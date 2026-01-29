@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>料理用単位変換ツール (Unit Converter)</title>
+    <meta name="description" content="料理用の単位変換ツール。グラム(g)、cc(ml)、大さじ(tbsp)の変換を、食材ごとの比重を考慮して計算します。">
+
+    <!-- ========================================== -->
+    <!-- Google Search Console Verification Tag -->
+    <!-- 下記の content 属性をあなたの認証コードに書き換えてください -->
+    <!-- ========================================== -->
+    <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE_HERE">
+
+    <!-- ========================================== -->
+    <!-- Google Tag Manager (Head) -->
+    <!-- 下記の GTM-XXXXXX をあなたのGTM IDに書き換えてください -->
+    <!-- ========================================== -->
+    <!--
+    <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    })(window,document,'script','dataLayer','GTM-XXXXXX');</script>
+    -->
+    <!-- End Google Tag Manager -->
+
+    <!-- ========================================== -->
+    <!-- Google Analytics 4 (GA4) -->
+    <!-- 下記の G-XXXXXXXXXX をあなたの測定IDに書き換えてください -->
+    <!-- ========================================== -->
+    <!--
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+
+      gtag('config', 'G-XXXXXXXXXX');
+    </script>
+    -->
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- ========================================== -->
+    <!-- Google Tag Manager (Body) -->
+    <!-- 下記の GTM-XXXXXX をあなたのGTM IDに書き換えてください -->
+    <!-- ========================================== -->
+    <!--
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-XXXXXX"
+    height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    -->
+    <!-- End Google Tag Manager (Body) -->
+
+    <header>
+        <h1>🍳 料理用単位変換</h1>
+    </header>
+
+    <main class="container">
+        <section class="converter-card">
+
+            <div class="conversion-row source-row">
+                <input type="number" id="source-input" class="calc-input large-input" placeholder="数値を入力"
+                    inputmode="decimal" step="any">
+                <select id="source-unit" class="unit-select">
+                    <option value="g">グラム (g)</option>
+                    <option value="ml" selected>cc (ml)</option>
+                    <option value="cup">カップ (200ml)</option>
+                    <option value="tbsp">大さじ (15ml)</option>
+                    <option value="tsp">小さじ (5ml)</option>
+                </select>
+            </div>
+
+            <div class="converter-arrow pop-arrow">↓</div>
+
+            <div class="conversion-row destination-row">
+                <input type="text" id="target-output" class="calc-input result-input" readonly>
+                <select id="target-unit" class="unit-select">
+                    <option value="g">グラム (g)</option>
+                    <option value="ml">cc (ml)</option>
+                    <option value="cup" selected>カップ (200ml)</option>
+                    <option value="tbsp">大さじ (15ml)</option>
+                    <option value="tsp">小さじ (5ml)</option>
+                </select>
+            </div>
+
+            <!-- Reference Section -->
+            <div class="reference-section">
+                <p class="ref-title">その他の換算例：</p>
+                <div id="reference-list">
+                    <!-- Dynamic content will populate here -->
+                    <span class="ref-item">大さじ: -</span>
+                    <span class="ref-item">小さじ: -</span>
+                </div>
+            </div>
+
+            <div class="reset-area">
+                <button id="reset-btn" type="button">リセット</button>
+            </div>
+        </section>
+
+        <!-- ========================================== -->
+        <!-- Amazon Associates Container -->
+        <!-- ここにおすすめのキッチングッズなどのリンクを配置してください -->
+        <!-- ========================================== -->
+        <section class="amazon-container">
+            <h3>おすすめ計量グッズ</h3>
+            <div class="amazon-placeholder">
+                <p>ここにAmazonアソシエイツのバナーやリンクを貼り付けてください。</p>
+                <p style="font-size: 0.8rem; color: #666; margin-top: 0.5rem;">(例: デジタルスケール、計量カップなど)</p>
+                <!-- 
+                例:
+                <iframe src="..." ...></iframe>
+                -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

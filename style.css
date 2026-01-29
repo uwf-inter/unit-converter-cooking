@@ -1,0 +1,254 @@
+/* Global Styles */
+:root {
+    --primary-color: #FF8c00;
+    /* Appetizing orange */
+    --accent-color: #4CAF50;
+    /* Fresh green */
+    --bg-color: #f9f9f9;
+    --card-bg: #ffffff;
+    --text-color: #333333;
+    --border-color: #dddddd;
+    --input-bg: #f5f5f5;
+    --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Noto Sans JP', sans-serif;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* Header */
+header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+    box-shadow: var(--shadow-sm);
+}
+
+header h1 {
+    font-size: 1.4rem;
+    font-weight: 700;
+}
+
+/* Main Container */
+.container {
+    flex: 1;
+    padding: 1.5rem;
+    max-width: 600px;
+    margin: 0 auto;
+    width: 100%;
+}
+
+/* Converter Card */
+.converter-card {
+    background-color: var(--card-bg);
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: var(--shadow-md);
+    margin-bottom: 2rem;
+}
+
+/* Input Groups */
+.input-group {
+    margin-bottom: 1rem;
+}
+
+.input-group label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    font-size: 1rem;
+    color: #555;
+}
+
+.input-group select,
+.input-group input {
+    width: 100%;
+    padding: 0.8rem 1rem;
+    font-size: 1.1rem;
+    /* Large font for readability */
+    border: 1px solid var(--border-color);
+    border-radius: 8px;
+    background-color: var(--input-bg);
+    transition: border-color 0.2s, background-color 0.2s;
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+/* Custom dropdown arrow for better cross-browser look, mostly for mobile */
+.ingredient-select {
+    position: relative;
+    margin-bottom: 1.5rem;
+}
+
+.ingredient-select select {
+    padding-right: 2.5rem;
+    background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+    background-repeat: no-repeat;
+    background-position: right 1rem center;
+    background-size: 1.2rem;
+}
+
+/* Conversion Row Layout */
+.conversion-row {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    margin-bottom: 0.5rem;
+}
+
+.conversion-row .calc-input {
+    flex: 2;
+    /* 2/3 width */
+    font-size: 1.5rem;
+    /* Large font for source */
+    font-weight: bold;
+    padding: 0.8rem;
+}
+
+.result-input {
+    background-color: #e8f5e9;
+    /* Light green bg for result */
+    border-color: #c8e6c9;
+    color: #2e7d32;
+}
+
+.conversion-row .unit-select {
+    flex: 1.2;
+    /* 1.2/3 width */
+    font-size: 1rem;
+    padding: 0.8rem 0.5rem;
+    background-color: #f0f0f0;
+    border-color: #ccc;
+    color: #444;
+}
+
+/* Reference Section */
+.reference-section {
+    margin-top: 2rem;
+    padding-top: 1rem;
+    border-top: 1px dashed #eee;
+}
+
+.ref-title {
+    font-size: 0.85rem;
+    color: #999;
+    margin-bottom: 0.5rem;
+}
+
+#reference-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.ref-item {
+    font-size: 0.9rem;
+    color: #888;
+    /* Thin/light color as requested */
+    background-color: #f8f8f8;
+    padding: 4px 8px;
+    border-radius: 4px;
+}
+
+.input-group select:focus,
+.input-group input:focus {
+    outline: none;
+    border-color: var(--primary-color);
+    background-color: #fff;
+}
+
+/* Directional Arrow / Separator */
+.converter-arrow {
+    text-align: center;
+    margin: 1rem auto;
+    /* Adjusted spacing */
+    width: 40px;
+    height: 40px;
+    line-height: 40px;
+    border-radius: 50%;
+    background-color: var(--primary-color);
+    color: white;
+    font-size: 1.5rem;
+    font-weight: bold;
+    user-select: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+    /* Pop shadow */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Reset Button */
+.reset-area {
+    text-align: right;
+    margin-top: 1rem;
+}
+
+#reset-btn {
+    background: transparent;
+    border: 1px solid #ccc;
+    padding: 5px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    color: #666;
+    cursor: pointer;
+}
+
+#reset-btn:active {
+    background-color: #eee;
+}
+
+
+/* Amazon/Marketing Container */
+.amazon-container {
+    text-align: center;
+    margin-top: 2rem;
+}
+
+.amazon-container h3 {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    color: #555;
+}
+
+.amazon-placeholder {
+    background-color: #eaeaea;
+    border: 2px dashed #ccc;
+    padding: 2rem;
+    border-radius: 8px;
+    color: #888;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    padding: 1.5rem;
+    font-size: 0.9rem;
+    color: #777;
+    background-color: #f1f1f1;
+}
+
+/* Responsive adjustments */
+@media (min-width: 600px) {
+    header h1 {
+        font-size: 1.6rem;
+    }
+
+    .converter-card {
+        padding: 2.5rem;
+    }
+}
