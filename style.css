@@ -217,20 +217,43 @@ header h1 {
 .amazon-container {
     text-align: center;
     margin-top: 2rem;
-}
-
-.amazon-container h3 {
-    font-size: 1.1rem;
-    margin-bottom: 1rem;
-    color: #555;
-}
-
-.amazon-placeholder {
-    background-color: #eaeaea;
-    border: 2px dashed #ccc;
-    padding: 2rem;
+    padding: 1rem;
+    background-color: #fff3e0;
+    /* Light orange bg */
     border-radius: 8px;
-    color: #888;
+    border: 1px solid #ffe0b2;
+}
+
+.amazon-text {
+    font-size: 1rem;
+    color: #333;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.amazon-btn {
+    display: inline-block;
+    background-color: #FF9900;
+    /* Amazon Orange */
+    color: white;
+    padding: 12px 24px;
+    border-radius: 4px;
+    /* Slightly rounded like Amazon buttons */
+    text-decoration: none;
+    font-weight: bold;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    transition: background-color 0.2s, transform 0.1s;
+}
+
+.amazon-btn:hover {
+    background-color: #e68a00;
+    /* Darker orange */
+    transform: translateY(-1px);
+}
+
+.amazon-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
 }
 
 /* Footer */
@@ -240,6 +263,12 @@ footer {
     font-size: 0.9rem;
     color: #777;
     background-color: #f1f1f1;
+}
+
+.disclaimer {
+    font-size: 0.75rem;
+    color: #999;
+    margin-top: 0.5rem;
 }
 
 /* Responsive adjustments */
