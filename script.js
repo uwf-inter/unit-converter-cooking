@@ -20,59 +20,108 @@ document.addEventListener('DOMContentLoaded', () => {
         'g': { type: 'mass', factor: 1, label: 'g' }
     };
 
+    // Default values for each unit
+    const defaultValues = {
+        'g': 100,
+        'ml': 100,
+        'cup': 1,
+        'tbsp': 1,
+        'tsp': 1
+    };
+
+    // Calculate conversion
     function calculate() {
-        const val = parseFloat(sourceInput.value);
+        // Handle "Smart Default/Preview" Logic
+        let val = parseFloat(sourceInput.value);
+        let isDefaultPreview = false;
+
+        // If input is empty, use the default value for the current source unit
         if (isNaN(val)) {
-            targetOutput.value = '';
-            referenceList.innerHTML = '<span class="ref-item">数値を入力してください</span>';
-            return;
+            const sourceUnit = sourceUnitSelect.value;
+            val = defaultValues[sourceUnit] || 1;
+            isDefaultPreview = true;
+
+            // Show this default as the placeholder
+            sourceInput.placeholder = val;
+        } else {
+            // Ensure placeholder matches current unit default even when typing
+            sourceInput.placeholder = defaultValues[sourceUnitSelect.value] || 1;
         }
 
         const sourceUnit = sourceUnitSelect.value;
         const targetUnit = targetUnitSelect.value;
 
-        // 1. Get Base ML
-        let baseML;
-        if (units[sourceUnit].type === 'mass') {
-            baseML = val / DENSITY;
+        // Style the output based on whether it's a real result or a preview
+        if (isDefaultPreview) {
+            targetOutput.classList.add('placeholder-text');
         } else {
-            baseML = val * units[sourceUnit].factor;
+            targetOutput.classList.remove('placeholder-text');
         }
 
-        // 2. Convert to Target
-        let result;
-        if (units[targetUnit].type === 'mass') {
-            result = baseML * DENSITY;
-        } else {
-            result = baseML / units[targetUnit].factor;
+        // 1. Convert source to grams (using water density=1 as base for simplicity if not food specific)
+        // Note: The previous logic was specialized. We'll simplify to:
+        // Volume (ml) -> Weight (g) : x1 (water)
+        // Weight (g) -> Volume (ml) : /1
+        // Cup=200ml, Tbsp=15ml, Tsp=5ml
+
+        // Base unit: ml (or g for water)
+        let inMl = 0;
+
+        switch (sourceUnit) {
+            case 'g': inMl = val; break; // Assumes water density
+            case 'ml': inMl = val; break;
+            case 'cup': inMl = val * 200; break;
+            case 'tbsp': inMl = val * 15; break;
+            case 'tsp': inMl = val * 5; break;
         }
 
-        targetOutput.value = formatNumber(result);
+        // 2. Convert ml to target
+        let result = 0;
+        switch (targetUnit) {
+            case 'g': result = inMl; break;
+            case 'ml': result = inMl; break;
+            case 'cup': result = inMl / 200; break;
+            case 'tbsp': result = inMl / 15; break;
+            case 'tsp': result = inMl / 5; break;
+        }
 
-        // 3. Update References
-        updateReferences(baseML, sourceUnit, targetUnit);
+        // Formatting
+        // If it's an integer, show no decimals. If float, max 2 decimals.
+        // For preview, we might want to be cleaner.
+        let displayResult = parseFloat(result.toFixed(2));
+        targetOutput.value = displayResult;
+
+        updateReferenceList(inMl, isDefaultPreview);
     }
 
-    function updateReferences(baseML, sourceUnit, targetUnit) {
+    function updateReferenceList(inMl, isPreview) {
+        // Clear current
         referenceList.innerHTML = '';
 
-        Object.keys(units).forEach(unitKey => {
-            // Skip if it's the source or target unit (redundant)
-            // But user might want to see them if they are looking for comparison? 
-            // Better to show ALL others.
-            if (unitKey === sourceUnit || unitKey === targetUnit) return;
+        const refs = [
+            { unit: 'tbsp', label: '大さじ', ml: 15 },
+            { unit: 'tsp', label: '小さじ', ml: 5 },
+            { unit: 'cup', label: 'カップ', ml: 200 },
+            { unit: 'ml', label: 'cc (ml)', ml: 1 },
+            { unit: 'g', label: 'グラム', ml: 1 }
+        ];
 
-            let converted;
-            if (units[unitKey].type === 'mass') {
-                converted = baseML * DENSITY;
-            } else {
-                converted = baseML / units[unitKey].factor;
-            }
+        // Filter out current source and target from reference? 
+        // Or just show useful ones (Tbsp, Tsp are most common references needed).
+        // Let's show Tbsp, Tsp, Cup if they are NOT the result.
 
-            const item = document.createElement('span');
-            item.className = 'ref-item';
-            item.textContent = `${units[unitKey].label}: ${formatNumber(converted)}`;
-            referenceList.appendChild(item);
+        refs.forEach(r => {
+            // Don't show if it's the target unit (redundant)
+            if (targetUnitSelect.value === r.unit) return;
+
+            let val = inMl / r.ml;
+            let valStr = parseFloat(val.toFixed(2));
+
+            const span = document.createElement('span');
+            span.className = 'ref-item';
+            if (isPreview) span.classList.add('placeholder-text');
+            span.textContent = `${r.label}: ${valStr}`;
+            referenceList.appendChild(span);
         });
     }
 
@@ -83,8 +132,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function resetAll() {
         sourceInput.value = '';
-        targetOutput.value = '';
-        referenceList.innerHTML = '<span class="ref-item">-</span>';
+        // Reset placeholders/previews handled by calculate()
+        // But we need to reset units too? Usually reset button clears values.
+        // sourceUnitSelect.value = 'ml';
+        // targetUnitSelect.value = 'cup';
+        // We can keep current units or reset to defaults.
+        // Let's just clear input.
+        calculate();
     }
 
     // Event Listeners
@@ -112,14 +166,20 @@ document.addEventListener('DOMContentLoaded', () => {
         calculate(); // Recalculate with defaults
     });
 
-    // --- Custom Select Implementation ---
+    // --- Custom Select Implementation (Updated for Interactivity) ---
     function setupCustomSelects() {
         const selects = document.querySelectorAll('.unit-select');
 
         selects.forEach(select => {
+            // Check if wrapper already exists (re-run safety)
+            if (select.nextElementSibling && select.nextElementSibling.classList.contains('custom-select-wrapper')) {
+                return;
+            }
+
             // Create Wrapper
             const wrapper = document.createElement('div');
             wrapper.className = 'custom-select-wrapper';
+            wrapper.dataset.forId = select.id; // Mark which select this belongs to
 
             // Create Trigger
             const trigger = document.createElement('div');
@@ -130,6 +190,7 @@ document.addEventListener('DOMContentLoaded', () => {
             const startUnit = select.value;
             const optionsContainer = document.createElement('div');
             optionsContainer.className = 'custom-options';
+            optionsContainer.dataset.forId = select.id;
 
             // Build options from original select
             Array.from(select.options).forEach(option => {
@@ -158,6 +219,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
                     // Trigger calculation
                     calculate();
+
+                    // ** NEW: Handle Exclusive Logic **
+                    if (select.id === 'source-unit') {
+                        updateTargetAvailability(option.value);
+                    }
                 });
 
                 optionsContainer.appendChild(optDiv);
@@ -167,12 +233,12 @@ document.addEventListener('DOMContentLoaded', () => {
             wrapper.appendChild(trigger);
             wrapper.appendChild(optionsContainer);
 
-            // Insert after the original select (original is hidden via CSS)
+            // Insert after the original select
             select.parentNode.insertBefore(wrapper, select.nextSibling);
 
             // Event listener for Wrapper
             wrapper.addEventListener('click', (e) => {
-                e.stopPropagation(); // Stop bubble so document click doesn't close immediately
+                e.stopPropagation(); // Stop bubble
 
                 // Close other open dropdowns
                 document.querySelectorAll('.custom-options.open').forEach(el => {
@@ -183,10 +249,55 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
+        // Initial sync of exclusive units
+        updateTargetAvailability(sourceUnitSelect.value);
+
+        // Initial calculation for placeholder
+        calculate();
+
         // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
             document.querySelectorAll('.custom-options.open').forEach(el => el.classList.remove('open'));
         });
+    }
+
+    // Function to hide Source unit from Target dropdown
+    function updateTargetAvailability(sourceUnitVal) {
+        const targetWrapper = document.querySelector('.custom-select-wrapper[data-for-id="target-unit"]');
+        if (!targetWrapper) return; // Should not happen
+
+        const targetOptions = targetWrapper.querySelectorAll('.custom-option');
+        let currentTargetVal = targetUnitSelect.value;
+        let collision = false;
+
+        targetOptions.forEach(opt => {
+            if (opt.dataset.value === sourceUnitVal) {
+                opt.classList.add('hidden'); // Hide duplicate unit
+                if (currentTargetVal === sourceUnitVal) {
+                    collision = true;
+                }
+            } else {
+                opt.classList.remove('hidden');
+            }
+        });
+
+        // If the current target matches the new source, we must switch the target!
+        if (collision) {
+            // Find first visible option
+            const firstVisible = Array.from(targetOptions).find(o => !o.classList.contains('hidden'));
+            if (firstVisible) {
+                const newVal = firstVisible.dataset.value;
+                targetUnitSelect.value = newVal;
+                // Update visual trigger
+                const trigger = targetWrapper.querySelector('.custom-select-trigger');
+                trigger.textContent = firstVisible.textContent;
+                // Update selected class
+                targetOptions.forEach(o => o.classList.remove('selected'));
+                firstVisible.classList.add('selected');
+
+                calculate(); // Recalc with new target
+            }
+        }
     }
 
     // Initialize Custom Selects

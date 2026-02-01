@@ -402,3 +402,13 @@ footer {
         font-size: 1.2rem;
     }
 }
+
+/* Utilities */
+.hidden {
+    display: none !important;
+}
+
+.placeholder-text {
+    color: #aaa !important;
+    /* Gray text for default preview */
+}
