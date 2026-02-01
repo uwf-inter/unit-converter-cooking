@@ -89,8 +89,107 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     sourceInput.addEventListener('input', calculate);
-    sourceUnitSelect.addEventListener('change', calculate);
-    targetUnitSelect.addEventListener('change', calculate);
+    // Remove direct change listeners because custom select will trigger them differently or we handle it inside custom select logic
+    // sourceUnitSelect.addEventListener('change', calculate); 
+    // targetUnitSelect.addEventListener('change', calculate);
 
-    resetBtn.addEventListener('click', resetAll);
+    resetBtn.addEventListener('click', () => {
+        resetAll();
+        // Reset custom selects UI
+        document.querySelectorAll('.unit-select').forEach(select => {
+            const wrapper = select.nextElementSibling; // The custom wrapper
+            if (wrapper && wrapper.classList.contains('custom-select-wrapper')) {
+                const trigger = wrapper.querySelector('.custom-select-trigger');
+                const selectedOption = select.options[select.selectedIndex];
+                trigger.textContent = selectedOption.text;
+
+                // Update selection state in the list
+                wrapper.querySelectorAll('.custom-option').forEach(opt => {
+                    opt.classList.toggle('selected', opt.dataset.value === select.value);
+                });
+            }
+        });
+        calculate(); // Recalculate with defaults
+    });
+
+    // --- Custom Select Implementation ---
+    function setupCustomSelects() {
+        const selects = document.querySelectorAll('.unit-select');
+
+        selects.forEach(select => {
+            // Create Wrapper
+            const wrapper = document.createElement('div');
+            wrapper.className = 'custom-select-wrapper';
+
+            // Create Trigger
+            const trigger = document.createElement('div');
+            trigger.className = 'custom-select-trigger';
+            trigger.textContent = select.options[select.selectedIndex].text;
+
+            // Create Options Container
+            const startUnit = select.value;
+            const optionsContainer = document.createElement('div');
+            optionsContainer.className = 'custom-options';
+
+            // Build options from original select
+            Array.from(select.options).forEach(option => {
+                const optDiv = document.createElement('div');
+                optDiv.className = 'custom-option';
+                optDiv.textContent = option.text;
+                optDiv.dataset.value = option.value;
+
+                if (option.value === startUnit) {
+                    optDiv.classList.add('selected');
+                }
+
+                optDiv.addEventListener('click', (e) => {
+                    e.stopPropagation(); // Prevent bubbling to wrapper
+
+                    // Update Original Select
+                    select.value = option.value;
+
+                    // Update UI
+                    trigger.textContent = option.text;
+                    wrapper.querySelectorAll('.custom-option').forEach(o => o.classList.remove('selected'));
+                    optDiv.classList.add('selected');
+
+                    // Close dropdown
+                    optionsContainer.classList.remove('open');
+
+                    // Trigger calculation
+                    calculate();
+                });
+
+                optionsContainer.appendChild(optDiv);
+            });
+
+            // Toggle Dropdown
+            wrapper.appendChild(trigger);
+            wrapper.appendChild(optionsContainer);
+
+            // Insert after the original select (original is hidden via CSS)
+            select.parentNode.insertBefore(wrapper, select.nextSibling);
+
+            // Event listener for Wrapper
+            wrapper.addEventListener('click', (e) => {
+                e.stopPropagation(); // Stop bubble so document click doesn't close immediately
+
+                // Close other open dropdowns
+                document.querySelectorAll('.custom-options.open').forEach(el => {
+                    if (el !== optionsContainer) el.classList.remove('open');
+                });
+
+                optionsContainer.classList.toggle('open');
+            });
+        });
+
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', () => {
+            document.querySelectorAll('.custom-options.open').forEach(el => el.classList.remove('open'));
+        });
+    }
+
+    // Initialize Custom Selects
+    setupCustomSelects();
+
 });
