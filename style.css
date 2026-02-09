@@ -20,7 +20,7 @@
 }
 
 body {
-    font-family: 'Noto Sans JP', sans-serif;
+    font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
     background-color: var(--bg-color);
     color: var(--text-color);
     line-height: 1.6;
@@ -411,4 +411,98 @@ footer {
 .placeholder-text {
     color: #aaa !important;
     /* Gray text for default preview */
+}
+
+/* SEO Content Section */
+.seo-content {
+    margin-top: 3rem;
+    padding-top: 1rem;
+}
+
+.seo-block {
+    background-color: #fffaf0;
+    /* Light cream/orange hint */
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border: 1px solid #ffeeba;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.03);
+}
+
+.seo-block h2 {
+    font-size: 1.2rem;
+    color: var(--primary-color);
+    margin-bottom: 1rem;
+    border-bottom: 2px dashed #ffe0b2;
+    padding-bottom: 0.5rem;
+}
+
+/* Reference Table */
+.table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    width: 100%;
+}
+
+.ref-table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: white;
+    min-width: 300px;
+    /* Force scroll on very small screens if needed */
+}
+
+.ref-table th,
+.ref-table td {
+    border: 1px solid #eee;
+    padding: 10px;
+    text-align: center;
+    font-size: 0.95rem;
+}
+
+.ref-table th {
+    background-color: #ffe0b2;
+    /* Lighter primary */
+    color: #d87c00;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+.unit-sub {
+    font-size: 0.75rem;
+    font-weight: normal;
+}
+
+.ref-table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.seo-note {
+    font-size: 0.8rem;
+    color: #777;
+    margin-top: 0.8rem;
+    text-align: right;
+}
+
+/* FAQ */
+.faq-item {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    margin-bottom: 1rem;
+    border: 1px solid #eee;
+}
+
+.faq-q {
+    font-size: 1rem;
+    color: #d87c00;
+    /* Darker orange for Q */
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+}
+
+.faq-a {
+    font-size: 0.95rem;
+    color: #444;
+    line-height: 1.6;
 }
