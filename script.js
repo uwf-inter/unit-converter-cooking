@@ -303,4 +303,100 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initialize Custom Selects
     setupCustomSelects();
 
+
+    // --- Recipe Scaler Logic ---
+    const originalServingsInput = document.getElementById('original-servings');
+    const desiredServingsInput = document.getElementById('desired-servings');
+    const recipeInput = document.getElementById('recipe-input');
+    const recipeOutput = document.getElementById('recipe-output');
+    const copyBtn = document.getElementById('copy-recipe-btn');
+    const scalerNote = document.getElementById('scaler-note');
+
+    function scaleRecipe() {
+        const original = parseFloat(originalServingsInput.value);
+        const desired = parseFloat(desiredServingsInput.value);
+        const text = recipeInput.value;
+
+        if (!original || !desired || original <= 0 || desired <= 0) {
+            recipeOutput.value = "人数を正しく入力してね！";
+            return;
+        }
+
+        const ratio = desired / original;
+        let hasFraction = false;
+
+        // Process line by line
+        const lines = text.split('\n');
+        const scaledLines = lines.map(line => {
+            // Regex to find numbers. 
+            // Handles decimals (1.5), fractions (1/2 <-- complicated, simpler to stick to decimals or simple fraction replacement if needed, 
+            // but for MVP let's stick to regex capturing [0-9.]+ )
+            // Updating regex to capture integers and floats.
+            return line.replace(/(\d+(\.\d+)?)/g, (match) => {
+                const num = parseFloat(match);
+                if (!isNaN(num)) {
+                    let scaled = num * ratio;
+
+                    // Rounding logic:
+                    // If simple integer, try to keep it simple.
+                    // If float, max 1 decimal place usually enough for cooking.
+                    // Check if it's basically an integer
+                    if (Math.abs(scaled - Math.round(scaled)) < 0.05) {
+                        scaled = Math.round(scaled);
+                    } else {
+                        // It has significant decimal
+                        scaled = parseFloat(scaled.toFixed(1));
+                        hasFraction = true;
+                    }
+                    return scaled;
+                }
+                return match;
+            });
+        });
+
+        recipeOutput.value = scaledLines.join('\n');
+
+        // Toggle fraction note
+        if (hasFraction) {
+            scalerNote.classList.remove('hidden');
+        } else {
+            scalerNote.classList.add('hidden');
+        }
+    }
+
+    // Event Listeners for Scaler
+    [originalServingsInput, desiredServingsInput, recipeInput].forEach(el => {
+        el.addEventListener('input', scaleRecipe);
+    });
+
+    // Handle +/- Buttons
+    document.querySelectorAll('.ctrl-btn').forEach(btn => {
+        btn.addEventListener('click', (e) => {
+            e.preventDefault(); // Prevent focus issues
+            const targetId = btn.dataset.target;
+            const input = document.getElementById(targetId);
+            let val = parseInt(input.value) || 0;
+
+            if (btn.classList.contains('plus')) {
+                val++;
+            } else if (btn.classList.contains('minus')) {
+                val = Math.max(1, val - 1); // Minimum 1
+            }
+
+            input.value = val;
+            scaleRecipe(); // Trigger logic
+        });
+    });
+
+    // Copy Button
+    copyBtn.addEventListener('click', () => {
+        recipeOutput.select();
+        document.execCommand('copy'); // Legacy but works widely, or use navigator.clipboard
+        const originalText = copyBtn.textContent;
+        copyBtn.textContent = 'コピーしました！';
+        setTimeout(() => {
+            copyBtn.textContent = originalText;
+        }, 2000);
+    });
+
 });

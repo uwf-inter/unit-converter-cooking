@@ -115,6 +115,56 @@
                 rel="noopener sponsored">Amazonでチェックする</a>
         </section>
 
+        <!-- Recipe Scaler Section -->
+        <section class="recipe-scaler-card">
+            <h2>👨‍🍳 レシピの人数分計算</h2>
+
+            <div class="scaler-inputs">
+                <div class="servings-group">
+                    <div class="input-wrapper">
+                        <label>もと</label>
+                        <div class="input-pill">
+                            <button class="ctrl-btn minus" data-target="original-servings">－</button>
+                            <div class="input-container">
+                                <input type="number" id="original-servings" value="4" min="1">
+                                <span class="unit-label">人</span>
+                            </div>
+                            <button class="ctrl-btn plus" data-target="original-servings">＋</button>
+                        </div>
+                    </div>
+                    <div class="scaler-arrow">➡</div>
+                    <div class="input-wrapper">
+                        <label>つくる</label>
+                        <div class="input-pill">
+                            <button class="ctrl-btn minus" data-target="desired-servings">－</button>
+                            <div class="input-container">
+                                <input type="number" id="desired-servings" value="2" min="1">
+                                <span class="unit-label">人</span>
+                            </div>
+                            <button class="ctrl-btn plus" data-target="desired-servings">＋</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="ingredients-area">
+                    <label>材料リスト</label>
+                    <textarea id="recipe-input" placeholder="例：&#13;&#10;豚肉 200g&#13;&#10;水 400ml"></textarea>
+                </div>
+            </div>
+
+            <div class="scaler-result-area">
+                <div class="result-header">
+                    <label>計算結果</label>
+                    <button id="copy-recipe-btn" class="copy-btn">結果をコピー</button>
+                </div>
+                <textarea id="recipe-output" readonly></textarea>
+                <div class="scaler-message-box">
+                    <p id="scaler-message">これでお買い物もバッチリだね！👨‍🍳</p>
+                    <p id="scaler-note" class="hidden">※端数が出たよ。計りにくい時は少し多め（少なめ）でも大丈夫だよ。</p>
+                </div>
+            </div>
+        </section>
+
         <!-- SEO Content Section -->
         <section class="seo-content">
             <div class="seo-block">
