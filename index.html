@@ -4,8 +4,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>サクッと解決！お料理単位くん｜大さじ・カップをグラム(g)に一瞬で変換</title>
-    <meta name="description" content="料理用の単位変換ツール。グラム(g)、cc(ml)、大さじ(tbsp)の変換を、食材ごとの比重を考慮して計算します。">
+    <title>サクッと解決！お料理単位くん｜大さじ・カップをgに一瞬で変換</title>
+    <meta name="description" content="料理の単位変換で迷わない！砂糖や小麦粉のグラム換算、海外レシピのカップ数、人数分の分量計算もこれ一つでサクッと解決。お料理がもっと楽しくなる便利な相棒です。">
+
+    <!-- OGP Tags -->
+    <meta property="og:title" content="サクッと解決！お料理単位くん｜大さじ・カップをgに一瞬で変換">
+    <meta property="og:description" content="料理の単位変換で迷わない！砂糖や小麦粉のグラム換算、海外レシピのカップ数、人数分の分量計算もこれ一つでサクッと解決。">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://your-website-url.com/">
+    <meta property="og:image" content="https://your-website-url.com/og-image.jpg">
+    <meta name="twitter:card" content="summary_large_image">
 
     <!-- ========================================== -->
     <!-- Google Search Console Verification Tag -->
@@ -67,8 +75,8 @@
 
             <div class="conversion-row source-row">
                 <input type="number" id="source-input" class="calc-input large-input" placeholder="数値を入力"
-                    inputmode="decimal" step="any">
-                <select id="source-unit" class="unit-select">
+                    inputmode="decimal" step="any" aria-label="変換元の数値を入力">
+                <select id="source-unit" class="unit-select" aria-label="変換元の単位を選択">
                     <option value="g">グラム (g)</option>
                     <option value="ml" selected>cc (ml)</option>
                     <option value="cup">カップ (200ml)</option>
@@ -80,8 +88,8 @@
             <div class="converter-arrow pop-arrow">↓</div>
 
             <div class="conversion-row destination-row">
-                <input type="text" id="target-output" class="calc-input result-input" readonly>
-                <select id="target-unit" class="unit-select">
+                <input type="text" id="target-output" class="calc-input result-input" readonly aria-label="変換結果">
+                <select id="target-unit" class="unit-select" aria-label="変換先の単位を選択">
                     <option value="g">グラム (g)</option>
                     <option value="ml">cc (ml)</option>
                     <option value="cup" selected>カップ (200ml)</option>
@@ -101,7 +109,7 @@
             </div>
 
             <div class="reset-area">
-                <button id="reset-btn" type="button">リセット</button>
+                <button id="reset-btn" type="button" aria-label="入力をリセット">リセット</button>
             </div>
         </section>
 
@@ -124,40 +132,42 @@
                     <div class="input-wrapper">
                         <label>もと</label>
                         <div class="input-pill">
-                            <button class="ctrl-btn minus" data-target="original-servings">－</button>
+                            <button class="ctrl-btn minus" data-target="original-servings"
+                                aria-label="人数を減らす">－</button>
                             <div class="input-container">
-                                <input type="number" id="original-servings" value="4" min="1">
+                                <input type="number" id="original-servings" value="4" min="1" aria-label="もとの人数">
                                 <span class="unit-label">人</span>
                             </div>
-                            <button class="ctrl-btn plus" data-target="original-servings">＋</button>
+                            <button class="ctrl-btn plus" data-target="original-servings" aria-label="人数を増やす">＋</button>
                         </div>
                     </div>
                     <div class="scaler-arrow">➡</div>
                     <div class="input-wrapper">
                         <label>つくる</label>
                         <div class="input-pill">
-                            <button class="ctrl-btn minus" data-target="desired-servings">－</button>
+                            <button class="ctrl-btn minus" data-target="desired-servings" aria-label="人数を減らす">－</button>
                             <div class="input-container">
-                                <input type="number" id="desired-servings" value="2" min="1">
+                                <input type="number" id="desired-servings" value="2" min="1" aria-label="作りたい人数">
                                 <span class="unit-label">人</span>
                             </div>
-                            <button class="ctrl-btn plus" data-target="desired-servings">＋</button>
+                            <button class="ctrl-btn plus" data-target="desired-servings" aria-label="人数を増やす">＋</button>
                         </div>
                     </div>
                 </div>
 
                 <div class="ingredients-area">
                     <label>材料リスト</label>
-                    <textarea id="recipe-input" placeholder="例：&#13;&#10;豚肉 200g&#13;&#10;水 400ml"></textarea>
+                    <textarea id="recipe-input" placeholder="例：&#13;&#10;豚肉 200g&#13;&#10;水 400ml"
+                        aria-label="材料リストを入力"></textarea>
                 </div>
             </div>
 
             <div class="scaler-result-area">
                 <div class="result-header">
                     <label>計算結果</label>
-                    <button id="copy-recipe-btn" class="copy-btn">結果をコピー</button>
+                    <button id="copy-recipe-btn" class="copy-btn" aria-label="計算結果をクリップボードにコピー">結果をコピー</button>
                 </div>
-                <textarea id="recipe-output" readonly></textarea>
+                <textarea id="recipe-output" readonly aria-label="計算結果の表示"></textarea>
                 <div class="scaler-message-box">
                     <p id="scaler-message">これでお買い物もバッチリだね！👨‍🍳</p>
                     <p id="scaler-note" class="hidden">※端数が出たよ。計りにくい時は少し多め（少なめ）でも大丈夫だよ。</p>
@@ -243,32 +253,47 @@
 
     <script src="script.js"></script>
     <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [{
-        "@type": "Question",
-        "name": "1ccと1mlって違うの？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "料理の世界では「1cc ＝ 1ml」と考えてOKだよ！"
-        }
-      }, {
-        "@type": "Question",
-        "name": "計量スプーンがない時はどうすればいい？",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "ペットボトルのキャップが約7.5mlだから、2杯分で「大さじ1（15ml）」の代わりになるよ！"
-        }
-      }, {
-        "@type": "Question",
-        "name": "海外レシピの「1cup」で失敗しちゃった…。",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "アメリカの1カップは約240ml、日本は約200mlなんだ。当サイトの変換ツールで「海外サイズ」を選んで計算してみてね！"
-        }
-      }]
-    }
+    [
+      {
+        "@context": "https://schema.org",
+        "@type": "SoftwareApplication",
+        "name": "サクッと解決！お料理単位くん",
+        "applicationCategory": "UtilitiesApplication",
+        "operatingSystem": "Web",
+        "offers": {
+          "@type": "Offer",
+          "price": "0",
+          "priceCurrency": "JPY"
+        },
+        "description": "料理の単位変換（大さじ、カップ、グラム）や、レシピの人数分計算ができる無料のWebツールです。"
+      },
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [{
+          "@type": "Question",
+          "name": "1ccと1mlって違うの？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "料理の世界では「1cc ＝ 1ml」と考えてOKだよ！"
+          }
+        }, {
+          "@type": "Question",
+          "name": "計量スプーンがない時はどうすればいい？",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "ペットボトルのキャップが約7.5mlだから、2杯分で「大さじ1（15ml）」の代わりになるよ！"
+          }
+        }, {
+          "@type": "Question",
+          "name": "海外レシピの「1cup」で失敗しちゃった…。",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "アメリカの1カップは約240ml、日本は約200mlなんだ。当サイトの変換ツールで「海外サイズ」を選んで計算してみてね！"
+          }
+        }]
+      }
+    ]
     </script>
 </body>
 
