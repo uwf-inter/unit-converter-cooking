@@ -196,6 +196,7 @@ header h1 {
 .reference-section {
     margin-top: 2rem;
     padding-top: 1rem;
+    min-height: 120px;
     border-top: 1px dashed #eee
 }
 
@@ -361,6 +362,27 @@ footer {
         padding: 1rem;
         font-size: 1.2rem
     }
+
+    .input-pill input {
+        width: 100%;
+        padding: 0.5rem 0;
+        font-size: 1.3rem;
+        text-align: right;
+        border: none;
+        background: transparent;
+        color: #444;
+        font-family: 'Zen Maru Gothic', sans-serif;
+        outline: none;
+        -moz-appearance: textfield;
+        appearance: textfield
+    }
+
+    .input-pill input::-webkit-outer-spin-button,
+    .input-pill input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        appearance: none;
+        margin: 0
+    }
 }
 
 .hidden {
@@ -374,6 +396,10 @@ footer {
 .seo-content {
     margin-top: 3rem;
     padding-top: 1rem
+}
+
+.seo-block {
+    margin-bottom: 3rem
 }
 
 .recipe-scaler-card {
@@ -460,12 +486,14 @@ footer {
     color: #444;
     font-family: 'Zen Maru Gothic', sans-serif;
     outline: none;
-    -moz-appearance: textfield
+    -moz-appearance: textfield;
+    appearance: textfield
 }
 
 .input-pill input::-webkit-outer-spin-button,
 .input-pill input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    appearance: none;
     margin: 0
 }
 

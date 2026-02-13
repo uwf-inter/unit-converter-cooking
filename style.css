@@ -214,6 +214,8 @@ header h1 {
 .reference-section {
     margin-top: 2rem;
     padding-top: 1rem;
+    min-height: 120px;
+    /* Prevent CLS */
     border-top: 1px dashed #eee;
 }
 
@@ -381,9 +383,7 @@ footer {
         /* Ensure readable size */
     }
 
-    .conversion-row .unit-select {
-        /* This is now hidden, style wrapper instead */
-    }
+    /* .conversion-row .unit-select is now hidden via global style, specific mobile override removed */
 
     .custom-select-wrapper {
         width: 100%;
@@ -417,6 +417,10 @@ footer {
 .seo-content {
     margin-top: 3rem;
     padding-top: 1rem;
+}
+
+.seo-block {
+    margin-bottom: 3rem;
 }
 
 /* Recipe Scaler */
@@ -497,8 +501,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    /* Base width */
 }
 
 .input-pill input {
@@ -513,12 +515,16 @@ footer {
     font-family: 'Zen Maru Gothic', sans-serif;
     outline: none;
     -moz-appearance: textfield;
+    appearance: textfield;
+    /* Fix lint */
     /* Remove default spinners */
 }
 
 .input-pill input::-webkit-outer-spin-button,
 .input-pill input::-webkit-inner-spin-button {
     -webkit-appearance: none;
+    appearance: none;
+    /* Fix lint */
     margin: 0;
 }
 

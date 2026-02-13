@@ -106,9 +106,8 @@ document.addEventListener('DOMContentLoaded', () => {
             { unit: 'g', label: 'グラム', ml: 1 }
         ];
 
-        // Filter out current source and target from reference? 
-        // Or just show useful ones (Tbsp, Tsp are most common references needed).
-        // Let's show Tbsp, Tsp, Cup if they are NOT the result.
+        // Create a DocumentFragment to minimize reflows
+        const fragment = document.createDocumentFragment();
 
         refs.forEach(r => {
             // Don't show if it's the target unit (redundant)
@@ -121,8 +120,10 @@ document.addEventListener('DOMContentLoaded', () => {
             span.className = 'ref-item';
             if (isPreview) span.classList.add('placeholder-text');
             span.textContent = `${r.label}: ${valStr}`;
-            referenceList.appendChild(span);
+            fragment.appendChild(span);
         });
+
+        referenceList.appendChild(fragment);
     }
 
     function formatNumber(num) {
