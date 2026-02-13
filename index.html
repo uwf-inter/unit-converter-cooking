@@ -114,7 +114,8 @@
 
         header h1 {
             font-size: 1.4rem;
-            font-weight: 700
+            font-weight: 700;
+            min-height: 1.6em
         }
 
         .container {
@@ -158,6 +159,19 @@
             appearance: none
         }
 
+        .ingredient-select {
+            position: relative;
+            margin-bottom: 1.5rem
+        }
+
+        .ingredient-select select {
+            padding-right: 2.5rem;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 1rem center;
+            background-size: 1.2rem
+        }
+
         .conversion-row {
             display: flex;
             gap: 10px;
@@ -180,6 +194,205 @@
 
         .conversion-row .unit-select {
             display: none
+        }
+
+        .custom-select-wrapper {
+            position: relative;
+            flex: 1.2;
+            cursor: pointer;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .custom-select-trigger {
+            background-color: #f0f0f0;
+            padding: 0.8rem 1rem;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            color: #444;
+            font-size: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center
+        }
+
+        .custom-select-trigger::after {
+            content: '';
+            width: 0.8rem;
+            height: 0.8rem;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain
+        }
+
+        .custom-options {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            z-index: 100;
+            margin-top: 5px;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.2s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+            max-height: 300px;
+            overflow-y: auto
+        }
+
+        .custom-options.open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0)
+        }
+
+        .custom-option {
+            padding: 0.8rem 1rem;
+            font-size: 1rem;
+            border-bottom: 1px solid #f0f0f0;
+            color: #333;
+            transition: background-color 0.2s
+        }
+
+        .custom-option:last-child {
+            border-bottom: none
+        }
+
+        .custom-option:hover {
+            background-color: #f9f9f9
+        }
+
+        .custom-option.selected {
+            background-color: #e8f5e9;
+            color: #2e7d32;
+            font-weight: bold
+        }
+
+        .reference-section {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            min-height: 120px;
+            border-top: 1px dashed #eee
+        }
+
+        .ref-title {
+            font-size: 0.85rem;
+            color: #666;
+            margin-bottom: 0.5rem
+        }
+
+        #reference-list {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px
+        }
+
+        .ref-item {
+            font-size: 0.9rem;
+            color: #555;
+            background-color: #f8f8f8;
+            padding: 4px 8px;
+            border-radius: 4px
+        }
+
+        .input-group select:focus,
+        .input-group input:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff
+        }
+
+        .converter-arrow {
+            text-align: center;
+            margin: 1rem auto;
+            width: 40px;
+            height: 40px;
+            line-height: 40px;
+            border-radius: 50%;
+            background-color: var(--primary-color);
+            color: white;
+            font-size: 1.5rem;
+            font-weight: bold;
+            user-select: none;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .reset-area {
+            text-align: right;
+            margin-top: 1rem
+        }
+
+        #reset-btn {
+            background: transparent;
+            border: 1px solid #ccc;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            color: #444;
+            cursor: pointer
+        }
+
+        #reset-btn:active {
+            background-color: #eee
+        }
+
+        .amazon-container {
+            text-align: center;
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #fff3e0;
+            border-radius: 8px;
+            border: 1px solid #ffe0b2
+        }
+
+        .amazon-text {
+            font-size: 1rem;
+            color: #222;
+            margin-bottom: 1rem;
+            font-weight: bold
+        }
+
+        .amazon-btn {
+            display: inline-block;
+            background-color: #FF9900;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            text-decoration: none;
+            font-weight: bold;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.2s, transform 0.1s
+        }
+
+        .amazon-btn:hover {
+            background-color: #e68a00;
+            transform: translateY(-1px)
+        }
+
+        .amazon-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
+        }
+
+        footer {
+            text-align: center;
+            padding: 1.5rem;
+            font-size: 0.9rem;
+            color: #777;
+            background-color: #f1f1f1
+        }
+
+        .disclaimer {
+            font-size: 0.75rem;
+            color: #999;
+            margin-top: 0.5rem
         }
 
         @media(min-width:600px) {
@@ -213,12 +426,361 @@
                 width: 100%;
                 font-size: 1.2rem
             }
+
+            .custom-select-wrapper {
+                width: 100%;
+                flex: auto
+            }
+
+            .custom-select-trigger {
+                font-size: 1.2rem;
+                padding: 1rem
+            }
+
+            .custom-option {
+                padding: 1rem;
+                font-size: 1.2rem
+            }
+
+            .input-pill input {
+                width: 100%;
+                padding: 0.5rem 0;
+                font-size: 1.3rem;
+                text-align: right;
+                border: none;
+                background: transparent;
+                color: #444;
+                font-family: 'Zen Maru Gothic', sans-serif;
+                outline: none;
+                -moz-appearance: textfield;
+                appearance: textfield
+            }
+
+            .input-pill input::-webkit-outer-spin-button,
+            .input-pill input::-webkit-inner-spin-button {
+                -webkit-appearance: none;
+                appearance: none;
+                margin: 0
+            }
+        }
+
+        .hidden {
+            display: none !important
+        }
+
+        .placeholder-text {
+            color: #767676 !important
+        }
+
+        .seo-content {
+            margin-top: 3rem;
+            padding-top: 1rem
+        }
+
+        .seo-block {
+            margin-bottom: 3rem
+        }
+
+        .recipe-scaler-card {
+            background-color: #fff;
+            padding: 1.5rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 20px rgba(255, 150, 50, 0.15);
+            margin-top: 2rem;
+            border: 3px solid #ffecb3;
+            min-height: 400px;
+            contain: content
+        }
+
+        .recipe-scaler-card h2 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 1.5rem;
+            text-align: center;
+            background: #fff8e1;
+            display: inline-block;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            position: relative;
+            left: 50%;
+            transform: translateX(-50%);
+            white-space: nowrap
+        }
+
+        .scaler-inputs {
+            margin-bottom: 1.5rem
+        }
+
+        .servings-group {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            background-color: transparent;
+            padding: 0
+        }
+
+        .input-wrapper {
+            display: flex;
+            flex-direction: column;
+            align-items: center
+        }
+
+        .input-wrapper label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-bottom: 0.3rem;
+            font-weight: bold
+        }
+
+        .input-pill {
+            display: flex;
+            align-items: center;
+            background-color: #fefefe;
+            border: 2px solid #ddd;
+            border-radius: 30px;
+            padding: 2px;
+            box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
+            transition: all 0.3s ease
+        }
+
+        .input-pill:focus-within {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 3px rgba(255, 167, 38, 0.2)
+        }
+
+        .input-container {
+            display: flex;
+            align-items: center;
+            justify-content: center
+        }
+
+        .input-pill input {
+            width: 100%;
+            padding: 0.5rem 0;
+            font-size: 1.3rem;
+            text-align: right;
+            border: none;
+            background: transparent;
+            color: #444;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            outline: none;
+            -moz-appearance: textfield;
+            appearance: textfield
+        }
+
+        .input-pill input::-webkit-outer-spin-button,
+        .input-pill input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+            appearance: none;
+            margin: 0
+        }
+
+        .unit-label {
+            font-size: 0.9rem;
+            color: #555;
+            margin-left: 2px;
+            white-space: nowrap
+        }
+
+        .ctrl-btn {
+            min-width: 32px;
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background-color: #ffe0b2;
+            color: #bf360c;
+            font-size: 1.2rem;
+            font-weight: bold;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s;
+            user-select: none;
+            margin: 0 2px;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent
+        }
+
+        .ctrl-btn:hover {
+            background-color: #ffcc80
+        }
+
+        .ctrl-btn:active {
+            background-color: #ffb74d;
+            transform: scale(0.95)
+        }
+
+        .scaler-arrow {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            padding-top: 1rem
+        }
+
+        .ingredients-area label,
+        .scaler-result-area .result-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 0.8rem
+        }
+
+        .scaler-result-area .result-header label {
+            font-size: 0.95rem;
+            color: #444;
+            margin-bottom: 0;
+            font-weight: bold
+        }
+
+        .copy-btn {
+            background: linear-gradient(135deg, #ff9800, #f57c00);
+            color: #3e2723;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(245, 124, 0, 0.3);
+            transition: all 0.2s;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            display: flex;
+            align-items: center;
+            gap: 5px
+        }
+
+        .copy-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 12px rgba(245, 124, 0, 0.4);
+            background: linear-gradient(135deg, #ffa726, #fb8c00)
+        }
+
+        .copy-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 2px 4px rgba(245, 124, 0, 0.3)
+        }
+
+        .ingredients-area textarea,
+        .scaler-result-area textarea {
+            width: 100%;
+            height: 120px;
+            padding: 1rem;
+            border: 2px solid #eee;
+            border-radius: 12px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            resize: none;
+            font-family: inherit;
+            background-color: #fafafa;
+            transition: all 0.2s
+        }
+
+        .ingredients-area textarea:focus {
+            outline: none;
+            border-color: var(--primary-color);
+            background-color: #fff;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05)
+        }
+
+        .scaler-result-area {
+            background-color: #fff0f5;
+            padding: 1.2rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            border: 2px dashed #f8bbd0
+        }
+
+        .scaler-result-area textarea {
+            background-color: white;
+            border-color: transparent;
+            box-shadow: none
+        }
+
+        .scaler-message-box {
+            margin-top: 1rem;
+            text-align: center;
+            min-height: 60px
+        }
+
+        #scaler-message {
+            font-weight: bold;
+            color: #e91e63
+        }
+
+        #scaler-note {
+            font-size: 0.85rem;
+            color: #880e4f;
+            margin-top: 0.5rem
+        }
+
+        .table-responsive {
+            overflow-x: auto;
+            -webkit-overflow-scrolling: touch;
+            width: 100%
+        }
+
+        .ref-table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: white;
+            min-width: 300px
+        }
+
+        .ref-table th,
+        .ref-table td {
+            border: 1px solid #eee;
+            padding: 10px;
+            text-align: center;
+            font-size: 0.95rem
+        }
+
+        .ref-table th {
+            background-color: #ffe0b2;
+            color: #bf360c;
+            font-weight: bold;
+            white-space: nowrap
+        }
+
+        .unit-sub {
+            font-size: 0.75rem;
+            font-weight: normal
+        }
+
+        .ref-table tr:nth-child(even) {
+            background-color: #f9f9f9
+        }
+
+        .seo-note {
+            font-size: 0.8rem;
+            color: #555;
+            margin-top: 0.8rem;
+            text-align: right
+        }
+
+        .faq-item {
+            background-color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            margin-bottom: 1rem;
+            border: 1px solid #eee
+        }
+
+        .faq-q {
+            font-size: 1rem;
+            color: #bf360c;
+            margin-bottom: 0.5rem;
+            font-weight: bold
+        }
+
+        .faq-a {
+            font-size: 0.95rem;
+            color: #444;
+            line-height: 1.6
         }
     </style>
-    <link rel="stylesheet" href="style.min.css?v=3.0" media="print" onload="this.media='all'">
-    <noscript>
-        <link rel="stylesheet" href="style.min.css?v=3.0">
-    </noscript>
 </head>
 
 <body>

@@ -313,56 +313,53 @@ document.addEventListener('DOMContentLoaded', () => {
     const copyBtn = document.getElementById('copy-recipe-btn');
     const scalerNote = document.getElementById('scaler-note');
 
+    let rAFPending = false;
+
     function scaleRecipe() {
-        const original = parseFloat(originalServingsInput.value);
-        const desired = parseFloat(desiredServingsInput.value);
-        const text = recipeInput.value;
+        if (rAFPending) return;
+        rAFPending = true;
 
-        if (!original || !desired || original <= 0 || desired <= 0) {
-            recipeOutput.value = "人数を正しく入力してね！";
-            return;
-        }
+        requestAnimationFrame(() => {
+            const original = parseFloat(originalServingsInput.value);
+            const desired = parseFloat(desiredServingsInput.value);
+            const text = recipeInput.value;
 
-        const ratio = desired / original;
-        let hasFraction = false;
+            if (!original || !desired || original <= 0 || desired <= 0) {
+                recipeOutput.value = "人数を正しく入力してね！";
+                rAFPending = false;
+                return;
+            }
 
-        // Process line by line
-        const lines = text.split('\n');
-        const scaledLines = lines.map(line => {
-            // Regex to find numbers. 
-            // Handles decimals (1.5), fractions (1/2 <-- complicated, simpler to stick to decimals or simple fraction replacement if needed, 
-            // but for MVP let's stick to regex capturing [0-9.]+ )
-            // Updating regex to capture integers and floats.
-            return line.replace(/(\d+(\.\d+)?)/g, (match) => {
-                const num = parseFloat(match);
-                if (!isNaN(num)) {
-                    let scaled = num * ratio;
+            const ratio = desired / original;
+            let hasFraction = false;
 
-                    // Rounding logic:
-                    // If simple integer, try to keep it simple.
-                    // If float, max 1 decimal place usually enough for cooking.
-                    // Check if it's basically an integer
-                    if (Math.abs(scaled - Math.round(scaled)) < 0.05) {
-                        scaled = Math.round(scaled);
-                    } else {
-                        // It has significant decimal
-                        scaled = parseFloat(scaled.toFixed(1));
-                        hasFraction = true;
+            const lines = text.split('\n');
+            const scaledLines = lines.map(line => {
+                return line.replace(/(\d+(\.\d+)?)/g, (match) => {
+                    const num = parseFloat(match);
+                    if (!isNaN(num)) {
+                        let scaled = num * ratio;
+                        if (Math.abs(scaled - Math.round(scaled)) < 0.05) {
+                            scaled = Math.round(scaled);
+                        } else {
+                            scaled = parseFloat(scaled.toFixed(1));
+                            hasFraction = true;
+                        }
+                        return scaled;
                     }
-                    return scaled;
-                }
-                return match;
+                    return match;
+                });
             });
+
+            recipeOutput.value = scaledLines.join('\n');
+
+            if (hasFraction) {
+                scalerNote.classList.remove('hidden');
+            } else {
+                scalerNote.classList.add('hidden');
+            }
+            rAFPending = false;
         });
-
-        recipeOutput.value = scaledLines.join('\n');
-
-        // Toggle fraction note
-        if (hasFraction) {
-            scalerNote.classList.remove('hidden');
-        } else {
-            scalerNote.classList.add('hidden');
-        }
     }
 
     // Event Listeners for Scaler

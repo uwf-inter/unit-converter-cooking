@@ -41,6 +41,8 @@ header {
 header h1 {
     font-size: 1.4rem;
     font-weight: 700;
+    min-height: 1.6em;
+    /* Reserve space for text */
 }
 
 /* Main Container */
@@ -434,6 +436,10 @@ footer {
     margin-top: 2rem;
     border: 3px solid #ffecb3;
     /* Pop border */
+    min-height: 400px;
+    /* Prevent CLS */
+    contain: content;
+    /* CSS containment for performance */
 }
 
 .recipe-scaler-card h2 {
