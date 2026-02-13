@@ -648,6 +648,24 @@ footer {
     border: 2px dashed #f8bbd0;
 }
 
+.scaler-message-box {
+    margin-top: 1rem;
+    text-align: center;
+    min-height: 60px;
+    /* Prevent CLS */
+}
+
+#scaler-message {
+    font-weight: bold;
+    color: #e91e63;
+}
+
+#scaler-note {
+    font-size: 0.85rem;
+    color: #880e4f;
+    margin-top: 0.5rem;
+}
+
 .scaler-result-area textarea {
     background-color: white;
     border-color: transparent;

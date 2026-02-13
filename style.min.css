@@ -472,8 +472,7 @@ footer {
 .input-container {
     display: flex;
     align-items: center;
-    justify-content: center;
-    width: 60px
+    justify-content: center
 }
 
 .input-pill input {
@@ -617,6 +616,23 @@ footer {
     background-color: white;
     border-color: transparent;
     box-shadow: none
+}
+
+.scaler-message-box {
+    margin-top: 1rem;
+    text-align: center;
+    min-height: 60px
+}
+
+#scaler-message {
+    font-weight: bold;
+    color: #e91e63
+}
+
+#scaler-note {
+    font-size: 0.85rem;
+    color: #880e4f;
+    margin-top: 0.5rem
 }
 
 .table-responsive {

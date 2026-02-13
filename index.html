@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サクッと解決！お料理単位くん｜大さじ・カップをgに一瞬で変換</title>
     <meta name="description" content="料理の単位変換で迷わない！砂糖や小麦粉のグラム換算、海外レシピのカップ数、人数分の分量計算もこれ一つでサクッと解決。お料理がもっと楽しくなる便利な相棒です。">
+    <meta http-equiv="Cache-Control" content="max-age=31536000">
 
     <!-- OGP Tags -->
     <meta property="og:title" content="サクッと解決！お料理単位くん｜大さじ・カップをgに一瞬で変換">
@@ -23,14 +24,27 @@
 
     <!-- ========================================== -->
     <!-- Google Tag Manager -->
-    <script>(function (w, d, s, l, i) {
-            w[l] = w[l] || []; w[l].push({
-                'gtm.start':
-                    new Date().getTime(), event: 'gtm.js'
-            }); var f = d.getElementsByTagName(s)[0],
-                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
-                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
-        })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');</script>
+    <script>
+        // Delayed GTM Load
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start':
+                        new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+
+        // Trigger on interaction or timeout
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000); // Fallback
+    </script>
     <!-- End Google Tag Manager -->
 
     <!-- ========================================== -->
@@ -52,11 +66,11 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap&subset=japanese"
         rel="stylesheet" media="print" onload="this.media='all'">
     <noscript>
         <link
-            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap&subset=japanese"
             rel="stylesheet">
     </noscript>
 
@@ -201,9 +215,9 @@
             }
         }
     </style>
-    <link rel="stylesheet" href="style.min.css?v=2.0" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="style.min.css?v=3.0" media="print" onload="this.media='all'">
     <noscript>
-        <link rel="stylesheet" href="style.min.css?v=2.0">
+        <link rel="stylesheet" href="style.min.css?v=3.0">
     </noscript>
 </head>
 
@@ -443,7 +457,7 @@
       }
     ]
     </script>
-    <script src="script.min.js?v=2.0"></script>
+    <script src="script.min.js?v=3.0"></script>
 </body>
 
 </html>
