@@ -53,11 +53,158 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
-        rel="stylesheet">
+        rel="stylesheet" media="print" onload="this.media='all'">
+    <noscript>
+        <link
+            href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;500;700&family=Zen+Maru+Gothic:wght@400;500;700&display=swap"
+            rel="stylesheet">
+    </noscript>
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/unit-converter-cooking/sitemap.xml">
-    <link rel="preload" href="style.min.css" as="style">
-    <link rel="stylesheet" href="style.min.css">
+    <style>
+        :root {
+            --primary-color: #FF8c00;
+            --accent-color: #4CAF50;
+            --bg-color: #f9f9f9;
+            --card-bg: #ffffff;
+            --text-color: #333333;
+            --border-color: #dddddd;
+            --input-bg: #f5f5f5;
+            --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
+            --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1)
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0
+        }
+
+        body {
+            font-family: 'Zen Maru Gothic', 'Noto Sans JP', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh
+        }
+
+        header {
+            background-color: var(--primary-color);
+            color: white;
+            padding: 1rem;
+            text-align: center;
+            box-shadow: var(--shadow-sm)
+        }
+
+        header h1 {
+            font-size: 1.4rem;
+            font-weight: 700
+        }
+
+        .container {
+            flex: 1;
+            padding: 1.5rem;
+            max-width: 600px;
+            margin: 0 auto;
+            width: 100%
+        }
+
+        .converter-card {
+            background-color: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 2rem
+        }
+
+        .input-group {
+            margin-bottom: 1rem
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            font-size: 1rem;
+            color: #333
+        }
+
+        .input-group select,
+        .input-group input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            font-size: 1.1rem;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            background-color: var(--input-bg);
+            transition: border-color 0.2s, background-color 0.2s;
+            -webkit-appearance: none;
+            appearance: none
+        }
+
+        .conversion-row {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            margin-bottom: 0.5rem
+        }
+
+        .conversion-row .calc-input {
+            flex: 2;
+            font-size: 1.5rem;
+            font-weight: bold;
+            padding: 0.8rem
+        }
+
+        .result-input {
+            background-color: #e8f5e9;
+            border-color: #c8e6c9;
+            color: #2e7d32
+        }
+
+        .conversion-row .unit-select {
+            display: none
+        }
+
+        @media(min-width:600px) {
+            header h1 {
+                font-size: 1.6rem
+            }
+
+            .converter-card {
+                padding: 2.5rem
+            }
+        }
+
+        @media(max-width:480px) {
+            .container {
+                padding: 1rem
+            }
+
+            .converter-card {
+                padding: 1.2rem
+            }
+
+            .conversion-row {
+                flex-direction: column;
+                align-items: stretch;
+                gap: 8px
+            }
+
+            .conversion-row .calc-input,
+            .conversion-row .unit-select {
+                flex: auto;
+                width: 100%;
+                font-size: 1.2rem
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="style.min.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="style.min.css">
+    </noscript>
 </head>
 
 <body>
@@ -252,7 +399,7 @@
         <p class="disclaimer">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
     </footer>
 
-    <script src="script.min.js" defer></script>
+
     <script type="application/ld+json">
     [
       {
@@ -296,6 +443,7 @@
       }
     ]
     </script>
+    <script src="script.min.js"></script>
 </body>
 
 </html>
