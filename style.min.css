@@ -1,22 +1,19 @@
-/* Global Styles */
 :root {
     --primary-color: #FF8c00;
-    /* Appetizing orange */
     --accent-color: #4CAF50;
-    /* Fresh green */
     --bg-color: #f9f9f9;
     --card-bg: #ffffff;
     --text-color: #333333;
     --border-color: #dddddd;
     --input-bg: #f5f5f5;
     --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
-    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+    --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1)
 }
 
 * {
     box-sizing: border-box;
     margin: 0;
-    padding: 0;
+    padding: 0
 }
 
 body {
@@ -26,44 +23,40 @@ body {
     line-height: 1.6;
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    min-height: 100vh
 }
 
-/* Header */
 header {
     background-color: var(--primary-color);
     color: white;
     padding: 1rem;
     text-align: center;
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-sm)
 }
 
 header h1 {
     font-size: 1.4rem;
-    font-weight: 700;
+    font-weight: 700
 }
 
-/* Main Container */
 .container {
     flex: 1;
     padding: 1.5rem;
     max-width: 600px;
     margin: 0 auto;
-    width: 100%;
+    width: 100%
 }
 
-/* Converter Card */
 .converter-card {
     background-color: var(--card-bg);
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: var(--shadow-md);
-    margin-bottom: 2rem;
+    margin-bottom: 2rem
 }
 
-/* Input Groups */
 .input-group {
-    margin-bottom: 1rem;
+    margin-bottom: 1rem
 }
 
 .input-group label {
@@ -71,7 +64,7 @@ header h1 {
     margin-bottom: 0.5rem;
     font-weight: 500;
     font-size: 1rem;
-    color: #333;
+    color: #333
 }
 
 .input-group select,
@@ -79,19 +72,17 @@ header h1 {
     width: 100%;
     padding: 0.8rem 1rem;
     font-size: 1.1rem;
-    /* Large font for readability */
     border: 1px solid var(--border-color);
     border-radius: 8px;
     background-color: var(--input-bg);
     transition: border-color 0.2s, background-color 0.2s;
     -webkit-appearance: none;
-    appearance: none;
+    appearance: none
 }
 
-/* Custom dropdown arrow for better cross-browser look, mostly for mobile */
 .ingredient-select {
     position: relative;
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem
 }
 
 .ingredient-select select {
@@ -99,44 +90,38 @@ header h1 {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 1rem center;
-    background-size: 1.2rem;
+    background-size: 1.2rem
 }
 
-/* Conversion Row Layout */
 .conversion-row {
     display: flex;
     gap: 10px;
     align-items: center;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem
 }
 
 .conversion-row .calc-input {
     flex: 2;
-    /* 2/3 width */
     font-size: 1.5rem;
-    /* Large font for source */
     font-weight: bold;
-    padding: 0.8rem;
+    padding: 0.8rem
 }
 
 .result-input {
     background-color: #e8f5e9;
-    /* Light green bg for result */
     border-color: #c8e6c9;
-    color: #2e7d32;
+    color: #2e7d32
 }
 
 .conversion-row .unit-select {
-    display: none;
-    /* Hide original select */
+    display: none
 }
 
-/* Custom Select Styles */
 .custom-select-wrapper {
     position: relative;
     flex: 1.2;
     cursor: pointer;
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent
 }
 
 .custom-select-trigger {
@@ -148,7 +133,7 @@ header h1 {
     font-size: 1rem;
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: center
 }
 
 .custom-select-trigger::after {
@@ -158,7 +143,7 @@ header h1 {
     background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23333' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: center;
-    background-size: contain;
+    background-size: contain
 }
 
 .custom-options {
@@ -177,79 +162,73 @@ header h1 {
     transition: all 0.2s ease;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
     max-height: 300px;
-    overflow-y: auto;
+    overflow-y: auto
 }
 
 .custom-options.open {
     opacity: 1;
     visibility: visible;
-    transform: translateY(0);
+    transform: translateY(0)
 }
 
 .custom-option {
     padding: 0.8rem 1rem;
-    /* Same padding as trigger */
     font-size: 1rem;
-    /* Same font size */
     border-bottom: 1px solid #f0f0f0;
     color: #333;
-    transition: background-color 0.2s;
+    transition: background-color 0.2s
 }
 
 .custom-option:last-child {
-    border-bottom: none;
+    border-bottom: none
 }
 
 .custom-option:hover {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9
 }
 
 .custom-option.selected {
     background-color: #e8f5e9;
     color: #2e7d32;
-    font-weight: bold;
+    font-weight: bold
 }
 
-/* Reference Section */
 .reference-section {
     margin-top: 2rem;
     padding-top: 1rem;
-    border-top: 1px dashed #eee;
+    border-top: 1px dashed #eee
 }
 
 .ref-title {
     font-size: 0.85rem;
     color: #666;
-    margin-bottom: 0.5rem;
+    margin-bottom: 0.5rem
 }
 
 #reference-list {
     display: flex;
     flex-wrap: wrap;
-    gap: 10px;
+    gap: 10px
 }
 
 .ref-item {
     font-size: 0.9rem;
     color: #555;
-    /* Thin/light color as requested */
     background-color: #f8f8f8;
     padding: 4px 8px;
-    border-radius: 4px;
+    border-radius: 4px
 }
 
 .input-group select:focus,
 .input-group input:focus {
     outline: none;
     border-color: var(--primary-color);
-    background-color: #fff;
+    background-color: #fff
 }
 
-/* Directional Arrow / Separator */
 .converter-arrow {
     text-align: center;
     margin: 1rem auto;
-    /* Adjusted spacing */
     width: 40px;
     height: 40px;
     line-height: 40px;
@@ -260,16 +239,14 @@ header h1 {
     font-weight: bold;
     user-select: none;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-    /* Pop shadow */
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: center
 }
 
-/* Reset Button */
 .reset-area {
     text-align: right;
-    margin-top: 1rem;
+    margin-top: 1rem
 }
 
 #reset-btn {
@@ -279,157 +256,133 @@ header h1 {
     border-radius: 20px;
     font-size: 0.9rem;
     color: #444;
-    cursor: pointer;
+    cursor: pointer
 }
 
 #reset-btn:active {
-    background-color: #eee;
+    background-color: #eee
 }
 
-
-/* Amazon/Marketing Container */
 .amazon-container {
     text-align: center;
     margin-top: 2rem;
     padding: 1rem;
     background-color: #fff3e0;
-    /* Light orange bg */
     border-radius: 8px;
-    border: 1px solid #ffe0b2;
+    border: 1px solid #ffe0b2
 }
 
 .amazon-text {
     font-size: 1rem;
     color: #222;
     margin-bottom: 1rem;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .amazon-btn {
     display: inline-block;
     background-color: #FF9900;
-    /* Amazon Orange */
     color: white;
     padding: 12px 24px;
     border-radius: 4px;
-    /* Slightly rounded like Amazon buttons */
     text-decoration: none;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.2s, transform 0.1s;
+    transition: background-color 0.2s, transform 0.1s
 }
 
 .amazon-btn:hover {
     background-color: #e68a00;
-    /* Darker orange */
-    transform: translateY(-1px);
+    transform: translateY(-1px)
 }
 
 .amazon-btn:active {
     transform: translateY(1px);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2)
 }
 
-/* Footer */
 footer {
     text-align: center;
     padding: 1.5rem;
     font-size: 0.9rem;
     color: #777;
-    background-color: #f1f1f1;
+    background-color: #f1f1f1
 }
 
 .disclaimer {
     font-size: 0.75rem;
     color: #999;
-    margin-top: 0.5rem;
+    margin-top: 0.5rem
 }
 
-/* Responsive adjustments */
-@media (min-width: 600px) {
+@media(min-width:600px) {
     header h1 {
-        font-size: 1.6rem;
+        font-size: 1.6rem
     }
 
     .converter-card {
-        padding: 2.5rem;
+        padding: 2.5rem
     }
 }
 
-/* Mobile responsive fix */
-@media (max-width: 480px) {
+@media(max-width:480px) {
     .container {
-        padding: 1rem;
+        padding: 1rem
     }
 
     .converter-card {
-        padding: 1.2rem;
+        padding: 1.2rem
     }
 
     .conversion-row {
         flex-direction: column;
         align-items: stretch;
-        gap: 8px;
-        /* Slightly closer than default */
+        gap: 8px
     }
 
     .conversion-row .calc-input,
     .conversion-row .unit-select {
         flex: auto;
         width: 100%;
-        font-size: 1.2rem;
-        /* Ensure readable size */
-    }
-
-    .conversion-row .unit-select {
-        /* This is now hidden, style wrapper instead */
+        font-size: 1.2rem
     }
 
     .custom-select-wrapper {
         width: 100%;
-        flex: auto;
+        flex: auto
     }
 
     .custom-select-trigger {
         font-size: 1.2rem;
-        /* Large font for mobile */
-        padding: 1rem;
+        padding: 1rem
     }
 
     .custom-option {
         padding: 1rem;
-        /* Large touch target */
-        font-size: 1.2rem;
+        font-size: 1.2rem
     }
 }
 
-/* Utilities */
 .hidden {
-    display: none !important;
+    display: none !important
 }
 
 .placeholder-text {
-    color: #767676 !important;
-    /* Gray text for default preview */
+    color: #767676 !important
 }
 
-/* SEO Content Section */
 .seo-content {
     margin-top: 3rem;
-    padding-top: 1rem;
+    padding-top: 1rem
 }
 
-/* Recipe Scaler */
 .recipe-scaler-card {
     background-color: #fff;
     padding: 1.5rem;
     border-radius: 20px;
-    /* More rounded */
     box-shadow: 0 8px 20px rgba(255, 150, 50, 0.15);
-    /* Orange glow shadow */
     margin-top: 2rem;
-    border: 3px solid #ffecb3;
-    /* Pop border */
+    border: 3px solid #ffecb3
 }
 
 .recipe-scaler-card h2 {
@@ -444,11 +397,11 @@ footer {
     position: relative;
     left: 50%;
     transform: translateX(-50%);
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .scaler-inputs {
-    margin-bottom: 1.5rem;
+    margin-bottom: 1.5rem
 }
 
 .servings-group {
@@ -456,24 +409,22 @@ footer {
     justify-content: center;
     align-items: center;
     gap: 1.5rem;
-    /* More space */
     margin-bottom: 1.5rem;
     background-color: transparent;
-    /* Clean look */
-    padding: 0;
+    padding: 0
 }
 
 .input-wrapper {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center
 }
 
 .input-wrapper label {
     font-size: 0.9rem;
     color: #555;
     margin-bottom: 0.3rem;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .input-pill {
@@ -483,22 +434,20 @@ footer {
     border: 2px solid #ddd;
     border-radius: 30px;
     padding: 2px;
-    /* Reduced padding to fit buttons */
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
-    transition: all 0.3s ease;
+    transition: all 0.3s ease
 }
 
 .input-pill:focus-within {
     border-color: var(--primary-color);
-    box-shadow: 0 0 0 3px rgba(255, 167, 38, 0.2);
+    box-shadow: 0 0 0 3px rgba(255, 167, 38, 0.2)
 }
 
 .input-container {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 60px;
-    /* Base width */
+    width: 60px
 }
 
 .input-pill input {
@@ -506,32 +455,29 @@ footer {
     padding: 0.5rem 0;
     font-size: 1.3rem;
     text-align: right;
-    /* Right align number to be close to unit */
     border: none;
     background: transparent;
     color: #444;
     font-family: 'Zen Maru Gothic', sans-serif;
     outline: none;
-    -moz-appearance: textfield;
-    /* Remove default spinners */
+    -moz-appearance: textfield
 }
 
 .input-pill input::-webkit-outer-spin-button,
 .input-pill input::-webkit-inner-spin-button {
     -webkit-appearance: none;
-    margin: 0;
+    margin: 0
 }
 
 .unit-label {
     font-size: 0.9rem;
     color: #555;
     margin-left: 2px;
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .ctrl-btn {
     min-width: 32px;
-    /* Ensure circular shape */
     width: 32px;
     height: 32px;
     border-radius: 50%;
@@ -548,24 +494,22 @@ footer {
     user-select: none;
     margin: 0 2px;
     padding: 0;
-    /* Remove default padding */
-    -webkit-tap-highlight-color: transparent;
+    -webkit-tap-highlight-color: transparent
 }
 
 .ctrl-btn:hover {
-    background-color: #ffcc80;
+    background-color: #ffcc80
 }
 
 .ctrl-btn:active {
     background-color: #ffb74d;
-    transform: scale(0.95);
+    transform: scale(0.95)
 }
 
 .scaler-arrow {
     font-size: 1.8rem;
     color: var(--primary-color);
-    padding-top: 1rem;
-    /* Align with inputs */
+    padding-top: 1rem
 }
 
 .ingredients-area label,
@@ -573,14 +517,14 @@ footer {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 0.8rem;
+    margin-bottom: 0.8rem
 }
 
 .scaler-result-area .result-header label {
     font-size: 0.95rem;
     color: #444;
     margin-bottom: 0;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .copy-btn {
@@ -597,18 +541,18 @@ footer {
     font-family: 'Zen Maru Gothic', sans-serif;
     display: flex;
     align-items: center;
-    gap: 5px;
+    gap: 5px
 }
 
 .copy-btn:hover {
     transform: translateY(-2px);
     box-shadow: 0 6px 12px rgba(245, 124, 0, 0.4);
-    background: linear-gradient(135deg, #ffa726, #fb8c00);
+    background: linear-gradient(135deg, #ffa726, #fb8c00)
 }
 
 .copy-btn:active {
     transform: translateY(0);
-    box-shadow: 0 2px 4px rgba(245, 124, 0, 0.3);
+    box-shadow: 0 2px 4px rgba(245, 124, 0, 0.3)
 }
 
 .ingredients-area textarea,
@@ -623,44 +567,41 @@ footer {
     resize: none;
     font-family: inherit;
     background-color: #fafafa;
-    transition: all 0.2s;
+    transition: all 0.2s
 }
 
 .ingredients-area textarea:focus {
     outline: none;
     border-color: var(--primary-color);
     background-color: #fff;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05)
 }
 
 .scaler-result-area {
     background-color: #fff0f5;
-    /* Light pinkish bg for result */
     padding: 1.2rem;
     border-radius: 12px;
     margin-top: 1rem;
-    border: 2px dashed #f8bbd0;
+    border: 2px dashed #f8bbd0
 }
 
 .scaler-result-area textarea {
     background-color: white;
     border-color: transparent;
-    box-shadow: none;
+    box-shadow: none
 }
 
-/* Reference Table */
 .table-responsive {
     overflow-x: auto;
     -webkit-overflow-scrolling: touch;
-    width: 100%;
+    width: 100%
 }
 
 .ref-table {
     width: 100%;
     border-collapse: collapse;
     background-color: white;
-    min-width: 300px;
-    /* Force scroll on very small screens if needed */
+    min-width: 300px
 }
 
 .ref-table th,
@@ -668,52 +609,49 @@ footer {
     border: 1px solid #eee;
     padding: 10px;
     text-align: center;
-    font-size: 0.95rem;
+    font-size: 0.95rem
 }
 
 .ref-table th {
     background-color: #ffe0b2;
-    /* Lighter primary */
     color: #bf360c;
     font-weight: bold;
-    white-space: nowrap;
+    white-space: nowrap
 }
 
 .unit-sub {
     font-size: 0.75rem;
-    font-weight: normal;
+    font-weight: normal
 }
 
 .ref-table tr:nth-child(even) {
-    background-color: #f9f9f9;
+    background-color: #f9f9f9
 }
 
 .seo-note {
     font-size: 0.8rem;
     color: #555;
     margin-top: 0.8rem;
-    text-align: right;
+    text-align: right
 }
 
-/* FAQ */
 .faq-item {
     background-color: white;
     padding: 1rem;
     border-radius: 8px;
     margin-bottom: 1rem;
-    border: 1px solid #eee;
+    border: 1px solid #eee
 }
 
 .faq-q {
     font-size: 1rem;
     color: #bf360c;
-    /* Darker orange for Q */
     margin-bottom: 0.5rem;
-    font-weight: bold;
+    font-weight: bold
 }
 
 .faq-a {
     font-size: 0.95rem;
     color: #444;
-    line-height: 1.6;
+    line-height: 1.6
 }

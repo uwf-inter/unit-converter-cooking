@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://uwf-inter.github.io/unit-converter-cooking/sitemap.xml
