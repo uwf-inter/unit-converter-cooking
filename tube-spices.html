@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>にんにく1片はチューブで何センチ？しょうがの換算も一発計算｜お料理単位くん</title>
+    <meta name="description" content="レシピの『にんにく1片』はチューブなら約5cmです。チューブ1cmは約1.5g。料理中にパッと計算できるツールをご活用ください。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=5.1">
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+    </header>
+
+    <nav class="main-nav">
+        <a href="index.html">トップ</a>
+        <a href="otama.html">おたま</a>
+        <a href="tube-spices.html" class="active">チューブ換算</a>
+        <a href="rice.html">お米</a>
+        <a href="butter.html">調味料</a>
+    </nav>
+
+    <main class="container">
+        <section class="seo-content">
+            <h2 class="section-title">にんにく・しょうが「チューブ換算」</h2>
+            <p>レシピによくある「にんにく1片」や「しょうが1かけ」、チューブなら何cm出せばいいの？をパッと解決します。</p>
+
+            <div class="converter-card tube-converter-card">
+                <div class="conversion-row">
+                    <input type="number" id="tube-source-input" class="calc-input" placeholder="数値を入力"
+                        inputmode="decimal" step="any">
+                    <select id="tube-spice-type" class="unit-select-native">
+                        <option value="garlic">にんにく 🧄</option>
+                        <option value="ginger">しょうが</option>
+                    </select>
+                </div>
+
+                <div class="unit-selection-area">
+                    <label class="radio-label"><input type="radio" name="tube-unit" value="piece" checked> 片/かけ</label>
+                    <label class="radio-label"><input type="radio" name="tube-unit" value="cm"> cm</label>
+                    <label class="radio-label"><input type="radio" name="tube-unit" value="g"> グラム(g)</label>
+                </div>
+
+                <div class="tube-result-area">
+                    <div id="tube-result-text" class="result-display">数値を入力してね！</div>
+
+                    <!-- Ruler Scale UI -->
+                    <div class="ruler-container">
+                        <div class="ruler-scale">
+                            <div class="ruler-marker" style="left: 0%;">0</div>
+                            <div class="ruler-marker" style="left: 20%;">1</div>
+                            <div class="ruler-marker" style="left: 40%;">2</div>
+                            <div class="ruler-marker" style="left: 60%;">3</div>
+                            <div class="ruler-marker" style="left: 80%;">4</div>
+                            <div class="ruler-marker" style="left: 100%;">5</div>
+                            <div id="tube-visual-indicator" class="tube-fill"></div>
+                        </div>
+                        <p class="ruler-label">約 5cm（にんにく1片分）</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="seo-content">
+            <h3 class="section-title">にんにくチューブ換算の目安</h3>
+            <div class="table-responsive">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>にんにくの状態</th>
+                            <th>チューブの長さ</th>
+                            <th>重さの目安</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1片 (標準サイズ)</td>
+                            <td>約 5cm</td>
+                            <td>約 6g</td>
+                        </tr>
+                        <tr>
+                            <td>1/2片</td>
+                            <td>約 2.5cm</td>
+                            <td>約 3g</td>
+                        </tr>
+                        <tr>
+                            <td>小さじ1</td>
+                            <td>約 4cm</td>
+                            <td>約 6g</td>
+                        </tr>
+                        <tr>
+                            <td>大さじ1</td>
+                            <td>約 12cm</td>
+                            <td>約 18g</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="seo-note">※チューブの太さや各メーカー（S&Bやハウスなど）によって多少前後するので、あくまで目安として使ってね！</p>
+        </section>
+
+        <section class="amazon-container">
+            <p class="amazon-text">チューブ調味料もおしゃれに収納 ✨</p>
+            <a href="https://amzn.to/3P8YF82" class="amazon-btn" target="_blank"
+                rel="noopener sponsored">Amazonで人気の商品を見る</a>
+        </section>
+
+        <section class="dictionary-links">
+            <h2 class="section-title">他の換算もチェック！</h2>
+            <div class="ingredient-grid">
+                <a href="shoyu.html" class="ingredient-card">
+                    <span class="emoji">🧂</span>
+                    <span class="name">醤油</span>
+                </a>
+                <a href="miso.html" class="ingredient-card">
+                    <span class="emoji">🥣</span>
+                    <span class="name">味噌</span>
+                </a>
+                <a href="index.html" class="ingredient-card">
+                    <span class="emoji">🏠</span>
+                    <span class="name">トップに戻る</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+        <p class="disclaimer">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
+    </footer>
+
+    <script src="script.js?v=5.1"></script>
+    <script>
+        // DataLayer push for tracking
+        document.querySelectorAll('.amazon-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                window.dataLayer = window.dataLayer || [];
+                window.dataLayer.push({
+                    'event': 'amazon_click',
+                    'button_location': document.title
+                });
+            });
+        });
+    </script>
+</body>
+
+</html>
