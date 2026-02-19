@@ -91,52 +91,70 @@
 
     <nav class="main-nav">
         <a href="index.html" class="active">トップ</a>
+        <a href="otama.html">おたま</a>
         <a href="oatmeal.html">オートミール</a>
         <a href="rice.html">お米</a>
         <a href="butter.html">調味料</a>
     </nav>
 
     <main class="container">
-        <section class="converter-card">
-
-            <div class="conversion-row source-row">
-                <input type="number" id="source-input" class="calc-input large-input" placeholder="数値を入力"
-                    inputmode="decimal" step="any" aria-label="変換元の数値を入力">
-                <select id="source-unit" class="unit-select" aria-label="変換元の単位を選択">
-                    <option value="g">グラム (g)</option>
-                    <option value="ml" selected>cc (ml)</option>
-                    <option value="cup">カップ (200ml)</option>
-                    <option value="tbsp">大さじ (15ml)</option>
-                    <option value="tsp">小さじ (5ml)</option>
+        <!-- Ingredient Density Option -->
+        <div class="input-group ingredient-option">
+            <label for="ingredient-select">✨ なにを量りますか？（オプション）<br><span
+                    style="font-size: 0.8rem; font-weight: normal; color: #795548;">お料理単位くんが、食材に合わせて正確に計算するよ！</span></label>
+            <div class="ingredient-select">
+                <select id="ingredient-select" class="unit-select" aria-label="食材を選択して比重を適用">
+                    <option value="none" selected>指定なし（基本・お水と同じ）</option>
+                    <option value="shoyu">醤油 🧂</option>
+                    <option value="sake">料理酒 🍶</option>
+                    <option value="mirin">みりん 🍶</option>
+                    <option value="sugar">砂糖 🧂</option>
+                    <option value="flour">小麦粉・片栗粉 🥣</option>
+                    <option value="butter">バター 🧈</option>
+                    <option value="rice">お米 🍚</option>
                 </select>
             </div>
+            <div id="density-msg" class="density-info hidden"></div>
+        </div>
 
-            <div class="converter-arrow pop-arrow">↓</div>
+        <div class="conversion-row source-row">
+            <input type="number" id="source-input" class="calc-input large-input" placeholder="数値を入力"
+                inputmode="decimal" step="any" aria-label="変換元の数値を入力">
+            <select id="source-unit" class="unit-select" aria-label="変換元の単位を選択">
+                <option value="g">グラム (g)</option>
+                <option value="ml" selected>cc (ml)</option>
+                <option value="cup">カップ (200ml)</option>
+                <option value="tbsp">大さじ (15ml)</option>
+                <option value="tsp">小さじ (5ml)</option>
+            </select>
+        </div>
 
-            <div class="conversion-row destination-row">
-                <input type="text" id="target-output" class="calc-input result-input" readonly aria-label="変換結果">
-                <select id="target-unit" class="unit-select" aria-label="変換先の単位を選択">
-                    <option value="g">グラム (g)</option>
-                    <option value="ml">cc (ml)</option>
-                    <option value="cup" selected>カップ (200ml)</option>
-                    <option value="tbsp">大さじ (15ml)</option>
-                    <option value="tsp">小さじ (5ml)</option>
-                </select>
+        <div class="converter-arrow pop-arrow">↓</div>
+
+        <div class="conversion-row destination-row">
+            <input type="text" id="target-output" class="calc-input result-input" readonly aria-label="変換結果">
+            <select id="target-unit" class="unit-select" aria-label="変換先の単位を選択">
+                <option value="g">グラム (g)</option>
+                <option value="ml">cc (ml)</option>
+                <option value="cup" selected>カップ (200ml)</option>
+                <option value="tbsp">大さじ (15ml)</option>
+                <option value="tsp">小さじ (5ml)</option>
+            </select>
+        </div>
+
+        <!-- Reference Section -->
+        <div class="reference-section">
+            <p class="ref-title">その他の換算例：</p>
+            <div id="reference-list">
+                <!-- Dynamic content will populate here -->
+                <span class="ref-item">大さじ: -</span>
+                <span class="ref-item">小さじ: -</span>
             </div>
+        </div>
 
-            <!-- Reference Section -->
-            <div class="reference-section">
-                <p class="ref-title">その他の換算例：</p>
-                <div id="reference-list">
-                    <!-- Dynamic content will populate here -->
-                    <span class="ref-item">大さじ: -</span>
-                    <span class="ref-item">小さじ: -</span>
-                </div>
-            </div>
-
-            <div class="reset-area">
-                <button id="reset-btn" type="button" aria-label="入力をリセット">リセット</button>
-            </div>
+        <div class="reset-area">
+            <button id="reset-btn" type="button" aria-label="入力をリセット">リセット</button>
+        </div>
         </section>
 
         <!-- ========================================== -->
@@ -204,6 +222,10 @@
         <section class="dictionary-links">
             <h2 class="section-title">🥣 食材別！換算早見表まとめ（図鑑）</h2>
             <div class="ingredient-grid">
+                <a href="otama.html" class="ingredient-card">
+                    <span class="emoji">🥣</span>
+                    <span class="name">おたま</span>
+                </a>
                 <a href="oatmeal.html" class="ingredient-card">
                     <span class="emoji">🥣</span>
                     <span class="name">オートミール</span>
@@ -212,13 +234,29 @@
                     <span class="emoji">🍚</span>
                     <span class="name">お米</span>
                 </a>
+                <a href="flour.html" class="ingredient-card">
+                    <span class="emoji">🥣</span>
+                    <span class="name">小麦粉</span>
+                </a>
                 <a href="butter.html" class="ingredient-card">
                     <span class="emoji">🧈</span>
                     <span class="name">バター</span>
                 </a>
                 <a href="sugar.html" class="ingredient-card">
                     <span class="emoji">🧂</span>
-                    <span class="name">砂糖・塩</span>
+                    <span class="name">砂糖</span>
+                </a>
+                <a href="salt.html" class="ingredient-card">
+                    <span class="emoji">🧂</span>
+                    <span class="name">塩</span>
+                </a>
+                <a href="shoyu.html" class="ingredient-card">
+                    <span class="emoji">🧂</span>
+                    <span class="name">醤油</span>
+                </a>
+                <a href="sake-mirin.html" class="ingredient-card">
+                    <span class="emoji">🍶</span>
+                    <span class="name">酒・みりん</span>
                 </a>
                 <a href="miso.html" class="ingredient-card">
                     <span class="emoji">🥣</span>

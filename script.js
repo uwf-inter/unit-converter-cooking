@@ -4,12 +4,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const sourceUnitSelect = document.getElementById('source-unit');
     const targetOutput = document.getElementById('target-output');
     const targetUnitSelect = document.getElementById('target-unit');
+    const ingredientSelect = document.getElementById('ingredient-select');
+    const densityMsg = document.getElementById('density-msg');
     const referenceList = document.getElementById('reference-list');
     const resetBtn = document.getElementById('reset-btn');
 
-    // Specific Gravity Data (g/cm3 or g/ml) - Fixed to Water for simplicity as requested
-    // "Ingredients are not selected" -> Default 1.0
-    const DENSITY = 1.0;
+    // Specific Gravity Data (g/ml)
+    const INGREDIENT_DATA = {
+        'none': { density: 1.0, name: '' },
+        'shoyu': { density: 1.2, name: '醤油' },
+        'sake': { density: 1.0, name: '酒' },
+        'mirin': { density: 1.2, name: 'みりん' },
+        'sugar': { density: 0.6, name: '砂糖' },
+        'flour': { density: 0.5, name: '小麦粉/片栗粉' },
+        'butter': { density: 0.8, name: 'バター' },
+        'rice': { density: 0.8, name: 'お米' }
+    };
 
     // Unit definitions
     const units = {
@@ -35,21 +45,28 @@ document.addEventListener('DOMContentLoaded', () => {
         let val = parseFloat(sourceInput.value);
         let isDefaultPreview = false;
 
-        // If input is empty, use the default value for the current source unit
-        if (isNaN(val)) {
-            const sourceUnit = sourceUnitSelect.value;
-            val = defaultValues[sourceUnit] || 1;
-            isDefaultPreview = true;
-
-            // Show this default as the placeholder
-            sourceInput.placeholder = val;
-        } else {
-            // Ensure placeholder matches current unit default even when typing
-            sourceInput.placeholder = defaultValues[sourceUnitSelect.value] || 1;
-        }
-
         const sourceUnit = sourceUnitSelect.value;
         const targetUnit = targetUnitSelect.value;
+        const ingredientKey = ingredientSelect.value;
+        const density = INGREDIENT_DATA[ingredientKey].density;
+        const ingredientName = INGREDIENT_DATA[ingredientKey].name;
+
+        // Update Density Message
+        if (ingredientKey !== 'none' && ingredientName) {
+            densityMsg.textContent = `✅ ${ingredientName}に合わせてピッタリ計算中！ (比重:${density})`;
+            densityMsg.classList.remove('hidden');
+        } else {
+            densityMsg.classList.add('hidden');
+        }
+
+        // If input is empty, use the default value for the current source unit
+        if (isNaN(val)) {
+            val = defaultValues[sourceUnit] || 1;
+            isDefaultPreview = true;
+            sourceInput.placeholder = val;
+        } else {
+            sourceInput.placeholder = defaultValues[sourceUnit] || 1;
+        }
 
         // Style the output based on whether it's a real result or a preview
         if (isDefaultPreview) {
@@ -58,27 +75,20 @@ document.addEventListener('DOMContentLoaded', () => {
             targetOutput.classList.remove('placeholder-text');
         }
 
-        // 1. Convert source to grams (using water density=1 as base for simplicity if not food specific)
-        // Note: The previous logic was specialized. We'll simplify to:
-        // Volume (ml) -> Weight (g) : x1 (water)
-        // Weight (g) -> Volume (ml) : /1
-        // Cup=200ml, Tbsp=15ml, Tsp=5ml
-
-        // Base unit: ml (or g for water)
+        // 1. Convert source to base unit: ml
         let inMl = 0;
-
         switch (sourceUnit) {
-            case 'g': inMl = val; break; // Assumes water density
+            case 'g': inMl = val / density; break; // g -> ml
             case 'ml': inMl = val; break;
             case 'cup': inMl = val * 200; break;
             case 'tbsp': inMl = val * 15; break;
             case 'tsp': inMl = val * 5; break;
         }
 
-        // 2. Convert ml to target
+        // 2. Convert base unit (ml) to target
         let result = 0;
         switch (targetUnit) {
-            case 'g': result = inMl; break;
+            case 'g': result = inMl * density; break; // ml -> g
             case 'ml': result = inMl; break;
             case 'cup': result = inMl / 200; break;
             case 'tbsp': result = inMl / 15; break;
@@ -86,15 +96,13 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Formatting
-        // If it's an integer, show no decimals. If float, max 2 decimals.
-        // For preview, we might want to be cleaner.
         let displayResult = parseFloat(result.toFixed(2));
         targetOutput.value = displayResult;
 
-        updateReferenceList(inMl, isDefaultPreview);
+        updateReferenceList(inMl, density, isDefaultPreview);
     }
 
-    function updateReferenceList(inMl, isPreview) {
+    function updateReferenceList(inMl, density, isPreview) {
         // Clear current
         referenceList.innerHTML = '';
 
@@ -113,7 +121,12 @@ document.addEventListener('DOMContentLoaded', () => {
             // Don't show if it's the target unit (redundant)
             if (targetUnitSelect.value === r.unit) return;
 
-            let val = inMl / r.ml;
+            let val;
+            if (r.unit === 'g') {
+                val = inMl * density; // ml -> g
+            } else {
+                val = inMl / r.ml;
+            }
             let valStr = parseFloat(val.toFixed(2));
 
             const span = document.createElement('span');
@@ -144,6 +157,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners
     sourceInput.addEventListener('input', calculate);
+    ingredientSelect.addEventListener('change', calculate);
     // Remove direct change listeners because custom select will trigger them differently or we handle it inside custom select logic
     // sourceUnitSelect.addEventListener('change', calculate); 
     // targetUnitSelect.addEventListener('change', calculate);
