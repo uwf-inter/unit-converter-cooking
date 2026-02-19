@@ -27,7 +27,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'cup': { type: 'volume', factor: 200, label: 'カップ' },
         'tbsp': { type: 'volume', factor: 15, label: '大さじ' },
         'tsp': { type: 'volume', factor: 5, label: '小さじ' },
-        'g': { type: 'mass', factor: 1, label: 'g' }
+        'g': { type: 'mass', factor: 1, label: 'g' },
+        'us-cup': { type: 'volume', factor: 236.59, label: 'USカップ' },
+        'uk-cup': { type: 'volume', factor: 284.13, label: 'UKカップ' }
     };
 
     // Default values for each unit
@@ -36,11 +38,15 @@ document.addEventListener('DOMContentLoaded', () => {
         'ml': 100,
         'cup': 1,
         'tbsp': 1,
-        'tsp': 1
+        'tsp': 1,
+        'us-cup': 1,
+        'uk-cup': 1
     };
 
     // Calculate conversion
     function calculate() {
+        if (!sourceInput || !sourceUnitSelect || !targetUnitSelect || !ingredientSelect) return;
+
         // Handle "Smart Default/Preview" Logic
         let val = parseFloat(sourceInput.value);
         let isDefaultPreview = false;
@@ -83,6 +89,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'cup': inMl = val * 200; break;
             case 'tbsp': inMl = val * 15; break;
             case 'tsp': inMl = val * 5; break;
+            case 'us-cup': inMl = val * 236.59; break;
+            case 'uk-cup': inMl = val * 284.13; break;
         }
 
         // 2. Convert base unit (ml) to target
@@ -93,6 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
             case 'cup': result = inMl / 200; break;
             case 'tbsp': result = inMl / 15; break;
             case 'tsp': result = inMl / 5; break;
+            case 'us-cup': result = inMl / 236.59; break;
+            case 'uk-cup': result = inMl / 284.13; break;
         }
 
         // Formatting
@@ -156,30 +166,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Event Listeners
-    sourceInput.addEventListener('input', calculate);
-    ingredientSelect.addEventListener('change', calculate);
-    // Remove direct change listeners because custom select will trigger them differently or we handle it inside custom select logic
-    // sourceUnitSelect.addEventListener('change', calculate); 
-    // targetUnitSelect.addEventListener('change', calculate);
+    if (sourceInput) sourceInput.addEventListener('input', calculate);
+    if (ingredientSelect) ingredientSelect.addEventListener('change', calculate);
 
-    resetBtn.addEventListener('click', () => {
-        resetAll();
-        // Reset custom selects UI
-        document.querySelectorAll('.unit-select').forEach(select => {
-            const wrapper = select.nextElementSibling; // The custom wrapper
-            if (wrapper && wrapper.classList.contains('custom-select-wrapper')) {
-                const trigger = wrapper.querySelector('.custom-select-trigger');
-                const selectedOption = select.options[select.selectedIndex];
-                trigger.textContent = selectedOption.text;
+    // Note: Unit selects (sourceUnitSelect, targetUnitSelect) are handled by custom select logic
+    // which triggers the change event on the hidden original select.
 
-                // Update selection state in the list
-                wrapper.querySelectorAll('.custom-option').forEach(opt => {
-                    opt.classList.toggle('selected', opt.dataset.value === select.value);
-                });
-            }
+    if (resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            resetAll();
         });
-        calculate(); // Recalculate with defaults
-    });
+    }
+
+    // Initialize
+    if (sourceInput) calculate();
 
     // --- Custom Select Implementation (Updated for Interactivity) ---
     function setupCustomSelects() {
@@ -264,11 +264,10 @@ document.addEventListener('DOMContentLoaded', () => {
             });
         });
 
-        // Initial sync of exclusive units
-        updateTargetAvailability(sourceUnitSelect.value);
+        if (sourceUnitSelect) updateTargetAvailability(sourceUnitSelect.value);
 
         // Initial calculation for placeholder
-        calculate();
+        if (sourceInput) calculate();
 
         // Close dropdowns when clicking outside
         document.addEventListener('click', () => {
@@ -378,7 +377,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Event Listeners for Scaler
     [originalServingsInput, desiredServingsInput, recipeInput].forEach(el => {
-        el.addEventListener('input', scaleRecipe);
+        if (el) el.addEventListener('input', scaleRecipe);
     });
 
     // Handle +/- Buttons
@@ -401,15 +400,80 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // Copy Button
-    copyBtn.addEventListener('click', () => {
-        recipeOutput.select();
-        document.execCommand('copy'); // Legacy but works widely, or use navigator.clipboard
-        const originalText = copyBtn.textContent;
-        copyBtn.textContent = 'コピーしました！';
-        setTimeout(() => {
-            copyBtn.textContent = originalText;
-        }, 2000);
-    });
+    if (copyBtn) {
+        copyBtn.addEventListener('click', () => {
+            recipeOutput.select();
+            document.execCommand('copy'); // Legacy but works widely, or use navigator.clipboard
+            const originalText = copyBtn.textContent;
+            copyBtn.textContent = 'コピーしました！';
+            setTimeout(() => {
+                copyBtn.textContent = originalText;
+            }, 2000);
+        });
+    }
+
+    // --- Tube Converter Logic ---
+    const tubeSourceInput = document.getElementById('tube-source-input');
+    const tubeSpiceType = document.getElementById('tube-spice-type');
+    const tubeResultText = document.getElementById('tube-result-text');
+    const tubeVisualIndicator = document.getElementById('tube-visual-indicator');
+
+    function calculateTube() {
+        if (!tubeSourceInput) return; // Only run on tube-spices.html
+
+        const val = parseFloat(tubeSourceInput.value);
+        const type = tubeSpiceType.value;
+        const unit = document.querySelector('input[name="tube-unit"]:checked').value;
+
+        if (isNaN(val) || val <= 0) {
+            tubeResultText.innerHTML = "数値を入力してね！";
+            tubeVisualIndicator.style.width = "0%";
+            return;
+        }
+
+        let piece = 0, cm = 0, g = 0;
+
+        if (type === 'garlic') {
+            // garlic: 1 piece = 5cm = 6g
+            switch (unit) {
+                case 'piece': piece = val; cm = val * 5; g = val * 6; break;
+                case 'cm': piece = val / 5; cm = val; g = val * (6 / 5); break;
+                case 'g': piece = val / 6; cm = val * (5 / 6); g = val; break;
+            }
+        } else {
+            // ginger: 1cm = 1g (piece not defined for ginger calculation)
+            switch (unit) {
+                case 'piece': piece = val; cm = val * 4; g = val * 4; break; // Assume 1 piece = 4cm for ginger
+                case 'cm': piece = val / 4; cm = val; g = val; break;
+                case 'g': piece = val / 4; cm = val; g = val; break;
+            }
+        }
+
+        const p = formatNumber(piece);
+        const c = formatNumber(cm);
+        const gr = formatNumber(g);
+
+        if (type === 'garlic') {
+            tubeResultText.innerHTML = `🧄 <strong>${p}片</strong> は<br>チューブなら <strong>約${c}cm</strong> (約${gr}g)`;
+        } else {
+            tubeResultText.innerHTML = `<strong>約${c}cm</strong> (約${gr}g)<br><span style="font-size: 0.8em; color: #666;">（およそ ${p}かけ分）</span>`;
+        }
+
+        // Set width for indicator (capped at 5cm for visualization)
+        const indicatorWidth = Math.min((cm / 5) * 100, 100);
+        tubeVisualIndicator.style.width = indicatorWidth + "%";
+    }
+
+    if (tubeSourceInput) {
+        tubeSourceInput.addEventListener('input', calculateTube);
+        tubeSpiceType.addEventListener('change', calculateTube);
+        document.querySelectorAll('input[name="tube-unit"]').forEach(radio => {
+            radio.addEventListener('change', calculateTube);
+        });
+
+        // Initial calculation
+        calculateTube();
+    }
 
     // Amazon Click Tracking
     document.querySelectorAll('.amazon-btn').forEach(btn => {

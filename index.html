@@ -124,6 +124,8 @@
                 <option value="cup">カップ (200ml)</option>
                 <option value="tbsp">大さじ (15ml)</option>
                 <option value="tsp">小さじ (5ml)</option>
+                <option value="us-cup">USカップ (約237ml)</option>
+                <option value="uk-cup">UKカップ (約284ml)</option>
             </select>
         </div>
 
@@ -143,11 +145,10 @@
         <!-- Reference Section -->
         <div class="reference-section">
             <p class="ref-title">その他の換算例：</p>
-            <div id="reference-list">
-                <!-- Dynamic content will populate here -->
-                <span class="ref-item">大さじ: -</span>
-                <span class="ref-item">小さじ: -</span>
+            <div id="reference-list" class="reference-list">
+                <!-- Reference list will be populated by JS -->
             </div>
+            <p class="unit-note">※USカップ=236.59ml、UKカップ=284.13mlで計算しています</p>
         </div>
 
         <div class="reset-area">
@@ -243,6 +244,10 @@
                 <a href="sugar.html" class="ingredient-card">
                     <span class="emoji">🧂</span>
                     <span class="name">砂糖</span>
+                </a>
+                <a href="tube-spices.html" class="ingredient-card featured-link">
+                    <span class="emoji">🧄</span>
+                    <span class="name">にんにくチューブ</span>
                 </a>
                 <a href="salt.html" class="ingredient-card">
                     <span class="emoji">🧂</span>
