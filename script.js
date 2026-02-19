@@ -411,4 +411,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 2000);
     });
 
+    // Amazon Click Tracking
+    document.querySelectorAll('.amazon-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            window.dataLayer = window.dataLayer || [];
+            window.dataLayer.push({
+                'event': 'amazon_click',
+                'button_location': document.title // Which page the button was on
+            });
+        });
+    });
 });
