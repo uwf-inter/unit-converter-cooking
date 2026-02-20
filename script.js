@@ -611,5 +611,53 @@ document.addEventListener('DOMContentLoaded', () => {
                 'button_location': document.title // Which page the button was on
             });
         });
-    });
+    });    // --- Substitute Measuring Logic ---
+    const pastaCircle = document.getElementById('pasta-circle');
+    const pastaBtns = document.querySelectorAll('[data-pasta]');
+    const subInput = document.getElementById('sub-input');
+    const subUnit = document.getElementById('sub-unit');
+    const capResult = document.getElementById('cap-result');
+
+    if (pastaCircle) {
+        const coinRefText = document.getElementById('coin-ref-text');
+        pastaBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                pastaBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                const size = btn.dataset.pasta;
+                if (size === '100') {
+                    pastaCircle.style.width = '23mm';
+                    pastaCircle.style.height = '23mm';
+                    pastaCircle.textContent = '100g';
+                    document.getElementById('pasta-real-size-note').textContent = '※23mm（10円玉とほぼ同じサイズです）';
+                    if (coinRefText) coinRefText.textContent = '【100g】10円玉（23.5mm）と重なれば正確です。';
+                } else {
+                    pastaCircle.style.width = '32.5mm';
+                    pastaCircle.style.height = '32.5mm';
+                    pastaCircle.textContent = '200g';
+                    document.getElementById('pasta-real-size-note').textContent = '※32.5mm（10円玉2枚分より一回り小さいサイズ）';
+                    if (coinRefText) coinRefText.textContent = '【200g】500円玉（26.5mm）よりも一回り大きいサイズです。';
+                }
+            });
+        });
+    }
+
+    function calculateCap() {
+        if (!capResult || !subInput) return;
+        const val = parseFloat(subInput.value) || 0;
+        const unit = subUnit.value;
+        let ml = val;
+
+        if (unit === 'tbsp') ml = val * 15;
+        if (unit === 'tsp') ml = val * 5;
+
+        const cups = ml / 7.5;
+        capResult.textContent = parseFloat(cups.toFixed(1)) + '杯分';
+    }
+
+    if (subInput) {
+        subInput.addEventListener('input', calculateCap);
+        subUnit.addEventListener('change', calculateCap);
+        calculateCap();
+    }
 });
