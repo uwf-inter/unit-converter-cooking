@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>はかりなしで量る！代用計量ツール｜ペットボトルキャップ・パスタ実寸ガイド｜お料理単位くん</title>
+    <meta name="description" content="計量器がなくても大丈夫！ペットボトルキャップやパスタの束を使って、大さじ・gを代用で量れる便利ツールです。パスタ100gの実寸大ガイドも掲載。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=7.0">
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 単位変換</a>
+        <a href="baking-calc.html" class="category-tab">🍰 型換算</a>
+        <a href="substitute-measuring.html" class="category-tab active">⚖️ 代用計量</a>
+    </div>
+
+    <main class="container">
+        <section class="seo-content">
+            <h2 class="section-title">はかりがない時の代用計量</h2>
+
+            <!-- Pasta Guide -->
+            <div class="guide-card">
+                <h3>🍝 パスタの量（実寸大ガイド）</h3>
+                <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">画面にパスタの束をあてて測れます。</p>
+
+                <div class="shape-selector">
+                    <button class="shape-btn active" data-pasta="100">100g<br><small>(1人前)</small></button>
+                    <button class="shape-btn" data-pasta="200">200g<br><small>(2人前)</small></button>
+                </div>
+
+                <div class="measuring-guide-area">
+                    <div id="pasta-circle" class="measuring-circle" style="width: 23mm; height: 23mm;">100g</div>
+                    <p class="real-size-note" id="pasta-real-size-note">※23mm（10円玉とほぼ同じサイズです）</p>
+                </div>
+                <div style="background-color: #fffde7; border-radius: 10px; padding: 10px; margin-top: 5px;">
+                    <p style="font-size: 0.75rem; color: #f57f17; font-weight: bold;">📏 正確に測るコツ</p>
+                    <p style="font-size: 0.7rem; color: #666; line-height: 1.4;">お手持ちの硬貨を画面に重ねてみてください。<br>
+                        <span id="coin-ref-text">【100g】10円玉（23.5mm）と重なれば正確です。</span>
+                    </p>
+                </div>
+                <p style="font-size: 0.7rem; color: #999; margin-top: 8px;">※機種により数ミリの誤差が出る場合があります。</p>
+            </div>
+
+            <!-- Pet Bottle Cap Converter -->
+            <div class="cap-converter">
+                <h3>🧴 キャップで量る (7.5ml/杯)</h3>
+                <p style="font-size: 0.85rem; color: #444; margin-bottom: 1rem;">ペットボトルのキャップは「約7.5ml」です。</p>
+
+                <div class="input-row" style="margin-bottom: 15px;">
+                    <input type="number" id="sub-input" class="calc-input" placeholder="数値" value="1"
+                        inputmode="decimal">
+                    <select id="sub-unit" class="unit-select">
+                        <option value="tbsp">大さじ</option>
+                        <option value="tsp">小さじ</option>
+                        <option value="ml" selected>ml</option>
+                    </select>
+                </div>
+
+                <div class="baking-result-card" style="background: white; border-color: #81d4fa; margin: 10px 0;">
+                    <p>キャップでおよそ</p>
+                    <span id="cap-result" class="ratio-display" style="color: #0288d1;">0.1杯分</span>
+                    <p>です</p>
+                </div>
+                <p style="font-size: 0.7rem; color: #0288d1;">※キャップ2杯で「大さじ1」になります。</p>
+            </div>
+
+            <!-- Hand Measuring Reference -->
+            <div class="knowledge-box" style="background-color: #f1f8e9; border-color: #c5e1a5;">
+                <h3 style="color: #33691e; border-bottom-color: #aed581;">🤏 手で量る目安</h3>
+                <table class="sub-table">
+                    <tr>
+                        <th>量り方</th>
+                        <th>g数目安</th>
+                    </tr>
+                    <tr>
+                        <td><strong>ひとつまみ</strong><br><small>(3本指でつまむ)</small></td>
+                        <td>約 1g (小さじ1/5)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>少々</strong><br><small>(2本指でつまむ)</small></td>
+                        <td>約 0.5g (小さじ1/10)</td>
+                    </tr>
+                    <tr>
+                        <td><strong>ひとつかみ</strong><br><small>(片手で握る)</small></td>
+                        <td>約 30g</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script src="script.js?v=7.0"></script>
+</body>
+
+</html>
