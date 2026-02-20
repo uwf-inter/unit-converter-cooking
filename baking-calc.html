@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ケーキ型のサイズ換算・分量計算ツール｜15cmから18cmへの変換も一発｜お料理単位くん</title>
+    <meta name="description" content="レシピの型と自分の型のサイズが違う時に。丸型・角型の面積比から、材料を何倍にすればいいか一瞬で計算します。お菓子作りの失敗を防ぐための専用ツールです。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=6.0">
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 料理の単位変換</a>
+        <a href="baking-calc.html" class="category-tab active">🍰 お菓子の型換算</a>
+    </div>
+
+    <main class="container">
+        <section class="seo-content">
+            <h2 class="section-title">ケーキ型のサイズ・分量換算</h2>
+            <p>レシピの型と自分の型、サイズが違っても大丈夫。面積比から「材料を何倍にすればいいか」を自動計算します。</p>
+
+            <div class="converter-card" style="margin-top: 1.5rem;">
+                <div class="shape-selector">
+                    <button class="shape-btn active" data-shape="round">
+                        <span style="font-size: 1.5rem;">◯</span>
+                        <span>丸型</span>
+                    </button>
+                    <button class="shape-btn" data-shape="square">
+                        <span style="font-size: 1.5rem;">□</span>
+                        <span>角型</span>
+                    </button>
+                </div>
+
+                <!-- Input Fields for Round Tin -->
+                <div id="round-inputs" class="baking-input-group">
+                    <div class="input-row">
+                        <div class="input-col">
+                            <label>レシピの型サイズ</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="recipe-diameter" class="calc-input" value="15"
+                                    inputmode="decimal">
+                                <span class="unit-label">cm</span>
+                            </div>
+                        </div>
+                        <div class="sim-arrow" style="align-self: flex-end; margin-bottom: 12px;">→</div>
+                        <div class="input-col">
+                            <label>自分の型サイズ</label>
+                            <div class="input-with-unit">
+                                <input type="number" id="my-diameter" class="calc-input" value="18" inputmode="decimal">
+                                <span class="unit-label">cm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Input Fields for Square Tin (Hidden by default) -->
+                <div id="square-inputs" class="baking-input-group" style="display: none;">
+                    <div class="input-row" style="flex-direction: column; gap: 15px;">
+                        <div>
+                            <label>レシピの型 (縦 × 横)</label>
+                            <div style="display: flex; gap: 5px; align-items: center;">
+                                <input type="number" id="recipe-width" class="calc-input" value="15"
+                                    inputmode="decimal">
+                                <span>×</span>
+                                <input type="number" id="recipe-height" class="calc-input" value="15"
+                                    inputmode="decimal">
+                                <span class="unit-label">cm</span>
+                            </div>
+                        </div>
+                        <div>
+                            <label>自分の型 (縦 × 横)</label>
+                            <div style="display: flex; gap: 5px; align-items: center;">
+                                <input type="number" id="my-width" class="calc-input" value="18" inputmode="decimal">
+                                <span>×</span>
+                                <input type="number" id="my-height" class="calc-input" value="18" inputmode="decimal">
+                                <span class="unit-label">cm</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="baking-result-card">
+                    <p>材料の分量を</p>
+                    <span id="baking-ratio-result" class="ratio-display">1.44倍</span>
+                    <p>にしてください</p>
+                </div>
+
+                <div class="batch-simulator">
+                    <h3 style="font-size: 1rem; color: #8d6e63; margin-bottom: 10px;">📉 分量シミュレーター</h3>
+                    <div id="simulator-rows">
+                        <div class="simulator-row">
+                            <input type="number" class="sim-input" placeholder="100" inputmode="decimal">
+                            <select class="sim-unit-select">
+                                <option value="g" selected>g</option>
+                                <option value="ml">ml</option>
+                                <option value="個">個</option>
+                                <option value="枚">枚</option>
+                                <option value="本">本</option>
+                                <option value="大さじ">大さじ</option>
+                                <option value="小さじ">小さじ</option>
+                            </select>
+                            <span class="sim-arrow">→</span>
+                            <span class="sim-result">-</span>
+                            <span class="sim-unit">g</span>
+                        </div>
+                    </div>
+                    <button id="add-sim-row" class="add-row-btn">＋ 行を追加</button>
+                    <p style="font-size: 0.75rem; color: #999; margin-top: 8px;">※卵などの割り切れない分量は、おおよその目安として調整してください。</p>
+                </div>
+
+                <!-- Knowledge Section -->
+                <div class="knowledge-box">
+                    <h3>💡 ぱっと解決！量り方のコツ</h3>
+
+                    <div class="knowledge-item">
+                        <h4>🥚 卵の端数（1.44倍など）</h4>
+                        <p>卵1個を約50gとし、溶き卵にしてから必要分を量り取ります。余りはスープやドリュールに。</p>
+                    </div>
+
+                    <div class="knowledge-item">
+                        <h4>🥣 粉類・砂糖</h4>
+                        <p>1gの差が仕上がりに響きます。端数も切り捨てず、デジタルスケールで正確に量りましょう。</p>
+                    </div>
+
+                    <div class="knowledge-item">
+                        <h4>🥛 液体（牛乳・油）</h4>
+                        <p>ml単位の端数は、そのまま「g（グラム）」として量るのが最も正確です。</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="seo-content" style="margin-top: 2rem;">
+            <h3 class="section-title">ケーキ型のサイズ換算の考え方</h3>
+            <p>ケーキの高さが同じであれば、必要な生地の量は型の「面積」に比例します。</p>
+            <ul style="margin: 1rem 0 1rem 1.5rem; font-size: 0.9rem; color: #555;">
+                <li><strong>丸型（直径15cm → 18cm）</strong>: 半径が7.5cmから9cmに増えるため、面積は約1.44倍になります。</li>
+                <li><strong>角型</strong>: 縦×横の面積を比較します。</li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+        <p class="disclaimer">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
+    </footer>
+
+    <script src="script.js?v=6.0"></script>
+</body>
+
+</html>

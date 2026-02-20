@@ -475,6 +475,133 @@ document.addEventListener('DOMContentLoaded', () => {
         calculateTube();
     }
 
+    // --- Baking Calculator Logic ---
+    const bakingRatioResult = document.getElementById('baking-ratio-result');
+    const shapeBtns = document.querySelectorAll('.shape-btn');
+    const roundInputs = document.getElementById('round-inputs');
+    const squareInputs = document.getElementById('square-inputs');
+
+    let currentShape = 'round';
+    let currentRatio = 1.0;
+
+    function calculateBakingRatio() {
+        if (!bakingRatioResult) return;
+
+        let recipeArea = 1;
+        let myArea = 1;
+
+        if (currentShape === 'round') {
+            const rd = parseFloat(document.getElementById('recipe-diameter').value) || 1;
+            const md = parseFloat(document.getElementById('my-diameter').value) || 1;
+            recipeArea = Math.pow(rd / 2, 2) * Math.PI;
+            myArea = Math.pow(md / 2, 2) * Math.PI;
+        } else {
+            const rw = parseFloat(document.getElementById('recipe-width').value) || 1;
+            const rh = parseFloat(document.getElementById('recipe-height').value) || 1;
+            const mw = parseFloat(document.getElementById('my-width').value) || 1;
+            const mh = parseFloat(document.getElementById('my-height').value) || 1;
+            recipeArea = rw * rh;
+            myArea = mw * mh;
+        }
+
+        currentRatio = myArea / recipeArea;
+        bakingRatioResult.textContent = formatNumber(currentRatio) + '倍';
+
+        updateSimulator();
+    }
+
+    function updateSimulator() {
+        const simulatorRows = document.querySelectorAll('.simulator-row');
+        simulatorRows.forEach(row => {
+            const input = row.querySelector('.sim-input');
+            const unitSelect = row.querySelector('.sim-unit-select');
+            const resultNode = row.querySelector('.sim-result');
+            const resultUnit = row.querySelector('.sim-unit');
+            const val = parseFloat(input.value);
+
+            if (unitSelect && resultUnit) {
+                resultUnit.textContent = unitSelect.value;
+            }
+
+            if (isNaN(val)) {
+                resultNode.textContent = '-';
+            } else {
+                resultNode.textContent = formatNumber(val * currentRatio);
+            }
+        });
+    }
+
+    const addRowBtn = document.getElementById('add-sim-row');
+    const simulatorRowsContainer = document.getElementById('simulator-rows');
+
+    if (addRowBtn && simulatorRowsContainer) {
+        addRowBtn.addEventListener('click', () => {
+            const newRow = document.createElement('div');
+            newRow.className = 'simulator-row';
+            newRow.innerHTML = `
+                <input type="number" class="sim-input" placeholder="100" inputmode="decimal">
+                <select class="sim-unit-select">
+                    <option value="g" selected>g</option>
+                    <option value="ml">ml</option>
+                    <option value="個">個</option>
+                    <option value="枚">枚</option>
+                    <option value="本">本</option>
+                    <option value="大さじ">大さじ</option>
+                    <option value="小さじ">小さじ</option>
+                </select>
+                <span class="sim-arrow">→</span>
+                <span class="sim-result">-</span>
+                <span class="sim-unit">g</span>
+            `;
+            simulatorRowsContainer.appendChild(newRow);
+
+            // Attach listeners to new row
+            const input = newRow.querySelector('.sim-input');
+            const select = newRow.querySelector('.sim-unit-select');
+            input.addEventListener('input', updateSimulator);
+            select.addEventListener('change', updateSimulator);
+        });
+
+        // Initialize existing inputs/selects
+        document.querySelectorAll('.sim-input, .sim-unit-select').forEach(el => {
+            el.addEventListener(el.tagName === 'SELECT' ? 'change' : 'input', updateSimulator);
+        });
+    }
+
+    if (bakingRatioResult) {
+        shapeBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                shapeBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentShape = btn.dataset.shape;
+
+                if (currentShape === 'round') {
+                    roundInputs.style.display = 'block';
+                    squareInputs.style.display = 'none';
+                } else {
+                    roundInputs.style.display = 'none';
+                    squareInputs.style.display = 'block';
+                }
+                calculateBakingRatio();
+            });
+        });
+
+        // Attach input listeners to all baking inputs
+        const allBakingInputs = document.querySelectorAll('.baking-input-group input, .sim-input');
+        allBakingInputs.forEach(input => {
+            input.addEventListener('input', () => {
+                if (input.classList.contains('sim-input')) {
+                    updateSimulator();
+                } else {
+                    calculateBakingRatio();
+                }
+            });
+        });
+
+        // Initial calc
+        calculateBakingRatio();
+    }
+
     // Amazon Click Tracking
     document.querySelectorAll('.amazon-btn').forEach(btn => {
         btn.addEventListener('click', () => {

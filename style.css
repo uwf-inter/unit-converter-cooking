@@ -45,18 +45,54 @@ header h1 {
     /* Reserve space for text */
 }
 
-/* Navigation Styles */
-.main-nav {
-    background-color: #fff8eb;
-    padding: 0.8rem 0.5rem;
+/* Category Tabs Navigation */
+.category-tabs {
     display: flex;
-    justify-content: center;
-    gap: 10px;
-    box-shadow: 0 4px 12px rgba(255, 140, 0, 0.1);
+    background-color: #fff;
+    border-bottom: 2px solid #ffe0b2;
     position: sticky;
     top: 0;
-    z-index: 1000;
-    border-bottom: 2px solid #ffe0b2;
+    z-index: 1001;
+}
+
+.category-tab {
+    flex: 1;
+    text-align: center;
+    padding: 12px 5px;
+    text-decoration: none;
+    color: #8d6e63;
+    font-size: 0.9rem;
+    font-weight: 700;
+    border-bottom: 3px solid transparent;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 48px;
+    /* Touch target accessibility */
+}
+
+.category-tab.active {
+    color: var(--primary-color);
+    border-bottom-color: var(--primary-color);
+    background-color: #fff8eb;
+}
+
+.category-tab:hover:not(.active) {
+    background-color: #fffaf0;
+}
+
+/* Original Navigation (Secondary) */
+.main-nav {
+    background-color: #fff8eb;
+    padding: 0.6rem 0.5rem;
+    display: flex;
+    justify-content: flex-start;
+    gap: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    border-bottom: 1px solid #ffe0b2;
 }
 
 .main-nav a {
@@ -674,6 +710,62 @@ footer {
     white-space: nowrap;
 }
 
+/* Baking Knowledge Content */
+.knowledge-box {
+    background-color: #fffcf5;
+    border: 1.5px solid #ffe0b2;
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-top: 2rem;
+}
+
+.knowledge-box h3 {
+    font-size: 1rem;
+    color: #e65100;
+    margin-bottom: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 2px dashed #ffd180;
+    padding-bottom: 10px;
+    letter-spacing: 0.02em;
+}
+
+.knowledge-item {
+    margin-bottom: 1rem;
+    padding-left: 0.5rem;
+}
+
+.knowledge-item h4 {
+    font-size: 0.9rem;
+    color: #8d6e63;
+    margin-bottom: 0.4rem;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.knowledge-item p {
+    font-size: 0.8rem;
+    color: #666;
+    margin-bottom: 0.2rem;
+    line-height: 1.7;
+    /* Increased for readability */
+    letter-spacing: 0.01em;
+}
+
+.knowledge-item .tip-badge {
+    display: inline-block;
+    background-color: #fff3e0;
+    color: #e65100;
+    padding: 1px 6px;
+    border: 1px solid #ffe0b2;
+    border-radius: 4px;
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin-right: 4px;
+}
+
 .scaler-inputs {
     margin-bottom: 1.5rem;
 }
@@ -1109,6 +1201,117 @@ footer {
     transform: translateX(-50%);
     font-size: 0.75rem;
     color: #999;
+}
+
+/* Baking Calculator Specific Styles */
+.shape-selector {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 1.5rem;
+}
+
+.shape-btn {
+    flex: 1;
+    padding: 12px;
+    border: 2px solid #eee;
+    border-radius: 12px;
+    background: white;
+    cursor: pointer;
+    font-weight: 700;
+    color: #8d6e63;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.shape-btn.active {
+    border-color: var(--primary-color);
+    background-color: #fff8eb;
+    color: var(--primary-color);
+}
+
+.baking-result-card {
+    background: linear-gradient(135deg, #fff3e0 0%, #fff8e1 100%);
+    border: 2px solid #ffe0b2;
+    border-radius: 16px;
+    padding: 1.5rem;
+    text-align: center;
+    margin: 1.5rem 0;
+}
+
+.ratio-display {
+    font-size: 2rem;
+    font-weight: 900;
+    color: var(--primary-color);
+    display: block;
+    margin: 0.5rem 0;
+}
+
+.batch-simulator {
+    margin-top: 2rem;
+}
+
+.simulator-row {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 10px;
+    background: white;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #eee;
+}
+
+.sim-input {
+    width: 70px;
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    text-align: center;
+    font-weight: 700;
+}
+
+.sim-unit-select {
+    padding: 6px 4px;
+    border: 1px solid #eee;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    color: #666;
+    background-color: #fafafa;
+}
+
+.sim-arrow {
+    color: #ffd180;
+    font-weight: bold;
+}
+
+.sim-result {
+    flex: 1;
+    font-weight: 700;
+    color: #e65100;
+    font-size: 1.1rem;
+    text-align: right;
+}
+
+.add-row-btn {
+    width: 100%;
+    padding: 10px;
+    background: white;
+    border: 2px dashed #ffe0b2;
+    border-radius: 8px;
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 0.9rem;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: all 0.2s;
+}
+
+.add-row-btn:hover {
+    background-color: #fff8eb;
+    border-style: solid;
 }
 
 .ruler-marker::before {
