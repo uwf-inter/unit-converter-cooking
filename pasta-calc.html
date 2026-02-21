@@ -1,0 +1,364 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【逆引き】パスタの茹で上がり重量・カロリー換算ツール｜乾麺100gは何g？｜お料理単位くん</title>
+    <meta name="description"
+        content="【逆引き対応】パスタ100gは茹でると何gになる？カロリーは？乾麺と茹で上がりの重量を相互変換。ダイエットや糖質制限に便利な、g（グラム）別の詳細カロリー表も掲載。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=13.0">
+    <style>
+        .pasta-calc-card {
+            background: #fff8f1;
+            border: 3px solid #ff7043;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .mode-tabs {
+            display: flex;
+            background: #eee;
+            border-radius: 12px;
+            padding: 4px;
+            margin-bottom: 2rem;
+        }
+
+        .mode-tab {
+            flex: 1;
+            text-align: center;
+            padding: 10px;
+            font-size: 0.85rem;
+            font-weight: bold;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .mode-tab.active {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            color: #ff7043;
+        }
+
+        .pasta-input-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .pasta-input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #5d4037;
+            margin-bottom: 8px;
+        }
+
+        .input-with-unit {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 16px;
+            padding: 8px 16px;
+        }
+
+        .input-with-unit input {
+            border: none;
+            width: 100%;
+            font-size: 2rem;
+            font-weight: 900;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            text-align: right;
+            outline: none;
+        }
+
+        .input-with-unit .unit {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #888;
+            margin-left: 10px;
+        }
+
+        .diet-box {
+            background: #e1f5fe;
+            border-radius: 16px;
+            padding: 1rem;
+            margin-top: 2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .diet-icon {
+            font-size: 2.5rem;
+        }
+
+        .diet-text {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #0277bd;
+            line-height: 1.4;
+        }
+
+        .measuring-circle {
+            transition: width 0.3s ease, height 0.3s ease;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 パスタ専用・重量＆カロリー換算 〜</p>
+    </header>
+
+    <div class="category-tabs" style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
+        <a href="index.html" class="category-tab">🍲 単位変換</a>
+        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
+        <a href="pasta-calc.html" class="category-tab active">🍝 パスタ</a>
+        <a href="rice-calc.html" class="category-tab">🍚 お米</a>
+        <a href="tube-spices.html" class="category-tab">🧄 チューブ</a>
+        <a href="otama.html" class="category-tab">🥣 おたま</a>
+    </div>
+
+    <main class="container">
+
+        <!-- Calibration for Visual Guide -->
+        <section class="guide-card" style="border: 2px dashed #999; background: #fafafa; margin-bottom: 2rem;">
+            <p style="font-size:0.75rem; color:#666; margin-bottom:10px; text-align:center;">📏
+                正確な太さを表示するため、10円玉で補正してください</p>
+            <div style="display:flex; align-items:center; justify-content:center; gap:20px;">
+                <div id="cal-circle"
+                    style="width: 23.5mm; height: 23.5mm; border: 2px solid #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size:0.7rem; font-weight:900;">
+                    10円玉</div>
+                <div style="display:flex; gap:10px;">
+                    <button id="cal-minus" class="cal-btn" style="width:44px; height:44px;">−</button>
+                    <button id="cal-plus" class="cal-btn" style="width:44px; height:44px;">＋</button>
+                </div>
+            </div>
+        </section>
+
+        <section class="pasta-calc-card">
+            <div class="mode-tabs">
+                <div class="mode-tab active" id="mode-dry">乾麺から計算</div>
+                <div class="mode-tab" id="mode-cooked">茹で上がりから計算</div>
+            </div>
+
+            <div class="pasta-input-group">
+                <label id="input-label">乾麺の重さ</label>
+                <div class="input-with-unit">
+                    <input type="number" id="pasta-input" value="100" inputmode="decimal">
+                    <span class="unit">g</span>
+                </div>
+                <input type="range" id="pasta-slider" min="20" max="300" step="5" value="100"
+                    style="width:100%; margin-top:15px;">
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                <div class="result-tile"
+                    style="background: #fff; padding: 15px; border-radius: 12px; border: 2px solid #ffab91; text-align:center;">
+                    <div style="font-size: 0.75rem; font-weight: bold; color: #ff7043;">茹で上がり</div>
+                    <div style="font-size: 1.5rem; font-weight: 900;"><span id="res-weight">240</span><small
+                            style="font-size:0.8rem;">g</small></div>
+                </div>
+                <div class="result-tile"
+                    style="background: #fff; padding: 15px; border-radius: 12px; border: 2px solid #ffcc80; text-align:center;">
+                    <div style="font-size: 0.75rem; font-weight: bold; color: #fb8c00;">摂取カロリー</div>
+                    <div style="font-size: 1.5rem; font-weight: 900;"><span id="res-kcal">350</span><small
+                            style="font-size:0.8rem;">kcal</small></div>
+                </div>
+            </div>
+
+            <div class="diet-box">
+                <div class="diet-icon">🚶‍♂️</div>
+                <div class="diet-text">
+                    このパスタを消費するには<br>
+                    <span style="font-size: 1.2rem; color: #e53935;">約 <span id="res-walking">88</span> 分</span>
+                    のウォーキングが必要です
+                </div>
+            </div>
+
+            <!-- Visual Bundle Area -->
+            <div style="margin-top: 2rem; text-align:center;">
+                <p style="font-size:0.8rem; font-weight:bold; color:#5d4037; margin-bottom:10px;">🍝 乾麺の状態での束の太さ目安</p>
+                <div id="pasta-circle" class="measuring-circle"
+                    style="width: 23mm; height: 23mm; background: #fffde7; border: 4px solid #fbc02d; border-radius: 50%; margin: 0 auto; display:flex; align-items:center; justify-content:center; font-weight:900; color:#f57f17; font-size:1.2rem;">
+                    100g</div>
+                <p style="font-size:0.7rem; color:#888; margin-top:8px;">直径: 約 <span id="res-diameter">23</span> mm</p>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content" style="margin-top: 3rem;">
+            <h3 class="section-title">パスタの茹で上がり・カロリーQ&A</h3>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <span class="faq-q">Q. パスタ100gは茹でると何g？</span>
+                    <p class="faq-a">A. 標準的な茹で時間で、<strong>約240g</strong>（2.3〜2.5倍）になります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. 茹で上がり200gのパスタ、乾麺では何g？</span>
+                    <p class="faq-a">A. 乾麺で <strong>約83g</strong> 使用している計算になります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. パスタ一人前のカロリーは？</span>
+                    <p class="faq-a">A. 乾麺100g（標準的一人前）で<strong>約350kcal</strong>です。茹で上がりの重量で測る場合は、100gあたり約150kcalが目安です。
+                    </p>
+                </div>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 2rem;">重量・カロリー早見表</h3>
+            <div class="table-responsive">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>乾麺(g)</th>
+                            <th>茹で上がり(g)</th>
+                            <th>カロリー(kcal)</th>
+                            <th>一人前の目安</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>80g</td>
+                            <td>約192g</td>
+                            <td>280kcal</td>
+                            <td>少なめ</td>
+                        </tr>
+                        <tr>
+                            <td><strong>100g</strong></td>
+                            <td><strong>約240g</strong></td>
+                            <td><strong>350kcal</strong></td>
+                            <td><strong>標準</strong></td>
+                        </tr>
+                        <tr>
+                            <td>120g</td>
+                            <td>約288g</td>
+                            <td>420kcal</td>
+                            <td>多め</td>
+                        </tr>
+                        <tr>
+                            <td>150g</td>
+                            <td>約360g</td>
+                            <td>525kcal</td>
+                            <td>超大盛</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const pastaIn = document.getElementById('pasta-input');
+            const pastaSlider = document.getElementById('pasta-slider');
+            const resWeight = document.getElementById('res-weight');
+            const resKcal = document.getElementById('res-kcal');
+            const resWalking = document.getElementById('res-walking');
+            const resDiameter = document.getElementById('res-diameter');
+            const pastaCircle = document.getElementById('pasta-circle');
+            const inputLabel = document.getElementById('input-label');
+
+            const modeTabs = document.querySelectorAll('.mode-tab');
+            let isDryMode = true;
+
+            // Calibration
+            const calCircle = document.getElementById('cal-circle');
+            let ppiScale = parseFloat(localStorage.getItem('measuring_ppi_scale')) || 1.6;
+
+            function updateAll() {
+                const val = parseFloat(pastaIn.value) || 0;
+                let dryG, cookedG, kcal;
+
+                if (isDryMode) {
+                    dryG = val;
+                    cookedG = Math.round(dryG * 2.4);
+                    kcal = Math.round(dryG * 3.5);
+                } else {
+                    cookedG = val;
+                    dryG = Math.round(cookedG / 2.4);
+                    kcal = Math.round(dryG * 3.5);
+                }
+
+                resWeight.textContent = isDryMode ? cookedG : dryG;
+                document.querySelectorAll('.result-tile')[0].querySelector('div:first-child').textContent = isDryMode ? "茹で上がり" : "乾麺重量";
+                resKcal.textContent = kcal;
+                resWalking.textContent = Math.round(kcal / 4); // 4kcal per min
+
+                // Bundle Size (Always based on Dry Weight)
+                const diameter = 23 * Math.sqrt(dryG / 100);
+                resDiameter.textContent = diameter.toFixed(1);
+
+                const mmPx = 3.78 * ppiScale;
+                const px = diameter * mmPx;
+                pastaCircle.style.width = px + 'px';
+                pastaCircle.style.height = px + 'px';
+                pastaCircle.textContent = Math.round(dryG) + 'g';
+
+                // Update Calibration Circle
+                calCircle.style.width = (23.5 * mmPx) + 'px';
+                calCircle.style.height = (23.5 * mmPx) + 'px';
+                localStorage.setItem('measuring_ppi_scale', ppiScale);
+            }
+
+            pastaIn.addEventListener('input', () => { pastaSlider.value = pastaIn.value; updateAll(); });
+            pastaSlider.addEventListener('input', () => { pastaIn.value = pastaSlider.value; updateAll(); });
+
+            modeTabs.forEach(tab => {
+                tab.addEventListener('click', () => {
+                    modeTabs.forEach(t => t.classList.remove('active'));
+                    tab.classList.add('active');
+                    isDryMode = (tab.id === 'mode-dry');
+                    inputLabel.textContent = isDryMode ? "乾麺の重さ" : "茹で上がりの重さ";
+                    if (isDryMode) {
+                        pastaSlider.min = 20; pastaSlider.max = 300;
+                        pastaIn.value = 100; pastaSlider.value = 100;
+                    } else {
+                        pastaSlider.min = 50; pastaSlider.max = 700;
+                        pastaIn.value = 240; pastaSlider.value = 240;
+                    }
+                    updateAll();
+                });
+            });
+
+            document.getElementById('cal-plus').addEventListener('click', () => { ppiScale += 0.05; updateAll(); });
+            document.getElementById('cal-minus').addEventListener('click', () => { ppiScale -= 0.05; if (ppiScale < 0.5) ppiScale = 0.5; updateAll(); });
+
+            updateAll();
+        });
+    </script>
+</body>
+
+</html>
