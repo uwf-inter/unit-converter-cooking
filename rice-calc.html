@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【逆引き】お米150gは何合？水の量・グラム・合数を一発換算｜お料理単位くん</title>
+    <meta name="description" content="【逆引き対応】お米150gは何合？2合の水の量は？お米の「重さ」「容積」「合数」を相互計算。無洗米や玄米にも対応し、炊き上がりの重量目安も算出します。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=12.0">
+    <style>
+        .rice-calc-card {
+            background: #fffdf9;
+            border: 3px solid #f9a825;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .rice-input-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        @media (min-width: 480px) {
+            .rice-input-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .rice-field {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+
+        .rice-field label {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #5d4037;
+        }
+
+        .rice-field .input-group {
+            display: flex;
+            align-items: center;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 12px;
+            padding: 5px 12px;
+        }
+
+        .rice-field input {
+            border: none;
+            width: 100%;
+            font-size: 1.4rem;
+            font-weight: 700;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            text-align: right;
+            outline: none;
+        }
+
+        .rice-field .unit {
+            margin-left: 8px;
+            font-weight: 700;
+            color: #888;
+        }
+
+        .quick-selector {
+            display: flex;
+            gap: 8px;
+            margin-top: 10px;
+            overflow-x: auto;
+            padding-bottom: 5px;
+        }
+
+        .q-btn {
+            background: #fff;
+            border: 1.5px solid #f9a825;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #f9a825;
+            cursor: pointer;
+            white-space: nowrap;
+        }
+
+        .q-btn:active {
+            background: #f9a825;
+            color: white;
+        }
+
+        .rice-result-card {
+            background: linear-gradient(135deg, #fff9c4 0%, #fffde7 100%);
+            border-radius: 16px;
+            padding: 1.2rem;
+            margin-top: 1rem;
+        }
+
+        .result-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px dashed #f9a825;
+        }
+
+        .result-item:last-child {
+            border-bottom: none;
+        }
+
+        .result-label {
+            font-size: 0.9rem;
+            font-weight: bold;
+            color: #795548;
+        }
+
+        .result-val {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #e65100;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 お米専用・相互換算ツール 〜</p>
+    </header>
+
+    <div class="category-tabs" style="overflow-x: auto; white-space: nowrap; -webkit-overflow-scrolling: touch;">
+        <a href="index.html" class="category-tab">🍲 単位変換</a>
+        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
+        <a href="pasta-calc.html" class="category-tab">🍝 パスタ</a>
+        <a href="rice-calc.html" class="category-tab active">🍚 お米</a>
+        <a href="tube-spices.html" class="category-tab">🧄 チューブ</a>
+        <a href="otama.html" class="category-tab">🥣 おたま</a>
+    </div>
+
+    <main class="container">
+        <section class="seo-content">
+            <h2 class="section-title">🍚 お米の「合・g・ml」相互計算ツール</h2>
+            <p style="margin-bottom: 1.5rem;">「お米200gって何合？」「3合に必要な水の量は？」といった疑問をすべて解決します。</p>
+
+            <div class="rice-calc-card">
+                <div class="rice-input-grid">
+                    <div class="rice-field">
+                        <label>合数（ごう）</label>
+                        <div class="input-group">
+                            <input type="number" id="rice-cup" value="1" step="0.1" inputmode="decimal">
+                            <span class="unit">合</span>
+                        </div>
+                        <div class="quick-selector">
+                            <button class="q-btn" onclick="setRice(0.5)">0.5合</button>
+                            <button class="q-btn" onclick="setRice(1)">1合</button>
+                            <button class="q-btn" onclick="setRice(2)">2合</button>
+                            <button class="q-btn" onclick="setRice(3)">3合</button>
+                        </div>
+                    </div>
+                    <div class="rice-field">
+                        <label>重さ（g）</label>
+                        <div class="input-group">
+                            <input type="number" id="rice-gram" value="150" inputmode="decimal">
+                            <span class="unit">g</span>
+                        </div>
+                    </div>
+                    <div class="rice-field">
+                        <label>体積（ml/cc）</label>
+                        <div class="input-group">
+                            <input type="number" id="rice-ml" value="180" inputmode="decimal">
+                            <span class="unit">ml</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="rice-result-card">
+                    <div class="result-item">
+                        <span class="result-label">💧 必要な水の量</span>
+                        <span class="result-val"><span id="water-ml">216</span> ml</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="result-label">🍱 炊き上がり想定</span>
+                        <span class="result-val"><span id="cooked-g">330</span> g</span>
+                    </div>
+                    <p style="font-size: 0.7rem; color: #8d6e63; margin-top: 10px; text-align: center;">
+                        ※水量は米の体積 × 1.2倍、炊き上がりは生米の2.2倍で算出
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO FAQ Section -->
+        <section class="seo-content"
+            style="margin-top: 2rem; background: #fff8e1; padding: 1.5rem; border-radius: 20px;">
+            <h3 style="color: #bf360c; margin-top: 0;">お米の計量「逆引き」Q&A</h3>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px dashed #ffe0b2; padding-bottom: 10px;">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. お米150gは何合？</span>
+                <span style="color: #333;">A. ちょうど <strong>1合</strong> です。</span>
+            </div>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px dashed #ffe0b2; padding-bottom: 10px;">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. お米300gは何合？</span>
+                <span style="color: #333;">A. ちょうど <strong>2合</strong> です。</span>
+            </div>
+            <div class="faq-item">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. 1合の水の量はどのくらい？</span>
+                <span style="color: #333;">A. <strong>約 200〜220ml</strong>（お米の体積の1.2倍）が標準的な水の量です。</span>
+            </div>
+        </section>
+
+        <section class="seo-content" style="margin-top: 2rem;">
+            <h3 class="section-title">お米の換算早見表（g・ml・水）</h3>
+            <div class="table-responsive">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>合数</th>
+                            <th>重量(g)</th>
+                            <th>体積(ml)</th>
+                            <th>水の量(ml)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>0.5合</td>
+                            <td>75g</td>
+                            <td>90ml</td>
+                            <td>108ml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>1合</strong></td>
+                            <td><strong>150g</strong></td>
+                            <td><strong>180ml</strong></td>
+                            <td><strong>216ml</strong></td>
+                        </tr>
+                        <tr>
+                            <td>1.5合</td>
+                            <td>225g</td>
+                            <td>270ml</td>
+                            <td>324ml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>2合</strong></td>
+                            <td><strong>300g</strong></td>
+                            <td><strong>360ml</strong></td>
+                            <td><strong>432ml</strong></td>
+                        </tr>
+                        <tr>
+                            <td>2.5合</td>
+                            <td>375g</td>
+                            <td>450ml</td>
+                            <td>540ml</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3合</strong></td>
+                            <td><strong>450g</strong></td>
+                            <td><strong>540ml</strong></td>
+                            <td><strong>648ml</strong></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="seo-note">※無洗米の場合は、水を少し多め（1.25倍程度）にするのがコツです。</p>
+        </section>
+
+        <section class="dictionary-links">
+            <h2 class="section-title">他のページもチェック！</h2>
+            <div class="ingredient-grid">
+                <a href="index.html" class="ingredient-card">
+                    <span class="emoji">🏠</span>
+                    <span class="name">トップ</span>
+                </a>
+                <a href="substitute-measuring.html" class="ingredient-card">
+                    <span class="emoji">🔧</span>
+                    <span class="name">代用計量</span>
+                </a>
+                <a href="tube-spices.html" class="ingredient-card">
+                    <span class="emoji">🧄</span>
+                    <span class="name">チューブ換算</span>
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script>
+        const cupInput = document.getElementById('rice-cup');
+        const gramInput = document.getElementById('rice-gram');
+        const mlInput = document.getElementById('rice-ml');
+        const waterDisplay = document.getElementById('water-ml');
+        const cookedDisplay = document.getElementById('cooked-g');
+
+        // Reference: 1 cup (go) = 180ml = 150g
+        // Water = Volume * 1.2
+        // Cooked = Mass * 2.2
+
+        function updateFromCup() {
+            const cups = parseFloat(cupInput.value) || 0;
+            gramInput.value = Math.round(cups * 150);
+            mlInput.value = Math.round(cups * 180);
+            calculateExtras();
+        }
+
+        function updateFromGram() {
+            const grams = parseFloat(gramInput.value) || 0;
+            cupInput.value = (grams / 150).toFixed(2).replace(/\.00$/, '');
+            mlInput.value = Math.round(grams * (180 / 150));
+            calculateExtras();
+        }
+
+        function updateFromMl() {
+            const ml = parseFloat(mlInput.value) || 0;
+            cupInput.value = (ml / 180).toFixed(2).replace(/\.00$/, '');
+            gramInput.value = Math.round(ml * (150 / 180));
+            calculateExtras();
+        }
+
+        function calculateExtras() {
+            const ml = parseFloat(mlInput.value) || 0;
+            const grams = parseFloat(gramInput.value) || 0;
+            waterDisplay.textContent = Math.round(ml * 1.2);
+            cookedDisplay.textContent = Math.round(grams * 2.2);
+        }
+
+        function setRice(cups) {
+            cupInput.value = cups;
+            updateFromCup();
+        }
+
+        cupInput.addEventListener('input', updateFromCup);
+        gramInput.addEventListener('input', updateFromGram);
+        mlInput.addEventListener('input', updateFromMl);
+
+        // Init
+        updateFromCup();
+    </script>
+</body>
+
+</html>
