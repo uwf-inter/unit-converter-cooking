@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>はかりなしで量る！代用計量ツール｜ペットボトルキャップ・パスタ実寸ガイド｜お料理単位くん</title>
-    <meta name="description" content="計量器がなくても大丈夫！ペットボトルキャップやパスタの束を使って、大さじ・gを代用で量れる便利ツールです。パスタ100gの実寸大ガイドも掲載。">
+    <title>【極限】はかりなしで量る代用ツール｜身近なモノで重さ・体積を測定｜お料理単位くん</title>
+    <meta name="description"
+        content="計量器がなくても大丈夫！コインを分銅にする重さ計算、紙コップ・スプーンの容量シミュレーター、パスタの実寸スライダーなど、非常時や屋外でも使える究極の代用計量ツールです。">
 
     <!-- Google Tag Manager -->
     <script>
@@ -30,103 +31,373 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=7.0">
+    <link rel="stylesheet" href="style.css?v=10.0">
+    <style>
+        /* Page-specific High Contrast Overrides */
+        :root {
+            --emergency-primary: #d32f2f;
+            --emergency-bg: #e1f5fe;
+        }
+
+        . survival-btn {
+            background: var(--emergency-primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 12px;
+            font-weight: 900;
+            width: 100%;
+            margin-bottom: 1rem;
+            cursor: pointer;
+            box-shadow: 0 4px 0 #b71c1c;
+        }
+
+        .anchor-nav {
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 8px;
+            display: flex;
+            gap: 5px;
+            overflow-x: auto;
+            border-bottom: 2px solid #333;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .anchor-item {
+            white-space: nowrap;
+            padding: 6px 12px;
+            background: #eee;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            color: #333;
+            text-decoration: none;
+        }
+
+        .anchor-item.active {
+            background: #333;
+            color: white;
+        }
+
+        .giant-result {
+            font-size: 3rem;
+            font-weight: 900;
+            color: #000;
+            line-height: 1;
+        }
+
+        .unit-label-big {
+            font-size: 1.2rem;
+            font-weight: 900;
+            margin-left: 5px;
+        }
+    </style>
 </head>
 
 <body>
     <header>
         <h1>👨‍🍳 お料理単位くん</h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 極限・非常時の代用計量 〜</p>
     </header>
 
     <div class="category-tabs">
         <a href="index.html" class="category-tab">🍲 単位変換</a>
         <a href="baking-calc.html" class="category-tab">🍰 型換算</a>
-        <a href="substitute-measuring.html" class="category-tab active">⚖️ 代用計量</a>
+        <a href="substitute-measuring.html" class="category-tab active">🔧 極限モード</a>
     </div>
 
+    <!-- Quick Navigation -->
+    <nav class="anchor-nav">
+        <a href="#coin-section" class="anchor-item">💰 お金で重さ</a>
+        <a href="#cup-section" class="anchor-item">🥤 容器で体積</a>
+        <a href="#ruler-section" class="anchor-item">📏 指スケール</a>
+        <a href="#pasta-section" class="anchor-item">🍝 パスタ</a>
+        <a href="#faq-section" class="anchor-item">📖 FAQ</a>
+    </nav>
+
     <main class="container">
-        <section class="seo-content">
-            <h2 class="section-title">はかりがない時の代用計量</h2>
 
-            <!-- Pasta Guide -->
-            <div class="guide-card">
-                <h3>🍝 パスタの量（実寸大ガイド）</h3>
-                <p style="font-size: 0.85rem; color: #666; margin-bottom: 1rem;">画面にパスタの束をあてて測れます。</p>
-
-                <div class="shape-selector">
-                    <button class="shape-btn active" data-pasta="100">100g<br><small>(1人前)</small></button>
-                    <button class="shape-btn" data-pasta="200">200g<br><small>(2人前)</small></button>
+        <!-- Size Calibration (Essential for Ruler/Pasta) -->
+        <section class="guide-card" style="border: 3px solid #333; background: #fffde7;">
+            <h3 style="margin-top:0;">🛑 最初にサイズを補正してください</h3>
+            <p style="font-size:0.8rem; margin-bottom:1rem;">画面上の1cmを現実に合わせるため、10円玉を置いて「＋ −」で調整してください。</p>
+            <div class="measuring-guide-area">
+                <div id="cal-circle"
+                    style="width: 23.5mm; height: 23.5mm; border: 3px dashed #333; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 900; margin: 0 auto;">
+                    10円玉</div>
+                <div class="calibration-ctrls" style="justify-content: center; margin-top:15px;">
+                    <button id="cal-minus" class="cal-btn" style="width:50px; height:50px; font-size:1.5rem;">−</button>
+                    <button id="cal-plus" class="cal-btn" style="width:50px; height:50px; font-size:1.5rem;">＋</button>
                 </div>
-
-                <div class="measuring-guide-area">
-                    <div id="pasta-circle" class="measuring-circle" style="width: 23mm; height: 23mm;">100g</div>
-                    <p class="real-size-note" id="pasta-real-size-note">※23mm（10円玉とほぼ同じサイズです）</p>
-                </div>
-                <div style="background-color: #fffde7; border-radius: 10px; padding: 10px; margin-top: 5px;">
-                    <p style="font-size: 0.75rem; color: #f57f17; font-weight: bold;">📏 正確に測るコツ</p>
-                    <p style="font-size: 0.7rem; color: #666; line-height: 1.4;">お手持ちの硬貨を画面に重ねてみてください。<br>
-                        <span id="coin-ref-text">【100g】10円玉（23.5mm）と重なれば正確です。</span>
-                    </p>
-                </div>
-                <p style="font-size: 0.7rem; color: #999; margin-top: 8px;">※機種により数ミリの誤差が出る場合があります。</p>
-            </div>
-
-            <!-- Pet Bottle Cap Converter -->
-            <div class="cap-converter">
-                <h3>🧴 キャップで量る (7.5ml/杯)</h3>
-                <p style="font-size: 0.85rem; color: #444; margin-bottom: 1rem;">ペットボトルのキャップは「約7.5ml」です。</p>
-
-                <div class="input-row" style="margin-bottom: 15px;">
-                    <input type="number" id="sub-input" class="calc-input" placeholder="数値" value="1"
-                        inputmode="decimal">
-                    <select id="sub-unit" class="unit-select">
-                        <option value="tbsp">大さじ</option>
-                        <option value="tsp">小さじ</option>
-                        <option value="ml" selected>ml</option>
-                    </select>
-                </div>
-
-                <div class="baking-result-card" style="background: white; border-color: #81d4fa; margin: 10px 0;">
-                    <p>キャップでおよそ</p>
-                    <span id="cap-result" class="ratio-display" style="color: #0288d1;">0.1杯分</span>
-                    <p>です</p>
-                </div>
-                <p style="font-size: 0.7rem; color: #0288d1;">※キャップ2杯で「大さじ1」になります。</p>
-            </div>
-
-            <!-- Hand Measuring Reference -->
-            <div class="knowledge-box" style="background-color: #f1f8e9; border-color: #c5e1a5;">
-                <h3 style="color: #33691e; border-bottom-color: #aed581;">🤏 手で量る目安</h3>
-                <table class="sub-table">
-                    <tr>
-                        <th>量り方</th>
-                        <th>g数目安</th>
-                    </tr>
-                    <tr>
-                        <td><strong>ひとつまみ</strong><br><small>(3本指でつまむ)</small></td>
-                        <td>約 1g (小さじ1/5)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>少々</strong><br><small>(2本指でつまむ)</small></td>
-                        <td>約 0.5g (小さじ1/10)</td>
-                    </tr>
-                    <tr>
-                        <td><strong>ひとつかみ</strong><br><small>(片手で握る)</small></td>
-                        <td>約 30g</td>
-                    </tr>
-                </table>
             </div>
         </section>
+
+        <!-- A. Coin Weight Calculator -->
+        <section id="coin-section" class="guide-card survival-mode">
+            <h3>💰 コインを「分銅」にして重さを測る</h3>
+            <p style="font-size:0.85rem; margin-bottom:1rem;">1円玉はちょうど「1.0g」です。数枚並べて天秤を作れば正確に測れます。</p>
+
+            <div class="baking-input-group">
+                <label>測りたい重さ (g)</label>
+                <input type="number" id="coin-weight-input" class="calc-input" placeholder="例: 10" value="10"
+                    inputmode="decimal">
+            </div>
+
+            <div class="baking-result-card" style="background:#f5f5f5; border: 2px solid #333;">
+                <p>1円玉ならおよそ</p>
+                <div>
+                    <span id="coin-count-result" class="giant-result">10</span>
+                    <span class="unit-label-big">枚分</span>
+                </div>
+            </div>
+
+            <p style="font-size:0.8rem; font-weight:bold; margin-top:1.5rem;">💡 その他の硬貨の重さ目安</p>
+            <div class="coin-grid">
+                <div class="coin-info-card">
+                    <div class="coin-icon" style="background:#e57373; color:white;">10</div>
+                    <div><small>10円玉</small><br><strong>4.5g</strong></div>
+                </div>
+                <div class="coin-info-card">
+                    <div class="coin-icon" style="background:#90a4ae; color:white;">100</div>
+                    <div><small>100円玉</small><br><strong>4.8g</strong></div>
+                </div>
+                <div class="coin-info-card">
+                    <div class="coin-icon" style="background:#fff176; color:#a48b00;">5</div>
+                    <div><small>5円玉</small><br><strong>3.75g</strong></div>
+                </div>
+                <div class="coin-info-card">
+                    <div class="coin-icon" style="background:#cfd8dc; color:#455a64;">50</div>
+                    <div><small>50円玉</small><br><strong>4.0g</strong></div>
+                </div>
+                <div class="coin-info-card" style="grid-column: span 2;">
+                    <div class="coin-icon" style="background:#ffe082; color:#7f6d00;">500</div>
+                    <div><small>500円玉</small><br><strong>7.0g</strong></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- B. Container Simulator -->
+        <section id="cup-section" class="guide-card survival-mode">
+            <h3>🥤 容器で体積を測る (シミュレーター)</h3>
+            <p style="font-size:0.85rem; margin-bottom:1rem;">紙コップやスプーンの目安を可視化します。</p>
+
+            <div class="shape-selector">
+                <button class="shape-btn active" data-cont="cup">紙コップ<br><small>(205ml)</small></button>
+                <button class="shape-btn" data-cont="spoon">コンビニスプーン<br><small>(約5ml)</small></button>
+            </div>
+
+            <div id="cup-visual-area">
+                <div class="cup-simulator">
+                    <div id="cup-water" class="cup-water" style="height: 50%;"></div>
+                    <div class="cup-mark" style="bottom: 80%;">【8分目】約160ml</div>
+                    <div class="cup-mark" style="bottom: 50%;">【半分】約100ml</div>
+                </div>
+                <p style="text-align:center; font-size:0.75rem; color:#666;">※標準的な7オンス(205ml)紙コップの場合</p>
+            </div>
+
+            <div id="spoon-visual-area" style="display:none; text-align:center; padding: 2rem 0;">
+                <span style="font-size: 4rem;">🥄</span>
+                <p>コンビニのデザートスプーン 1杯</p>
+                <div class="giant-result">約 5<span class="unit-label-big">ml</span></div>
+                <p style="font-size:0.8rem; color:#d32f2f; font-weight:bold;">＝ 小さじ1 とほぼ同じ</p>
+            </div>
+        </section>
+
+        <!-- C. Digital Ruler -->
+        <section id="ruler-section" class="guide-card survival-mode">
+            <h3>📏 指スケール（デジタル定規）</h3>
+            <p style="font-size:0.85rem; margin-bottom:1rem;">画面に指やモノをあてて測れます。</p>
+
+            <div id="main-ruler" class="digital-ruler">
+                <!-- Ticks generated by JS -->
+            </div>
+            <p style="font-size:0.7rem; color:#d32f2f; text-align:center;">※あらかじめ一番上の10円玉で補正した状態で使ってください。</p>
+        </section>
+
+        <!-- D. Enhanced Pasta Slider -->
+        <section id="pasta-section" class="guide-card survival-mode">
+            <h3>🍝 パスタの量 (スライダー調整)</h3>
+            <p style="font-size:0.85rem; margin-bottom:1rem;">測りたい人数に合わせて円の大きさが変わります。</p>
+
+            <div class="pasta-slider-container">
+                <input type="range" id="pasta-range" class="pasta-range" min="50" max="300" step="10" value="100">
+                <div style="text-align:center; margin-top:10px;">
+                    <span id="pasta-val-display" class="giant-result">100</span><span class="unit-label-big">g</span>
+                </div>
+            </div>
+
+            <div class="measuring-guide-area">
+                <div id="pasta-circle" class="measuring-circle"
+                    style="background:#fff8e1; border: 4px solid #fbc02d; color:#f57f17; font-weight:900;">100g</div>
+            </div>
+        </section>
+
+        <!-- SEO FAQ Section -->
+        <section id="faq-section" class="faq-section">
+            <h2 class="section-title" style="text-align:left;">はかりがない時に使える「重さの目安」FAQ</h2>
+
+            <div class="faq-item">
+                <span class="faq-q">Q. 水 100ml はどのくらい？</span>
+                <p class="faq-a">A. 標準的な紙コップ（205ml）の<strong>ちょうど半分</strong>くらいです。8分目まで入れると約160mlになります。</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-q">Q. 塩 1g はどのくらい？</span>
+                <p class="faq-a">A. 1円玉1枚分と同じ重さです。指で量るなら、<strong>人差し指・中指・親指の3本で「ひとつまみ」</strong>した量がおよそ1gになります。</p>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-q">Q. 大さじ1 をスプーンで代用するには？</span>
+                <p class="faq-a">A.
+                    コンビニで貰うデザートスプーンなら<strong>約3杯</strong>、カレーなどを食べる時に使う大きめのカレースプーンなら<strong>約1杯弱</strong>が目安です（大さじ1＝15ml、カレースプーンは約15〜18ml）。
+                </p>
+            </div>
+
+            <div class="faq-item">
+                <span class="faq-q">Q. 郵便物の50gをコインで確認できる？</span>
+                <p class="faq-a">A. 1円玉を50枚集めるか、<strong>10円玉を11枚</strong>（4.5g×11=49.5g）で代用できます。</p>
+            </div>
+        </section>
+
     </main>
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>
     </footer>
 
-    <script src="script.js?v=7.0"></script>
+    <script src="script.js?v=10.0"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // --- 1. Size Calibration System ---
+            const calCircle = document.getElementById('cal-circle');
+            const calPlus = document.getElementById('cal-plus');
+            const calMinus = document.getElementById('cal-minus');
+            let ppiScale = parseFloat(localStorage.getItem('measuring_ppi_scale')) || 1.6;
+
+            function updateAllSizes() {
+                // 10 Yen = 23.5mm
+                const px = 23.5 * 3.78 * ppiScale;
+                if (calCircle) {
+                    calCircle.style.width = px + 'px';
+                    calCircle.style.height = px + 'px';
+                }
+                localStorage.setItem('measuring_ppi_scale', ppiScale);
+
+                updateRuler();
+                updatePastaCircle();
+            }
+
+            calPlus.addEventListener('click', () => { ppiScale += 0.05; updateAllSizes(); });
+            calMinus.addEventListener('click', () => { ppiScale -= 0.05; if (ppiScale < 0.5) ppiScale = 0.5; updateAllSizes(); });
+
+            // --- 2. Coin Weight Calculator ---
+            const weightInput = document.getElementById('coin-weight-input');
+            const countResult = document.getElementById('coin-count-result');
+
+            function updateCoinCalc() {
+                const val = parseFloat(weightInput.value) || 0;
+                countResult.textContent = Math.round(val); // 1g = 1 coin
+            }
+            weightInput.addEventListener('input', updateCoinCalc);
+
+            // --- 3. Container Simulator ---
+            const contBtns = document.querySelectorAll('[data-cont]');
+            const cupView = document.getElementById('cup-visual-area');
+            const spoonView = document.getElementById('spoon-visual-area');
+
+            contBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    contBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+                    if (btn.dataset.cont === 'cup') {
+                        cupView.style.display = 'block';
+                        spoonView.style.display = 'none';
+                    } else {
+                        cupView.style.display = 'none';
+                        spoonView.style.display = 'block';
+                    }
+                });
+            });
+
+            // --- 4. Digital Ruler Generation ---
+            const ruler = document.getElementById('main-ruler');
+            function updateRuler() {
+                if (!ruler) return;
+                ruler.innerHTML = '';
+                const mmInPx = 3.78 * ppiScale;
+                const totalWidth = ruler.offsetWidth;
+                const maxCm = Math.floor(totalWidth / (10 * mmInPx));
+
+                for (let i = 0; i <= maxCm * 10; i++) {
+                    const tick = document.createElement('div');
+                    tick.className = 'ruler-tick';
+                    tick.style.left = (i * mmInPx) + 'px';
+
+                    if (i % 10 === 0) {
+                        tick.classList.add('major');
+                        const num = document.createElement('div');
+                        num.className = 'ruler-num';
+                        num.textContent = (i / 10);
+                        num.style.left = (i * mmInPx) + 'px';
+                        ruler.appendChild(num);
+                    } else if (i % 5 === 0) {
+                        tick.classList.add('major');
+                        tick.style.height = '15px';
+                    } else {
+                        tick.classList.add('minor');
+                    }
+                    ruler.appendChild(tick);
+                }
+            }
+
+            // --- 5. Pasta Guide Expansion ---
+            const pastaRange = document.getElementById('pasta-range');
+            const pastaVal = document.getElementById('pasta-val-display');
+            const pastaCircle = document.getElementById('pasta-circle');
+
+            function updatePastaCircle() {
+                if (!pastaRange || !pastaCircle) return;
+                const grams = parseInt(pastaRange.value);
+                pastaVal.textContent = grams;
+
+                // Heuristic: 100g = 23mm diameter
+                // Area is proportional to weight. Weight 100 -> Diameter 23.
+                // Weight W -> Diameter D = 23 * sqrt(W / 100)
+                const diameterMm = 23 * Math.sqrt(grams / 100);
+                const px = diameterMm * 3.78 * ppiScale;
+
+                pastaCircle.style.width = px + 'px';
+                pastaCircle.style.height = px + 'px';
+                pastaCircle.textContent = grams + 'g';
+            }
+            pastaRange.addEventListener('input', updatePastaCircle);
+
+            // --- Window Resize & Initial ---
+            window.addEventListener('resize', updateRuler);
+            updateAllSizes();
+
+            // --- Simple Anchor Highlighting ---
+            window.addEventListener('scroll', () => {
+                const sections = ['coin-section', 'cup-section', 'ruler-section', 'pasta-section', 'faq-section'];
+                let current = '';
+                sections.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el && window.scrollY >= el.offsetTop - 100) {
+                        current = id;
+                    }
+                });
+                document.querySelectorAll('.anchor-item').forEach(a => {
+                    a.classList.remove('active');
+                    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
