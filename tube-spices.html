@@ -4,8 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>にんにく1片はチューブで何センチ？しょうがの換算も一発計算｜お料理単位くん</title>
-    <meta name="description" content="レシピの『にんにく1片』はチューブなら約5cmです。チューブ1cmは約1.5g。料理中にパッと計算できるツールをご活用ください。">
+    <title>【逆引き】にんにく1片・何グラムはチューブで何センチ？しょうがの換算も一発計算｜お料理単位くん</title>
+    <meta name="description"
+        content="【逆引き対応】にんにく10gはチューブで何センチ？レシピの『1片』はチューブなら約5cmです。グラム(g)から長さ(cm)への逆算や、しょうがの換算、視覚的な定規UIで料理の計量を快適に。">
 
     <!-- Google Tag Manager -->
     <script>
@@ -33,7 +34,7 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700&family=Zen+Maru+Gothic:wght@400;700&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=5.1">
+    <link rel="stylesheet" href="style.css?v=11.0">
 </head>
 
 <body>
@@ -45,36 +46,43 @@
         <a href="index.html">トップ</a>
         <a href="otama.html">おたま</a>
         <a href="tube-spices.html" class="active">チューブ換算</a>
+        <a href="substitute-measuring.html">代用計量</a>
         <a href="rice.html">お米</a>
-        <a href="butter.html">調味料</a>
     </nav>
 
     <main class="container">
         <section class="seo-content">
-            <h2 class="section-title">にんにく・しょうが「チューブ換算」</h2>
-            <p>レシピによくある「にんにく1片」や「しょうが1かけ」、チューブなら何cm出せばいいの？をパッと解決します。</p>
+            <h2 class="section-title">にんにく・しょうが「チューブ逆引き換算」</h2>
+            <p>レシピの「10g」や「1片」はチューブなら何cm出せばいいの？を双方向で解決します。</p>
 
-            <div class="converter-card tube-converter-card">
-                <div class="conversion-row">
-                    <input type="number" id="tube-source-input" class="calc-input" placeholder="数値を入力"
-                        inputmode="decimal" step="any">
-                    <select id="tube-spice-type" class="unit-select-native">
-                        <option value="garlic">にんにく 🧄</option>
-                        <option value="ginger">しょうが</option>
+            <div class="converter-card tube-converter-card" style="border: 3px solid #ffcc80;">
+                <div class="conversion-row" style="margin-bottom: 5px;">
+                    <select id="tube-spice-type" class="unit-select-native"
+                        style="width: 100%; margin-bottom: 10px; font-weight: bold; border-color: #ffb74d;">
+                        <option value="garlic">にんにくチューブ 🧄</option>
+                        <option value="ginger">しょうがチューブ</option>
                     </select>
                 </div>
 
-                <div class="unit-selection-area">
-                    <label class="radio-label"><input type="radio" name="tube-unit" value="piece" checked> 片/かけ</label>
-                    <label class="radio-label"><input type="radio" name="tube-unit" value="cm"> cm</label>
-                    <label class="radio-label"><input type="radio" name="tube-unit" value="g"> グラム(g)</label>
+                <div class="conversion-row">
+                    <input type="number" id="tube-source-input" class="calc-input" placeholder="数値を入力"
+                        inputmode="decimal" step="any" value="1">
+                    <div class="unit-selection-area" style="flex: 1.5; margin: 0; gap: 5px;">
+                        <select id="tube-unit-select" class="unit-select-native"
+                            style="width: 100%; font-size: 0.9rem;">
+                            <option value="piece">片/かけ (基準)</option>
+                            <option value="cm">cm (長さ)</option>
+                            <option value="g">g (重さ)</option>
+                        </select>
+                    </div>
                 </div>
 
-                <div class="tube-result-area">
-                    <div id="tube-result-text" class="result-display">数値を入力してね！</div>
+                <div class="tube-result-area" style="margin-top: 1.5rem;">
+                    <div id="tube-result-text" class="result-display" style="font-size: 1.4rem; line-height: 1.4;">
+                        数値を入力してね！</div>
 
                     <!-- Ruler Scale UI -->
-                    <div class="ruler-container">
+                    <div class="ruler-container" style="margin-top: 2rem;">
                         <div class="ruler-scale">
                             <div class="ruler-marker" style="left: 0%;">0</div>
                             <div class="ruler-marker" style="left: 20%;">1</div>
@@ -84,14 +92,32 @@
                             <div class="ruler-marker" style="left: 100%;">5</div>
                             <div id="tube-visual-indicator" class="tube-fill"></div>
                         </div>
-                        <p class="ruler-label">約 5cm（にんにく1片分）</p>
+                        <p class="ruler-label" id="ruler-dynamic-label">約 5cm（にんにく1片分）</p>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="seo-content">
-            <h3 class="section-title">にんにくチューブ換算の目安</h3>
+        <!-- Reverse Lookup FAQ -->
+        <section class="faq-section"
+            style="margin-top: 2rem; background: #fff8e1; padding: 1.5rem; border-radius: 20px;">
+            <h3 style="margin-top: 0; color: #e65100; font-size: 1.1rem;">💡 チューブ換算の「逆引き」早見表</h3>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px dashed #ffe0b2; padding-bottom: 10px;">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. にんにく10gはチューブで何センチ？</span>
+                <span style="color: #333;">A. <strong>約 8.3cm</strong> です（1cm ≒ 1.2g換算）。</span>
+            </div>
+            <div class="faq-item" style="margin-bottom: 15px; border-bottom: 1px dashed #ffe0b2; padding-bottom: 10px;">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. にんにく1片（約5g）はチューブで何センチ？</span>
+                <span style="color: #333;">A. <strong>約 4.2cm</strong> です。※標準的な1片サイズなら5cm程度出せば安心です。</span>
+            </div>
+            <div class="faq-item">
+                <span style="font-weight: bold; display: block; color: #5d4037;">Q. しょうが 1かけ はチューブで何センチ？</span>
+                <span style="color: #333;">A. <strong>約 4cm</strong> です（1cm ≒ 1.0g換算）。</span>
+            </div>
+        </section>
+
+        <section class="seo-content" style="margin-top: 3rem;">
+            <h3 class="section-title">換算の目安一覧（1cm ≒ 1.2g）</h3>
             <div class="table-responsive">
                 <table class="ref-table">
                     <thead>
@@ -125,29 +151,23 @@
                     </tbody>
                 </table>
             </div>
-            <p class="seo-note">※チューブの太さや各メーカー（S&Bやハウスなど）によって多少前後するので、あくまで目安として使ってね！</p>
-        </section>
-
-        <section class="amazon-container">
-            <p class="amazon-text">チューブ調味料もおしゃれに収納 ✨</p>
-            <a href="https://amzn.to/3P8YF82" class="amazon-btn" target="_blank"
-                rel="noopener sponsored">Amazonで人気の商品を見る</a>
+            <p class="seo-note">※S&Bやハウスなどの一般的なメーカーのチューブ（太さ）を基準にしています。メーカーにより多少前後します。</p>
         </section>
 
         <section class="dictionary-links">
             <h2 class="section-title">他の換算もチェック！</h2>
             <div class="ingredient-grid">
-                <a href="shoyu.html" class="ingredient-card">
-                    <span class="emoji">🧂</span>
-                    <span class="name">醤油</span>
-                </a>
-                <a href="miso.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">味噌</span>
-                </a>
                 <a href="index.html" class="ingredient-card">
                     <span class="emoji">🏠</span>
-                    <span class="name">トップに戻る</span>
+                    <span class="name">トップ</span>
+                </a>
+                <a href="otama.html" class="ingredient-card">
+                    <span class="emoji">🥣</span>
+                    <span class="name">おたま</span>
+                </a>
+                <a href="substitute-measuring.html" class="ingredient-card">
+                    <span class="emoji">⚖️</span>
+                    <span class="name">代用計量</span>
                 </a>
             </div>
         </section>
@@ -155,20 +175,73 @@
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>
-        <p class="disclaimer">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
     </footer>
 
-    <script src="script.js?v=5.1"></script>
+    <script src="script.js?v=11.0"></script>
     <script>
-        // DataLayer push for tracking
-        document.querySelectorAll('.amazon-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                window.dataLayer = window.dataLayer || [];
-                window.dataLayer.push({
-                    'event': 'amazon_click',
-                    'button_location': document.title
-                });
-            });
+        document.addEventListener('DOMContentLoaded', () => {
+            const input = document.getElementById('tube-source-input');
+            const typeSelect = document.getElementById('tube-spice-type');
+            const unitSelect = document.getElementById('tube-unit-select');
+            const resultText = document.getElementById('tube-result-text');
+            const indicator = document.getElementById('tube-visual-indicator');
+            const label = document.getElementById('ruler-dynamic-label');
+
+            function calculate() {
+                const val = parseFloat(input.value);
+                const type = typeSelect.value;
+                const unit = unitSelect.value;
+
+                if (isNaN(val) || val <= 0) {
+                    resultText.innerHTML = "数値を入力してね！";
+                    indicator.style.width = "0%";
+                    return;
+                }
+
+                let piece = 0, cm = 0, g = 0;
+
+                if (type === 'garlic') {
+                    // garlic: 1 piece = 5cm = 6g (1cm = 1.2g)
+                    switch (unit) {
+                        case 'piece': piece = val; cm = val * 5; g = val * 6; break;
+                        case 'cm': piece = val / 5; cm = val; g = val * 1.2; break;
+                        case 'g': piece = val / 6; cm = val / 1.2; g = val; break;
+                    }
+                } else {
+                    // ginger: 1かけ = 4cm = 4g (1cm = 1.0g)
+                    switch (unit) {
+                        case 'piece': piece = val; cm = val * 4; g = val * 4; break;
+                        case 'cm': piece = val / 4; cm = val; g = val; break;
+                        case 'g': piece = val / 4; cm = val; g = val; break;
+                    }
+                }
+
+                const p = piece.toFixed(1).replace(/\.0$/, '');
+                const c = cm.toFixed(1).replace(/\.0$/, '');
+                const gr = g.toFixed(1).replace(/\.0$/, '');
+
+                const icon = type === 'garlic' ? '🧄' : '🫚';
+                const name = type === 'garlic' ? 'にんにく' : 'しょうが';
+                const pieceUnit = type === 'garlic' ? '片' : 'かけ';
+
+                if (unit === 'g') {
+                    resultText.innerHTML = `${icon} ${name} <strong>${gr}g</strong> は<br>チューブで <strong>約 ${c}cm</strong>`;
+                } else if (unit === 'cm') {
+                    resultText.innerHTML = `${icon} チューブ <strong>${c}cm</strong> は<br>重さ <strong>約 ${gr}g</strong>`;
+                } else {
+                    resultText.innerHTML = `${icon} <strong>${p}${pieceUnit}</strong> は<br>チューブ <strong>約 ${c}cm</strong> (約 ${gr}g)`;
+                }
+
+                // Update visual
+                const width = Math.min((cm / 5) * 100, 100);
+                indicator.style.width = width + "%";
+                label.textContent = `約 ${c}cm （${gr}g分）`;
+            }
+
+            input.addEventListener('input', calculate);
+            typeSelect.addEventListener('change', calculate);
+            unitSelect.addEventListener('change', calculate);
+            calculate();
         });
     </script>
 </body>

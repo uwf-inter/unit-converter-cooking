@@ -232,8 +232,12 @@ document.addEventListener('DOMContentLoaded', () => {
                     // Close dropdown
                     optionsContainer.classList.remove('open');
 
-                    // Trigger calculation
-                    calculate();
+                    // Trigger calculations
+                    if (typeof calculate === 'function') calculate();
+                    if (typeof calculateCap === 'function' && select.id === 'sub-unit') calculateCap();
+
+                    // Dispatch change event for other listeners
+                    select.dispatchEvent(new Event('change'));
 
                     // ** NEW: Handle Exclusive Logic **
                     if (select.id === 'source-unit') {
@@ -617,29 +621,58 @@ document.addEventListener('DOMContentLoaded', () => {
     const subInput = document.getElementById('sub-input');
     const subUnit = document.getElementById('sub-unit');
     const capResult = document.getElementById('cap-result');
+    const calPlus = document.getElementById('cal-plus');
+    const calMinus = document.getElementById('cal-minus');
+
+    // Display scale factor (default heuristic for high-DPI mobile)
+    let ppiScale = parseFloat(localStorage.getItem('measuring_ppi_scale')) || 1.6;
+    let currentPastaType = '100';
+
+    function updatePastaSize() {
+        if (!pastaCircle) return;
+        // Standard mm to px at 96dpi is ~3.78. 
+        // We multiply by our calibration scale.
+        const baseMm = currentPastaType === '100' ? 23 : 32.5;
+        const px = baseMm * 3.78 * ppiScale;
+
+        pastaCircle.style.width = px + 'px';
+        pastaCircle.style.height = px + 'px';
+        pastaCircle.textContent = currentPastaType + 'g';
+
+        const note = document.getElementById('pasta-real-size-note');
+        if (note) {
+            if (currentPastaType === '100') {
+                note.textContent = '※10円玉と同じサイズに合わせてください';
+            } else {
+                note.textContent = '※10円玉2枚分より一回り小さいサイズ';
+            }
+        }
+    }
 
     if (pastaCircle) {
-        const coinRefText = document.getElementById('coin-ref-text');
         pastaBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 pastaBtns.forEach(b => b.classList.remove('active'));
                 btn.classList.add('active');
-                const size = btn.dataset.pasta;
-                if (size === '100') {
-                    pastaCircle.style.width = '23mm';
-                    pastaCircle.style.height = '23mm';
-                    pastaCircle.textContent = '100g';
-                    document.getElementById('pasta-real-size-note').textContent = '※23mm（10円玉とほぼ同じサイズです）';
-                    if (coinRefText) coinRefText.textContent = '【100g】10円玉（23.5mm）と重なれば正確です。';
-                } else {
-                    pastaCircle.style.width = '32.5mm';
-                    pastaCircle.style.height = '32.5mm';
-                    pastaCircle.textContent = '200g';
-                    document.getElementById('pasta-real-size-note').textContent = '※32.5mm（10円玉2枚分より一回り小さいサイズ）';
-                    if (coinRefText) coinRefText.textContent = '【200g】500円玉（26.5mm）よりも一回り大きいサイズです。';
-                }
+                currentPastaType = btn.dataset.pasta;
+                updatePastaSize();
             });
         });
+
+        calPlus.addEventListener('click', () => {
+            ppiScale += 0.05;
+            localStorage.setItem('measuring_ppi_scale', ppiScale);
+            updatePastaSize();
+        });
+
+        calMinus.addEventListener('click', () => {
+            ppiScale -= 0.05;
+            if (ppiScale < 0.5) ppiScale = 0.5;
+            localStorage.setItem('measuring_ppi_scale', ppiScale);
+            updatePastaSize();
+        });
+
+        updatePastaSize();
     }
 
     function calculateCap() {
@@ -655,9 +688,14 @@ document.addEventListener('DOMContentLoaded', () => {
         capResult.textContent = parseFloat(cups.toFixed(1)) + '杯分';
     }
 
-    if (subInput) {
-        subInput.addEventListener('input', calculateCap);
+    if (subInput && subUnit) {
+        // Use multiple events for maximum reactivity on mobile
+        ['input', 'keyup', 'change', 'blur'].forEach(ev => {
+            subInput.addEventListener(ev, calculateCap);
+        });
+
         subUnit.addEventListener('change', calculateCap);
+        // Initial calc
         calculateCap();
     }
 });

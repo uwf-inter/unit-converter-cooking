@@ -236,7 +236,8 @@ header h1 {
 .container {
     flex: 1;
     padding: 1rem;
-    max-width: 600px;
+    max-width: 700px;
+    /* Increased from 600px to use more site width */
     margin: 0 auto;
     width: 100%;
 }
@@ -782,12 +783,13 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    /* More space */
+    gap: 1rem;
+    /* Slightly reduced gap to allow wider pills */
     margin-bottom: 1.5rem;
     background-color: transparent;
-    /* Clean look */
     padding: 0;
+    width: 100%;
+    /* Ensure it spans the width */
 }
 
 .input-wrapper {
@@ -810,9 +812,14 @@ footer {
     border: 2px solid #ddd;
     border-radius: 30px;
     padding: 2px;
-    /* Reduced padding to fit buttons */
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    min-width: 120px;
+    /* Ensure a minimum width to prevent clipping */
+    flex: 1;
+    /* Allow equal growth */
+    max-width: 160px;
+    /* But don't let it get too huge */
 }
 
 .input-pill:focus-within {
@@ -824,14 +831,20 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
+    /* Take up all available space between buttons */
+    min-width: 0;
+    /* Allow shrinking if needed, though buttons are fixed */
 }
 
 .input-pill input {
     width: 100%;
+    /* Take full width of parent container */
+    min-width: 30px;
     padding: 0.5rem 0;
     font-size: 1.3rem;
-    text-align: right;
-    /* Right align number to be close to unit */
+    text-align: center;
+    /* Changed to center for better balance in wider pill */
     border: none;
     background: transparent;
     color: #444;
@@ -1195,14 +1208,6 @@ footer {
         margin-top: 10px;
     }
 
-    .cap-converter {
-        background: #e1f5fe;
-        border: 2px solid #81d4fa;
-        border-radius: 20px;
-        padding: 1.5rem;
-        margin-bottom: 1.5rem;
-    }
-
     .cap-result-display {
         font-size: 1.5rem;
         font-weight: 900;
@@ -1468,4 +1473,197 @@ footer {
     border: 2px solid #eee;
     font-family: inherit;
     font-size: 1rem;
+}
+
+/* Emergency / Survival Mode Styles */
+.emergency-nav {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-bottom: 2rem;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 0;
+    backdrop-filter: blur(5px);
+    border-bottom: 1px solid #eee;
+}
+
+.env-btn {
+    flex: 1;
+    min-width: 80px;
+    padding: 8px 5px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    background: white;
+    color: #444;
+    text-decoration: none;
+    text-align: center;
+    transition: all 0.2s;
+}
+
+.env-btn:hover {
+    background: #f5f5f5;
+    border-color: #999;
+}
+
+/* Coin Data Table */
+.coin-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 1rem;
+}
+
+.coin-info-card {
+    background: white;
+    padding: 10px;
+    border-radius: 12px;
+    border: 1px solid #eee;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.coin-icon {
+    width: 30px;
+    height: 30px;
+    background: #ffd700;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 0.7rem;
+    color: #b8860b;
+}
+
+/* Paper Cup Simulator */
+.cup-simulator {
+    width: 120px;
+    height: 150px;
+    margin: 20px auto;
+    position: relative;
+    background: #fff;
+    border: 2px solid #ddd;
+    border-top: none;
+    border-radius: 5px 5px 40px 40px;
+    overflow: hidden;
+}
+
+.cup-water {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background: #e1f5fe;
+    transition: height 0.5s ease;
+}
+
+.cup-mark {
+    position: absolute;
+    left: 0;
+    width: 100%;
+    border-top: 1px dashed #64b5f6;
+    font-size: 0.6rem;
+    color: #1976d2;
+    padding-left: 5px;
+    pointer-events: none;
+}
+
+/* Digital Ruler */
+.digital-ruler {
+    height: 60px;
+    background: #fafafa;
+    border: 2px solid #333;
+    border-radius: 4px;
+    position: relative;
+    margin: 2rem 0;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.ruler-tick {
+    position: absolute;
+    bottom: 0;
+    width: 2px;
+    background: #333;
+}
+
+.ruler-tick.major {
+    height: 20px;
+}
+
+.ruler-tick.minor {
+    height: 10px;
+    width: 1px;
+}
+
+.ruler-num {
+    position: absolute;
+    bottom: 22px;
+    transform: translateX(-50%);
+    font-size: 0.7rem;
+    font-weight: bold;
+}
+
+/* Survival High Contrast UI */
+.survival-mode {
+    border: 4px solid #333 !important;
+    background: white !important;
+}
+
+.survival-mode h3 {
+    color: #000 !important;
+    font-weight: 900 !important;
+}
+
+/* Range Slider Styles */
+.pasta-slider-container {
+    padding: 20px 0;
+}
+
+.pasta-range {
+    width: 100%;
+    height: 12px;
+    -webkit-appearance: none;
+    background: #eee;
+    border-radius: 6px;
+    outline: none;
+}
+
+.pasta-range::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    width: 24px;
+    height: 24px;
+    background: var(--primary-color);
+    border-radius: 50%;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* FAQ Section */
+.faq-section {
+    margin-top: 3rem;
+    border-top: 2px solid #eee;
+    padding-top: 2rem;
+}
+
+.faq-item {
+    margin-bottom: 1.5rem;
+}
+
+.faq-q {
+    font-weight: bold;
+    color: #333;
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+    display: block;
+}
+
+.faq-a {
+    color: #666;
+    line-height: 1.6;
 }
