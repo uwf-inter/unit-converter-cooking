@@ -75,7 +75,100 @@
     </noscript>
 
     <link rel="sitemap" type="application/xml" title="Sitemap" href="/unit-converter-cooking/sitemap.xml">
-    <link rel="stylesheet" href="style.css?v=5.0">
+    <link rel="stylesheet" href="style.css?v=7.0">
+    <style>
+        /* Promotional Banner for Substitute Measuring */
+        .promo-banner {
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background: linear-gradient(135deg, #fff9c4 0%, #ffecb3 50%, #ffe082 100%);
+            border-radius: 20px;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 1.2rem;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            box-shadow: 0 10px 25px rgba(255, 193, 7, 0.15);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .promo-banner:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(255, 193, 7, 0.25);
+            background: linear-gradient(135deg, #fffde7 0%, #fff9c4 100%);
+        }
+
+        .promo-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+            pointer-events: none;
+        }
+
+        .promo-icon {
+            font-size: 2.8rem;
+            flex-shrink: 0;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        .promo-content {
+            flex-grow: 1;
+        }
+
+        .promo-main-copy {
+            display: block;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #795548;
+            margin-bottom: 4px;
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+
+        .promo-sub-copy {
+            display: block;
+            font-size: 0.85rem;
+            color: #8d6e63;
+            line-height: 1.4;
+            font-family: 'Noto Sans JP', sans-serif;
+        }
+
+        .promo-btn-text {
+            display: inline-block;
+            margin-top: 10px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #ff8f00;
+            background: white;
+            padding: 6px 15px;
+            border-radius: 20px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 480px) {
+            .promo-banner {
+                padding: 1.2rem;
+                gap: 1rem;
+            }
+
+            .promo-icon {
+                font-size: 2.2rem;
+            }
+
+            .promo-main-copy {
+                font-size: 1.05rem;
+            }
+
+            .promo-sub-copy {
+                font-size: 0.75rem;
+            }
+        }
+    </style>
 </head>
 
 <body>
@@ -223,6 +316,19 @@
                 </div>
             </div>
         </section>
+
+        <!-- Substitute Measuring Promo Banner -->
+        <a href="substitute-measuring.html" class="promo-banner">
+            <div class="promo-icon">⚖️</div>
+            <div class="promo-content">
+                <span class="promo-main-copy">はかり・計量スプーンがない時は？</span>
+                <span class="promo-sub-copy">1円玉やペットボトルキャップで量れる<br>「極限の代用計量」も使えます</span>
+                <span class="promo-btn-text">代用ツールを使ってみる →</span>
+            </div>
+            <div class="promo-icon"
+                style="opacity: 0.2; position: absolute; right: -10px; bottom: -10px; font-size: 4rem; transform: rotate(15deg);">
+                ⛺</div>
+        </a>
 
         <section class="dictionary-links">
             <h2 class="section-title">🥣 食材別！換算早見表まとめ（図鑑）</h2>

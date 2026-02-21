@@ -4,9 +4,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【極限】はかりなしで量る代用ツール｜身近なモノで重さ・体積を測定｜お料理単位くん</title>
+    <title>【逆引き】パスタの重さ・コインで計量｜1gは1円玉何枚？はかりなしで量る｜お料理単位くん</title>
     <meta name="description"
-        content="計量器がなくても大丈夫！コインを分銅にする重さ計算、紙コップ・スプーンの容量シミュレーター、パスタの実寸スライダーなど、非常時や屋外でも使える究極の代用計量ツールです。">
+        content="【逆引き対応】この太さのパスタは何グラム？10円玉何枚で何グラム？計量器がなくても大丈夫！コインを分銅にする重さ計算、パスタの実寸スライダーなど、非常時や屋外でも使える究極の代用計量ツールです。">
 
     <!-- Google Tag Manager -->
     <script>
@@ -34,25 +34,12 @@
         href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
         rel="stylesheet">
 
-    <link rel="stylesheet" href="style.css?v=10.0">
+    <link rel="stylesheet" href="style.css?v=11.0">
     <style>
         /* Page-specific High Contrast Overrides */
         :root {
             --emergency-primary: #d32f2f;
             --emergency-bg: #e1f5fe;
-        }
-
-        . survival-btn {
-            background: var(--emergency-primary);
-            color: white;
-            border: none;
-            padding: 12px;
-            border-radius: 12px;
-            font-weight: 900;
-            width: 100%;
-            margin-bottom: 1rem;
-            cursor: pointer;
-            box-shadow: 0 4px 0 #b71c1c;
         }
 
         .anchor-nav {
@@ -96,6 +83,30 @@
             font-weight: 900;
             margin-left: 5px;
         }
+
+        .mode-toggle {
+            display: flex;
+            background: #eee;
+            border-radius: 10px;
+            margin-bottom: 1rem;
+            padding: 3px;
+        }
+
+        .mode-btn {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            background: none;
+            font-size: 0.8rem;
+            font-weight: bold;
+            cursor: pointer;
+            border-radius: 8px;
+        }
+
+        .mode-btn.active {
+            background: white;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }
     </style>
 </head>
 
@@ -108,15 +119,15 @@
     <div class="category-tabs">
         <a href="index.html" class="category-tab">🍲 単位変換</a>
         <a href="baking-calc.html" class="category-tab">🍰 型換算</a>
-        <a href="substitute-measuring.html" class="category-tab active">🔧 極限モード</a>
+        <a href="substitute-measuring.html" class="category-tab active">🔧 【逆引き】代用計量</a>
     </div>
 
     <!-- Quick Navigation -->
     <nav class="anchor-nav">
-        <a href="#coin-section" class="anchor-item">💰 お金で重さ</a>
-        <a href="#cup-section" class="anchor-item">🥤 容器で体積</a>
+        <a href="#coin-section" class="anchor-item">💰 コインで測る</a>
+        <a href="#cup-section" class="anchor-item">🥤 容器で測る</a>
         <a href="#ruler-section" class="anchor-item">📏 指スケール</a>
-        <a href="#pasta-section" class="anchor-item">🍝 パスタ</a>
+        <a href="#pasta-section" class="anchor-item">🍝 パスタ逆引き</a>
         <a href="#faq-section" class="anchor-item">📖 FAQ</a>
     </nav>
 
@@ -137,26 +148,34 @@
             </div>
         </section>
 
-        <!-- A. Coin Weight Calculator -->
+        <!-- A. Coin Weight Calculator (Bidirectional) -->
         <section id="coin-section" class="guide-card survival-mode">
-            <h3>💰 コインを「分銅」にして重さを測る</h3>
-            <p style="font-size:0.85rem; margin-bottom:1rem;">1円玉はちょうど「1.0g」です。数枚並べて天秤を作れば正確に測れます。</p>
-
-            <div class="baking-input-group">
-                <label>測りたい重さ (g)</label>
-                <input type="number" id="coin-weight-input" class="calc-input" placeholder="例: 10" value="10"
-                    inputmode="decimal">
+            <h3>💰 1円玉で重さを測る（1g ＝ 1円玉1枚）</h3>
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="mode-w-to-c">重さ → 枚数</button>
+                <button class="mode-btn" id="mode-c-to-w">枚数 → 重さ</button>
             </div>
 
-            <div class="baking-result-card" style="background:#f5f5f5; border: 2px solid #333;">
-                <p>1円玉ならおよそ</p>
-                <div>
-                    <span id="coin-count-result" class="giant-result">10</span>
-                    <span class="unit-label-big">枚分</span>
+            <div id="coin-calc-area">
+                <div class="baking-input-group" id="input-group-weight">
+                    <label>測りたい重さ (g)</label>
+                    <input type="number" id="coin-weight-input" class="calc-input" value="10" inputmode="decimal">
+                </div>
+                <div class="baking-input-group" id="input-group-count" style="display:none;">
+                    <label>1円玉の枚数</label>
+                    <input type="number" id="coin-count-input" class="calc-input" value="10" inputmode="decimal">
+                </div>
+
+                <div class="baking-result-card" style="background:#f5f5f5; border: 2px solid #333;">
+                    <p id="coin-result-label">1円玉ならおよそ</p>
+                    <div>
+                        <span id="coin-result-val" class="giant-result">10</span>
+                        <span id="coin-result-unit" class="unit-label-big">枚分</span>
+                    </div>
                 </div>
             </div>
 
-            <p style="font-size:0.8rem; font-weight:bold; margin-top:1.5rem;">💡 その他の硬貨の重さ目安</p>
+            <p style="font-size:0.8rem; font-weight:bold; margin-top:1.5rem;">💡 その他の硬貨の重さ早見表</p>
             <div class="coin-grid">
                 <div class="coin-info-card">
                     <div class="coin-icon" style="background:#e57373; color:white;">10</div>
@@ -174,60 +193,52 @@
                     <div class="coin-icon" style="background:#cfd8dc; color:#455a64;">50</div>
                     <div><small>50円玉</small><br><strong>4.0g</strong></div>
                 </div>
-                <div class="coin-info-card" style="grid-column: span 2;">
-                    <div class="coin-icon" style="background:#ffe082; color:#7f6d00;">500</div>
-                    <div><small>500円玉</small><br><strong>7.0g</strong></div>
-                </div>
             </div>
         </section>
 
         <!-- B. Container Simulator -->
         <section id="cup-section" class="guide-card survival-mode">
-            <h3>🥤 容器で体積を測る (シミュレーター)</h3>
-            <p style="font-size:0.85rem; margin-bottom:1rem;">紙コップやスプーンの目安を可視化します。</p>
-
+            <h3>🥤 紙コップ・スプーンで測る目安</h3>
             <div class="shape-selector">
                 <button class="shape-btn active" data-cont="cup">紙コップ<br><small>(205ml)</small></button>
-                <button class="shape-btn" data-cont="spoon">コンビニスプーン<br><small>(約5ml)</small></button>
+                <button class="shape-btn" data-cont="spoon">スプーン<br><small>(約5ml)</small></button>
             </div>
-
             <div id="cup-visual-area">
                 <div class="cup-simulator">
                     <div id="cup-water" class="cup-water" style="height: 50%;"></div>
                     <div class="cup-mark" style="bottom: 80%;">【8分目】約160ml</div>
                     <div class="cup-mark" style="bottom: 50%;">【半分】約100ml</div>
                 </div>
-                <p style="text-align:center; font-size:0.75rem; color:#666;">※標準的な7オンス(205ml)紙コップの場合</p>
             </div>
-
             <div id="spoon-visual-area" style="display:none; text-align:center; padding: 2rem 0;">
                 <span style="font-size: 4rem;">🥄</span>
-                <p>コンビニのデザートスプーン 1杯</p>
                 <div class="giant-result">約 5<span class="unit-label-big">ml</span></div>
-                <p style="font-size:0.8rem; color:#d32f2f; font-weight:bold;">＝ 小さじ1 とほぼ同じ</p>
+                <p style="font-size:0.8rem; color:#d32f2f; font-weight:bold;">＝ デザートスプーン 1杯</p>
             </div>
         </section>
 
         <!-- C. Digital Ruler -->
         <section id="ruler-section" class="guide-card survival-mode">
-            <h3>📏 指スケール（デジタル定規）</h3>
-            <p style="font-size:0.85rem; margin-bottom:1rem;">画面に指やモノをあてて測れます。</p>
-
-            <div id="main-ruler" class="digital-ruler">
-                <!-- Ticks generated by JS -->
-            </div>
-            <p style="font-size:0.7rem; color:#d32f2f; text-align:center;">※あらかじめ一番上の10円玉で補正した状態で使ってください。</p>
+            <h3>📏 指スケール（画面でものさし）</h3>
+            <div id="main-ruler" class="digital-ruler"></div>
+            <p style="font-size:0.7rem; color:#d32f2f; text-align:center;">※10円玉で補正してから使ってください。</p>
         </section>
 
-        <!-- D. Enhanced Pasta Slider -->
+        <!-- D. Enhanced Pasta Slider (Reverse Ready) -->
         <section id="pasta-section" class="guide-card survival-mode">
-            <h3>🍝 パスタの量 (スライダー調整)</h3>
-            <p style="font-size:0.85rem; margin-bottom:1rem;">測りたい人数に合わせて円の大きさが変わります。</p>
+            <h3>🍝 パスタ逆引き（直径からグラムを計算）</h3>
+            <p style="font-size:0.8rem; margin-bottom:1rem;">束の「直径」を測れば、パスタの「重さ」がわかります。</p>
+
+            <div class="mode-toggle">
+                <button class="mode-btn active" id="pasta-to-weight">直径 → 重さ</button>
+                <button class="mode-btn" id="weight-to-pasta">重さ → 直径</button>
+            </div>
 
             <div class="pasta-slider-container">
-                <input type="range" id="pasta-range" class="pasta-range" min="50" max="300" step="10" value="100">
+                <input type="range" id="pasta-range" class="pasta-range" min="10" max="60" step="1" value="23">
                 <div style="text-align:center; margin-top:10px;">
-                    <span id="pasta-val-display" class="giant-result">100</span><span class="unit-label-big">g</span>
+                    <span id="pasta-val-display" class="giant-result">100</span><span id="pasta-unit-display"
+                        class="unit-label-big">g</span>
                 </div>
             </div>
 
@@ -235,167 +246,138 @@
                 <div id="pasta-circle" class="measuring-circle"
                     style="background:#fff8e1; border: 4px solid #fbc02d; color:#f57f17; font-weight:900;">100g</div>
             </div>
+            <p style="text-align:center; font-size:0.75rem; color:#666; margin-top:10px;" id="pasta-extra-note">直径:
+                約23mm (100g分)</p>
         </section>
 
         <!-- SEO FAQ Section -->
         <section id="faq-section" class="faq-section">
-            <h2 class="section-title" style="text-align:left;">はかりがない時に使える「重さの目安」FAQ</h2>
-
+            <h2 class="section-title" style="text-align:left;">【逆引き】代用計量まとめ</h2>
             <div class="faq-item">
                 <span class="faq-q">Q. 水 100ml はどのくらい？</span>
-                <p class="faq-a">A. 標準的な紙コップ（205ml）の<strong>ちょうど半分</strong>くらいです。8分目まで入れると約160mlになります。</p>
+                <p class="faq-a">A. 標準的な紙コップ（205ml）の<strong>ちょうど半分</strong>です。</p>
             </div>
-
             <div class="faq-item">
-                <span class="faq-q">Q. 塩 1g はどのくらい？</span>
-                <p class="faq-a">A. 1円玉1枚分と同じ重さです。指で量るなら、<strong>人差し指・中指・親指の3本で「ひとつまみ」</strong>した量がおよそ1gになります。</p>
+                <span class="faq-q">Q. パスタ1束（直径23mm）は何グラム？</span>
+                <p class="faq-a">A. およそ <strong>100g</strong> です。直径が25mmなら約120g、30mmなら約170gになります。</p>
             </div>
-
             <div class="faq-item">
-                <span class="faq-q">Q. 大さじ1 をスプーンで代用するには？</span>
-                <p class="faq-a">A.
-                    コンビニで貰うデザートスプーンなら<strong>約3杯</strong>、カレーなどを食べる時に使う大きめのカレースプーンなら<strong>約1杯弱</strong>が目安です（大さじ1＝15ml、カレースプーンは約15〜18ml）。
-                </p>
-            </div>
-
-            <div class="faq-item">
-                <span class="faq-q">Q. 郵便物の50gをコインで確認できる？</span>
-                <p class="faq-a">A. 1円玉を50枚集めるか、<strong>10円玉を11枚</strong>（4.5g×11=49.5g）で代用できます。</p>
+                <span class="faq-q">Q. 塩 1g は1円玉何枚？</span>
+                <p class="faq-a">A. <strong>1円玉 1枚分</strong> の重さです。</p>
             </div>
         </section>
-
     </main>
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>
     </footer>
 
-    <script src="script.js?v=10.0"></script>
+    <script src="script.js?v=11.0"></script>
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            // --- 1. Size Calibration System ---
+            // --- 1. Size Calibration ---
             const calCircle = document.getElementById('cal-circle');
-            const calPlus = document.getElementById('cal-plus');
-            const calMinus = document.getElementById('cal-minus');
             let ppiScale = parseFloat(localStorage.getItem('measuring_ppi_scale')) || 1.6;
-
             function updateAllSizes() {
-                // 10 Yen = 23.5mm
                 const px = 23.5 * 3.78 * ppiScale;
-                if (calCircle) {
-                    calCircle.style.width = px + 'px';
-                    calCircle.style.height = px + 'px';
-                }
+                if (calCircle) { calCircle.style.width = px + 'px'; calCircle.style.height = px + 'px'; }
                 localStorage.setItem('measuring_ppi_scale', ppiScale);
-
-                updateRuler();
-                updatePastaCircle();
+                updateRuler(); updatePastaCircle();
             }
+            document.getElementById('cal-plus').addEventListener('click', () => { ppiScale += 0.05; updateAllSizes(); });
+            document.getElementById('cal-minus').addEventListener('click', () => { ppiScale -= 0.05; if (ppiScale < 0.5) ppiScale = 0.5; updateAllSizes(); });
 
-            calPlus.addEventListener('click', () => { ppiScale += 0.05; updateAllSizes(); });
-            calMinus.addEventListener('click', () => { ppiScale -= 0.05; if (ppiScale < 0.5) ppiScale = 0.5; updateAllSizes(); });
+            // --- 2. Coin Weight (Bidirectional) ---
+            const wInput = document.getElementById('coin-weight-input');
+            const cInput = document.getElementById('coin-count-input');
+            const resVal = document.getElementById('coin-result-val');
+            const resUnit = document.getElementById('coin-result-unit');
+            const resLabel = document.getElementById('coin-result-label');
+            let coinMode = 'w-to-c';
 
-            // --- 2. Coin Weight Calculator ---
-            const weightInput = document.getElementById('coin-weight-input');
-            const countResult = document.getElementById('coin-count-result');
-
-            function updateCoinCalc() {
-                const val = parseFloat(weightInput.value) || 0;
-                countResult.textContent = Math.round(val); // 1g = 1 coin
+            function updateCoin() {
+                if (coinMode === 'w-to-c') {
+                    const v = parseFloat(wInput.value) || 0;
+                    resVal.textContent = Math.round(v); resUnit.textContent = '枚分'; resLabel.textContent = '1円玉ならおよそ';
+                } else {
+                    const v = parseFloat(cInput.value) || 0;
+                    resVal.textContent = Math.round(v); resUnit.textContent = 'g'; resLabel.textContent = '合計の重さは';
+                }
             }
-            weightInput.addEventListener('input', updateCoinCalc);
-
-            // --- 3. Container Simulator ---
-            const contBtns = document.querySelectorAll('[data-cont]');
-            const cupView = document.getElementById('cup-visual-area');
-            const spoonView = document.getElementById('spoon-visual-area');
-
-            contBtns.forEach(btn => {
-                btn.addEventListener('click', () => {
-                    contBtns.forEach(b => b.classList.remove('active'));
-                    btn.classList.add('active');
-                    if (btn.dataset.cont === 'cup') {
-                        cupView.style.display = 'block';
-                        spoonView.style.display = 'none';
-                    } else {
-                        cupView.style.display = 'none';
-                        spoonView.style.display = 'block';
-                    }
-                });
+            wInput.addEventListener('input', updateCoin); cInput.addEventListener('input', updateCoin);
+            document.getElementById('mode-w-to-c').addEventListener('click', (e) => {
+                coinMode = 'w-to-c'; updateCoinModeTabs(e.target);
+                document.getElementById('input-group-weight').style.display = 'block'; document.getElementById('input-group-count').style.display = 'none'; updateCoin();
             });
+            document.getElementById('mode-c-to-w').addEventListener('click', (e) => {
+                coinMode = 'c-to-w'; updateCoinModeTabs(e.target);
+                document.getElementById('input-group-weight').style.display = 'none'; document.getElementById('input-group-count').style.display = 'block'; updateCoin();
+            });
+            function updateCoinModeTabs(activeBtn) {
+                document.querySelectorAll('#coin-section .mode-btn').forEach(b => b.classList.remove('active')); activeBtn.classList.add('active');
+            }
 
-            // --- 4. Digital Ruler Generation ---
+            // --- 3. Pasta (Bidirectional) ---
+            let pastaMode = 'weight-to-pasta'; // default from previous version was weight-to-pasta actually? no, let's set it.
+            const pRange = document.getElementById('pasta-range');
+            const pDisp = document.getElementById('pasta-val-display');
+            const pUnit = document.getElementById('pasta-unit-display');
+            const pCircle = document.getElementById('pasta-circle');
+            const pNote = document.getElementById('pasta-extra-note');
+
+            function updatePastaCircle() {
+                const val = parseInt(pRange.value);
+                let weightG, diameterMm;
+                if (pastaMode === 'weight-to-pasta') {
+                    weightG = val; diameterMm = 23 * Math.sqrt(weightG / 100);
+                    pDisp.textContent = weightG; pUnit.textContent = 'g';
+                } else {
+                    diameterMm = val; weightG = 100 * Math.pow(diameterMm / 23, 2);
+                    pDisp.textContent = Math.round(weightG); pUnit.textContent = 'g';
+                }
+                const px = diameterMm * 3.78 * ppiScale;
+                pCircle.style.width = px + 'px'; pCircle.style.height = px + 'px'; pCircle.textContent = Math.round(weightG) + 'g';
+                pNote.textContent = `直径: 約 ${Math.round(diameterMm)}mm (${Math.round(weightG)}g分)`;
+            }
+            pRange.addEventListener('input', updatePastaCircle);
+            document.getElementById('pasta-to-weight').addEventListener('click', (e) => {
+                pastaMode = 'pasta-to-weight'; updatePastaModeTabs(e.target);
+                pRange.min = 10; pRange.max = 50; pRange.value = 23; updatePastaCircle();
+            });
+            document.getElementById('weight-to-pasta').addEventListener('click', (e) => {
+                pastaMode = 'weight-to-pasta'; updatePastaModeTabs(e.target);
+                pRange.min = 50; pRange.max = 300; pRange.value = 100; updatePastaCircle();
+            });
+            function updatePastaModeTabs(activeBtn) {
+                document.querySelectorAll('#pasta-section .mode-btn').forEach(b => b.classList.remove('active')); activeBtn.classList.add('active');
+            }
+
+            // --- 4. Ruler ---
             const ruler = document.getElementById('main-ruler');
             function updateRuler() {
-                if (!ruler) return;
-                ruler.innerHTML = '';
-                const mmInPx = 3.78 * ppiScale;
-                const totalWidth = ruler.offsetWidth;
-                const maxCm = Math.floor(totalWidth / (10 * mmInPx));
-
-                for (let i = 0; i <= maxCm * 10; i++) {
-                    const tick = document.createElement('div');
-                    tick.className = 'ruler-tick';
-                    tick.style.left = (i * mmInPx) + 'px';
-
+                if (!ruler) return; ruler.innerHTML = '';
+                const mmPx = 3.78 * ppiScale;
+                for (let i = 0; i <= 150; i++) { // 15cm max
+                    if (i * mmPx > ruler.offsetWidth) break;
+                    const tick = document.createElement('div'); tick.className = 'ruler-tick'; tick.style.left = (i * mmPx) + 'px';
                     if (i % 10 === 0) {
-                        tick.classList.add('major');
-                        const num = document.createElement('div');
-                        num.className = 'ruler-num';
-                        num.textContent = (i / 10);
-                        num.style.left = (i * mmInPx) + 'px';
-                        ruler.appendChild(num);
-                    } else if (i % 5 === 0) {
-                        tick.classList.add('major');
-                        tick.style.height = '15px';
-                    } else {
-                        tick.classList.add('minor');
-                    }
+                        tick.classList.add('major'); const n = document.createElement('div'); n.className = 'ruler-num'; n.textContent = (i / 10); n.style.left = (i * mmPx) + 'px'; ruler.appendChild(n);
+                    } else if (i % 5 === 0) { tick.classList.add('major'); tick.style.height = '15px'; } else { tick.classList.add('minor'); }
                     ruler.appendChild(tick);
                 }
             }
 
-            // --- 5. Pasta Guide Expansion ---
-            const pastaRange = document.getElementById('pasta-range');
-            const pastaVal = document.getElementById('pasta-val-display');
-            const pastaCircle = document.getElementById('pasta-circle');
-
-            function updatePastaCircle() {
-                if (!pastaRange || !pastaCircle) return;
-                const grams = parseInt(pastaRange.value);
-                pastaVal.textContent = grams;
-
-                // Heuristic: 100g = 23mm diameter
-                // Area is proportional to weight. Weight 100 -> Diameter 23.
-                // Weight W -> Diameter D = 23 * sqrt(W / 100)
-                const diameterMm = 23 * Math.sqrt(grams / 100);
-                const px = diameterMm * 3.78 * ppiScale;
-
-                pastaCircle.style.width = px + 'px';
-                pastaCircle.style.height = px + 'px';
-                pastaCircle.textContent = grams + 'g';
-            }
-            pastaRange.addEventListener('input', updatePastaCircle);
-
-            // --- Window Resize & Initial ---
-            window.addEventListener('resize', updateRuler);
-            updateAllSizes();
-
-            // --- Simple Anchor Highlighting ---
-            window.addEventListener('scroll', () => {
-                const sections = ['coin-section', 'cup-section', 'ruler-section', 'pasta-section', 'faq-section'];
-                let current = '';
-                sections.forEach(id => {
-                    const el = document.getElementById(id);
-                    if (el && window.scrollY >= el.offsetTop - 100) {
-                        current = id;
-                    }
-                });
-                document.querySelectorAll('.anchor-item').forEach(a => {
-                    a.classList.remove('active');
-                    if (a.getAttribute('href') === '#' + current) a.classList.add('active');
+            // --- 5. Container ---
+            const contBtns = document.querySelectorAll('[data-cont]');
+            contBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    contBtns.forEach(b => b.classList.remove('active')); btn.classList.add('active');
+                    document.getElementById('cup-visual-area').style.display = btn.dataset.cont === 'cup' ? 'block' : 'none';
+                    document.getElementById('spoon-visual-area').style.display = btn.dataset.cont === 'spoon' ? 'block' : 'none';
                 });
             });
+
+            updateAllSizes();
         });
     </script>
 </body>

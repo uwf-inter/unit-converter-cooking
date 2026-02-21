@@ -236,7 +236,8 @@ header h1 {
 .container {
     flex: 1;
     padding: 1rem;
-    max-width: 600px;
+    max-width: 700px;
+    /* Increased from 600px to use more site width */
     margin: 0 auto;
     width: 100%;
 }
@@ -782,12 +783,13 @@ footer {
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 1.5rem;
-    /* More space */
+    gap: 1rem;
+    /* Slightly reduced gap to allow wider pills */
     margin-bottom: 1.5rem;
     background-color: transparent;
-    /* Clean look */
     padding: 0;
+    width: 100%;
+    /* Ensure it spans the width */
 }
 
 .input-wrapper {
@@ -810,9 +812,14 @@ footer {
     border: 2px solid #ddd;
     border-radius: 30px;
     padding: 2px;
-    /* Reduced padding to fit buttons */
     box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.05);
     transition: all 0.3s ease;
+    min-width: 120px;
+    /* Ensure a minimum width to prevent clipping */
+    flex: 1;
+    /* Allow equal growth */
+    max-width: 160px;
+    /* But don't let it get too huge */
 }
 
 .input-pill:focus-within {
@@ -824,14 +831,20 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
+    flex: 1;
+    /* Take up all available space between buttons */
+    min-width: 0;
+    /* Allow shrinking if needed, though buttons are fixed */
 }
 
 .input-pill input {
     width: 100%;
+    /* Take full width of parent container */
+    min-width: 30px;
     padding: 0.5rem 0;
     font-size: 1.3rem;
-    text-align: right;
-    /* Right align number to be close to unit */
+    text-align: center;
+    /* Changed to center for better balance in wider pill */
     border: none;
     background: transparent;
     color: #444;
@@ -1569,7 +1582,7 @@ footer {
     border-radius: 4px;
     position: relative;
     margin: 2rem 0;
-    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .ruler-tick {
@@ -1579,8 +1592,14 @@ footer {
     background: #333;
 }
 
-.ruler-tick.major { height: 20px; }
-.ruler-tick.minor { height: 10px; width: 1px; }
+.ruler-tick.major {
+    height: 20px;
+}
+
+.ruler-tick.minor {
+    height: 10px;
+    width: 1px;
+}
 
 .ruler-num {
     position: absolute;
@@ -1622,7 +1641,7 @@ footer {
     background: var(--primary-color);
     border-radius: 50%;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
 }
 
 /* FAQ Section */
