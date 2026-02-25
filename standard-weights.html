@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【逆引き】野菜・肉の「1個・1枚」は何グラム？標準重量・カロリー早見表｜お料理単位くん</title>
+    <meta name="description" content="玉ねぎ1個、大根1/4本、鶏胸肉1枚は何グラム？レシピの「1個」をgに換算。野菜や肉の標準的な重さと、はかりがない時の目安を一覧で紹介します。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=15.0">
+    <style>
+        .standard-weight-card {
+            background: #f1f8e9;
+            border: 3px solid #689f38;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .ingredient-selector-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 10px;
+            margin-bottom: 1.5rem;
+        }
+
+        .ing-btn {
+            background: white;
+            border: 2px solid #aecbfa;
+            border-radius: 12px;
+            padding: 10px 5px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.2s;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .ing-btn.active {
+            border-color: #689f38;
+            background: #dcedc8;
+        }
+
+        .ing-btn .emoji {
+            font-size: 1.5rem;
+        }
+
+        .ing-btn .name {
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .calc-area {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media (min-width: 600px) {
+            .calc-area {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .calc-box {
+            background: white;
+            border-radius: 16px;
+            padding: 1rem;
+            border: 1px solid #ddd;
+        }
+
+        .calc-box label {
+            display: block;
+            font-size: 0.8rem;
+            font-weight: 900;
+            color: #555;
+            margin-bottom: 5px;
+        }
+
+        .input-wrap {
+            display: flex;
+            align-items: center;
+            border-bottom: 2px solid #689f38;
+        }
+
+        .input-wrap input {
+            border: none;
+            width: 100%;
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            text-align: right;
+            outline: none;
+            padding: 5px;
+        }
+
+        .input-wrap .unit {
+            margin-left: 10px;
+            font-weight: 900;
+            color: #888;
+        }
+
+        .info-panel {
+            margin-top: 1.5rem;
+            padding: 1rem;
+            background: #fff;
+            border-radius: 16px;
+            border-left: 5px solid #689f38;
+        }
+
+        .info-title {
+            font-weight: bold;
+            color: #33691e;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .info-desc {
+            font-size: 0.85rem;
+            line-height: 1.5;
+            color: #444;
+        }
+
+        .kcal-badge {
+            display: inline-block;
+            background: #ff7043;
+            color: white;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 野菜・肉の「1個」は何g？ガイド 〜</p>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 単位変換</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス</a>
+        <a href="standard-weights.html" class="category-tab active">🥦 標準重量</a>
+        <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
+        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
+        <a href="pasta-calc.html" class="category-tab">🍝 パスタ</a>
+        <a href="rice-calc.html" class="category-tab">🍚 お米</a>
+    </div>
+
+    <main class="container">
+        <section class="standard-weight-card">
+            <span
+                style="font-size:0.85rem; font-weight:900; color:#33691e; display:block; margin-bottom:10px;">食材を選んで計算</span>
+            <div class="ingredient-selector-grid" id="ing-grid">
+                <!-- Ingredients injected by JS -->
+            </div>
+
+            <div class="calc-area">
+                <div class="calc-box">
+                    <label>個数・枚数</label>
+                    <div class="input-wrap">
+                        <input type="number" id="input-count" value="1" step="0.1" inputmode="decimal">
+                        <span class="unit" id="display-unit">個</span>
+                    </div>
+                </div>
+                <div class="calc-box">
+                    <label>合計重量（目安）</label>
+                    <div class="input-wrap">
+                        <input type="number" id="input-weight" value="200" inputmode="decimal">
+                        <span class="unit">g</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="info-panel">
+                <div class="info-title">💡 サイズの目安</div>
+                <div class="info-desc" id="size-guide">玉ねぎ中サイズは、スマホを横に並べた時より一回り大きいくらいのサイズ感です。</div>
+                <div class="kcal-badge">推定カロリー: <span id="res-kcal">74</span> kcal</div>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content" style="margin-top: 3rem;">
+            <h3 class="section-title">野菜・肉の「1個」重量Q&A</h3>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <span class="faq-q">Q. 玉ねぎ中1個は何グラム？</span>
+                    <p class="faq-a">A. 一般的な中サイズで <strong>約200g</strong> です。小サイズなら150g、大サイズなら300g程度が目安となります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. 鶏胸肉1枚の重さは？</span>
+                    <p class="faq-a">A. スーパーで売られている標準的な1枚で <strong>約250g〜300g</strong> です。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. 大根1/4本は何グラム？</span>
+                    <p class="faq-a">A. 大根1本が約1kgなので、1/4本で <strong>約250g</strong> になります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. キャベツ1玉はどのくらいの重さ？</span>
+                    <p class="faq-a">A. 葉の詰まり具合にもよりますが、1玉で <strong>約1.2kg</strong> ほどあります。</p>
+                </div>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 2rem;">主要食材の重量・カロリー早見表</h3>
+            <div class="table-responsive">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>食材</th>
+                            <th>単位</th>
+                            <th>標準重量(g)</th>
+                            <th>カロリー(kcal)</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>玉ねぎ(中)</td>
+                            <td>1個</td>
+                            <td>200g</td>
+                            <td>74kcal</td>
+                        </tr>
+                        <tr>
+                            <td>じゃがいも(中)</td>
+                            <td>1個</td>
+                            <td>150g</td>
+                            <td>114kcal</td>
+                        </tr>
+                        <tr>
+                            <td>大根</td>
+                            <td>1/4本</td>
+                            <td>250g</td>
+                            <td>45kcal</td>
+                        </tr>
+                        <tr>
+                            <td>人参(中)</td>
+                            <td>1本</td>
+                            <td>150g</td>
+                            <td>54kcal</td>
+                        </tr>
+                        <tr>
+                            <td>キャベツ</td>
+                            <td>1/4玉</td>
+                            <td>300g</td>
+                            <td>69kcal</td>
+                        </tr>
+                        <tr>
+                            <td>ピーマン</td>
+                            <td>1個</td>
+                            <td>30g</td>
+                            <td>6kcal</td>
+                        </tr>
+                        <tr>
+                            <td>鶏もも肉</td>
+                            <td>1枚</td>
+                            <td>250g</td>
+                            <td>500kcal</td>
+                        </tr>
+                        <tr>
+                            <td>鶏胸肉</td>
+                            <td>1枚</td>
+                            <td>280g</td>
+                            <td>300kcal</td>
+                        </tr>
+                        <tr>
+                            <td>豚薄切り肉</td>
+                            <td>1枚</td>
+                            <td>20g</td>
+                            <td>45kcal</td>
+                        </tr>
+                        <tr>
+                            <td>切り餅</td>
+                            <td>1個</td>
+                            <td>50g</td>
+                            <td>118kcal</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <p class="seo-note">※重量は可食部ではなく「まるごと」の状態を優先して記載しています。料理の際の目安としてお使いください。</p>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script>
+        const INGREDIENTS = {
+            'onion': { name: '玉ねぎ', emoji: '🧅', weight: 200, unit: '個', kcalPer100: 37, guide: '中サイズはスマホを横に並べた時より一回り大きいくらい。大サイズはソフトボールくらい。' },
+            'potato': { name: 'じゃが', emoji: '🥔', weight: 150, unit: '個', kcalPer100: 76, guide: '中サイズはテニスボール一回り小さいくらい。' },
+            'radish': { name: '大根', emoji: '🥗', weight: 250, unit: '1/4本', kcalPer100: 18, guide: '1/4本は、だいたい500mlペットボトルの下半分くらいの長さです。' },
+            'carrot': { name: '人参', emoji: '🥕', weight: 150, unit: '本', kcalPer100: 36, guide: '中サイズは、一般的なスマホ（約15cm）と同じくらいの長さです。' },
+            'cabbage': { name: 'キャベツ', emoji: '🥬', weight: 300, unit: '1/4玉', kcalPer100: 23, guide: '1/4玉でもずっしり重く、大きめのメロン1/4くらいあります。' },
+            'pepper': { name: 'ピーマン', emoji: '🫑', weight: 30, unit: '個', kcalPer100: 20, guide: '1個はゴルフボールより一回り大きいくらい。非常に軽いです。' },
+            'chicken_momo': { name: '鶏もも', emoji: '🍗', weight: 250, unit: '枚', kcalPer100: 200, guide: '1枚はだいたい成人の手のひら（指含まず）を広げたサイズです。' },
+            'chicken_mune': { name: '鶏胸', emoji: '🍖', weight: 280, unit: '枚', kcalPer100: 108, guide: '1枚は成人男性の手のひらよりやや大きく、厚みがあります。' },
+            'slice_meat': { name: '薄切り肉', emoji: '🥓', weight: 20, unit: '枚', kcalPer100: 220, guide: '1枚はハガキの半分くらいの面積のイメージです。' },
+            'mochi': { name: '切り餅', emoji: '🎑', weight: 50, unit: '個', kcalPer100: 235, guide: '標準的な個包装1個。10円玉を4枚並べた正方形に近いサイズ。' }
+        };
+
+        let currentKey = 'onion';
+        const grid = document.getElementById('ing-grid');
+        const countInt = document.getElementById('input-count');
+        const weightInt = document.getElementById('input-weight');
+        const displayUnit = document.getElementById('display-unit');
+        const resKcal = document.getElementById('res-kcal');
+        const sizeGuide = document.getElementById('size-guide');
+
+        // Render Grid
+        Object.keys(INGREDIENTS).forEach(key => {
+            const data = INGREDIENTS[key];
+            const btn = document.createElement('div');
+            btn.className = 'ing-btn' + (key === currentKey ? ' active' : '');
+            btn.innerHTML = `<span class="emoji">${data.emoji}</span><span class="name">${data.name}</span>`;
+            btn.onclick = () => {
+                document.querySelectorAll('.ing-btn').forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+                currentKey = key;
+                updateFromKey();
+            };
+            grid.appendChild(btn);
+        });
+
+        function updateFromKey() {
+            const data = INGREDIENTS[currentKey];
+            displayUnit.textContent = data.unit;
+            countInt.value = 1;
+            updateFromCount();
+            sizeGuide.textContent = data.guide;
+        }
+
+        function updateFromCount() {
+            const data = INGREDIENTS[currentKey];
+            const count = parseFloat(countInt.value) || 0;
+            const w = Math.round(count * data.weight);
+            weightInt.value = w;
+            updateKcal(w);
+        }
+
+        function updateFromWeight() {
+            const data = INGREDIENTS[currentKey];
+            const weight = parseFloat(weightInt.value) || 0;
+            countInt.value = (weight / data.weight).toFixed(1).replace(/\.0$/, '');
+            updateKcal(weight);
+        }
+
+        function updateKcal(weight) {
+            const data = INGREDIENTS[currentKey];
+            const kcal = Math.round((weight * data.kcalPer100) / 100);
+            resKcal.textContent = kcal;
+        }
+
+        countInt.oninput = updateFromCount;
+        weightInt.oninput = updateFromWeight;
+
+        // Init
+        updateFromKey();
+    </script>
+</body>
+
+</html>
