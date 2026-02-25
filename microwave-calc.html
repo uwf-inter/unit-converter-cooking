@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【逆引き】電子レンジのワット数換算｜500W・600W・1000Wの加熱時間を一発計算｜お料理単位くん</title>
+    <meta name="description"
+        content="「600Wで3分は、500Wだと何分？」電子レンジのワット数（W）の違いによる加熱時間を相互換算。コンビニ弁当やレシピの時間を、自宅のレンジに合わせて自動計算します。便利な時間早見表付き。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=14.0">
+    <style>
+        .microwave-card {
+            background: #f3e5f5;
+            border: 3px solid #7b1fa2;
+            border-radius: 20px;
+            padding: 1.5rem;
+        }
+
+        .watt-selector {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .watt-chip {
+            flex: 1;
+            min-width: 60px;
+            background: white;
+            border: 2px solid #ce93d8;
+            border-radius: 30px;
+            padding: 8px 5px;
+            text-align: center;
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #7b1fa2;
+            cursor: pointer;
+            transition: 0.2s;
+        }
+
+        .watt-chip.active {
+            background: #7b1fa2;
+            color: white;
+            border-color: #7b1fa2;
+        }
+
+        .time-input-group {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: white;
+            border: 2px solid #ddd;
+            border-radius: 16px;
+            padding: 10px 15px;
+            margin-bottom: 1.5rem;
+        }
+
+        .time-input-group input {
+            border: none;
+            width: 60px;
+            font-size: 1.8rem;
+            font-weight: 900;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            text-align: right;
+            outline: none;
+        }
+
+        .time-input-group .unit {
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #666;
+        }
+
+        .micro-result-area {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            border: 2px solid #7b1fa2;
+            margin-top: 1rem;
+        }
+
+        .micro-result-label {
+            font-size: 0.85rem;
+            font-weight: bold;
+            color: #7b1fa2;
+            margin-bottom: 5px;
+        }
+
+        .micro-result-time {
+            font-size: 2.8rem;
+            font-weight: 900;
+            color: #4a148c;
+            font-family: 'Zen Maru Gothic', sans-serif;
+            line-height: 1;
+        }
+
+        .micro-result-time small {
+            font-size: 1.2rem;
+            margin: 0 5px;
+            color: #7b1fa2;
+        }
+
+        .sub-watt-label {
+            font-size: 0.85rem;
+            font-weight: 900;
+            color: #4a148c;
+            margin-bottom: 8px;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1>👨‍🍳 お料理単位くん</h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 電子レンジ・ワット数換算 〜</p>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 単位変換</a>
+        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス</a>
+        <a href="standard-weights.html" class="category-tab">🥦 標準重量</a>
+        <a href="microwave-calc.html" class="category-tab active">⚡ レンジ換算</a>
+        <a href="pasta-calc.html" class="category-tab">🍝 パスタ</a>
+        <a href="rice-calc.html" class="category-tab">🍚 お米</a>
+        <a href="tube-spices.html" class="category-tab">🧄 チューブ</a>
+        <a href="otama.html" class="category-tab">🥣 おたま</a>
+    </div>
+
+    <main class="container">
+
+        <section class="microwave-card">
+            <span class="sub-watt-label">📋 レシピ・商品の指定</span>
+            <div class="watt-selector" id="source-watts">
+                <div class="watt-chip" data-watt="500">500W</div>
+                <div class="watt-chip active" data-watt="600">600W</div>
+                <div class="watt-chip" data-watt="700">700W</div>
+                <div class="watt-chip" data-watt="800">800W</div>
+                <div class="watt-chip" data-watt="1000">1000W</div>
+            </div>
+
+            <div class="time-input-group">
+                <input type="number" id="input-min" value="1" min="0" max="60" inputmode="numeric">
+                <span class="unit">分</span>
+                <input type="number" id="input-sec" value="00" min="0" max="59" inputmode="numeric">
+                <span class="unit">秒</span>
+            </div>
+
+            <span class="sub-watt-label">🏠 自宅のワット数</span>
+            <div class="watt-selector" id="target-watts">
+                <div class="watt-chip active" data-watt="500">500W</div>
+                <div class="watt-chip" data-watt="600">600W</div>
+                <div class="watt-chip" data-watt="700">700W</div>
+                <div class="watt-chip" data-watt="800">800W</div>
+                <div class="watt-chip" data-watt="1000">1000W</div>
+            </div>
+
+            <div class="micro-result-area">
+                <div class="micro-result-label">自宅レンジでの加熱時間</div>
+                <div class="micro-result-time">
+                    <span id="res-min">1</span><small>分</small><span id="res-sec">12</span><small>秒</small>
+                </div>
+            </div>
+        </section>
+
+        <!-- SEO Content -->
+        <section class="seo-content" style="margin-top: 3rem;">
+            <h3 class="section-title">電子レンジ換算Q&A</h3>
+            <div class="faq-section">
+                <div class="faq-item">
+                    <span class="faq-q">Q. 600Wで3分は、500Wなら何分？</span>
+                    <p class="faq-a">A. <strong>3分36秒</strong> です。計算式は (600W × 180秒) ÷ 500W = 216秒 となります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. 500Wで5分は、600Wなら何分？</span>
+                    <p class="faq-a">A. <strong>4分10秒</strong> です。ワット数が上がると加熱時間は短くなります。</p>
+                </div>
+                <div class="faq-item">
+                    <span class="faq-q">Q. 700Wの時間はどう計算する？</span>
+                    <p class="faq-a">A. 元のワット数に時間をかけ、700で割ることで算出できます。当サイトのシミュレーターならチップをタップするだけで一瞬で計算可能です。</p>
+                </div>
+            </div>
+
+            <h3 class="section-title" style="margin-top: 2rem;">加熱時間早見表 (目安)</h3>
+            <div class="table-responsive">
+                <table class="ref-table">
+                    <thead>
+                        <tr>
+                            <th>600W時</th>
+                            <th>500W換算</th>
+                            <th>700W換算</th>
+                            <th>1000W換算</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1分</td>
+                            <td>1分12秒</td>
+                            <td>51秒</td>
+                            <td>36秒</td>
+                        </tr>
+                        <tr>
+                            <td>2分</td>
+                            <td>2分24秒</td>
+                            <td>1分43秒</td>
+                            <td>1分12秒</td>
+                        </tr>
+                        <tr>
+                            <td><strong>3分</strong></td>
+                            <td><strong>3分36秒</strong></td>
+                            <td><strong>2分34秒</strong></td>
+                            <td><strong>1分48秒</strong></td>
+                        </tr>
+                        <tr>
+                            <td>5分</td>
+                            <td>6分</td>
+                            <td>4分17秒</td>
+                            <td>3分</td>
+                        </tr>
+                        <tr>
+                            <td>10分</td>
+                            <td>12分</td>
+                            <td>8分34秒</td>
+                            <td>6分</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputMin = document.getElementById('input-min');
+            const inputSec = document.getElementById('input-sec');
+            const resMin = document.getElementById('res-min');
+            const resSec = document.getElementById('res-sec');
+
+            let sourceWatt = 600;
+            let targetWatt = 500;
+
+            function updateChips(containerId, currentWatt) {
+                const chips = document.querySelectorAll(`#${containerId} .watt-chip`);
+                chips.forEach(chip => {
+                    if (parseInt(chip.dataset.watt) === currentWatt) {
+                        chip.classList.add('active');
+                    } else {
+                        chip.classList.remove('active');
+                    }
+                });
+            }
+
+            function calculate() {
+                const min = parseInt(inputMin.value) || 0;
+                const sec = parseInt(inputSec.value) || 0;
+                const totalSec = (min * 60) + sec;
+
+                if (totalSec <= 0) {
+                    resMin.textContent = '0';
+                    resSec.textContent = '00';
+                    return;
+                }
+
+                // Formula: (Source W * Source Sec) / Target W = Result Sec
+                const resultTotalSec = Math.round((sourceWatt * totalSec) / targetWatt);
+
+                const m = Math.floor(resultTotalSec / 60);
+                const s = resultTotalSec % 60;
+
+                resMin.textContent = m;
+                resSec.textContent = s.toString().padStart(2, '0');
+            }
+
+            // Event Listeners for Chips
+            document.querySelectorAll('#source-watts .watt-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    sourceWatt = parseInt(chip.dataset.watt);
+                    updateChips('source-watts', sourceWatt);
+                    calculate();
+                });
+            });
+
+            document.querySelectorAll('#target-watts .watt-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    targetWatt = parseInt(chip.dataset.watt);
+                    updateChips('target-watts', targetWatt);
+                    calculate();
+                });
+            });
+
+            // Event Listeners for Inputs
+            [inputMin, inputSec].forEach(input => {
+                input.addEventListener('input', calculate);
+            });
+
+            // Initial calc
+            calculate();
+        });
+    </script>
+</body>
+
+</html>

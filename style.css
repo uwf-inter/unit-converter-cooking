@@ -53,16 +53,25 @@ header h1 {
     position: sticky;
     top: 0;
     z-index: 1001;
+    overflow-x: auto;
+    white-space: nowrap;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    /* Firefox */
+}
+
+.category-tabs::-webkit-scrollbar {
+    display: none;
+    /* Safari/Chrome */
 }
 
 .category-tab {
-    flex: 1;
+    flex: 0 0 auto;
     text-align: center;
-    padding: 12px 2px;
+    padding: 12px 15px;
     text-decoration: none;
     color: #8d6e63;
-    font-size: 0.82rem;
-    /* Adjusted for 3 tabs */
+    font-size: 0.85rem;
     font-weight: 700;
     border-bottom: 3px solid transparent;
     transition: all 0.3s ease;
@@ -70,7 +79,6 @@ header h1 {
     align-items: center;
     justify-content: center;
     min-height: 48px;
-    /* Touch target accessibility */
 }
 
 .category-tab.active {
@@ -86,17 +94,24 @@ header h1 {
 /* Original Navigation (Secondary) */
 .main-nav {
     background-color: #fff8eb;
-    padding: 0.6rem 0.5rem;
+    padding: 0.8rem 0.5rem;
     display: flex;
     justify-content: flex-start;
-    gap: 8px;
+    gap: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
     overflow-x: auto;
+    white-space: nowrap;
     -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
     border-bottom: 1px solid #ffe0b2;
 }
 
+.main-nav::-webkit-scrollbar {
+    display: none;
+}
+
 .main-nav a {
+    flex: 0 0 auto;
     text-decoration: none;
     color: #8d6e63;
     font-size: 0.95rem;
