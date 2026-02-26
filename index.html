@@ -183,20 +183,20 @@
     </header>
 
     <div class="category-tabs">
-        <a href="index.html" class="category-tab active">🍲 単位変換</a>
-        <a href="baking-calc.html" class="category-tab">🍰 型換算</a>
-        <a href="microwave-calc.html" class="category-tab">⚡ 電子レンジ</a>
-        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス</a>
-        <a href="standard-weights.html" class="category-tab">🥦 標準重量</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用計量</a>
+        <a href="index.html" class="category-tab active">🍲 単位・g換算</a>
+        <a href="baking-calc.html" class="category-tab">🍰 ケーキ型換算</a>
+        <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
     </div>
 
     <nav class="main-nav">
         <a href="index.html" class="active">トップ</a>
-        <a href="otama.html">おたま</a>
-        <a href="tube-spices.html">チューブ換算</a>
-        <a href="pasta-calc.html">パスタ</a>
-        <a href="rice-calc.html">お米</a>
+        <a href="otama.html">おたま容量</a>
+        <a href="tube-spices.html">チューブ調味料</a>
+        <a href="pasta-calc.html">パスタ計算</a>
+        <a href="rice-calc.html">お米換算</a>
         <a href="microwave-calc.html">レンジ換算</a>
         <a href="fitness-calc.html">フィットネス</a>
         <a href="standard-weights.html">標準重量</a>
@@ -273,7 +273,7 @@
         </section>
 
         <!-- Recipe Scaler Section -->
-        <section class="recipe-scaler-card">
+        <section class="recipe-scaler-card" id="recipe-scaler">
             <h2>👨‍🍳 レシピの人数分計算</h2>
 
             <div class="scaler-inputs">
@@ -368,38 +368,102 @@
             <p class="seo-note">※「大さじ1＝15ml」「1カップ＝200ml」として計算しています。</p>
         </section>
 
-        <!-- Substitute Measuring Promo Banner -->
-        <a href="substitute-measuring.html" class="promo-banner">
-            <div class="promo-icon">⚖️</div>
-            <div class="promo-content">
-                <span class="promo-main-copy">はかり・計量スプーンがない時は？</span>
-                <span class="promo-sub-copy">1円玉やペットボトルキャップで量れる<br>「極限の代用計量」も使えます</span>
-                <span class="promo-btn-text">代用ツールを使ってみる →</span>
+        <!-- Hub Section: Category 1 -->
+        <section class="hub-section">
+            <h2 class="section-title">カテゴリーからツールを探す</h2>
+            <div class="hub-category-title">🚨 【SOS】はかり・スプーンがない！</div>
+            <div class="hub-grid">
+                <a href="substitute-measuring.html" class="hub-card">
+                    <div class="icon">⚖️</div>
+                    <div class="content">
+                        <span class="title">パスタ・硬貨での代用計量｜はかりがない時の裏ワザ</span>
+                        <span class="desc">はかり不要！身近なもので重さやパスタの束を正確に判定。</span>
+                    </div>
+                </a>
+                <a href="otama.html" class="hub-card">
+                    <div class="icon">🥣</div>
+                    <div class="content">
+                        <span class="title">おたま一杯の容量計算｜味噌汁の分量・ml換算</span>
+                        <span class="desc">おたま一杯は何ml？レシピの分量をおたまで量るなら何杯か。</span>
+                    </div>
+                </a>
+                <a href="tube-spices.html" class="hub-card">
+                    <div class="icon">🧄</div>
+                    <div class="content">
+                        <span class="title">チューブ調味料のg換算｜にんにく1片・生姜1cmをグラムに</span>
+                        <span class="desc">にんにく・生姜チューブの「◯cm」を「g」に即座に変換。</span>
+                    </div>
+                </a>
             </div>
-            <div class="promo-icon"
-                style="opacity: 0.2; position: absolute; right: -10px; bottom: -10px; font-size: 4rem; transform: rotate(15deg);">
-                ⛺</div>
-        </a>
+        </section>
 
-        <section class="dictionary-links">
-            <h2 class="section-title">🥣 食材別！換算早見表まとめ（図鑑）</h2>
+        <!-- Hub Section: Category 2 -->
+        <section class="hub-section">
+            <div class="hub-category-title">⏱️ 【時短・効率】毎日の自炊をスムーズに</div>
+            <div class="hub-grid">
+                <a href="microwave-calc.html" class="hub-card">
+                    <div class="icon">⚡</div>
+                    <div class="content">
+                        <span class="title">電子レンジのワット数換算｜500Wを600Wで加熱する時間は？</span>
+                        <span class="desc">500Wを600Wで加熱するなら何秒？失敗しない加熱時間計算。</span>
+                    </div>
+                </a>
+                <a href="baking-calc.html" class="hub-card">
+                    <div class="icon">🍰</div>
+                    <div class="content">
+                        <span class="title">ケーキ型・サイズ換算｜15cmを18cmで焼く時の分量倍率</span>
+                        <span class="desc">15cmの型を18cmで焼く時は？お菓子作りの分量比を計算。</span>
+                    </div>
+                </a>
+                <a href="#recipe-scaler" class="hub-card">
+                    <div class="icon">👨‍🍳</div>
+                    <div class="content">
+                        <span class="title">レシピの人数分・分量一括計算</span>
+                        <span class="desc">4人分のレシピを、2人分や3人分に全材料まとめて一瞬で変換。</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Hub Section: Category 3 -->
+        <section class="hub-section">
+            <div class="hub-category-title">🏃 【体調管理】ダイエット・筋トレの味方</div>
+            <div class="hub-grid">
+                <a href="fitness-calc.html" class="hub-card">
+                    <div class="icon">💪</div>
+                    <div class="content">
+                        <span class="title">オートミール・プロテイン計量｜30gは大さじ何杯？</span>
+                        <span class="desc">30gは大さじ何杯？はかりなしで粉末食材を正確に記録。</span>
+                    </div>
+                </a>
+                <a href="rice-calc.html" class="hub-card">
+                    <div class="icon">🍚</div>
+                    <div class="content">
+                        <span class="title">お米の合数・g・炊き上がり換算｜1合の重さと水の量</span>
+                        <span class="desc">0.5合は何グラム？炊いた後の重さと糖質を一発チェック。</span>
+                    </div>
+                </a>
+                <a href="pasta-calc.html" class="hub-card">
+                    <div class="icon">🍝</div>
+                    <div class="content">
+                        <span class="title">パスタの茹で上がり・カロリー計算｜乾麺100gは何グラムになる？</span>
+                        <span class="desc">乾麺100gは茹でると何g？ダイエットに役立つ詳細計算。</span>
+                    </div>
+                </a>
+                <a href="standard-weights.html" class="hub-card">
+                    <div class="icon">🥦</div>
+                    <div class="content">
+                        <span class="title">野菜・肉の標準重量ガイド｜玉ねぎ1個は何グラム？</span>
+                        <span class="desc">「玉ねぎ1個」は何グラム？食材の標準的な重さの目安一覧。</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Hub Section: Category 4 -->
+        <section class="hub-section">
+            <div class="hub-category-title">🥣 【図鑑】食材別！換算早見表まとめ</div>
             <div class="ingredient-grid">
-                <a href="otama.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">おたま</span>
-                </a>
-                <a href="pasta-calc.html" class="ingredient-card">
-                    <span class="emoji">🍝</span>
-                    <span class="name">パスタ</span>
-                </a>
-                <a href="rice-calc.html" class="ingredient-card">
-                    <span class="emoji">🍚</span>
-                    <span class="name">お米</span>
-                </a>
-                <a href="substitute-measuring.html" class="ingredient-card">
-                    <span class="emoji">⚖️</span>
-                    <span class="name">代用計量</span>
-                </a>
                 <a href="butter.html" class="ingredient-card">
                     <span class="emoji">🧈</span>
                     <span class="name">バター</span>
@@ -415,10 +479,6 @@
                 <a href="sugar.html" class="ingredient-card">
                     <span class="emoji">🧂</span>
                     <span class="name">砂糖</span>
-                </a>
-                <a href="tube-spices.html" class="ingredient-card featured-link">
-                    <span class="emoji">🧄</span>
-                    <span class="name">にんにくチューブ</span>
                 </a>
                 <a href="salt.html" class="ingredient-card">
                     <span class="emoji">🧂</span>

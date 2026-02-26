@@ -164,19 +164,26 @@
 
 <body>
     <header>
-        <h1><a href="index.html">👨‍🍳 お料理単位くん</a></h1>
+        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
         <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 野菜・肉の「1個」は何g？ガイド 〜</p>
     </header>
 
     <div class="category-tabs">
-        <a href="index.html" class="category-tab">🍲 単位変換</a>
-        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス</a>
-        <a href="standard-weights.html" class="category-tab active">🥦 標準重量</a>
+        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="standard-weights.html" class="category-tab active">🥦 野菜の重量</a>
         <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
-        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
-        <a href="pasta-calc.html" class="category-tab">🍝 パスタ</a>
-        <a href="rice-calc.html" class="category-tab">🍚 お米</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
     </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">トップ</a>
+        <span>&gt;</span>
+        <a href="index.html#dictionary-section">食材図鑑・目安</a>
+        <span>&gt;</span>
+        標準重量・カロリー早見表
+    </nav>
 
     <main class="container">
         <section class="standard-weight-card">
@@ -207,6 +214,9 @@
                 <div class="info-title">💡 サイズの目安</div>
                 <div class="info-desc" id="size-guide">玉ねぎ中サイズは、スマホを横に並べた時より一回り大きいくらいのサイズ感です。</div>
                 <div class="kcal-badge">推定カロリー: <span id="res-kcal">74</span> kcal</div>
+                <div style="margin-top: 15px;">
+                    <a href="#ing-grid" class="cta-calc-btn">🔢 計算機を使ってみる</a>
+                </div>
             </div>
         </section>
 
@@ -309,7 +319,29 @@
             </div>
             <p class="seo-note">※重量は可食部ではなく「まるごと」の状態を優先して記載しています。料理の際の目安としてお使いください。</p>
         </section>
+
+        <!-- Recommended Tools -->
+        <section class="recommend-section">
+            <h2 class="recommend-header">🛒 あわせてチェック！食材図鑑ツール</h2>
+            <div class="recommend-grid">
+                <a href="fitness-calc.html" class="recommend-item">
+                    <span class="icon">🥣</span>
+                    <span class="name">オートミール計量</span>
+                </a>
+                <a href="rice-calc.html" class="recommend-item">
+                    <span class="icon">🍚</span>
+                    <span class="name">お米換算</span>
+                </a>
+                <a href="index.html" class="recommend-item">
+                    <span class="icon">🏠</span>
+                    <span class="name">トップ画面</span>
+                </a>
+            </div>
+        </section>
     </main>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn" title="トップページに戻る">🏠</a>
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>

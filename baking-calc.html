@@ -38,14 +38,23 @@
 
 <body>
     <header>
-        <h1>👨‍🍳 お料理単位くん</h1>
+        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
     </header>
 
     <div class="category-tabs">
-        <a href="index.html" class="category-tab">🍲 単位変換</a>
-        <a href="baking-calc.html" class="category-tab active">🍰 型換算</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用計量</a>
+        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
+        <a href="baking-calc.html" class="category-tab active">🍰 ケーキ型換算</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
     </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">トップ</a>
+        <span>&gt;</span>
+        <a href="index.html#efficiency-section">時短・効率アップ</a>
+        <span>&gt;</span>
+        ケーキ型・サイズ換算
+    </nav>
 
     <main class="container">
         <section class="seo-content">
@@ -171,7 +180,29 @@
                 <li><strong>角型</strong>: 縦×横の面積を比較します。</li>
             </ul>
         </section>
+
+        <!-- Recommended Tools -->
+        <section class="recommend-section">
+            <h2 class="recommend-header">🛒 あわせてチェック！時短・効率アップ</h2>
+            <div class="recommend-grid">
+                <a href="microwave-calc.html" class="recommend-item">
+                    <span class="icon">⚡</span>
+                    <span class="name">レンジ換算</span>
+                </a>
+                <a href="index.html#recipe-scaler" class="recommend-item">
+                    <span class="icon">👨‍🍳</span>
+                    <span class="name">分量計算</span>
+                </a>
+                <a href="index.html" class="recommend-item">
+                    <span class="icon">🏠</span>
+                    <span class="name">トップ画面</span>
+                </a>
+            </div>
+        </section>
     </main>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn" title="トップページに戻る">🏠</a>
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>
