@@ -152,21 +152,27 @@
 
 <body>
     <header>
-        <h1><a href="index.html">👨‍🍳 お料理単位くん</a></h1>
+        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
         <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 お米専用・相互換算ツール 〜</p>
     </header>
 
     <div class="category-tabs">
-        <a href="index.html" class="category-tab">🍲 単位変換</a>
-        <a href="substitute-measuring.html" class="category-tab">🔧 代用計量</a>
-        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス</a>
-        <a href="standard-weights.html" class="category-tab">🥦 標準重量</a>
+        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
         <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
-        <a href="pasta-calc.html" class="category-tab">🍝 パスタ</a>
-        <a href="rice-calc.html" class="category-tab active">🍚 お米</a>
-        <a href="tube-spices.html" class="category-tab">🧄 チューブ</a>
-        <a href="otama.html" class="category-tab">🥣 おたま</a>
+        <a href="rice-calc.html" class="category-tab active">🍚 お米換算</a>
     </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">トップ</a>
+        <span>&gt;</span>
+        <a href="index.html#fitness-section">体調管理・ダイエット</a>
+        <span>&gt;</span>
+        お米の炊き上がり換算
+    </nav>
 
     <main class="container">
         <section class="seo-content">
@@ -236,6 +242,7 @@
                 <span style="font-weight: bold; display: block; color: #5d4037;">Q. 1合の水の量はどのくらい？</span>
                 <span style="color: #333;">A. <strong>約 200〜220ml</strong>（お米の体積の1.2倍）が標準的な水の量です。</span>
             </div>
+            <a href="#rice-cup" class="cta-calc-btn">🔢 計算機を使ってみる</a>
         </section>
 
         <section class="seo-content" style="margin-top: 2rem;">
@@ -293,24 +300,28 @@
             <p class="seo-note">※無洗米の場合は、水を少し多め（1.25倍程度）にするのがコツです。</p>
         </section>
 
-        <section class="dictionary-links">
-            <h2 class="section-title">他のページもチェック！</h2>
-            <div class="ingredient-grid">
-                <a href="index.html" class="ingredient-card">
-                    <span class="emoji">🏠</span>
-                    <span class="name">トップ</span>
+        <!-- Recommended Tools -->
+        <section class="recommend-section">
+            <h2 class="recommend-header">🛒 あわせてチェック！体調管理ツール</h2>
+            <div class="recommend-grid">
+                <a href="fitness-calc.html" class="recommend-item">
+                    <span class="icon">🏃</span>
+                    <span class="name">フィットネス計量</span>
                 </a>
-                <a href="substitute-measuring.html" class="ingredient-card">
-                    <span class="emoji">🔧</span>
-                    <span class="name">代用計量</span>
+                <a href="pasta-calc.html" class="recommend-item">
+                    <span class="icon">🍝</span>
+                    <span class="name">パスタ計算</span>
                 </a>
-                <a href="tube-spices.html" class="ingredient-card">
-                    <span class="emoji">🧄</span>
-                    <span class="name">チューブ換算</span>
+                <a href="standard-weights.html" class="recommend-item">
+                    <span class="icon">🥦</span>
+                    <span class="name">標準重量ガイド</span>
                 </a>
             </div>
         </section>
     </main>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn" title="トップページに戻る">🏠</a>
 
     <footer>
         <p>&copy; 2026 Cooking Unit Converter</p>
