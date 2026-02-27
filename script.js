@@ -18,7 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
         'sugar': { density: 0.6, name: '砂糖' },
         'flour': { density: 0.5, name: '小麦粉/片栗粉' },
         'butter': { density: 0.8, name: 'バター' },
-        'rice': { density: 0.8, name: 'お米' }
+        'rice': { density: 0.8, name: 'お米' },
+        'ap-flour': { density: 0.52, name: '中力粉 (All-purpose)' },
+        'brown-sugar': { density: 0.83, name: 'ブラウンシュガー (Packed)' }
     };
 
     // Unit definitions
@@ -29,7 +31,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'tsp': { type: 'volume', factor: 5, label: '小さじ' },
         'g': { type: 'mass', factor: 1, label: 'g' },
         'us-cup': { type: 'volume', factor: 236.59, label: 'USカップ' },
-        'uk-cup': { type: 'volume', factor: 284.13, label: 'UKカップ' }
+        'uk-cup': { type: 'volume', factor: 284.13, label: 'UKカップ' },
+        'us-fl-oz': { type: 'volume', factor: 29.57, label: 'US液量オンス (fl oz)' },
+        'oz': { type: 'mass', factor: 28.35, label: 'オンス (oz)' },
+        'lb': { type: 'mass', factor: 453.59, label: 'ポンド (lb)' },
+        'celsius': { type: 'temp', label: '摂氏 (°C)' },
+        'fahrenheit': { type: 'temp', label: '華氏 (°F)' }
     };
 
     // Default values for each unit
@@ -40,7 +47,12 @@ document.addEventListener('DOMContentLoaded', () => {
         'tbsp': 1,
         'tsp': 1,
         'us-cup': 1,
-        'uk-cup': 1
+        'uk-cup': 1,
+        'oz': 1,
+        'lb': 1,
+        'us-fl-oz': 1,
+        'celsius': 180,
+        'fahrenheit': 350
     };
 
     // Calculate conversion
@@ -81,35 +93,80 @@ document.addEventListener('DOMContentLoaded', () => {
             targetOutput.classList.remove('placeholder-text');
         }
 
-        // 1. Convert source to base unit: ml
-        let inMl = 0;
-        switch (sourceUnit) {
-            case 'g': inMl = val / density; break; // g -> ml
-            case 'ml': inMl = val; break;
-            case 'cup': inMl = val * 200; break;
-            case 'tbsp': inMl = val * 15; break;
-            case 'tsp': inMl = val * 5; break;
-            case 'us-cup': inMl = val * 236.59; break;
-            case 'uk-cup': inMl = val * 284.13; break;
+        // Detect Unit Types
+        const sourceUnitType = units[sourceUnit].type;
+        const targetUnitType = units[targetUnit].type;
+
+        // Handle Temperature (Special Non-linear Case)
+        if (sourceUnitType === 'temp' || targetUnitType === 'temp') {
+            if (sourceUnitType !== targetUnitType) {
+                targetOutput.value = "温度同士で選んでね";
+                return;
+            }
+            let res = 0;
+            if (sourceUnit === 'celsius' && targetUnit === 'fahrenheit') {
+                res = (val * 9 / 5) + 32;
+            } else if (sourceUnit === 'fahrenheit' && targetUnit === 'celsius') {
+                res = (val - 32) * 5 / 9;
+            } else {
+                res = val;
+            }
+            targetOutput.value = formatNumber(res);
+            referenceList.innerHTML = ''; // Hide suggestions for temp
+            return;
         }
 
-        // 2. Convert base unit (ml) to target
+        // 1. Convert source to base unit: ml (volume) or g (mass)
+        let baseVal = 0;
+        let baseType = sourceUnitType;
+
+        switch (sourceUnit) {
+            case 'g': baseVal = val; break;
+            case 'oz': baseVal = val * 28.35; break;
+            case 'lb': baseVal = val * 453.59; break;
+            case 'ml': baseVal = val; break;
+            case 'cup': baseVal = val * 200; break;
+            case 'tbsp': baseVal = val * 15; break;
+            case 'tsp': baseVal = val * 5; break;
+            case 'us-cup': baseVal = val * 236.59; break;
+            case 'uk-cup': baseVal = val * 284.13; break;
+            case 'us-fl-oz': baseVal = val * 29.57; break;
+        }
+
+        // 2. Handle Volume/Mass Mixed Conversion via density
+        let finalMl = 0;
+        if (sourceUnitType === 'mass') {
+            finalMl = baseVal / density;
+        } else {
+            finalMl = baseVal;
+        }
+
+        // 3. Convert from finalMl to target
         let result = 0;
-        switch (targetUnit) {
-            case 'g': result = inMl * density; break; // ml -> g
-            case 'ml': result = inMl; break;
-            case 'cup': result = inMl / 200; break;
-            case 'tbsp': result = inMl / 15; break;
-            case 'tsp': result = inMl / 5; break;
-            case 'us-cup': result = inMl / 236.59; break;
-            case 'uk-cup': result = inMl / 284.13; break;
+        if (targetUnitType === 'mass') {
+            let targetG = finalMl * density;
+            switch (targetUnit) {
+                case 'g': result = targetG; break;
+                case 'oz': result = targetG / 28.35; break;
+                case 'lb': result = targetG / 453.59; break;
+            }
+        } else {
+            switch (targetUnit) {
+                case 'ml': result = finalMl; break;
+                case 'cup': result = finalMl / 200; break;
+                case 'tbsp': result = finalMl / 15; break;
+                case 'tsp': result = finalMl / 5; break;
+                case 'us-cup': result = finalMl / 236.59; break;
+                case 'uk-cup': result = finalMl / 284.13; break;
+                case 'us-fl-oz': result = finalMl / 29.57; break;
+            }
         }
 
         // Formatting
-        let displayResult = parseFloat(result.toFixed(2));
+        let displayResult = formatNumber(result);
         targetOutput.value = displayResult;
 
-        updateReferenceList(inMl, density, isDefaultPreview);
+        updateReferenceList(finalMl, density, isDefaultPreview);
     }
 
     function updateReferenceList(inMl, density, isPreview) {
