@@ -188,6 +188,7 @@
         <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
         <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
+        <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
         <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
     </div>
 
@@ -216,6 +217,8 @@
                     <option value="flour">小麦粉・片栗粉 🥣</option>
                     <option value="butter">バター 🧈</option>
                     <option value="rice">お米 🍚</option>
+                    <option value="ap-flour">中力粉 (AP粉) 🥣</option>
+                    <option value="brown-sugar">ブラウンシュガー 🧂</option>
                 </select>
             </div>
             <div id="density-msg" class="density-info hidden"></div>
@@ -232,6 +235,11 @@
                 <option value="tsp">小さじ (5ml)</option>
                 <option value="us-cup">USカップ (約237ml)</option>
                 <option value="uk-cup">UKカップ (約284ml)</option>
+                <option value="us-fl-oz">US液量オンス (fl oz)</option>
+                <option value="oz">オンス (oz/重さ)</option>
+                <option value="lb">ポンド (lb)</option>
+                <option value="celsius">摂氏 (°C)</option>
+                <option value="fahrenheit">華氏 (°F)</option>
             </select>
         </div>
 
@@ -245,6 +253,12 @@
                 <option value="cup" selected>カップ (200ml)</option>
                 <option value="tbsp">大さじ (15ml)</option>
                 <option value="tsp">小さじ (5ml)</option>
+                <option value="us-cup">USカップ (約237ml)</option>
+                <option value="uk-cup">UKカップ (約284ml)</option>
+                <option value="oz">オンス (oz)</option>
+                <option value="lb">ポンド (lb)</option>
+                <option value="celsius">摂氏 (°C)</option>
+                <option value="fahrenheit">華氏 (°F)</option>
             </select>
         </div>
 
@@ -427,6 +441,37 @@
 
         <!-- Hub Section: Category 3 -->
         <section class="hub-section">
+            <div class="hub-category-title">🌍 【海外】世界中のレシピを再現</div>
+            <div class="hub-grid">
+                <a href="#source-input" class="hub-card"
+                    onclick="document.getElementById('source-unit').value='us-cup'; setupCustomSelects();">
+                    <div class="icon">🇺🇸</div>
+                    <div class="content">
+                        <span class="title">アメリカの1カップ換算｜240mlをgに直す</span>
+                        <span class="desc">USレシピで頻出の「1cup = 240ml」をグラムや日本のカップに変換。</span>
+                    </div>
+                </a>
+                <a href="#source-input" class="hub-card"
+                    onclick="document.getElementById('source-unit').value='oz'; setupCustomSelects();">
+                    <div class="icon">⚖️</div>
+                    <div class="content">
+                        <span class="title">オンス(oz)・ポンド(lb)計算｜海外の重量単位</span>
+                        <span class="desc">ステーキ肉のオンスや、小麦粉のポンドを一瞬でグラム換算。</span>
+                    </div>
+                </a>
+                <a href="#source-input" class="hub-card"
+                    onclick="document.getElementById('source-unit').value='fahrenheit'; setupCustomSelects();">
+                    <div class="icon">🌡️</div>
+                    <div class="content">
+                        <span class="title">華氏(°F) ↔ 摂氏(°C) 変換｜オーブンの温度計算</span>
+                        <span class="desc">海外レシピの「350°F」は何度？オーブン設定に迷わない。</span>
+                    </div>
+                </a>
+            </div>
+        </section>
+
+        <!-- Hub Section: Category 4 -->
+        <section class="hub-section">
             <div class="hub-category-title">🏃 【体調管理】ダイエット・筋トレの味方</div>
             <div class="hub-grid">
                 <a href="fitness-calc.html" class="hub-card">
@@ -504,6 +549,11 @@
                     <span class="emoji">🍞</span>
                     <span class="name">パン粉</span>
                 </a>
+                <a href="conversion-tables.html" class="ingredient-card"
+                    style="background: #fff3e0; border-color: #ffb74d;">
+                    <span class="emoji">📘</span>
+                    <span class="name" style="color: #e65100; font-weight: bold;">全て見る</span>
+                </a>
             </div>
         </section>
 
@@ -521,7 +571,14 @@
                     </div>
                     <div class="faq-item">
                         <h3 class="faq-q">Q：海外レシピの「1cup」で失敗しちゃった…。</h3>
-                        <p class="faq-a">A：アメリカの1カップは約240ml、日本は約200mlなんだ。当サイトの変換ツールで「海外サイズ」を選んで計算してみてね！</p>
+                        <p class="faq-a">
+                            A：アメリカの1カップは約240ml、イギリス・カナダ・オーストラリアは約250ml、日本は約200mlなんだ。当サイトの変換ツールで「USカップ」などを選んで計算してみてね！</p>
+                    </div>
+                    <div class="faq-item">
+                        <h3 class="faq-q">Q：アメリカの「1カップ」の小麦粉は何グラム？</h3>
+                        <p class="faq-a">
+                            A：アメリカの1カップ（240ml換算）の小麦粉は<strong>約120〜125g</strong>だよ。日本の1カップ（200ml）だと約110gだから、約10gの差が出るんだね。
+                        </p>
                     </div>
                 </div>
             </div>
