@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>【グローバル食材換算マトリックス】日米英対応の究極の単位変換表 | お料理単位くん</title>
+    <meta name="description" content="小麦粉、砂糖、バターなど主要食材の「g×ml×カップ×大さじ」を日米英3カ国基準で完全網羅。アメリカ1カップ何グラム？日本vsアメリカ比較対応の究極換算マトリックス。">
+    <link rel="canonical" href="https://uwf-inter.github.io/unit-converter-cooking/global-matrix.html">
+    
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": ["WebPage", "Dataset"],
+            "name": "グローバル食材換算マトリックス",
+            "description": "日米英対応の究極の単位変換表",
+            "url": "https://uwf-inter.github.io/unit-converter-cooking/global-matrix.html",
+            "mainEntity": {
+                "@type": "Table",
+                "name": "食材別国際単位換算表",
+                "description": "小麦粉、砂糖、バター等の重さ・体積換算を日本、アメリカ、イギリス基準で比較"
+            },
+            "dataset": {
+                "@type": "Dataset",
+                "name": "グローバル食材換算データセット",
+                "description": "日米英3カ国の食材単位換換算データ（小麦粉、砂糖、バター、油、液体等）",
+                "keywords": ["単位変換", "カップ", "グラム", "海外レシピ", "アメリカ", "イギリス", "日本", "小麦粉", "砂糖", "バター"],
+                "license": "https://creativecommons.org/licenses/by/4.0/",
+                "creator": {
+                    "@type": "Organization",
+                    "name": "お料理単位くん"
+                }
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": [
+                {
+                    "@type": "Question",
+                    "name": "アメリカの1カップは何グラムですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "アメリカの1カップは236.59mlで、食材により重量が異なります。小麦粉の場合約125g、砂糖の場合約200g、水の場合約240gです。"
+                    }
+                },
+                {
+                    "@type": "Question", 
+                    "name": "日本とアメリカのカップの違いは何ですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "日本のカップは200ml、アメリカのカップは236.59mlです。約1.2倍の差があり、海外レシピを作る際は換算が必要です。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "小麦粉1カップは何グラムですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "小麦粉1カップの重量は国により異なります。日本：110g、アメリカ：125g、イギリス：138gです。"
+                    }
+                },
+                {
+                    "@type": "Question",
+                    "name": "バター1/2カップは何グラムですか？",
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": "バター1/2カップは日本で90g、アメリカで約113g、イギリスで120gです。"
+                    }
+                }
+            ]
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "トップ",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/"
+                },
+                {
+                    "@type": "ListItem", 
+                    "position": 2,
+                    "name": "食材大辞典",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/conversion-tables.html"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 3,
+                    "name": "グローバル食材換算マトリックス",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/global-matrix.html"
+                }
+            ]
+        }
+    ]
+    </script>
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=17.0">
+    <style>
+        /* Global Matrix Styles */
+        .matrix-controls {
+            background: linear-gradient(135deg, #fff3e0 0%, #ffe0b2 100%);
+            padding: 1.5rem;
+            border-radius: 15px;
+            margin-bottom: 2rem;
+            box-shadow: 0 8px 25px rgba(255, 112, 67, 0.15);
+        }
+
+        .country-selector {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .country-btn {
+            padding: 8px 20px;
+            border: 2px solid #ff7043;
+            background: white;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .country-btn.active {
+            background: #ff7043;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255, 112, 67, 0.3);
+        }
+
+        .country-btn:hover {
+            background: #ff8a65;
+            color: white;
+        }
+
+        .search-container {
+            margin: 1rem 0;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: 1rem;
+            border-radius: 50px;
+            border: 3px solid #ffccbc;
+            font-size: 1rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.08);
+            outline: none;
+            transition: all 0.3s ease;
+        }
+
+        .search-input:focus {
+            border-color: #ff7043;
+            box-shadow: 0 8px 20px rgba(255, 112, 67, 0.2);
+        }
+
+        .view-modes {
+            display: flex;
+            gap: 10px;
+            margin-top: 1rem;
+        }
+
+        .view-mode-btn {
+            padding: 6px 15px;
+            border: 1px solid #ddd;
+            background: white;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.85rem;
+            transition: all 0.2s ease;
+        }
+
+        .view-mode-btn.active {
+            background: #4e342e;
+            color: white;
+            border-color: #4e342e;
+        }
+
+        /* Sticky Table Headers */
+        .matrix-table-container {
+            position: relative;
+            overflow-x: auto;
+            margin-bottom: 2rem;
+        }
+
+        .matrix-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: white;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .matrix-table thead {
+            position: sticky;
+            top: 0;
+            z-index: 10;
+            background: linear-gradient(135deg, #ff8a65 0%, #ff7043 100%);
+        }
+
+        .matrix-table th {
+            padding: 1rem 0.8rem;
+            text-align: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.9rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            white-space: nowrap;
+        }
+
+        .matrix-table td {
+            padding: 0.8rem;
+            text-align: center;
+            border: 1px solid #f0f0f0;
+            font-size: 0.9rem;
+        }
+
+        .matrix-table tbody tr {
+            transition: background-color 0.2s ease;
+        }
+
+        .matrix-table tbody tr:hover {
+            background-color: #fff8e1;
+        }
+
+        .ingredient-name {
+            font-weight: 600;
+            text-align: left;
+            min-width: 150px;
+        }
+
+        .ingredient-name a {
+            color: #4e342e;
+            text-decoration: none;
+        }
+
+        .ingredient-name a:hover {
+            color: #ff7043;
+            text-decoration: underline;
+        }
+
+        .country-cell {
+            background: #f8f9fa;
+            font-weight: 600;
+        }
+
+        .country-cell.jp { background: #ffebee; }
+        .country-cell.us { background: #e3f2fd; }
+        .country-cell.uk { background: #e8f5e9; }
+
+        .calc-btn {
+            display: inline-block;
+            padding: 4px 12px;
+            background: #ff7043;
+            color: white;
+            border-radius: 15px;
+            text-decoration: none;
+            font-size: 0.75rem;
+            transition: all 0.2s ease;
+            margin-top: 4px;
+        }
+
+        .calc-btn:hover {
+            background: #ff8a65;
+            transform: translateY(-1px);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin: 3rem 0 1.5rem 0;
+            border-left: 6px solid #ff7043;
+            padding-left: 15px;
+        }
+
+        .section-header h2 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: #4e342e;
+        }
+
+        .comparison-mode {
+            background: linear-gradient(135deg, #e8f5e9 0%, #c8e6c9 100%);
+            border: 2px solid #4caf50;
+        }
+
+        .hidden-row {
+            display: none;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .matrix-table {
+                font-size: 0.8rem;
+            }
+            
+            .matrix-table th,
+            .matrix-table td {
+                padding: 0.5rem 0.3rem;
+            }
+            
+            .country-selector {
+                justify-content: center;
+            }
+            
+            .section-header h2 {
+                font-size: 1.2rem;
+            }
+        }
+
+        /* SEO Enhancement Classes */
+        .seo-keywords {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            white-space: nowrap;
+            border: 0;
+        }
+
+        .aria-label-enhanced {
+            position: relative;
+        }
+
+        .aria-label-enhanced::after {
+            content: attr(aria-label);
+            position: absolute;
+            left: -9999px;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
+        <p style="text-align:center; font-size:0.9rem; margin-top:-10px; font-weight:700;">🌍 グローバル食材換算マトリックス 🌍</p>
+        <p style="text-align:center; font-size:0.8rem; margin-top:5px;">〜 日米英3カ国対応の究極の単位変換表 〜</p>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
+        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
+        <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
+        <a href="global-matrix.html" class="category-tab active">🌍 グローバルマトリックス</a>
+    </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">トップ</a>
+        <span>&gt;</span>
+        <a href="conversion-tables.html">食材大辞典</a>
+        <span>&gt;</span>
+        グローバル食材換算マトリックス
+    </nav>
+
+    <main class="container">
+        <!-- Matrix Controls -->
+        <div class="matrix-controls">
+            <h3 style="margin-top:0; color: #4e342e;">🌎 表示国を選択</h3>
+            <div class="country-selector">
+                <button class="country-btn active" data-country="jp">🇯🇵 日本 (200ml)</button>
+                <button class="country-btn" data-country="us">🇺🇸 アメリカ (240ml)</button>
+                <button class="country-btn" data-country="uk">🇬🇧 イギリス (250ml)</button>
+                <button class="country-btn" data-country="compare">⚖️ 比較モード</button>
+            </div>
+
+            <div class="search-container">
+                <input type="text" id="matrix-search" class="search-input" placeholder="🔍 食材名で検索（例：小麦粉、砂糖、バター...）" aria-label="食材名を入力してフィルタリング">
+            </div>
+
+            <div class="view-modes">
+                <button class="view-mode-btn active" data-view="all">すべて表示</button>
+                <button class="view-mode-btn" data-view="powder">粉物</button>
+                <button class="view-mode-btn" data-view="sweet">甘味料</button>
+                <button class="view-mode-btn" data-view="oil">油脂</button>
+                <button class="view-mode-btn" data-view="liquid">液体</button>
+            </div>
+        </div>
+
+        <!-- Section 1: Powder Ingredients -->
+        <section class="table-section" data-category="powder">
+            <div class="section-header">
+                <h2>💪 粉物の国別換算目安 - 小麦粉、片栗粉、ココア等</h2>
+            </div>
+            <div class="matrix-table-container">
+                <table class="matrix-table" id="powder-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">食材名</th>
+                            <th scope="col" class="country-header jp">日本<br>1カップ</th>
+                            <th scope="col" class="country-header us">アメリカ<br>1カップ</th>
+                            <th scope="col" class="country-header uk">イギリス<br>1カップ</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">小さじ1</th>
+                            <th scope="col">グラム(g)</th>
+                            <th scope="col">オンス(oz)</th>
+                            <th scope="col">詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-name="こむぎこ 小麦粉 薄力粉 flour all-purpose" data-category="powder">
+                            <td class="ingredient-name">
+                                <a href="flour.html">小麦粉 (薄力粉)</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは110グラム">110g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは125グラム">125g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは138グラム">138g</td>
+                            <td>9g</td>
+                            <td>3g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="flour.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="こむぎこ 小麦粉 強力粉 bread flour" data-category="powder">
+                            <td class="ingredient-name">
+                                <a href="flour.html">小麦粉 (強力粉)</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは115グラム">115g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは135グラム">135g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは145グラム">145g</td>
+                            <td>9g</td>
+                            <td>3g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="flour.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="ちゅうりきこ 中力粉 AP粉 all-purpose flour" data-category="powder">
+                            <td class="ingredient-name">中力粉 (AP粉)</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは110グラム">110g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは125グラム">125g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは138グラム">138g</td>
+                            <td>9g</td>
+                            <td>3g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="かたくりこ 片栗粉 cornstarch starch" data-category="powder">
+                            <td class="ingredient-name">
+                                <a href="katakuriko.html">片栗粉</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは110グラム">110g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは125グラム">125g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは138グラム">138g</td>
+                            <td>9g</td>
+                            <td>3g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="katakuriko.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="ここあ ココア cocoa powder" data-category="powder">
+                            <td class="ingredient-name">ココアパウダー</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは80グラム">80g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは90グラム">90g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは95グラム">95g</td>
+                            <td>6g</td>
+                            <td>2g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="ぱんこ panko bread crumbs" data-category="powder">
+                            <td class="ingredient-name">
+                                <a href="panko.html">パン粉</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは40グラム">40g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは48グラム">48g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは50グラム">50g</td>
+                            <td>3g</td>
+                            <td>1g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="panko.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 2: Sweeteners -->
+        <section class="table-section" data-category="sweet">
+            <div class="section-header">
+                <h2>🍯 甘味料の国別換算目安 - 砂糖、はちみつ、メープルシロップ等</h2>
+            </div>
+            <div class="matrix-table-container">
+                <table class="matrix-table" id="sweet-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">食材名</th>
+                            <th scope="col" class="country-header jp">日本<br>1カップ</th>
+                            <th scope="col" class="country-header us">アメリカ<br>1カップ</th>
+                            <th scope="col" class="country-header uk">イギリス<br>1カップ</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">小さじ1</th>
+                            <th scope="col">グラム(g)</th>
+                            <th scope="col">オンス(oz)</th>
+                            <th scope="col">詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-name="さとう 砂糖 上白糖 white sugar" data-category="sweet">
+                            <td class="ingredient-name">
+                                <a href="sugar.html">砂糖 (上白糖)</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは120グラム">120g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは200グラム">200g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは220グラム">220g</td>
+                            <td>9g</td>
+                            <td>3g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="sugar.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="さとう 砂糖 グラニュー糖 granulated sugar" data-category="sweet">
+                            <td class="ingredient-name">
+                                <a href="sugar.html">グラニュー糖</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは170グラム">170g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは200グラム">200g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは220グラム">220g</td>
+                            <td>12g</td>
+                            <td>4g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="sugar.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="はちみつ 蜂蜜 honey" data-category="sweet">
+                            <td class="ingredient-name">蜂蜜 (はちみつ)</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは280グラム">280g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは340グラム">340g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは350グラム">350g</td>
+                            <td>21g</td>
+                            <td>7g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="めーぷるしろっぷ メープルシロップ maple syrup" data-category="sweet">
+                            <td class="ingredient-name">メープルシロップ</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは260グラム">260g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは320グラム">320g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは330グラム">330g</td>
+                            <td>20g</td>
+                            <td>7g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 3: Fats & Oils -->
+        <section class="table-section" data-category="oil">
+            <div class="section-header">
+                <h2>🧈 油脂の国別換算目安 - バター、サラダ油、オリーブオイル等</h2>
+            </div>
+            <div class="matrix-table-container">
+                <table class="matrix-table" id="oil-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">食材名</th>
+                            <th scope="col" class="country-header jp">日本<br>1カップ</th>
+                            <th scope="col" class="country-header us">アメリカ<br>1カップ</th>
+                            <th scope="col" class="country-header uk">イギリス<br>1カップ</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">小さじ1</th>
+                            <th scope="col">グラム(g)</th>
+                            <th scope="col">オンス(oz)</th>
+                            <th scope="col">詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-name="ばたー butter" data-category="oil">
+                            <td class="ingredient-name">
+                                <a href="butter.html">バター</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは180グラム">180g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは227グラム">227g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは240グラム">240g</td>
+                            <td>12g</td>
+                            <td>4g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="butter.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="さらだゆ サラダ油 salad oil" data-category="oil">
+                            <td class="ingredient-name">サラダ油</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは180グラム">180g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは227グラム">227g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは240グラム">240g</td>
+                            <td>12g</td>
+                            <td>4g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="おりーぶおいる オリーブオイル olive oil" data-category="oil">
+                            <td class="ingredient-name">オリーブオイル</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは180グラム">180g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは227グラム">227g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは240グラム">240g</td>
+                            <td>12g</td>
+                            <td>4g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- Section 4: Liquids -->
+        <section class="table-section" data-category="liquid">
+            <div class="section-header">
+                <h2>💧 液体の国別換算目安 - 水、牛乳、酒、みりん、醤油等</h2>
+            </div>
+            <div class="matrix-table-container">
+                <table class="matrix-table" id="liquid-table">
+                    <thead>
+                        <tr>
+                            <th scope="col">食材名</th>
+                            <th scope="col" class="country-header jp">日本<br>1カップ</th>
+                            <th scope="col" class="country-header us">アメリカ<br>1カップ</th>
+                            <th scope="col" class="country-header uk">イギリス<br>1カップ</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">小さじ1</th>
+                            <th scope="col">グラム(g)</th>
+                            <th scope="col">オンス(oz)</th>
+                            <th scope="col">詳細</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr data-name="みず 水 water" data-category="liquid">
+                            <td class="ingredient-name">水</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは200グラム">200g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは240グラム">240g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは250グラム">250g</td>
+                            <td>15g</td>
+                            <td>5g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="ぎゅうにゅう 牛乳 milk" data-category="liquid">
+                            <td class="ingredient-name">牛乳</td>
+                            <td class="country-cell jp" aria-label="日本の1カップは200グラム">200g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは240グラム">240g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは250グラム">250g</td>
+                            <td>15g</td>
+                            <td>5g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td>-</td>
+                        </tr>
+                        <tr data-name="しょうゆ 醤油 soy sauce" data-category="liquid">
+                            <td class="ingredient-name">
+                                <a href="shoyu.html">醤油</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは240グラム">240g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは290グラム">290g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは300グラム">300g</td>
+                            <td>18g</td>
+                            <td>6g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="shoyu.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="さけ 酒 sake" data-category="liquid">
+                            <td class="ingredient-name">
+                                <a href="sake-mirin.html">酒</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは200グラム">200g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは240グラム">240g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは250グラム">250g</td>
+                            <td>15g</td>
+                            <td>5g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="sake-mirin.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                        <tr data-name="みりん 味醂 mirin" data-category="liquid">
+                            <td class="ingredient-name">
+                                <a href="sake-mirin.html">みりん</a>
+                            </td>
+                            <td class="country-cell jp" aria-label="日本の1カップは240グラム">240g</td>
+                            <td class="country-cell us" aria-label="アメリカの1カップは290グラム">290g</td>
+                            <td class="country-cell uk" aria-label="イギリスの1カップは300グラム">300g</td>
+                            <td>18g</td>
+                            <td>6g</td>
+                            <td>100g</td>
+                            <td>3.5oz</td>
+                            <td><a href="sake-mirin.html" class="calc-btn">計算機へ</a></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- SEO Keywords (hidden) -->
+        <div class="seo-keywords">
+            アメリカ 小麦粉 1カップ 何グラム 砂糖 200g カップ 何杯 日本 vs アメリカ バター 1/2カップ グラム オンス 換算 All-purpose flour 2 cups to grams 
+            日本の計量カップ アメリカの計量カップ 違い イギリスの計量カップ オーストラリア カップ 換算 ベーキング 計量 無料 換算ツール
+        </div>
+
+        <section class="support-section">
+            <div class="support-content">
+                <p class="support-text">グローバルマトリックスで見つからない食材は、個別計算機で詳細に計算できます！</p>
+                <a href="index.html" class="ofuse-btn">
+                    個別計算機トップへ
+                </a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn" title="トップページに戻る">🏠</a>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+        <p class="disclaimer">※重量は食材の状態（温度、湿度、詰め方）によって変化します。あくまで目安としてお使いください。</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            // Matrix functionality
+            const countryBtns = document.querySelectorAll('.country-btn');
+            const viewModeBtns = document.querySelectorAll('.view-mode-btn');
+            const searchInput = document.getElementById('matrix-search');
+            const tables = document.querySelectorAll('.matrix-table');
+            const sections = document.querySelectorAll('.table-section');
+
+            // Country selection
+            countryBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    countryBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const country = btn.dataset.country;
+                    updateTableDisplay(country);
+                });
+            });
+
+            // View mode selection
+            viewModeBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    // Update active button
+                    viewModeBtns.forEach(b => b.classList.remove('active'));
+                    btn.classList.add('active');
+
+                    const view = btn.dataset.view;
+                    updateViewMode(view);
+                });
+            });
+
+            // Search functionality
+            searchInput.addEventListener('input', () => {
+                const query = searchInput.value.toLowerCase().trim();
+                filterRows(query);
+            });
+
+            function updateTableDisplay(country) {
+                tables.forEach(table => {
+                    const headers = table.querySelectorAll('.country-header');
+                    const cells = table.querySelectorAll('.country-cell');
+
+                    if (country === 'compare') {
+                        // Show all countries in comparison mode
+                        headers.forEach(header => header.style.display = 'table-cell');
+                        cells.forEach(cell => cell.style.display = 'table-cell');
+                        table.parentElement.parentElement.classList.add('comparison-mode');
+                    } else {
+                        // Show only selected country
+                        headers.forEach(header => {
+                            header.style.display = header.classList.contains(country) ? 'table-cell' : 'none';
+                        });
+                        cells.forEach(cell => {
+                            cell.style.display = cell.classList.contains(country) ? 'table-cell' : 'none';
+                        });
+                        table.parentElement.parentElement.classList.remove('comparison-mode');
+                    }
+                });
+            }
+
+            function updateViewMode(view) {
+                sections.forEach(section => {
+                    if (view === 'all') {
+                        section.style.display = 'block';
+                    } else {
+                        section.style.display = section.dataset.category === view ? 'block' : 'none';
+                    }
+                });
+            }
+
+            function filterRows(query) {
+                const allRows = document.querySelectorAll('.matrix-table tbody tr');
+
+                allRows.forEach(row => {
+                    const name = row.dataset.name.toLowerCase();
+                    const text = row.textContent.toLowerCase();
+
+                    if (name.includes(query) || text.includes(query)) {
+                        row.classList.remove('hidden-row');
+                    } else {
+                        row.classList.add('hidden-row');
+                    }
+                });
+
+                // Hide sections if no visible rows
+                sections.forEach(section => {
+                    const visibleRows = section.querySelectorAll('tbody tr:not(.hidden-row)');
+                    if (visibleRows.length === 0) {
+                        section.style.display = 'none';
+                    } else {
+                        // Only show if not filtered by view mode
+                        const currentView = document.querySelector('.view-mode-btn.active').dataset.view;
+                        if (currentView === 'all' || section.dataset.category === currentView) {
+                            section.style.display = 'block';
+                        }
+                    }
+                });
+            }
+
+            // Initialize with Japan view
+            updateTableDisplay('jp');
+        });
+    </script>
+</body>
+
+</html>
