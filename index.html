@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>サクッと解決！お料理単位くん｜大さじ・カップをgに一瞬で変換</title>
     <meta name="description" content="料理の単位変換で迷わない！砂糖や小麦粉のグラム換算、海外レシピのカップ数、人数分の分量計算もこれ一つでサクッと解決。お料理がもっと楽しくなる便利な相棒です。">
+    <link rel="canonical" href="https://uwf-inter.github.io/unit-converter-cooking/">
     <meta http-equiv="Cache-Control" content="max-age=31536000">
 
     <!-- OGP Tags -->
@@ -186,9 +187,8 @@
         <a href="index.html" class="category-tab active">🍲 単位・g換算</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
         <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
-        <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
         <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ パスタ計量</a>
+        <a href="global-matrix.html" class="category-tab">🌍 グローバルマトリックス</a>
     </div>
 
     <nav class="main-nav">
@@ -408,6 +408,13 @@
                 <h2 class="section-title">カテゴリーからツールを探す</h2>
                 <div class="hub-category-title">🚨 【SOS】はかり・スプーンがない！</div>
                 <div class="hub-grid">
+                    <a href="no-scale-measuring.html" class="hub-card">
+                        <div class="icon">🚨</div>
+                        <div class="content">
+                            <span class="title">はかりなし究極ガイド｜卵・スマホで100gを量る</span>
+                            <span class="desc">はかり不要！身近なもので正確に量る究極の代用計量ツール。</span>
+                        </div>
+                    </a>
                     <a href="substitute-measuring.html" class="hub-card">
                         <div class="icon">⚖️</div>
                         <div class="content">
@@ -439,8 +446,8 @@
                     <a href="microwave-calc.html" class="hub-card">
                         <div class="icon">⚡</div>
                         <div class="content">
-                            <span class="title">電子レンジのワット数換算｜500Wを600Wで加熱する時間は？</span>
-                            <span class="desc">500Wを600Wで加熱するなら何秒？失敗しない加熱時間計算。</span>
+                            <span class="title">レンジ加熱・解凍シミュレーター｜牛乳温め・冷凍肉解凍</span>
+                            <span class="desc">牛乳200mlは何分？冷凍肉の解凍時間をW数に合わせて最適計算。</span>
                         </div>
                     </a>
                     <a href="baking-calc.html" class="hub-card">
@@ -622,6 +629,30 @@
         <p class="disclaimer">Amazonのアソシエイトとして、当サイトは適格販売により収入を得ています。</p>
     </footer>
 
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "サクッと解決！お料理単位くん",
+            "description": "料理の単位変換（大さじ、カップ、グラム）や、レシピの人数分計算ができる無料のWebツール",
+            "url": "https://uwf-inter.github.io/unit-converter-cooking/"
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "トップ",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/"
+                }
+            ]
+        }
+    ]
+    </script>
 
     <script type="application/ld+json">
     [
@@ -665,6 +696,67 @@
         }]
       }
     ]
+    </script>
+
+    <!-- HowTo Schema for Unit Conversion -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "HowTo",
+        "name": "料理の単位変換方法",
+        "description": "大さじ・カップをグラムに正確に変換する手順",
+        "image": "https://uwf-inter.github.io/unit-converter-cooking/",
+        "totalTime": "PT1M",
+        "supply": [
+            {
+                "@type": "HowToSupply",
+                "name": "デジタルスケール（はかり）"
+            },
+            {
+                "@type": "HowToSupply", 
+                "name": "計量スプーン（大さじ・小さじ）"
+            }
+        ],
+        "step": [
+            {
+                "@type": "HowToStep",
+                "name": "食材を選択",
+                "text": "変換したい食材（小麦粉、砂糖、バター等）を選択します。"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "元の単位を入力",
+                "text": "持っている分量（例：大さじ2杯）を入力します。"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "変換先単位を選択",
+                "text": "知りたい単位（グラム、オンス等）を選択します。"
+            },
+            {
+                "@type": "HowToStep",
+                "name": "結果を確認",
+                "text": "自動計算された正確な分量を確認し、料理に使用します。"
+            }
+        ]
+    }
+    </script>
+
+    <!-- Organization Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "お料理単位くん",
+        "url": "https://uwf-inter.github.io/unit-converter-cooking/",
+        "logo": "https://uwf-inter.github.io/unit-converter-cooking/",
+        "description": "料理の単位変換をサクッと解決する無料Webツール。海外レシピのカップ換算、人数分の計算など、料理の疑問を一瞬で解決します。",
+        "sameAs": [],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "contactType": "customer service"
+        }
+    }
     </script>
     <script src="script.js?v=5.0"></script>
 </body>

@@ -773,4 +773,323 @@ document.addEventListener('DOMContentLoaded', () => {
         // Initial calc
         calculateCap();
     }
+
+    // Global Matrix Conversion Functions
+    window.GlobalMatrix = {
+        // Country-specific cup volumes in ml
+        cupVolumes: {
+            jp: 200,    // Japan
+            us: 236.59,  // US
+            uk: 284.13   // UK (also Australia, Canada)
+        },
+
+        // Ingredient density data (g/ml)
+        ingredientDensities: {
+            'flour-cake': 0.55,      // 薄力粉
+            'flour-bread': 0.58,     // 強力粉
+            'flour-all': 0.55,       // 中力粉
+            'sugar-white': 0.85,     // 上白糖
+            'sugar-granulated': 0.8, // グラニュー糖
+            'cornstarch': 0.55,      // 片栗粉
+            'cocoa': 0.4,            // ココア
+            'panko': 0.2,            // パン粉
+            'butter': 0.9,           // バター
+            'oil': 0.9,              // 油
+            'honey': 1.4,            // はちみつ
+            'maple': 1.3,            // メープルシロップ
+            'water': 1.0,            // 水
+            'milk': 1.03,            // 牛乳
+            'soy-sauce': 1.2,        // 醤油
+            'sake': 1.0,             // 酒
+            'mirin': 1.2             // みりん
+        },
+
+        // Convert between units for specific ingredient and country
+        convert: function(value, fromUnit, toUnit, ingredientType, country = 'jp') {
+            const density = this.ingredientDensities[ingredientType] || 1.0;
+            
+            // Convert to grams first
+            let grams = this.toGrams(value, fromUnit, ingredientType, country);
+            
+            // Convert from grams to target unit
+            return this.fromGrams(grams, toUnit, ingredientType, country);
+        },
+
+        // Convert any unit to grams
+        toGrams: function(value, unit, ingredientType, country = 'jp') {
+            const density = this.ingredientDensities[ingredientType] || 1.0;
+            
+            switch(unit) {
+                case 'g':
+                    return value;
+                case 'oz':
+                    return value * 28.35;
+                case 'ml':
+                    return value * density;
+                case 'cup':
+                    return value * this.cupVolumes[country] * density;
+                case 'tbsp':
+                    return value * 15 * density;
+                case 'tsp':
+                    return value * 5 * density;
+                default:
+                    return value;
+            }
+        },
+
+        // Convert grams to any unit
+        fromGrams: function(grams, unit, ingredientType, country = 'jp') {
+            const density = this.ingredientDensities[ingredientType] || 1.0;
+            
+            switch(unit) {
+                case 'g':
+                    return grams;
+                case 'oz':
+                    return grams / 28.35;
+                case 'ml':
+                    return grams / density;
+                case 'cup':
+                    return grams / (this.cupVolumes[country] * density);
+                case 'tbsp':
+                    return grams / (15 * density);
+                case 'tsp':
+                    return grams / (5 * density);
+                default:
+                    return grams;
+            }
+        },
+
+        // Get cup weight for ingredient in specific country
+        getCupWeight: function(ingredientType, country = 'jp') {
+            const density = this.ingredientDensities[ingredientType] || 1.0;
+            return this.cupVolumes[country] * density;
+        },
+
+        // Format number with appropriate precision
+        formatNumber: function(num, decimals = 1) {
+            return Math.round(num * Math.pow(10, decimals)) / Math.pow(10, decimals);
+        }
+    };
+
+    // Auto-populate matrix data if on global-matrix page
+    if (window.location.pathname.includes('global-matrix.html')) {
+        // Add any matrix-specific initialization here
+        console.log('Global Matrix loaded with conversion functions');
+    }
+
+    // No-Scale Measuring Data
+    window.NoScaleMeasuring = {
+        // Everyday items for weight reference
+        everydayItems: {
+            'egg': { weight: 50, name: '卵', unit: '個' },
+            'smartphone': { weight: 180, name: 'スマホ', unit: '台' },
+            'battery-aaa': { weight: 23, name: '単3電池', unit: '本' },
+            'coin-100': { weight: 4.5, name: '100円玉', unit: '枚' },
+            'coin-10': { weight: 4.5, name: '10円玉', unit: '枚' },
+            'coin-1': { weight: 1.0, name: '1円玉', unit: '枚' }
+        },
+
+        // Container volume data
+        containers: {
+            'mug-small': { volume: 200, name: 'マグカップ（小）', unit: '杯' },
+            'mug-standard': { volume: 300, name: 'マグカップ（標準）', unit: '杯' },
+            'paper-cup': { volume: 205, name: '紙コップ', unit: '杯' },
+            'soup-bowl': { volume: 200, name: '汁椀', unit: '杯' },
+            'rice-bowl': { volume: 250, name: 'ご飯茶碗', unit: '杯' },
+            'pet-bottle-cap': { volume: 7.5, name: 'ペットボトルキャップ', unit: '個' }
+        },
+
+        // Visual measurement guides
+        visualGuides: {
+            'finger-first-joint': { volume: 5, name: '人差し指第一関節まで', description: '小さじ1相当' },
+            'finger-circle': { volume: 15, name: '親指と人差し指で輪', description: '大さじ1相当' },
+            'two-fingers-pinch': { weight: 0.3, name: '指2本でつまむ', description: '少々' },
+            'three-fingers-pinch': { weight: 1.0, name: '指3本でつまむ', description: 'ひとつまみ' },
+            'hand-flat': { weight: 17, name: '手のひら一杯（平ら）', description: '粉類15-20g' },
+            'hand-heaped': { weight: 27, name: '手のひら一杯（山盛り）', description: '粉類25-30g' }
+        },
+
+        // Convert grams to everyday items
+        convertToEverydayItems: function(grams, itemType = 'egg') {
+            const item = this.everydayItems[itemType];
+            if (!item) return null;
+            
+            const count = grams / item.weight;
+            return {
+                count: count,
+                text: `${item.name} ${count.toFixed(1)}${item.unit}分`,
+                itemName: item.name,
+                unit: item.unit
+            };
+        },
+
+        // Convert volume to containers
+        convertToContainers: function(ml, containerType = 'mug-small') {
+            const container = this.containers[containerType];
+            if (!container) return null;
+            
+            const count = ml / container.volume;
+            return {
+                count: count,
+                text: `${container.name} ${count.toFixed(1)}${container.unit}分`,
+                containerName: container.name,
+                unit: container.unit
+            };
+        },
+
+        // Get visual guide for measurement
+        getVisualGuide: function(targetAmount, unit = 'g') {
+            const guides = Object.values(this.visualGuides);
+            
+            if (unit === 'g') {
+                return guides.filter(g => g.weight).find(g => Math.abs(g.weight - targetAmount) < 2);
+            } else if (unit === 'ml') {
+                return guides.filter(g => g.volume).find(g => Math.abs(g.volume - targetAmount) < 3);
+            }
+            
+            return null;
+        },
+
+        // Quick search data
+        quickSearchData: {
+            '小麦粉100g': '卵2個分、またはマグカップ小さめ1杯弱',
+            '小麦粉50g': '卵1個分、またはマグカップ小さめ1/2杯',
+            '砂糖100g': '卵2個分、またはマグカップ小さめ0.6杯',
+            '砂糖50g': '卵1個分、またはマグカップ小さめ0.3杯',
+            'バター100g': '卵2個分、またはマグカップ小さめ0.55杯',
+            '塩小さじ1': '指3本でつまんだ量（ひとつまみ）',
+            '大さじ1': '親指と人差し指で輪を作った量',
+            'カップ1': 'マグカップ小さめ1杯、または汁椀1杯',
+            '水200ml': 'マグカップ小さめ1杯、または汁椀1杯'
+        },
+
+        // Search quick answers
+        searchQuickAnswer: function(query) {
+            const lowerQuery = query.toLowerCase();
+            
+            for (const [key, value] of Object.entries(this.quickSearchData)) {
+                if (key.includes(lowerQuery)) {
+                    return value;
+                }
+            }
+            
+            return null;
+        }
+    };
+
+    // Microwave Heating Calculator
+    window.MicrowaveCalc = {
+        // Heating data for different drinks
+        drinkData: {
+            milk: { targetTemp: 60, specificHeat: 3.93, name: '牛乳' },
+            soymilk: { targetTemp: 60, specificHeat: 3.95, name: '豆乳' },
+            water: { targetTemp: 60, specificHeat: 4.19, name: '水' },
+            coffee: { targetTemp: 65, specificHeat: 4.19, name: 'コーヒー' }
+        },
+
+        // Freezing data for different foods
+        freezeData: {
+            'chicken-breast': { baseTime: 2.0, thickness: 2, name: '鶏むね肉' },
+            'chicken-thigh': { baseTime: 2.2, thickness: 2.5, name: '鶏もも肉' },
+            'ground-meat': { baseTime: 1.5, thickness: 1, name: 'ひき肉' },
+            'block-meat': { baseTime: 3.0, thickness: 3, name: 'ブロック肉' },
+            'rice': { baseTime: 2.5, thickness: 2, name: 'ごはん' },
+            'bread': { baseTime: 1.8, thickness: 1.5, name: 'パン' }
+        },
+
+        // Calculate drink heating time
+        calculateDrinkHeating: function(drinkType, amount, startTemp, watt) {
+            const data = this.drinkData[drinkType];
+            if (!data) return null;
+
+            const tempDiff = data.targetTemp - startTemp;
+            const energyNeeded = amount * data.specificHeat * tempDiff; // in Joules
+            const timeInSeconds = energyNeeded / (watt * 0.8); // 80% efficiency
+            
+            return {
+                timeInSeconds: timeInSeconds,
+                minutes: Math.floor(timeInSeconds / 60),
+                seconds: Math.round(timeInSeconds % 60),
+                targetTemp: data.targetTemp,
+                drinkName: data.name
+            };
+        },
+
+        // Calculate freezing time
+        calculateFreezing: function(foodType, weight, mode, watt) {
+            const data = this.freezeData[foodType];
+            if (!data) return null;
+
+            const effectiveWatt = mode === 'defrost' ? 200 : watt;
+            const baseTime = data.baseTime * (weight / 100);
+            const timeInSeconds = (baseTime * 60) * (200 / effectiveWatt);
+            
+            return {
+                timeInSeconds: timeInSeconds,
+                minutes: Math.floor(timeInSeconds / 60),
+                seconds: Math.round(timeInSeconds % 60),
+                foodName: data.name,
+                thickness: data.thickness
+            };
+        },
+
+        // Convert wattage between different microwave powers
+        convertWattage: function(originalWatt, originalTime, targetWatt) {
+            const convertedTime = originalTime * (originalWatt / targetWatt);
+            return {
+                convertedTime: convertedTime,
+                minutes: Math.floor(convertedTime),
+                seconds: Math.round((convertedTime - Math.floor(convertedTime)) * 60),
+                ratio: originalWatt / targetWatt
+            };
+        },
+
+        // Get temperature guide
+        getTemperatureGuide: function() {
+            return [
+                { temp: 40, description: 'ぬるま湯', usage: '赤ちゃんミルク向け' },
+                { temp: 60, description: '飲み頃', usage: 'ホットミルク・コーヒー' },
+                { temp: 70, description: '熱め', usage: '紅茶・ココア' },
+                { temp: 80, description: '注意！', usage: '突沸の可能性' }
+            ];
+        },
+
+        // Get freezing tips
+        getFreezingTips: function(foodType) {
+            const data = this.freezeData[foodType];
+            if (!data) return [];
+
+            const tips = [
+                '薄く切る：厚さ2cm以下で均一に解凍',
+                '並べて加熱：重ならないように熱の通りを均一に',
+                '途中で裏返す：1-2分ごとにムラ防止',
+                '余熱で仕上げ：少し硬いうちに自然解凍と組み合わせ'
+            ];
+
+            if (data.thickness > 2) {
+                tips.push('厚みがある場合は、途中で裏返すと均一に解凍できます');
+            }
+
+            return tips;
+        },
+
+        // Generate wattage conversion table
+        generateWattageTable: function() {
+            const commonWatts = [500, 600, 700];
+            const targetWatts = [500, 600, 700, 800, 1000];
+            const baseTime = 3; // 3 minutes as reference
+
+            const table = [];
+            commonWatts.forEach(originalWatt => {
+                const row = { originalWatt: originalWatt, originalTime: baseTime };
+                targetWatts.forEach(targetWatt => {
+                    const converted = this.convertWattage(originalWatt, baseTime, targetWatt);
+                    row[`w${targetWatt}`] = `${converted.minutes}分${converted.seconds}秒`;
+                });
+                table.push(row);
+            });
+
+            return table;
+        }
+    };
 });

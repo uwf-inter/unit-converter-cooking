@@ -5,7 +5,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>【完全版】食材別の「大さじ1・1カップ」は何グラム？換算早見表（日・米・英対応）</title>
-    <meta name="description" content="砂糖、小麦粉、油、醤油など100種類以上の食材の重さを一覧化。日本(200ml)とアメリカ(240ml)のカップ換算にも対応。はかりがない時の目安付き。">
+    <meta name="description" content="砂糖、小麦粉、油、醤油など100種類以上の食材の重さを一覧化。日本(200ml)とアメリカ(240ml)のカップ換算にも対応。はかりがない時の目安付き。海外レシピの単位変換に最適。">
+    <link rel="canonical" href="https://uwf-inter.github.io/unit-converter-cooking/conversion-tables.html">
 
     <!-- Google Tag Manager -->
     <script>
@@ -169,7 +170,8 @@
         <a href="index.html" class="category-tab">🍲 単位・g換算</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
         <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
-        <a href="conversion-tables.html" class="category-tab active">📘 食材大辞典</a>
+        <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
+        <a href="global-matrix.html" class="category-tab">🌍 グローバルマトリックス</a>
     </div>
 
     <!-- Breadcrumb -->
@@ -190,6 +192,7 @@
             <a href="#powder" class="jump-btn">💪 粉物・穀物 (日米英対応)</a>
             <a href="#dairy" class="jump-btn">🧈 乳製品・油</a>
             <a href="#others" class="jump-btn">🍯 その他（蜂蜜・ジャム等）</a>
+            <a href="global-matrix.html" class="jump-btn" style="background: #ff7043; color: white; border-color: #ff7043;">🌍 グローバルマトリックス</a>
         </div>
 
         <!-- Section 1: Basic Seasonings -->
@@ -201,12 +204,12 @@
                 <table class="dictionary-table ref-table" id="table-basic">
                     <thead>
                         <tr>
-                            <th>食材名</th>
-                            <th>大さじ1</th>
-                            <th>小さじ1</th>
-                            <th>1カップ</th>
-                            <th class="hidden-mobile">kcal/100g</th>
-                            <th class="hidden-mobile">比重</th>
+                            <th scope="col">食材名</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">小さじ1</th>
+                            <th scope="col">1カップ</th>
+                            <th scope="col" class="hidden-mobile">kcal/100g</th>
+                            <th scope="col" class="hidden-mobile">比重</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -286,12 +289,12 @@
                 <table class="dictionary-table ref-table" id="table-powder">
                     <thead>
                         <tr>
-                            <th>食材名</th>
-                            <th><span class="c-tab jp">日本</span></th>
-                            <th><span class="c-tab us">アメリカ</span></th>
-                            <th><span class="c-tab uk">イギリス</span></th>
-                            <th>大さじ1</th>
-                            <th class="hidden-mobile">kcal/100g</th>
+                            <th scope="col">食材名</th>
+                            <th scope="col"><span class="c-tab jp">日本</span></th>
+                            <th scope="col"><span class="c-tab us">アメリカ</span></th>
+                            <th scope="col"><span class="c-tab uk">イギリス</span></th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col" class="hidden-mobile">kcal/100g</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -366,11 +369,11 @@
                 <table class="dictionary-table ref-table" id="table-dairy">
                     <thead>
                         <tr>
-                            <th>食材名</th>
-                            <th>大さじ1</th>
-                            <th>1カップ</th>
-                            <th class="hidden-mobile">kcal/100g</th>
-                            <th>備考</th>
+                            <th scope="col">食材名</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">1カップ</th>
+                            <th scope="col" class="hidden-mobile">kcal/100g</th>
+                            <th scope="col">備考</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -425,10 +428,10 @@
                 <table class="dictionary-table ref-table" id="table-others">
                     <thead>
                         <tr>
-                            <th>食材名</th>
-                            <th>大さじ1</th>
-                            <th>1カップ</th>
-                            <th>比重</th>
+                            <th scope="col">食材名</th>
+                            <th scope="col">大さじ1</th>
+                            <th scope="col">1カップ</th>
+                            <th scope="col">比重</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -521,6 +524,48 @@
                 });
             });
         });
+    </script>
+
+    <!-- JSON-LD Structured Data -->
+    <script type="application/ld+json">
+    [
+        {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": "食材別の重さ換算早見表",
+            "description": "砂糖、小麦粉、油、醤油など100種類以上の食材の重さを一覧化",
+            "url": "https://uwf-inter.github.io/unit-converter-cooking/conversion-tables.html",
+            "mainEntity": {
+                "@type": "Table",
+                "name": "食材別単位換算表",
+                "description": "主要食材の大さじ1、小さじ1、1カップあたりの重量を国際基準で表示",
+                "about": [
+                    {"name": "小麦粉 換算"},
+                    {"name": "砂糖 グラム"},
+                    {"name": "バター 単位変換"},
+                    {"name": "海外レシピ カップ"}
+                ]
+            }
+        },
+        {
+            "@context": "https://schema.org",
+            "@type": "BreadcrumbList",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "トップ",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/"
+                },
+                {
+                    "@type": "ListItem",
+                    "position": 2,
+                    "name": "食材別の重さ換算早見表",
+                    "item": "https://uwf-inter.github.io/unit-converter-cooking/conversion-tables.html"
+                }
+            ]
+        }
+    ]
     </script>
 </body>
 
