@@ -171,9 +171,9 @@
     <div class="category-tabs">
         <a href="index.html" class="category-tab">🍲 単位・g換算</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
         <a href="standard-weights.html" class="category-tab active">🥦 野菜の重量</a>
-        <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ パスタ計量</a>
     </div>
 
     <!-- Breadcrumb -->
@@ -214,11 +214,50 @@
                 <div class="info-title">💡 サイズの目安</div>
                 <div class="info-desc" id="size-guide">玉ねぎ中サイズは、スマホを横に並べた時より一回り大きいくらいのサイズ感です。</div>
                 <div class="kcal-badge">推定カロリー: <span id="res-kcal">74</span> kcal</div>
+
+                <!-- Nutrition Card -->
+                <div id="nutrition-card" class="nutrition-card"
+                    style="margin-top: 1.5rem; background: #fff; border-color: #689f38;">
+                    <div class="total-kcal">
+                        <span class="kcal-label" id="nutri-label">🔥 推定エネルギー</span>
+                        <span class="kcal-val" id="nutri-kcal">74</span><small class="kcal-unit">kcal</small>
+                    </div>
+                    <div class="pfc-grid">
+                        <div class="pfc-item p">
+                            <span class="pfc-label">P (Protein)</span>
+                            <span class="pfc-val" id="nutri-p">2.0</span><small class="pfc-unit">g</small>
+                        </div>
+                        <div class="pfc-item f">
+                            <span class="pfc-label">F (Fat)</span>
+                            <span class="pfc-val" id="nutri-f">0.2</span><small class="pfc-unit">g</small>
+                        </div>
+                        <div class="pfc-item c">
+                            <span class="pfc-label">C (Carb)</span>
+                            <span class="pfc-val" id="nutri-c">18.0</span><small class="pfc-unit">g</small>
+                        </div>
+                    </div>
+                    <div class="nutrition-source">
+                        ※文部科学省 <a href="https://fooddb.mext.go.jp/" target="_blank" rel="noopener">日本食品標準成分表(八訂)</a>
+                        に基づき計算
+                    </div>
+                </div>
+
                 <div style="margin-top: 15px;">
                     <a href="#ing-grid" class="cta-calc-btn">🔢 計算機を使ってみる</a>
                 </div>
             </div>
         </section>
+
+        <!-- Visual Guide Banner -->
+        <div
+            style="margin-top: 2rem; background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 16px; padding: 1.5rem; text-align: center; border: 1px solid #90caf9;">
+            <div style="font-size: 2rem; margin-bottom: 5px;">📱</div>
+            <h3 style="margin: 0 0 10px 0; color: #1565c0; font-size: 1.1rem;">計量カップやはかりがない？</h3>
+            <p style="font-size: 0.85rem; color: #333; margin-bottom: 15px;">スマホ画面を定規代わりにしたり、身近なモノで量る裏ワザはこちら！</p>
+            <a href="visual-guide.html"
+                style="display: inline-block; background: #1976D2; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 6px rgba(25, 118, 210, 0.3);">📏
+                視覚的ガイドを見る</a>
+        </div>
 
         <!-- SEO Content -->
         <section class="seo-content" style="margin-top: 3rem;">
@@ -349,16 +388,16 @@
 
     <script>
         const INGREDIENTS = {
-            'onion': { name: '玉ねぎ', emoji: '🧅', weight: 200, unit: '個', kcalPer100: 37, guide: '中サイズはスマホを横に並べた時より一回り大きいくらい。大サイズはソフトボールくらい。' },
-            'potato': { name: 'じゃが', emoji: '🥔', weight: 150, unit: '個', kcalPer100: 76, guide: '中サイズはテニスボール一回り小さいくらい。' },
-            'radish': { name: '大根', emoji: '🥗', weight: 250, unit: '1/4本', kcalPer100: 18, guide: '1/4本は、だいたい500mlペットボトルの下半分くらいの長さです。' },
-            'carrot': { name: '人参', emoji: '🥕', weight: 150, unit: '本', kcalPer100: 36, guide: '中サイズは、一般的なスマホ（約15cm）と同じくらいの長さです。' },
-            'cabbage': { name: 'キャベツ', emoji: '🥬', weight: 300, unit: '1/4玉', kcalPer100: 23, guide: '1/4玉でもずっしり重く、大きめのメロン1/4くらいあります。' },
-            'pepper': { name: 'ピーマン', emoji: '🫑', weight: 30, unit: '個', kcalPer100: 20, guide: '1個はゴルフボールより一回り大きいくらい。非常に軽いです。' },
-            'chicken_momo': { name: '鶏もも', emoji: '🍗', weight: 250, unit: '枚', kcalPer100: 200, guide: '1枚はだいたい成人の手のひら（指含まず）を広げたサイズです。' },
-            'chicken_mune': { name: '鶏胸', emoji: '🍖', weight: 280, unit: '枚', kcalPer100: 108, guide: '1枚は成人男性の手のひらよりやや大きく、厚みがあります。' },
-            'slice_meat': { name: '薄切り肉', emoji: '🥓', weight: 20, unit: '枚', kcalPer100: 220, guide: '1枚はハガキの半分くらいの面積のイメージです。' },
-            'mochi': { name: '切り餅', emoji: '🎑', weight: 50, unit: '個', kcalPer100: 235, guide: '標準的な個包装1個。10円玉を4枚並べた正方形に近いサイズ。' }
+            'onion': { name: '玉ねぎ', emoji: '🧅', weight: 200, unit: '個', kcalPer100: 37, p: 1.0, f: 0.1, c: 8.8, guide: '中サイズはスマホを横に並べた時より一回り大きいくらい。大サイズはソフトボールくらい。' },
+            'potato': { name: 'じゃが', emoji: '🥔', weight: 150, unit: '個', kcalPer100: 76, p: 1.6, f: 0.1, c: 17.6, guide: '中サイズはテニスボール一回り小さいくらい。' },
+            'radish': { name: '大根', emoji: '🥗', weight: 250, unit: '1/4本', kcalPer100: 18, p: 0.5, f: 0.1, c: 4.1, guide: '1/4本は、だいたい500mlペットボトルの下半分くらいの長さです。' },
+            'carrot': { name: '人参', emoji: '🥕', weight: 150, unit: '本', kcalPer100: 36, p: 0.7, f: 0.1, c: 9.1, guide: '中サイズは、一般的なスマホ（約15cm）と同じくらいの長さです。' },
+            'cabbage': { name: 'キャベツ', emoji: '🥬', weight: 300, unit: '1/4玉', kcalPer100: 23, p: 1.3, f: 0.2, c: 5.2, guide: '1/4玉送ずっしり重く、大きめのメロン1/4くらいあります。' },
+            'pepper': { name: 'ピーマン', emoji: '🫑', weight: 30, unit: '個', kcalPer100: 22, p: 0.9, f: 0.2, c: 5.1, guide: '1個はゴルフボールより一回り大きいくらい。非常に軽いです。' },
+            'chicken_momo': { name: '鶏もも', emoji: '🍗', weight: 250, unit: '枚', kcalPer100: 190, p: 16.6, f: 14.2, c: 0, guide: '1枚はだいたい成人の手のひら（指含まず）を広げたサイズです。' },
+            'chicken_mune': { name: '鶏胸', emoji: '🍖', weight: 280, unit: '枚', kcalPer100: 108, p: 22.3, f: 1.5, c: 0, guide: '1枚は成人男性の手のひらよりやや大きく、厚みがあります。' },
+            'slice_meat': { name: '薄切り肉', emoji: '🥓', weight: 20, unit: '枚', kcalPer100: 220, p: 17.0, f: 17.0, c: 0, guide: '1枚はハガキの半分くらいの面積のイメージです。' },
+            'mochi': { name: '切り餅', emoji: '🎑', weight: 50, unit: '個', kcalPer100: 235, p: 4.0, f: 0.6, c: 50.3, guide: '標準的な個包装1個。10円玉を4枚並べた正方形に近いサイズ。' }
         };
 
         let currentKey = 'onion';
@@ -409,8 +448,15 @@
 
         function updateKcal(weight) {
             const data = INGREDIENTS[currentKey];
-            const kcal = Math.round((weight * data.kcalPer100) / 100);
+            const ratio = weight / 100;
+            const kcal = Math.round(data.kcalPer100 * ratio);
             resKcal.textContent = kcal;
+
+            // Update PFC Card
+            document.getElementById('nutri-kcal').textContent = kcal;
+            document.getElementById('nutri-p').textContent = (data.p * ratio).toFixed(1);
+            document.getElementById('nutri-f').textContent = (data.f * ratio).toFixed(1);
+            document.getElementById('nutri-c').textContent = (data.c * ratio).toFixed(1);
         }
 
         countInt.oninput = updateFromCount;

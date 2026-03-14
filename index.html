@@ -184,12 +184,11 @@
 
     <div class="category-tabs">
         <a href="index.html" class="category-tab active">🍲 単位・g換算</a>
-        <a href="baking-calc.html" class="category-tab">🍰 ケーキ型換算</a>
-        <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
         <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
         <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ パスタ計量</a>
     </div>
 
     <nav class="main-nav">
@@ -273,326 +272,349 @@
 
         <div class="reset-area">
             <button id="reset-btn" type="button" aria-label="入力をリセット">リセット</button>
-        </div>
-        </section>
+            </section>
 
-        <!-- ========================================== -->
-        <!-- Amazon Associates Container -->
-        <!-- ここにおすすめのキッチングッズなどのリンクを配置してください -->
-        <!-- ========================================== -->
-        <section class="amazon-container">
-            <p class="amazon-text">正確な計量にはデジタルスケールが便利です</p>
-            <a href="https://amzn.to/3ZL4leA" class="amazon-btn" target="_blank"
-                rel="noopener sponsored">Amazonでチェックする</a>
-        </section>
+            <!-- ========================================== -->
+            <!-- Amazon Associates Container -->
+            <!-- ここにおすすめのキッチングッズなどのリンクを配置してください -->
+            <!-- ========================================== -->
+            <section class="amazon-container">
+                <p class="amazon-text">正確な計量にはデジタルスケールが便利です</p>
+                <a href="https://amzn.to/3ZL4leA" class="amazon-btn" target="_blank"
+                    rel="noopener sponsored">Amazonでチェックする</a>
+            </section>
 
-        <!-- Recipe Scaler Section -->
-        <section class="recipe-scaler-card" id="recipe-scaler">
-            <h2>👨‍🍳 レシピの人数分計算</h2>
+            <!-- Recipe Scaler Section -->
+            <section class="recipe-scaler-card" id="recipe-scaler">
+                <h2>👨‍🍳 レシピの人数分計算</h2>
 
-            <div class="scaler-inputs">
-                <div class="servings-group">
-                    <div class="input-wrapper">
-                        <label>もと</label>
-                        <div class="input-pill">
-                            <button class="ctrl-btn minus" data-target="original-servings"
-                                aria-label="人数を減らす">－</button>
-                            <div class="input-container">
-                                <input type="number" id="original-servings" value="4" min="1" aria-label="もとの人数">
-                                <span class="unit-label">人</span>
+                <div class="scaler-inputs">
+                    <div class="servings-group">
+                        <div class="input-wrapper">
+                            <label>もと</label>
+                            <div class="input-pill">
+                                <button class="ctrl-btn minus" data-target="original-servings"
+                                    aria-label="人数を減らす">－</button>
+                                <div class="input-container">
+                                    <input type="number" id="original-servings" value="4" min="1" aria-label="もとの人数">
+                                    <span class="unit-label">人</span>
+                                </div>
+                                <button class="ctrl-btn plus" data-target="original-servings"
+                                    aria-label="人数を増やす">＋</button>
                             </div>
-                            <button class="ctrl-btn plus" data-target="original-servings" aria-label="人数を増やす">＋</button>
+                        </div>
+                        <div class="scaler-arrow">➡</div>
+                        <div class="input-wrapper">
+                            <label>つくる</label>
+                            <div class="input-pill">
+                                <button class="ctrl-btn minus" data-target="desired-servings"
+                                    aria-label="人数を減らす">－</button>
+                                <div class="input-container">
+                                    <input type="number" id="desired-servings" value="2" min="1" aria-label="作りたい人数">
+                                    <span class="unit-label">人</span>
+                                </div>
+                                <button class="ctrl-btn plus" data-target="desired-servings"
+                                    aria-label="人数を増やす">＋</button>
+                            </div>
                         </div>
                     </div>
-                    <div class="scaler-arrow">➡</div>
-                    <div class="input-wrapper">
-                        <label>つくる</label>
-                        <div class="input-pill">
-                            <button class="ctrl-btn minus" data-target="desired-servings" aria-label="人数を減らす">－</button>
-                            <div class="input-container">
-                                <input type="number" id="desired-servings" value="2" min="1" aria-label="作りたい人数">
-                                <span class="unit-label">人</span>
-                            </div>
-                            <button class="ctrl-btn plus" data-target="desired-servings" aria-label="人数を増やす">＋</button>
+
+                    <div class="ingredients-area">
+                        <label>材料リスト</label>
+                        <textarea id="recipe-input" placeholder="例：&#13;&#10;豚肉 200g&#13;&#10;水 400ml"
+                            aria-label="材料リストを入力"></textarea>
+                    </div>
+                </div>
+
+                <div class="scaler-result-area">
+                    <div class="result-header">
+                        <label>計算結果</label>
+                        <button id="copy-recipe-btn" class="copy-btn" aria-label="計算結果をクリップボードにコピー">結果をコピー</button>
+                    </div>
+                    <textarea id="recipe-output" readonly aria-label="計算結果の表示"></textarea>
+                    <div class="scaler-message-box">
+                        <p id="scaler-message">これでお買い物もバッチリだね！👨‍🍳</p>
+                        <p id="scaler-note" class="hidden">※端数が出たよ。計りにくい時は少し多め（少なめ）でも大丈夫だよ。</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recommended Tools -->
+            <section class="recommend-section">
+                <h2 class="recommend-header">🛒 あわせてチェック！用途別ツール</h2>
+                <div class="recommend-grid">
+                    <a href="visual-guide.html" class="recommend-item"
+                        style="background: #e3f2fd; border: 1px solid #bbdefb;">
+                        <span class="icon">📏</span>
+                        <span class="name">はかり不要！<br>視覚的ガイド</span>
+                    </a>
+                    <a href="fitness-calc.html" class="recommend-item">
+                        <span class="icon">🥣</span>
+                        <span class="name">オートミール<br>プロテイン計量</span>
+                    </a>
+                    <a href="rice-calc.html" class="recommend-item">
+                        <span class="icon">🍚</span>
+                        <span class="name">お米・炊飯<br>専用換算</span>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Featured Snippet & Quick Reference Table -->
+            <section class="seo-content"
+                style="margin-top: 3rem; background: #fff8e1; padding: 1.5rem; border-radius: 20px; border: 2px solid #ffe0b2;">
+                <h3 style="color: #bf360c; margin-top: 0;">醤油100gは大さじ何杯？砂糖100gは？</h3>
+                <p style="font-size: 1rem; line-height: 1.6; color: #444; margin-bottom: 1.5rem;">
+                    食材の比重によって異なります。<strong>醤油なら約5.6杯</strong>、<strong>砂糖なら約0.8カップ</strong>が100gの目安です。よく使う食材の100gあたりの換算表をまとめました。
+                </p>
+
+                <div class="table-responsive">
+                    <table class="ref-table">
+                        <thead>
+                            <tr>
+                                <th>食材</th>
+                                <th>100gあたりの大さじ</th>
+                                <th>100gあたりのカップ</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td><strong>醤油・みりん</strong></td>
+                                <td style="color: #bf360c; font-weight: bold;">約 5.6 杯</td>
+                                <td>約 0.41 カップ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>酒・水</strong></td>
+                                <td style="color: #bf360c; font-weight: bold;">約 6.7 杯</td>
+                                <td>ちょうど 0.5 カップ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>砂糖 (上白糖)</strong></td>
+                                <td style="color: #bf360c; font-weight: bold;">約 11.1 杯</td>
+                                <td>約 0.83 カップ</td>
+                            </tr>
+                            <tr>
+                                <td><strong>小麦粉・片栗粉</strong></td>
+                                <td style="color: #bf360c; font-weight: bold;">約 13.3 杯</td>
+                                <td>ちょうど 1.0 カップ</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="seo-note">※「大さじ1＝15ml」「1カップ＝200ml」として計算しています。</p>
+            </section>
+
+            <!-- Hub Section: Category 1 -->
+            <section class="hub-section">
+                <h2 class="section-title">カテゴリーからツールを探す</h2>
+                <div class="hub-category-title">🚨 【SOS】はかり・スプーンがない！</div>
+                <div class="hub-grid">
+                    <a href="substitute-measuring.html" class="hub-card">
+                        <div class="icon">⚖️</div>
+                        <div class="content">
+                            <span class="title">パスタ・硬貨での代用計量｜はかりがない時の裏ワザ</span>
+                            <span class="desc">はかり不要！身近なもので重さやパスタの束を正確に判定。</span>
+                        </div>
+                    </a>
+                    <a href="otama.html" class="hub-card">
+                        <div class="icon">🥣</div>
+                        <div class="content">
+                            <span class="title">おたま一杯の容量計算｜味噌汁の分量・ml換算</span>
+                            <span class="desc">おたま一杯は何ml？レシピの分量をおたまで量るなら何杯か。</span>
+                        </div>
+                    </a>
+                    <a href="tube-spices.html" class="hub-card">
+                        <div class="icon">🧄</div>
+                        <div class="content">
+                            <span class="title">チューブ調味料のg換算｜にんにく1片・生姜1cmをグラムに</span>
+                            <span class="desc">にんにく・生姜チューブの「◯cm」を「g」に即座に変換。</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Hub Section: Category 2 -->
+            <section class="hub-section">
+                <div class="hub-category-title">⏱️ 【時短・効率】毎日の自炊をスムーズに</div>
+                <div class="hub-grid">
+                    <a href="microwave-calc.html" class="hub-card">
+                        <div class="icon">⚡</div>
+                        <div class="content">
+                            <span class="title">電子レンジのワット数換算｜500Wを600Wで加熱する時間は？</span>
+                            <span class="desc">500Wを600Wで加熱するなら何秒？失敗しない加熱時間計算。</span>
+                        </div>
+                    </a>
+                    <a href="baking-calc.html" class="hub-card">
+                        <div class="icon">🍰</div>
+                        <div class="content">
+                            <span class="title">ケーキ型・サイズ換算｜15cmを18cmで焼く時の分量倍率</span>
+                            <span class="desc">15cmの型を18cmで焼く時は？お菓子作りの分量比を計算。</span>
+                        </div>
+                    </a>
+                    <a href="#recipe-scaler" class="hub-card">
+                        <div class="icon">👨‍🍳</div>
+                        <div class="content">
+                            <span class="title">レシピの人数分・分量一括計算</span>
+                            <span class="desc">4人分のレシピを、2人分や3人分に全材料まとめて一瞬で変換。</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Hub Section: Category 3 -->
+            <section class="hub-section">
+                <div class="hub-category-title">🌍 【海外】世界中のレシピを再現</div>
+                <div class="hub-grid">
+                    <a href="#source-input" class="hub-card"
+                        onclick="document.getElementById('source-unit').value='us-cup'; setupCustomSelects();">
+                        <div class="icon">🇺🇸</div>
+                        <div class="content">
+                            <span class="title">アメリカの1カップ換算｜240mlをgに直す</span>
+                            <span class="desc">USレシピで頻出の「1cup = 240ml」をグラムや日本のカップに変換。</span>
+                        </div>
+                    </a>
+                    <a href="#source-input" class="hub-card"
+                        onclick="document.getElementById('source-unit').value='oz'; setupCustomSelects();">
+                        <div class="icon">⚖️</div>
+                        <div class="content">
+                            <span class="title">オンス(oz)・ポンド(lb)計算｜海外の重量単位</span>
+                            <span class="desc">ステーキ肉のオンスや、小麦粉のポンドを一瞬でグラム換算。</span>
+                        </div>
+                    </a>
+                    <a href="#source-input" class="hub-card"
+                        onclick="document.getElementById('source-unit').value='fahrenheit'; setupCustomSelects();">
+                        <div class="icon">🌡️</div>
+                        <div class="content">
+                            <span class="title">華氏(°F) ↔ 摂氏(°C) 変換｜オーブンの温度計算</span>
+                            <span class="desc">海外レシピの「350°F」は何度？オーブン設定に迷わない。</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Hub Section: Category 4 -->
+            <section class="hub-section">
+                <div class="hub-category-title">🏃 【体調管理】ダイエット・筋トレの味方</div>
+                <div class="hub-grid">
+                    <a href="fitness-calc.html" class="hub-card">
+                        <div class="icon">💪</div>
+                        <div class="content">
+                            <span class="title">オートミール・プロテイン計量｜30gは大さじ何杯？</span>
+                            <span class="desc">30gは大さじ何杯？はかりなしで粉末食材を正確に記録。</span>
+                        </div>
+                    </a>
+                    <a href="rice-calc.html" class="hub-card">
+                        <div class="icon">🍚</div>
+                        <div class="content">
+                            <span class="title">お米の合数・g・炊き上がり換算｜1合の重さと水の量</span>
+                            <span class="desc">0.5合は何グラム？炊いた後の重さと糖質を一発チェック。</span>
+                        </div>
+                    </a>
+                    <a href="pasta-calc.html" class="hub-card">
+                        <div class="icon">🍝</div>
+                        <div class="content">
+                            <span class="title">パスタの茹で上がり・カロリー計算｜乾麺100gは何グラムになる？</span>
+                            <span class="desc">乾麺100gは茹でると何g？ダイエットに役立つ詳細計算。</span>
+                        </div>
+                    </a>
+                    <a href="standard-weights.html" class="hub-card">
+                        <div class="icon">🥦</div>
+                        <div class="content">
+                            <span class="title">野菜・肉の標準重量ガイド｜玉ねぎ1個は何グラム？</span>
+                            <span class="desc">「玉ねぎ1個」は何グラム？食材の標準的な重さの目安一覧。</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+
+            <!-- Hub Section: Category 4 -->
+            <section class="hub-section">
+                <div class="hub-category-title">🥣 【図鑑】食材別！換算早見表まとめ</div>
+                <div class="ingredient-grid">
+                    <a href="butter.html" class="ingredient-card">
+                        <span class="emoji">🧈</span>
+                        <span class="name">バター</span>
+                    </a>
+                    <a href="oatmeal.html" class="ingredient-card">
+                        <span class="emoji">🥣</span>
+                        <span class="name">オートミール</span>
+                    </a>
+                    <a href="flour.html" class="ingredient-card">
+                        <span class="emoji">🥣</span>
+                        <span class="name">小麦粉</span>
+                    </a>
+                    <a href="sugar.html" class="ingredient-card">
+                        <span class="emoji">🧂</span>
+                        <span class="name">砂糖</span>
+                    </a>
+                    <a href="salt.html" class="ingredient-card">
+                        <span class="emoji">🧂</span>
+                        <span class="name">塩</span>
+                    </a>
+                    <a href="shoyu.html" class="ingredient-card">
+                        <span class="emoji">🧂</span>
+                        <span class="name">醤油</span>
+                    </a>
+                    <a href="sake-mirin.html" class="ingredient-card">
+                        <span class="emoji">🍶</span>
+                        <span class="name">酒・みりん</span>
+                    </a>
+                    <a href="miso.html" class="ingredient-card">
+                        <span class="emoji">🥣</span>
+                        <span class="name">味噌</span>
+                    </a>
+                    <a href="katakuriko.html" class="ingredient-card">
+                        <span class="emoji">🥣</span>
+                        <span class="name">片栗粉</span>
+                    </a>
+                    <a href="panko.html" class="ingredient-card">
+                        <span class="emoji">🍞</span>
+                        <span class="name">パン粉</span>
+                    </a>
+                    <a href="conversion-tables.html" class="ingredient-card"
+                        style="background: #fff3e0; border-color: #ffb74d;">
+                        <span class="emoji">📘</span>
+                        <span class="name" style="color: #e65100; font-weight: bold;">全て見る</span>
+                    </a>
+                </div>
+            </section>
+
+            <section class="seo-content">
+                <div class="seo-block">
+                    <h2>👨‍🍳 お料理単位くんが教える！よくある質問</h2>
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <h3 class="faq-q">Q：1ccと1mlって違うの？</h3>
+                            <p class="faq-a">A：料理の世界では「1cc ＝ 1ml」と考えてOKだよ！</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-q">Q：計量スプーンがない時はどうすればいい？</h3>
+                            <p class="faq-a">A：ペットボトルのキャップが約7.5mlだから、2杯分で「大さじ1（15ml）」の代わりになるよ！</p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-q">Q：海外レシピの「1cup」で失敗しちゃった…。</h3>
+                            <p class="faq-a">
+                                A：アメリカの1カップは約240ml、イギリス・カナダ・オーストラリアは約250ml、日本は約200mlなんだ。当サイトの変換ツールで「USカップ」などを選んで計算してみてね！
+                            </p>
+                        </div>
+                        <div class="faq-item">
+                            <h3 class="faq-q">Q：アメリカの「1カップ」の小麦粉は何グラム？</h3>
+                            <p class="faq-a">
+                                A：アメリカの1カップ（240ml換算）の小麦粉は<strong>約120〜125g</strong>だよ。日本の1カップ（200ml）だと約110gだから、約10gの差が出るんだね。
+                            </p>
                         </div>
                     </div>
                 </div>
+            </section>
 
-                <div class="ingredients-area">
-                    <label>材料リスト</label>
-                    <textarea id="recipe-input" placeholder="例：&#13;&#10;豚肉 200g&#13;&#10;水 400ml"
-                        aria-label="材料リストを入力"></textarea>
+            <section class="support-section">
+                <div class="support-content">
+                    <span class="support-icon">❤️</span>
+                    <p class="support-text">このツールが役に立ったら、作成者を応援していただけると嬉しいです！</p>
+                    <a href="https://ofuse.me/84223319" class="ofuse-btn" target="_blank" rel="noopener noreferrer">
+                        作成者を応援
+                    </a>
                 </div>
-            </div>
-
-            <div class="scaler-result-area">
-                <div class="result-header">
-                    <label>計算結果</label>
-                    <button id="copy-recipe-btn" class="copy-btn" aria-label="計算結果をクリップボードにコピー">結果をコピー</button>
-                </div>
-                <textarea id="recipe-output" readonly aria-label="計算結果の表示"></textarea>
-                <div class="scaler-message-box">
-                    <p id="scaler-message">これでお買い物もバッチリだね！👨‍🍳</p>
-                    <p id="scaler-note" class="hidden">※端数が出たよ。計りにくい時は少し多め（少なめ）でも大丈夫だよ。</p>
-                </div>
-            </div>
-        </section>
-
-        <!-- Featured Snippet & Quick Reference Table -->
-        <section class="seo-content"
-            style="margin-top: 3rem; background: #fff8e1; padding: 1.5rem; border-radius: 20px; border: 2px solid #ffe0b2;">
-            <h3 style="color: #bf360c; margin-top: 0;">醤油100gは大さじ何杯？砂糖100gは？</h3>
-            <p style="font-size: 1rem; line-height: 1.6; color: #444; margin-bottom: 1.5rem;">
-                食材の比重によって異なります。<strong>醤油なら約5.6杯</strong>、<strong>砂糖なら約0.8カップ</strong>が100gの目安です。よく使う食材の100gあたりの換算表をまとめました。
-            </p>
-
-            <div class="table-responsive">
-                <table class="ref-table">
-                    <thead>
-                        <tr>
-                            <th>食材</th>
-                            <th>100gあたりの大さじ</th>
-                            <th>100gあたりのカップ</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td><strong>醤油・みりん</strong></td>
-                            <td style="color: #bf360c; font-weight: bold;">約 5.6 杯</td>
-                            <td>約 0.41 カップ</td>
-                        </tr>
-                        <tr>
-                            <td><strong>酒・水</strong></td>
-                            <td style="color: #bf360c; font-weight: bold;">約 6.7 杯</td>
-                            <td>ちょうど 0.5 カップ</td>
-                        </tr>
-                        <tr>
-                            <td><strong>砂糖 (上白糖)</strong></td>
-                            <td style="color: #bf360c; font-weight: bold;">約 11.1 杯</td>
-                            <td>約 0.83 カップ</td>
-                        </tr>
-                        <tr>
-                            <td><strong>小麦粉・片栗粉</strong></td>
-                            <td style="color: #bf360c; font-weight: bold;">約 13.3 杯</td>
-                            <td>ちょうど 1.0 カップ</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            <p class="seo-note">※「大さじ1＝15ml」「1カップ＝200ml」として計算しています。</p>
-        </section>
-
-        <!-- Hub Section: Category 1 -->
-        <section class="hub-section">
-            <h2 class="section-title">カテゴリーからツールを探す</h2>
-            <div class="hub-category-title">🚨 【SOS】はかり・スプーンがない！</div>
-            <div class="hub-grid">
-                <a href="substitute-measuring.html" class="hub-card">
-                    <div class="icon">⚖️</div>
-                    <div class="content">
-                        <span class="title">パスタ・硬貨での代用計量｜はかりがない時の裏ワザ</span>
-                        <span class="desc">はかり不要！身近なもので重さやパスタの束を正確に判定。</span>
-                    </div>
-                </a>
-                <a href="otama.html" class="hub-card">
-                    <div class="icon">🥣</div>
-                    <div class="content">
-                        <span class="title">おたま一杯の容量計算｜味噌汁の分量・ml換算</span>
-                        <span class="desc">おたま一杯は何ml？レシピの分量をおたまで量るなら何杯か。</span>
-                    </div>
-                </a>
-                <a href="tube-spices.html" class="hub-card">
-                    <div class="icon">🧄</div>
-                    <div class="content">
-                        <span class="title">チューブ調味料のg換算｜にんにく1片・生姜1cmをグラムに</span>
-                        <span class="desc">にんにく・生姜チューブの「◯cm」を「g」に即座に変換。</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Hub Section: Category 2 -->
-        <section class="hub-section">
-            <div class="hub-category-title">⏱️ 【時短・効率】毎日の自炊をスムーズに</div>
-            <div class="hub-grid">
-                <a href="microwave-calc.html" class="hub-card">
-                    <div class="icon">⚡</div>
-                    <div class="content">
-                        <span class="title">電子レンジのワット数換算｜500Wを600Wで加熱する時間は？</span>
-                        <span class="desc">500Wを600Wで加熱するなら何秒？失敗しない加熱時間計算。</span>
-                    </div>
-                </a>
-                <a href="baking-calc.html" class="hub-card">
-                    <div class="icon">🍰</div>
-                    <div class="content">
-                        <span class="title">ケーキ型・サイズ換算｜15cmを18cmで焼く時の分量倍率</span>
-                        <span class="desc">15cmの型を18cmで焼く時は？お菓子作りの分量比を計算。</span>
-                    </div>
-                </a>
-                <a href="#recipe-scaler" class="hub-card">
-                    <div class="icon">👨‍🍳</div>
-                    <div class="content">
-                        <span class="title">レシピの人数分・分量一括計算</span>
-                        <span class="desc">4人分のレシピを、2人分や3人分に全材料まとめて一瞬で変換。</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Hub Section: Category 3 -->
-        <section class="hub-section">
-            <div class="hub-category-title">🌍 【海外】世界中のレシピを再現</div>
-            <div class="hub-grid">
-                <a href="#source-input" class="hub-card"
-                    onclick="document.getElementById('source-unit').value='us-cup'; setupCustomSelects();">
-                    <div class="icon">🇺🇸</div>
-                    <div class="content">
-                        <span class="title">アメリカの1カップ換算｜240mlをgに直す</span>
-                        <span class="desc">USレシピで頻出の「1cup = 240ml」をグラムや日本のカップに変換。</span>
-                    </div>
-                </a>
-                <a href="#source-input" class="hub-card"
-                    onclick="document.getElementById('source-unit').value='oz'; setupCustomSelects();">
-                    <div class="icon">⚖️</div>
-                    <div class="content">
-                        <span class="title">オンス(oz)・ポンド(lb)計算｜海外の重量単位</span>
-                        <span class="desc">ステーキ肉のオンスや、小麦粉のポンドを一瞬でグラム換算。</span>
-                    </div>
-                </a>
-                <a href="#source-input" class="hub-card"
-                    onclick="document.getElementById('source-unit').value='fahrenheit'; setupCustomSelects();">
-                    <div class="icon">🌡️</div>
-                    <div class="content">
-                        <span class="title">華氏(°F) ↔ 摂氏(°C) 変換｜オーブンの温度計算</span>
-                        <span class="desc">海外レシピの「350°F」は何度？オーブン設定に迷わない。</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Hub Section: Category 4 -->
-        <section class="hub-section">
-            <div class="hub-category-title">🏃 【体調管理】ダイエット・筋トレの味方</div>
-            <div class="hub-grid">
-                <a href="fitness-calc.html" class="hub-card">
-                    <div class="icon">💪</div>
-                    <div class="content">
-                        <span class="title">オートミール・プロテイン計量｜30gは大さじ何杯？</span>
-                        <span class="desc">30gは大さじ何杯？はかりなしで粉末食材を正確に記録。</span>
-                    </div>
-                </a>
-                <a href="rice-calc.html" class="hub-card">
-                    <div class="icon">🍚</div>
-                    <div class="content">
-                        <span class="title">お米の合数・g・炊き上がり換算｜1合の重さと水の量</span>
-                        <span class="desc">0.5合は何グラム？炊いた後の重さと糖質を一発チェック。</span>
-                    </div>
-                </a>
-                <a href="pasta-calc.html" class="hub-card">
-                    <div class="icon">🍝</div>
-                    <div class="content">
-                        <span class="title">パスタの茹で上がり・カロリー計算｜乾麺100gは何グラムになる？</span>
-                        <span class="desc">乾麺100gは茹でると何g？ダイエットに役立つ詳細計算。</span>
-                    </div>
-                </a>
-                <a href="standard-weights.html" class="hub-card">
-                    <div class="icon">🥦</div>
-                    <div class="content">
-                        <span class="title">野菜・肉の標準重量ガイド｜玉ねぎ1個は何グラム？</span>
-                        <span class="desc">「玉ねぎ1個」は何グラム？食材の標準的な重さの目安一覧。</span>
-                    </div>
-                </a>
-            </div>
-        </section>
-
-        <!-- Hub Section: Category 4 -->
-        <section class="hub-section">
-            <div class="hub-category-title">🥣 【図鑑】食材別！換算早見表まとめ</div>
-            <div class="ingredient-grid">
-                <a href="butter.html" class="ingredient-card">
-                    <span class="emoji">🧈</span>
-                    <span class="name">バター</span>
-                </a>
-                <a href="oatmeal.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">オートミール</span>
-                </a>
-                <a href="flour.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">小麦粉</span>
-                </a>
-                <a href="sugar.html" class="ingredient-card">
-                    <span class="emoji">🧂</span>
-                    <span class="name">砂糖</span>
-                </a>
-                <a href="salt.html" class="ingredient-card">
-                    <span class="emoji">🧂</span>
-                    <span class="name">塩</span>
-                </a>
-                <a href="shoyu.html" class="ingredient-card">
-                    <span class="emoji">🧂</span>
-                    <span class="name">醤油</span>
-                </a>
-                <a href="sake-mirin.html" class="ingredient-card">
-                    <span class="emoji">🍶</span>
-                    <span class="name">酒・みりん</span>
-                </a>
-                <a href="miso.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">味噌</span>
-                </a>
-                <a href="katakuriko.html" class="ingredient-card">
-                    <span class="emoji">🥣</span>
-                    <span class="name">片栗粉</span>
-                </a>
-                <a href="panko.html" class="ingredient-card">
-                    <span class="emoji">🍞</span>
-                    <span class="name">パン粉</span>
-                </a>
-                <a href="conversion-tables.html" class="ingredient-card"
-                    style="background: #fff3e0; border-color: #ffb74d;">
-                    <span class="emoji">📘</span>
-                    <span class="name" style="color: #e65100; font-weight: bold;">全て見る</span>
-                </a>
-            </div>
-        </section>
-
-        <section class="seo-content">
-            <div class="seo-block">
-                <h2>👨‍🍳 お料理単位くんが教える！よくある質問</h2>
-                <div class="faq-list">
-                    <div class="faq-item">
-                        <h3 class="faq-q">Q：1ccと1mlって違うの？</h3>
-                        <p class="faq-a">A：料理の世界では「1cc ＝ 1ml」と考えてOKだよ！</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 class="faq-q">Q：計量スプーンがない時はどうすればいい？</h3>
-                        <p class="faq-a">A：ペットボトルのキャップが約7.5mlだから、2杯分で「大さじ1（15ml）」の代わりになるよ！</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 class="faq-q">Q：海外レシピの「1cup」で失敗しちゃった…。</h3>
-                        <p class="faq-a">
-                            A：アメリカの1カップは約240ml、イギリス・カナダ・オーストラリアは約250ml、日本は約200mlなんだ。当サイトの変換ツールで「USカップ」などを選んで計算してみてね！</p>
-                    </div>
-                    <div class="faq-item">
-                        <h3 class="faq-q">Q：アメリカの「1カップ」の小麦粉は何グラム？</h3>
-                        <p class="faq-a">
-                            A：アメリカの1カップ（240ml換算）の小麦粉は<strong>約120〜125g</strong>だよ。日本の1カップ（200ml）だと約110gだから、約10gの差が出るんだね。
-                        </p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="support-section">
-            <div class="support-content">
-                <span class="support-icon">❤️</span>
-                <p class="support-text">このツールが役に立ったら、作成者を応援していただけると嬉しいです！</p>
-                <a href="https://ofuse.me/84223319" class="ofuse-btn" target="_blank" rel="noopener noreferrer">
-                    作成者を応援
-                </a>
-            </div>
-        </section>
+            </section>
     </main>
 
     <footer>

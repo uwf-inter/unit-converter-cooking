@@ -11,6 +11,15 @@
     --input-bg: #f5f5f5;
     --shadow-sm: 0 2px 5px rgba(0, 0, 0, 0.05);
     --shadow-md: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+    /* PFC Colors */
+    --p-color: #2196F3;
+    /* Protein - Blue */
+    --f-color: #FBC02D;
+    /* Fat - Yellow */
+    --c-color: #F44336;
+    /* Carb - Red */
+    --kcal-color: #E65100;
 }
 
 * {
@@ -98,6 +107,120 @@ header h1 a:hover {
     color: var(--primary-color);
     border-bottom-color: var(--primary-color);
     background-color: #fff8eb;
+}
+
+/* Nutrition Card Styling */
+.nutrition-card {
+    background: #fff;
+    border-radius: 16px;
+    padding: 1.2rem;
+    margin-top: 1.5rem;
+    box-shadow: var(--shadow-sm);
+    border: 1px solid #eee;
+}
+
+.nutrition-card .total-kcal {
+    text-align: center;
+    margin-bottom: 1rem;
+    padding-bottom: 0.8rem;
+    border-bottom: 1px dashed #eee;
+}
+
+.nutrition-card .kcal-label {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: #666;
+    margin-bottom: 2px;
+}
+
+.nutrition-card .kcal-val {
+    font-size: 2.2rem;
+    font-weight: 900;
+    color: var(--kcal-color);
+    font-family: 'Zen Maru Gothic', sans-serif;
+}
+
+.nutrition-card .kcal-unit {
+    font-size: 1rem;
+    margin-left: 4px;
+}
+
+.pfc-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+}
+
+.pfc-item {
+    text-align: center;
+    padding: 10px 5px;
+    border-radius: 12px;
+}
+
+.pfc-item.p {
+    background: #E3F2FD;
+    border: 1px solid #BBDEFB;
+}
+
+.pfc-item.f {
+    background: #FFFDE7;
+    border: 1px solid #FFF9C4;
+}
+
+.pfc-item.c {
+    background: #FFEBEE;
+    border: 1px solid #FFCDD2;
+}
+
+.pfc-label {
+    display: block;
+    font-size: 0.75rem;
+    font-weight: bold;
+    margin-bottom: 4px;
+}
+
+.pfc-item.p .pfc-label {
+    color: #1565C0;
+}
+
+.pfc-item.f .pfc-label {
+    color: #F57F17;
+}
+
+.pfc-item.c .pfc-label {
+    color: #C62828;
+}
+
+.pfc-val {
+    font-size: 1.3rem;
+    font-weight: 900;
+}
+
+.pfc-unit {
+    font-size: 0.75rem;
+    margin-left: 2px;
+}
+
+.nutrition-source {
+    margin-top: 1rem;
+    font-size: 0.7rem;
+    color: #999;
+    text-align: center;
+}
+
+.nutrition-source a {
+    color: #999;
+}
+
+@media (max-width: 400px) {
+    .nutrition-card .kcal-val {
+        font-size: 1.8rem;
+    }
+
+    .pfc-val {
+        font-size: 1.1rem;
+    }
 }
 
 .category-tab:hover:not(.active) {

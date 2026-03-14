@@ -23,6 +23,24 @@ document.addEventListener('DOMContentLoaded', () => {
         'brown-sugar': { density: 0.83, name: 'ブラウンシュガー (Packed)' }
     };
 
+    // Nutrition Data per 100g (kcal, Protein, Fat, Carbohydrate)
+    const NUTRITION_DATA = {
+        'flour': { kcal: 368, p: 8.0, f: 1.7, c: 75.9 }, // 薄力粉
+        'ap-flour': { kcal: 368, p: 10.0, f: 1.5, c: 73.0 }, // 中力粉
+        'sugar': { kcal: 384, p: 0, f: 0, c: 99.2 }, // 上白糖
+        'brown-sugar': { kcal: 354, p: 0, f: 0, c: 89.7 },
+        'rice': { kcal: 356, p: 6.1, f: 0.9, c: 77.1 }, // 生米 (approx)
+        'butter': { kcal: 745, p: 0.6, f: 81.0, c: 0.2 },
+        // Specialized from Request
+        'oats_rolled': { kcal: 380, p: 13.7, f: 5.7, c: 69.1 },
+        'oats_quick': { kcal: 380, p: 13.7, f: 5.7, c: 69.1 },
+        'protein': { kcal: 390, p: 75.0, f: 5.0, c: 10.0 },
+        'chicken_mune_no_skin': { kcal: 108, p: 22.3, f: 1.5, c: 0 },
+        'rice_cooked': { kcal: 156, p: 2.5, f: 0.3, c: 37.1 },
+        'pasta_cooked': { kcal: 150, p: 5.2, f: 0.9, c: 28.4 },
+        'egg': { kcal: 142, p: 12.3, f: 10.3, c: 0.3 }
+    };
+
     // Unit definitions
     const units = {
         'ml': { type: 'volume', factor: 1, label: 'cc (ml)' },

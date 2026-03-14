@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>【はかり不要】スマホで計量！2カップの量・大さじ・グラムの視覚的ガイド</title>
+    <meta name="description"
+        content="計量カップやはかりがない時に便利！「2カップはどのくらい？」「大さじ1はペットボトルのフタ何杯？」身近なモノを使った分量の量り方や、スマホ画面の原寸大定規で計量する裏ワザを紹介します。">
+
+    <!-- Google Tag Manager -->
+    <script>
+        function loadGTM() {
+            if (window.gtmLoaded) return;
+            window.gtmLoaded = true;
+            (function (w, d, s, l, i) {
+                w[l] = w[l] || []; w[l].push({
+                    'gtm.start': new Date().getTime(), event: 'gtm.js'
+                }); var f = d.getElementsByTagName(s)[0],
+                    j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+            })(window, document, 'script', 'dataLayer', 'GTM-MM9MG7P');
+        }
+        window.addEventListener('scroll', loadGTM, { once: true, passive: true });
+        window.addEventListener('mousemove', loadGTM, { once: true, passive: true });
+        window.addEventListener('touchstart', loadGTM, { once: true, passive: true });
+        setTimeout(loadGTM, 3000);
+    </script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP:wght@400;700;900&family=Zen+Maru+Gothic:wght@400;700;900&display=swap"
+        rel="stylesheet">
+
+    <link rel="stylesheet" href="style.css?v=18.0">
+    <style>
+        .visual-guide-header {
+            background: linear-gradient(135deg, #a5d6a7, #81c784);
+            color: #1b5e20;
+            padding: 2rem 1rem;
+            text-align: center;
+            border-radius: 0 0 20px 20px;
+            margin-bottom: 2rem;
+        }
+
+        .guide-section {
+            background: #fff;
+            border-radius: 16px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid #ddd;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .guide-section-title {
+            font-family: 'Zen Maru Gothic', sans-serif;
+            color: #2e7d32;
+            border-bottom: 3px solid #81c784;
+            display: inline-block;
+            padding-bottom: 5px;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- Ruler Section --- */
+        .ruler-container {
+            width: 100%;
+            height: 250px;
+            background: #fdfdfd;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            position: relative;
+            margin-top: 1rem;
+            overflow: hidden;
+            touch-action: none;
+        }
+
+        .ruler-scale {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 50px;
+            height: 100%;
+            border-right: 2px solid #333;
+            background: #f5f5f5;
+        }
+
+        .ruler-mark {
+            position: absolute;
+            right: 0;
+            border-top: 1px solid #666;
+            width: 15px;
+            /* mm mark */
+        }
+
+        .ruler-mark.cm {
+            width: 25px;
+            border-top: 2px solid #333;
+        }
+
+        .ruler-label {
+            position: absolute;
+            right: 30px;
+            transform: translateY(-50%);
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Common Cup/Bottle Guides */
+        .cup-guide-line {
+            position: absolute;
+            left: 50px;
+            width: calc(100% - 50px);
+            border-top: 2px dashed #e53935;
+            z-index: 10;
+        }
+
+        .cup-guide-label {
+            position: absolute;
+            right: 10px;
+            transform: translateY(-120%);
+            color: #e53935;
+            font-weight: bold;
+            font-size: 0.85rem;
+            background: rgba(255, 255, 255, 0.8);
+            padding: 2px 5px;
+            border-radius: 4px;
+        }
+
+        .calibration-area {
+            background: #e8f5e9;
+            padding: 1rem;
+            border-radius: 12px;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .calibration-area p {
+            font-size: 0.85rem;
+            color: #2e7d32;
+            margin-bottom: 10px;
+        }
+
+        .coin-target {
+            width: 88px;
+            /* Approx 23.5mm if 1px=0.26mm, will set via JS */
+            height: 88px;
+            border: 2px dashed #ff9800;
+            border-radius: 50%;
+            margin: 0 auto 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            color: #d84315;
+            background: rgba(255, 152, 0, 0.1);
+        }
+
+        .range-slider {
+            width: 100%;
+            max-width: 300px;
+        }
+
+        /* --- Visual Comparison Cards --- */
+        .comparison-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1.5rem;
+        }
+
+        @media(min-width: 768px) {
+            .comparison-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .comp-card {
+            background: #fff9c4;
+            border: 2px solid #fff59d;
+            border-radius: 16px;
+            padding: 1.5rem;
+            text-align: center;
+            transition: 0.2s;
+        }
+
+        .comp-card.blue {
+            background: #e3f2fd;
+            border-color: #bbdefb;
+        }
+
+        .comp-card.red {
+            background: #ffebee;
+            border-color: #ffcdd2;
+        }
+
+        .comp-card.green {
+            background: #e8f5e9;
+            border-color: #c8e6c9;
+        }
+
+        .comp-icon {
+            font-size: 3rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .comp-title {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #333;
+            margin-bottom: 0.5rem;
+            font-family: 'Zen Maru Gothic', sans-serif;
+        }
+
+        .comp-desc {
+            font-size: 0.95rem;
+            color: #555;
+            line-height: 1.5;
+            text-align: left;
+            background: rgba(255, 255, 255, 0.7);
+            padding: 10px;
+            border-radius: 8px;
+        }
+
+        .share-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            background: #00B900;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 1.1rem;
+            margin-top: 1.5rem;
+            transition: 0.2s;
+            box-shadow: 0 4px 6px rgba(0, 185, 0, 0.3);
+        }
+
+        .share-btn:hover {
+            background: #009900;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
+        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 身近なモノで量る！はかり不要ガイド 〜</p>
+    </header>
+
+    <div class="category-tabs">
+        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
+        <a href="visual-guide.html" class="category-tab active">📏 目分量・代用</a>
+        <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ パスタ計量</a>
+    </div>
+
+    <!-- Breadcrumb -->
+    <nav class="breadcrumb">
+        <a href="index.html">トップ</a>
+        <span>&gt;</span>
+        身近なモノで量る視覚的ガイド（2カップとは？）
+    </nav>
+
+    <main class="container">
+        <!-- RULER SECTION -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">📏 スマホ原寸大！スクリーン・定規</h2>
+            <p>スマホの画面を「定規」代わりにして、コップの中の液体の高さを測りましょう。一般的なコップなら、高さでだいたいの量がわかります。</p>
+
+            <div class="calibration-area">
+                <p>⚠️ 機種による誤差をなくすため、<strong>10円玉</strong>を画面の円に合わせてスライダーを調整してください。</p>
+                <div id="coin-target" class="coin-target">10円玉を<br>ここに置く</div>
+                <input type="range" id="scale-slider" class="range-slider" min="0.5" max="3" step="0.01" value="1.6">
+            </div>
+
+            <div class="ruler-container" id="ruler-container">
+                <div class="ruler-scale" id="ruler-scale">
+                    <!-- Marks injected via JS -->
+                </div>
+                <!-- Guide Lines -->
+                <div class="cup-guide-line" id="guide-1cup">
+                    <span class="cup-guide-label">一般的なコップの 200ml (約Xcm)</span>
+                </div>
+                <div class="cup-guide-line" id="guide-halfcup" style="border-top-color:#1976D2;">
+                    <span class="cup-guide-label" style="color:#1976D2;">100ml / 半カップ (約Ycm)</span>
+                </div>
+            </div>
+            <p style="font-size:0.7rem; color:#888; margin-top:10px; text-align:right;">
+                ※コップの直径（約7cm想定）により異なります。目安としてお使いください。</p>
+        </section>
+
+        <!-- VISUAL COMPARISON SECTION -->
+        <section class="guide-section">
+            <h2 class="guide-section-title">👀 身近なモノで目分量！換算カード</h2>
+
+            <div class="comparison-grid">
+                <!-- 2 Cups -->
+                <div class="comp-card blue">
+                    <span class="comp-icon">🍾</span>
+                    <h3 class="comp-title">2カップ（400ml）とは？</h3>
+                    <div class="comp-desc">
+                        レシピで「水2カップ」と出たら、<strong>500mlペットボトルの「ラベルの上端あたり」</strong>までと覚えましょう。<br><br>
+                        ※お米の場合は「約2.2合（360g）」になるため、炊飯器の目盛りを頼りにするのが無難です。
+                    </div>
+                </div>
+
+                <!-- 1 Cup -->
+                <div class="comp-card">
+                    <span class="comp-icon">☕</span>
+                    <h3 class="comp-title">1カップ（200ml）の代用</h3>
+                    <div class="comp-desc">
+                        ・<strong>紙コップ</strong>（通常180ml）：なみなみ1杯 ＋ 小さじ4杯分<br>
+                        ・<strong>マグカップ</strong>：約8分目ほど<br>
+                        ・<strong>お米の計量カップ（1合）</strong>：すりきり1杯（180ml）＋ 大さじ1強
+                    </div>
+                </div>
+
+                <!-- 1 Tbsp -->
+                <div class="comp-card red">
+                    <span class="comp-icon">🧴</span>
+                    <h3 class="comp-title">大さじ1（15ml）の代用</h3>
+                    <div class="comp-desc">
+                        ・<strong>ペットボトルのフタ</strong>：すりきりで約2杯分（※フタ1杯は約7.5mlです）<br>
+                        ・<strong>カレースプーン</strong>：ごく普通のサイズで、なみなみすくって約1杯分。
+                    </div>
+                </div>
+
+                <!-- 100g Meat/Veg -->
+                <div class="comp-card green">
+                    <span class="comp-icon">📱</span>
+                    <h3 class="comp-title">肉・野菜の 100g の目安</h3>
+                    <div class="comp-desc">
+                        ・<strong>面積</strong>：一般的なスマホ（iPhone等）の画面の約2/3ほどのサイズ。<br>
+                        ・<strong>厚み</strong>：約1cm程度。<br>
+                        ※薄切り肉なら、スマホサイズのパックに2重に重なっている程度。
+                    </div>
+                </div>
+            </div>
+
+            <div style="text-align: center;">
+                <a href="https://line.me/R/msg/text/?計量カップやはかりがない時に便利！「2カップはどのくらい？」スマホでわかる計量ガイド%0ahttps://unit-converter-cooking.example.com/visual-guide.html"
+                    target="_blank" rel="noopener" class="share-btn">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M21.543 10.493c0-4.329-3.963-7.85-8.834-7.85-4.87 0-8.833 3.521-8.833 7.85 0 3.93 2.585 7.24 6.208 7.749.262.054.618.156.711.378.084.2.055.512.026.702-.038.253-.243 1.468-.295 1.828-.088.595.344.823.774.568.32-.191 3.447-2.028 4.717-3.486 1.056-1.205 1.526-2.613 1.526-4.225V10.493h0Zm-11.896.795H8.381c-.266 0-.482-.218-.482-.486 0-.27.216-.487.482-.487h1.266c.264 0 .48.217.48.487 0 .268-.216.486-.48.486Zm4.417 0h-1.266c-.265 0-.481-.218-.481-.486 0-.27.216-.487.481-.487h1.266c.266 0 .482.217.482.487 0 .268-.216.486-.482.486Zm3.367-1.157c0 .268-.217.486-.484.486h-2.12c-.265 0-.482-.218-.482-.486 0-.27.217-.487.482-.487h2.12c.267 0 .484.217.484.487v.486Z"
+                            fill="white" />
+                    </svg>
+                    LINEでシェアする
+                </a>
+            </div>
+        </section>
+
+        <!-- SEO FAQ SECTION -->
+        <section class="seo-content">
+            <h2 class="section-title">🤔 「2カップとは」よくあるQ&A</h2>
+            <div class="faq-section">
+                <!-- FAQ 1 -->
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <span class="faq-q" itemprop="name">Q. 料理レシピの「2カップ」とは何mlですか？</span>
+                    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                        <p class="faq-a" itemprop="text">
+                            A. 一般的な料理の計量カップは1カップ＝200mlなので、<strong>2カップ＝400ml</strong>を指します。<br>
+                            例外として、お米の計量カップ（1合カップ）の場合は1カップ＝180mlなので、お米の2カップは360ml（約300g）となります。炊飯器の目盛りまたは400mlの水を基準にしてください。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 2 -->
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <span class="faq-q" itemprop="name">Q. 計量カップがない場合、コップで代用できますか？</span>
+                    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                        <p class="faq-a" itemprop="text">
+                            A.
+                            はい。オフィスやアウトドアでよくある「紙コップ」は、すりきり一杯で約180ml〜200mlです。また、マグカップ（250ml〜300ml程度）なら、<strong>約8分目</strong>まで入れると1カップ（200ml）の目安になります。<br>
+                            より正確に400ml量りたい場合は、500mlペットボトルを活用するのがおすすめです。
+                        </p>
+                    </div>
+                </div>
+
+                <!-- FAQ 3 -->
+                <div class="faq-item" itemscope itemprop="mainEntity" itemtype="https://schema.org/Question">
+                    <span class="faq-q" itemprop="name">Q. アメリカのレシピの「2 cups」も400mlですか？</span>
+                    <div itemprop="acceptedAnswer" itemscope itemtype="https://schema.org/Answer">
+                        <p class="faq-a" itemprop="text">
+                            A. いいえ。アメリカの1カップ（US Cup）は約240mlです。したがって、海外のレシピにおける <strong>2 cups は約480ml</strong>
+                            になります。日本の計量カップを使う場合は、2カップ強を量るか、当サイトの変換ツールをご利用ください。
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Floating Home Button -->
+    <a href="index.html" class="floating-home-btn" title="トップページに戻る">🏠</a>
+
+    <footer>
+        <p>&copy; 2026 Cooking Unit Converter</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const scaleSlider = document.getElementById('scale-slider');
+            const coinTarget = document.getElementById('coin-target');
+            const rulerScale = document.getElementById('ruler-scale');
+            const guide1Cup = document.getElementById('guide-1cup');
+            const guideHalfCup = document.getElementById('guide-halfcup');
+
+            // 物理的な距離 (mm) からピクセルへの変換係数
+            let ppiScale = parseFloat(localStorage.getItem('measuring_ppi_scale')) || 1.6;
+            scaleSlider.value = ppiScale;
+
+            // 一般的なコップ(内径約6.8cm想定)での高さ(mm)
+            // 体積 V = π * r^2 * h  =>  h = V / (π * r^2)
+            // 半径 r = 3.4cm
+            // 200ml = 200cm^3 => h = 200 / (3.14 * 3.4^2) = 200 / 36.2984 ≈ 5.5cm = 55mm
+            const H_1Cup_mm = 55;
+            const H_Half_mm = 27.5;
+
+            function renderRuler() {
+                // mmPx = 1mmあたりのピクセル数
+                // パスタ画面では直径(mm)*3.78*ppiScaleとしていた。
+                // 1インチ=25.4mm. ppiScaleは基準dpiの倍率。
+                // 基準1インチ96pxとすると、1mm = 96/25.4 ≈ 3.78px
+                const mmPx = 3.78 * ppiScale;
+
+                // コインターゲット更新 (10円玉 直径 23.5mm)
+                const coinPx = 23.5 * mmPx;
+                coinTarget.style.width = coinPx + 'px';
+                coinTarget.style.height = coinPx + 'px';
+
+                // ガイドラインの更新
+                guide1Cup.style.top = (H_1Cup_mm * mmPx) + 'px';
+                guideHalfCup.style.top = (H_Half_mm * mmPx) + 'px';
+
+                // 定規目盛りの描画
+                rulerScale.innerHTML = '';
+                // 25cm分描画
+                const totalMm = 250;
+                for (let i = 1; i <= totalMm; i++) {
+                    const topPx = i * mmPx;
+                    const mark = document.createElement('div');
+                    mark.className = 'ruler-mark';
+                    mark.style.top = topPx + 'px';
+
+                    if (i % 10 === 0) {
+                        mark.classList.add('cm');
+                        const label = document.createElement('div');
+                        label.className = 'ruler-label';
+                        label.style.top = topPx + 'px';
+                        label.textContent = (i / 10).toString();
+                        rulerScale.appendChild(label);
+                    } else if (i % 5 === 0) {
+                        mark.style.width = '20px';
+                    }
+                    rulerScale.appendChild(mark);
+                }
+            }
+
+            scaleSlider.addEventListener('input', (e) => {
+                ppiScale = parseFloat(e.target.value);
+                localStorage.setItem('measuring_ppi_scale', ppiScale);
+                renderRuler();
+            });
+
+            // 初期描画
+            renderRuler();
+        });
+    </script>
+</body>
+
+</html>
