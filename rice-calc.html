@@ -158,9 +158,10 @@
 
     <div class="category-tabs">
         <a href="index.html" class="category-tab">🍲 単位・g換算</a>
-        <a href="substitute-measuring.html" class="category-tab">⚖️ 代用・パスタ計量</a>
         <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
+        <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
         <a href="standard-weights.html" class="category-tab">🥦 野菜の重量</a>
+        <a href="substitute-measuring.html" class="category-tab">⚖️ パスタ計量</a>
         <a href="microwave-calc.html" class="category-tab">⚡ レンジ換算</a>
         <a href="rice-calc.html" class="category-tab active">🍚 お米換算</a>
     </div>
@@ -223,10 +224,47 @@
                         ※水量は米の体積 × 1.2倍、炊き上がりは生米の2.2倍で算出
                     </p>
                 </div>
+
+                <!-- PFC Card (Cooked Rice Basis) -->
+                <div id="nutrition-card" class="nutrition-card"
+                    style="margin-top: 1.5rem; background: #fff; border-color: #f9a825;">
+                    <div class="total-kcal">
+                        <span class="kcal-label">🔥 炊き上がり推定（100gあたり156kcal）</span>
+                        <span class="kcal-val" id="nutri-kcal">515</span><small class="kcal-unit">kcal</small>
+                    </div>
+                    <div class="pfc-grid">
+                        <div class="pfc-item p">
+                            <span class="pfc-label">P (Protein)</span>
+                            <span class="pfc-val" id="nutri-p">8.3</span><small class="pfc-unit">g</small>
+                        </div>
+                        <div class="pfc-item f">
+                            <span class="pfc-label">F (Fat)</span>
+                            <span class="pfc-val" id="nutri-f">1.0</span><small class="pfc-unit">g</small>
+                        </div>
+                        <div class="pfc-item c">
+                            <span class="pfc-label">C (Carb)</span>
+                            <span class="pfc-val" id="nutri-c">122.4</span><small class="pfc-unit">g</small>
+                        </div>
+                    </div>
+                    <div class="nutrition-source">
+                        ※炊き上がり白米として計算（出典：文科省 日本食品標準成分表）
+                    </div>
+                </div>
             </div>
         </section>
 
-        <!-- SEO FAQ Section -->
+        <!-- Visual Guide Banner -->
+        <div
+            style="margin-top: 2rem; background: linear-gradient(135deg, #e3f2fd, #bbdefb); border-radius: 16px; padding: 1.5rem; text-align: center; border: 1px solid #90caf9;">
+            <div style="font-size: 2rem; margin-bottom: 5px;">📱</div>
+            <h3 style="margin: 0 0 10px 0; color: #1565c0; font-size: 1.1rem;">計量カップやはかりがない？</h3>
+            <p style="font-size: 0.85rem; color: #333; margin-bottom: 15px;">スマホ画面を定規代わりにしたり、身近なモノで量る裏ワザはこちら！</p>
+            <a href="visual-guide.html"
+                style="display: inline-block; background: #1976D2; color: #fff; text-decoration: none; padding: 10px 20px; border-radius: 30px; font-weight: bold; font-size: 0.9rem; box-shadow: 0 4px 6px rgba(25, 118, 210, 0.3);">📏
+                視覚的ガイドを見る</a>
+        </div>
+
+        <!-- SEO Content -->
         <section class="seo-content"
             style="margin-top: 2rem; background: #fff8e1; padding: 1.5rem; border-radius: 20px;">
             <h3 style="color: #bf360c; margin-top: 0;">お米の計量「逆引き」Q&A</h3>
@@ -362,8 +400,16 @@
         function calculateExtras() {
             const ml = parseFloat(mlInput.value) || 0;
             const grams = parseFloat(gramInput.value) || 0;
+            const cookedG = Math.round(grams * 2.2);
             waterDisplay.textContent = Math.round(ml * 1.2);
-            cookedDisplay.textContent = Math.round(grams * 2.2);
+            cookedDisplay.textContent = cookedG;
+
+            // PFC Calculation (Cooked Rice: 156kcal, P:2.5, F:0.3, C:37.1 per 100g)
+            const ratio = cookedG / 100;
+            document.getElementById('nutri-kcal').textContent = Math.round(156 * ratio);
+            document.getElementById('nutri-p').textContent = (2.5 * ratio).toFixed(1);
+            document.getElementById('nutri-f').textContent = (0.3 * ratio).toFixed(1);
+            document.getElementById('nutri-c').textContent = (37.1 * ratio).toFixed(1);
         }
 
         function setRice(cups) {
