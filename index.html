@@ -204,75 +204,124 @@
     </nav>
 
     <main class="container">
-        <!-- Ingredient Density Option -->
-        <div class="input-group ingredient-option">
-            <div class="ingredient-select">
-                <select id="ingredient-select" class="unit-select" aria-label="食材を選択して比重を適用">
-                    <option value="none" selected>指定なし（基本・お水と同じ）</option>
-                    <option value="shoyu">醤油 🧂</option>
-                    <option value="sake">料理酒 🍶</option>
-                    <option value="mirin">みりん 🍶</option>
-                    <option value="sugar">砂糖 🧂</option>
-                    <option value="flour">小麦粉・片栗粉 🥣</option>
-                    <option value="butter">バター 🧈</option>
-                    <option value="rice">お米 🍚</option>
-                    <option value="ap-flour">中力粉 (AP粉) 🥣</option>
-                    <option value="brown-sugar">ブラウンシュガー 🧂</option>
+        <!-- Quick Conversion Board -->
+        <section class="quick-conversion-board">
+            <h2 class="board-title">⚡ クイック変換ボード</h2>
+            
+            <!-- Main Input Area -->
+            <div class="main-input-area">
+                <input type="number" id="quick-input" class="quick-number" placeholder="数値を入力"
+                    inputmode="decimal" step="any" aria-label="変換する数値を入力">
+                <select id="quick-unit" class="quick-unit-select" aria-label="単位を選択">
+                    <option value="tbsp">大さじ</option>
+                    <option value="tsp">小さじ</option>
+                    <option value="cup">カップ</option>
+                    <option value="ml" selected>ml</option>
+                    <option value="g">g</option>
+                    <option value="us-cup">USカップ</option>
+                    <option value="uk-cup">UKカップ</option>
+                    <option value="oz">oz</option>
                 </select>
             </div>
-            <div id="density-msg" class="density-info hidden"></div>
-        </div>
-
-        <div class="conversion-row source-row">
-            <input type="number" id="source-input" class="calc-input large-input" placeholder="数値を入力"
-                inputmode="decimal" step="any" aria-label="変換元の数値を入力">
-            <select id="source-unit" class="unit-select" aria-label="変換元の単位を選択">
-                <option value="g">グラム (g)</option>
-                <option value="ml" selected>cc (ml)</option>
-                <option value="cup">カップ (200ml)</option>
-                <option value="tbsp">大さじ (15ml)</option>
-                <option value="tsp">小さじ (5ml)</option>
-                <option value="us-cup">USカップ (約237ml)</option>
-                <option value="uk-cup">UKカップ (約284ml)</option>
-                <option value="us-fl-oz">US液量オンス (fl oz)</option>
-                <option value="oz">オンス (oz/重さ)</option>
-                <option value="lb">ポンド (lb)</option>
-                <option value="celsius">摂氏 (°C)</option>
-                <option value="fahrenheit">華氏 (°F)</option>
-            </select>
-        </div>
-
-        <div class="converter-arrow pop-arrow">↓</div>
-
-        <div class="conversion-row destination-row">
-            <input type="text" id="target-output" class="calc-input result-input" readonly aria-label="変換結果">
-            <select id="target-unit" class="unit-select" aria-label="変換先の単位を選択">
-                <option value="g">グラム (g)</option>
-                <option value="ml">cc (ml)</option>
-                <option value="cup" selected>カップ (200ml)</option>
-                <option value="tbsp">大さじ (15ml)</option>
-                <option value="tsp">小さじ (5ml)</option>
-                <option value="us-cup">USカップ (約237ml)</option>
-                <option value="uk-cup">UKカップ (約284ml)</option>
-                <option value="oz">オンス (oz)</option>
-                <option value="lb">ポンド (lb)</option>
-                <option value="celsius">摂氏 (°C)</option>
-                <option value="fahrenheit">華氏 (°F)</option>
-            </select>
-        </div>
-
-        <!-- Reference Section -->
-        <div class="reference-section">
-            <p class="ref-title">その他の換算例：</p>
-            <div id="reference-list" class="reference-list">
-                <!-- Reference list will be populated by JS -->
+            
+            <!-- Current Status Display -->
+            <div class="current-status" id="current-status">
+                <span class="status-text">💧 水（比重1.0）を基準に計算中</span>
             </div>
-            <p class="unit-note">※USカップ=236.59ml、UKカップ=284.13mlで計算しています</p>
-        </div>
-
-        <div class="reset-area">
-            <button id="reset-btn" type="button" aria-label="入力をリセット">リセット</button>
-            </section>
+            
+            <!-- Ingredient Option Toggle -->
+            <div class="ingredient-option-toggle">
+                <button class="option-toggle-btn" id="ingredient-toggle" aria-expanded="false">
+                    <span class="toggle-text">食材を指定して計算（小麦粉・砂糖など）</span>
+                    <span class="toggle-icon">▼</span>
+                </button>
+            </div>
+            
+            <!-- Collapsible Ingredient Selection -->
+            <div class="ingredient-selection-panel" id="ingredient-panel" hidden>
+                <div class="ingredient-chips">
+                    <button class="ingredient-chip active" data-ingredient="none">💧 水</button>
+                    <button class="ingredient-chip" data-ingredient="flour">🥣 小麦粉</button>
+                    <button class="ingredient-chip" data-ingredient="sugar">🧂 砂糖</button>
+                    <button class="ingredient-chip" data-ingredient="butter">🧈 バター</button>
+                    <button class="ingredient-chip" data-ingredient="rice">🍚 お米</button>
+                    <button class="ingredient-chip" data-ingredient="shoyu">🧂 醤油</button>
+                    <button class="ingredient-chip" data-ingredient="sake">🍶 酒</button>
+                    <button class="ingredient-chip" data-ingredient="mirin">🍶 みりん</button>
+                    <button class="ingredient-chip" data-ingredient="ap-flour">🥣 中力粉</button>
+                    <button class="ingredient-chip" data-ingredient="brown-sugar">🧂 ブラウン糖</button>
+                </div>
+            </div>
+            
+            <!-- Quick Results Board -->
+            <div class="quick-results-board">
+                <!-- Volume Card -->
+                <div class="result-card volume">
+                    <div class="card-title">🥤 体積</div>
+                    <div class="result-item">
+                        <span class="value" id="vol-ml">-</span>
+                        <span class="unit">ml</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="value" id="vol-cup">-</span>
+                        <span class="unit">カップ</span>
+                    </div>
+                </div>
+                
+                <!-- Mass Card -->
+                <div class="result-card mass">
+                    <div class="card-title">⚖️ 重量</div>
+                    <div class="result-item">
+                        <span class="value" id="mass-g">-</span>
+                        <span class="unit">g</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="value" id="mass-oz">-</span>
+                        <span class="unit">oz</span>
+                    </div>
+                </div>
+                
+                <!-- Tools Card -->
+                <div class="result-card tools">
+                    <div class="card-title">🥄 器具</div>
+                    <div class="result-item">
+                        <span class="value" id="tools-tbsp">-</span>
+                        <span class="unit">大さじ</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="value" id="tools-tsp">-</span>
+                        <span class="unit">小さじ</span>
+                    </div>
+                </div>
+                
+                <!-- International Card -->
+                <div class="result-card international">
+                    <div class="card-title">🌍 海外</div>
+                    <div class="result-item">
+                        <span class="value" id="int-us-cup">-</span>
+                        <span class="unit">USカップ</span>
+                    </div>
+                    <div class="result-item">
+                        <span class="value" id="int-uk-cup">-</span>
+                        <span class="unit">UKカップ</span>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- SEO Structure (Hidden for crawlers) -->
+            <dl class="quick-results-dl sr-only" id="seo-dl">
+                <!-- Dynamically populated -->
+            </dl>
+            
+            <!-- Dynamic SEO JSON-LD -->
+            <script type="application/ld+json" id="dynamic-structured-data">
+            {
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": []
+            }
+            </script>
+        </section>
 
             <!-- ========================================== -->
             <!-- Amazon Associates Container -->
