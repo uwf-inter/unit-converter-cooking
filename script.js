@@ -1,5 +1,301 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // DOM Elements
+    // Specific Gravity Data (g/ml) - Move to global scope
+    window.INGREDIENT_DATA = {
+        'none': { density: 1.0, name: '', icon: '💧' },
+        'shoyu': { density: 1.2, name: '醤油', icon: '🧂' },
+        'sake': { density: 1.0, name: '酒', icon: '🍶' },
+        'mirin': { density: 1.2, name: 'みりん', icon: '🍶' },
+        'sugar': { density: 0.6, name: '砂糖', icon: '🧂' },
+        'flour': { density: 0.5, name: '小麦粉/片栗粉', icon: '🥣' },
+        'butter': { density: 0.8, name: 'バター', icon: '🧈' },
+        'rice': { density: 0.8, name: 'お米', icon: '🍚' },
+        'ap-flour': { density: 0.52, name: '中力粉 (All-purpose)', icon: '🥣' },
+        'brown-sugar': { density: 0.83, name: 'ブラウンシュガー (Packed)', icon: '🧂' }
+    };
+
+    // Quick Conversion Board Elements
+    const quickInput = document.getElementById('quick-input');
+    const quickUnit = document.getElementById('quick-unit');
+    const ingredientChips = document.querySelectorAll('.ingredient-chip');
+    const ingredientToggle = document.getElementById('ingredient-toggle');
+    const ingredientPanel = document.getElementById('ingredient-panel');
+    const currentStatus = document.getElementById('current-status');
+    const seoDl = document.getElementById('seo-dl');
+    const dynamicStructuredData = document.getElementById('dynamic-structured-data');
+    
+    // Current ingredient state
+    let currentIngredient = 'none';
+    
+    // Toggle ingredient panel
+    if (ingredientToggle && ingredientPanel) {
+        // Initialize panel state
+        ingredientPanel.hidden = true;
+        ingredientToggle.setAttribute('aria-expanded', 'false');
+        
+        ingredientToggle.addEventListener('click', () => {
+            const isExpanded = ingredientToggle.getAttribute('aria-expanded') === 'true';
+            const toggleIcon = ingredientToggle.querySelector('.toggle-icon');
+            
+            console.log('Toggle clicked, isExpanded:', isExpanded); // Debug log
+            
+            if (isExpanded) {
+                ingredientPanel.hidden = true;
+                ingredientToggle.setAttribute('aria-expanded', 'false');
+                if (toggleIcon) toggleIcon.textContent = '▼';
+            } else {
+                ingredientPanel.hidden = false;
+                ingredientToggle.setAttribute('aria-expanded', 'true');
+                if (toggleIcon) toggleIcon.textContent = '▲';
+                
+                // Add animation class
+                ingredientPanel.style.animation = 'slideDown 0.3s ease';
+            }
+        });
+    }
+    
+    // Update status display
+    function updateStatusDisplay() {
+        if (!currentStatus) return;
+        
+        const ingredientData = window.INGREDIENT_DATA[currentIngredient];
+        if (!ingredientData) return;
+        
+        const ingredientName = ingredientData.name;
+        const density = ingredientData.density;
+        const icon = ingredientData.icon;
+        
+        if (currentIngredient === 'none') {
+            currentStatus.querySelector('.status-text').textContent = '💧 水（比重1.0）を基準に計算中';
+        } else {
+            currentStatus.querySelector('.status-text').textContent = `${icon} ${ingredientName}（比重${density}）で計算中`;
+        }
+    }
+    
+    // Quick Conversion Function
+    function calculateQuickConversion() {
+        if (!quickInput || !quickUnit) return;
+        
+        const value = parseFloat(quickInput.value) || 0;
+        const sourceUnit = quickUnit.value;
+        const ingredientData = window.INGREDIENT_DATA[currentIngredient];
+        
+        if (!ingredientData) return;
+        
+        const density = ingredientData.density;
+        const ingredientName = ingredientData.name;
+        
+        if (value === 0) {
+            clearQuickResults();
+            return;
+        }
+        
+        // 1. Convert to base ml
+        let baseMl = 0;
+        switch (sourceUnit) {
+            case 'g': baseMl = value / density; break;
+            case 'oz': baseMl = (value * 28.35) / density; break;
+            case 'ml': baseMl = value; break;
+            case 'cup': baseMl = value * 200; break;
+            case 'tbsp': baseMl = value * 15; break;
+            case 'tsp': baseMl = value * 5; break;
+            case 'us-cup': baseMl = value * 236.59; break;
+            case 'uk-cup': baseMl = value * 284.13; break;
+            default: baseMl = value;
+        }
+        
+        // 2. Calculate all conversions
+        const conversions = {
+            volume: {
+                ml: baseMl,
+                cup: baseMl / 200,
+                us_cup: baseMl / 236.59,
+                uk_cup: baseMl / 284.13,
+                tbsp: baseMl / 15,
+                tsp: baseMl / 5
+            },
+            mass: {
+                g: baseMl * density,
+                oz: (baseMl * density) / 28.35,
+                lb: (baseMl * density) / 453.59
+            }
+        };
+        
+        // 3. Update UI
+        updateQuickResults(conversions, value, sourceUnit, ingredientName);
+        
+        // 4. Update SEO
+        updateSEOStructure(conversions, value, sourceUnit, ingredientName);
+    }
+    
+    // Update Quick Results UI
+    function updateQuickResults(conversions, inputValue, inputUnit, ingredientName) {
+        // Volume Card
+        const volMl = document.getElementById('vol-ml');
+        const volCup = document.getElementById('vol-cup');
+        if (volMl) volMl.textContent = formatNumber(conversions.volume.ml);
+        if (volCup) volCup.textContent = formatNumber(conversions.volume.cup);
+        
+        // Mass Card
+        const massG = document.getElementById('mass-g');
+        const massOz = document.getElementById('mass-oz');
+        if (massG) massG.textContent = formatNumber(conversions.mass.g);
+        if (massOz) massOz.textContent = formatNumber(conversions.mass.oz);
+        
+        // Tools Card
+        const toolsTbsp = document.getElementById('tools-tbsp');
+        const toolsTsp = document.getElementById('tools-tsp');
+        if (toolsTbsp) toolsTbsp.textContent = formatNumber(conversions.volume.tbsp);
+        if (toolsTsp) toolsTsp.textContent = formatNumber(conversions.volume.tsp);
+        
+        // International Card
+        const intUsCup = document.getElementById('int-us-cup');
+        const intUkCup = document.getElementById('int-uk-cup');
+        if (intUsCup) intUsCup.textContent = formatNumber(conversions.volume.us_cup);
+        if (intUkCup) intUkCup.textContent = formatNumber(conversions.volume.uk_cup);
+    }
+    
+    // Clear Quick Results
+    function clearQuickResults() {
+        const resultElements = document.querySelectorAll('.result-card .value');
+        resultElements.forEach(el => el.textContent = '-');
+        
+        if (seoDl) seoDl.innerHTML = '';
+        if (dynamicStructuredData) {
+            dynamicStructuredData.textContent = JSON.stringify({
+                "@context": "https://schema.org",
+                "@type": "FAQPage",
+                "mainEntity": []
+            });
+        }
+    }
+    
+    // Update SEO Structure
+    function updateSEOStructure(conversions, inputValue, inputUnit, ingredientName) {
+        if (!seoDl || !dynamicStructuredData) return;
+        
+        const unitLabels = {
+            'tbsp': '大さじ',
+            'tsp': '小さじ',
+            'cup': 'カップ',
+            'ml': 'ml',
+            'g': 'g',
+            'us-cup': 'USカップ',
+            'uk-cup': 'UKカップ',
+            'oz': 'oz'
+        };
+        
+        const inputLabel = unitLabels[inputUnit] || inputUnit;
+        const ingredientSuffix = ingredientName ? `（${ingredientName}）` : '';
+        
+        // Create DL structure
+        let dlHtml = '';
+        const faqData = [];
+        
+        // Add main conversion pairs
+        const mainConversions = [
+            { unit: 'ml', value: conversions.volume.ml },
+            { unit: 'g', value: conversions.mass.g },
+            { unit: 'cup', value: conversions.volume.cup },
+            { unit: 'tbsp', value: conversions.volume.tbsp },
+            { unit: 'tsp', value: conversions.volume.tsp },
+            { unit: 'us-cup', value: conversions.volume.us_cup },
+            { unit: 'uk-cup', value: conversions.volume.uk_cup },
+            { unit: 'oz', value: conversions.mass.oz }
+        ];
+        
+        mainConversions.forEach(conv => {
+            if (conv.value > 0) {
+                const label = unitLabels[conv.unit];
+                dlHtml += `<dt>${inputLabel}${inputValue}${ingredientSuffix}</dt>`;
+                dlHtml += `<dd>${formatNumber(conv.value)}${label}</dd>`;
+                
+                faqData.push({
+                    "@type": "Question",
+                    "name": `${inputLabel}${inputValue}${ingredientSuffix}は何${label}？`,
+                    "acceptedAnswer": {
+                        "@type": "Answer",
+                        "text": `${inputLabel}${inputValue}${ingredientSuffix}は${formatNumber(conv.value)}${label}です`
+                    }
+                });
+            }
+        });
+        
+        seoDl.innerHTML = dlHtml;
+        
+        // Update JSON-LD
+        dynamicStructuredData.textContent = JSON.stringify({
+            "@context": "https://schema.org",
+            "@type": "FAQPage",
+            "mainEntity": faqData
+        });
+    }
+    
+    // Ingredient chip handlers
+    if (ingredientChips.length > 0) {
+        console.log('Found ingredient chips:', ingredientChips.length); // Debug log
+        
+        ingredientChips.forEach(chip => {
+            chip.addEventListener('click', () => {
+                const ingredient = chip.dataset.ingredient;
+                console.log('Chip clicked:', ingredient); // Debug log
+                
+                currentIngredient = ingredient;
+                
+                // Update active state
+                ingredientChips.forEach(c => c.classList.remove('active'));
+                chip.classList.add('active');
+                
+                // Update status display
+                updateStatusDisplay();
+                
+                // Recalculate with new ingredient
+                calculateQuickConversion();
+            });
+        });
+    } else {
+        console.log('No ingredient chips found'); // Debug log
+    }
+    
+    // Input event listeners
+    if (quickInput) {
+        quickInput.addEventListener('input', calculateQuickConversion);
+        quickInput.addEventListener('keyup', calculateQuickConversion);
+    }
+    
+    if (quickUnit) {
+        quickUnit.addEventListener('change', calculateQuickConversion);
+    }
+    
+    // Format number helper
+    function formatNumber(num) {
+        if (isNaN(num)) return '-';
+        
+        // Round to appropriate precision
+        if (num < 0.01) return num.toFixed(3);
+        if (num < 1) return num.toFixed(2);
+        if (num < 10) return num.toFixed(1);
+        return Math.round(num);
+    }
+
+    // Initialize status display and default calculation
+    updateStatusDisplay();
+    
+    // Debug: Check if elements exist
+    console.log('Quick elements found:', {
+        quickInput: !!quickInput,
+        quickUnit: !!quickUnit,
+        ingredientToggle: !!ingredientToggle,
+        ingredientPanel: !!ingredientPanel,
+        ingredientChips: ingredientChips.length
+    });
+    
+    if (quickInput) {
+        // Set default value to trigger initial calculation
+        quickInput.value = '1';
+        calculateQuickConversion();
+    }
+
+    // DOM Elements (Legacy - keeping for compatibility)
     const sourceInput = document.getElementById('source-input');
     const sourceUnitSelect = document.getElementById('source-unit');
     const targetOutput = document.getElementById('target-output');
@@ -8,38 +304,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const densityMsg = document.getElementById('density-msg');
     const referenceList = document.getElementById('reference-list');
     const resetBtn = document.getElementById('reset-btn');
-
-    // Specific Gravity Data (g/ml)
-    const INGREDIENT_DATA = {
-        'none': { density: 1.0, name: '' },
-        'shoyu': { density: 1.2, name: '醤油' },
-        'sake': { density: 1.0, name: '酒' },
-        'mirin': { density: 1.2, name: 'みりん' },
-        'sugar': { density: 0.6, name: '砂糖' },
-        'flour': { density: 0.5, name: '小麦粉/片栗粉' },
-        'butter': { density: 0.8, name: 'バター' },
-        'rice': { density: 0.8, name: 'お米' },
-        'ap-flour': { density: 0.52, name: '中力粉 (All-purpose)' },
-        'brown-sugar': { density: 0.83, name: 'ブラウンシュガー (Packed)' }
-    };
-
-    // Nutrition Data per 100g (kcal, Protein, Fat, Carbohydrate)
-    const NUTRITION_DATA = {
-        'flour': { kcal: 368, p: 8.0, f: 1.7, c: 75.9 }, // 薄力粉
-        'ap-flour': { kcal: 368, p: 10.0, f: 1.5, c: 73.0 }, // 中力粉
-        'sugar': { kcal: 384, p: 0, f: 0, c: 99.2 }, // 上白糖
-        'brown-sugar': { kcal: 354, p: 0, f: 0, c: 89.7 },
-        'rice': { kcal: 356, p: 6.1, f: 0.9, c: 77.1 }, // 生米 (approx)
-        'butter': { kcal: 745, p: 0.6, f: 81.0, c: 0.2 },
-        // Specialized from Request
-        'oats_rolled': { kcal: 380, p: 13.7, f: 5.7, c: 69.1 },
-        'oats_quick': { kcal: 380, p: 13.7, f: 5.7, c: 69.1 },
-        'protein': { kcal: 390, p: 75.0, f: 5.0, c: 10.0 },
-        'chicken_mune_no_skin': { kcal: 108, p: 22.3, f: 1.5, c: 0 },
-        'rice_cooked': { kcal: 156, p: 2.5, f: 0.3, c: 37.1 },
-        'pasta_cooked': { kcal: 150, p: 5.2, f: 0.9, c: 28.4 },
-        'egg': { kcal: 142, p: 12.3, f: 10.3, c: 0.3 }
-    };
 
     // Unit definitions
     const units = {
@@ -73,6 +337,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'fahrenheit': 350
     };
 
+    // --- Legacy Functions (keeping for compatibility) ---
     // Calculate conversion
     function calculate() {
         if (!sourceInput || !sourceUnitSelect || !targetUnitSelect || !ingredientSelect) return;
@@ -84,8 +349,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const sourceUnit = sourceUnitSelect.value;
         const targetUnit = targetUnitSelect.value;
         const ingredientKey = ingredientSelect.value;
-        const density = INGREDIENT_DATA[ingredientKey].density;
-        const ingredientName = INGREDIENT_DATA[ingredientKey].name;
+        const density = window.INGREDIENT_DATA[ingredientKey].density;
+        const ingredientName = window.INGREDIENT_DATA[ingredientKey].name;
 
         // Update Density Message
         if (ingredientKey !== 'none' && ingredientName) {
