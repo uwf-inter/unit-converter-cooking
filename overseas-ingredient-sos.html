@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>海外の粉物・個体系を日本の単位でチェック！</title>
+    <meta name="description" content="海外のレシピで出てくる粉物や個体系の単位を、日本の単位に簡単換算！All-purpose flour 1cupのグラム数、バター1スティックの重さ、1lbを卵やスマホで量る方法を、かわいいイラストと一緒に分かりやすく解説します。">
+    <meta name="keywords" content="All-purpose flour 1cup 何g,バター 1スティック 何g,1lb 何グラム,海外レシピ 粉物,バター 換算,ポンド グラム,卵 1個 何g">
+    
+    <!-- Open Graph -->
+    <meta property="og:title" content="海外の粉物・個体系を日本の単位でチェック！">
+    <meta property="og:description" content="海外の粉物・個体系を日本の単位で簡単換算">
+    <meta property="og:type" content="article">
+    <meta property="og:url" content="https://uwf-inter.github.io/unit-converter-cooking/overseas-ingredient-sos.html">
+    
+    <!-- Canonical -->
+    <link rel="canonical" href="https://uwf-inter.github.io/unit-converter-cooking/overseas-ingredient-sos.html">
+    
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <h1>🥣 海外の粉物・個体系を日本の単位でチェック！</h1>
+        <p>All-purpose flour、バター、ポンドなどを日本の単位で簡単換算</p>
+    </header>
+
+    <main>
+        <div class="overseas-sos-header">
+            <h2>� 海外のレシピって、重さではなくカサで量るんだよね！</h2>
+            <p>日本ではグラムで量るのが当たり前ですが、海外では「1カップの小麦粉」や「1スティックのバター」なんて言っちゃうんです。これを知らないと、お菓子作りが失敗しちゃいます。でも大丈夫！身近なもので量る方法をお教えします。</p>
+        </div>
+
+        <div class="soft-card">
+            <h2>🧮 海外の単位を日本の単位に即時変換！</h2>
+            <p>数値を入れるだけで、簡単に換算できますよ。</p>
+            
+            <div class="calc-section">
+                <div class="calc-input-group">
+                    <input type="number" id="input-value" class="calc-input" placeholder="数値を入力" value="1">
+                    <select id="input-unit" class="calc-input">
+                        <option value="cup-flour">🌾 小麦粉 1カップ</option>
+                        <option value="stick-butter">🧈 バター 1スティック</option>
+                        <option value="lb">⚖️ ポンド 1lb</option>
+                        <option value="oz">🥄 オンス 1oz</option>
+                        <option value="egg-large">🥚 卵 Lサイズ 1個</option>
+                    </select>
+                </div>
+                
+                <div class="calc-results" id="calc-results">
+                    <div class="result-item">
+                        <div class="result-value" id="result-grams">-</div>
+                        <div class="result-label">グラム (g)</div>
+                    </div>
+                    <div class="result-item">
+                        <div class="result-value" id="result-household">-</div>
+                        <div class="result-label">身近なもので比較</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <section class="ingredient-grid">
+            <h2>🥣 粉物の換算ガイド</h2>
+            
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">🌾</div>
+                    <div class="ingredient-title">
+                        <h3>All-purpose Flour</h3>
+                        <p>中力粉（オールパーパス粉）</p>
+                    </div>
+                </div>
+                
+                <table class="conversion-table">
+                    <tr>
+                        <th>単位</th>
+                        <th>グラム数</th>
+                        <th>日本の単位</th>
+                    </tr>
+                    <tr>
+                        <td>1カップ</td>
+                        <td><strong>125g</strong></td>
+                        <td>1カップ＋大さじ1杯</td>
+                    </tr>
+                    <tr>
+                        <td>1/2カップ</td>
+                        <td>63g</td>
+                        <td>1/2カップ＋小さじ1杯</td>
+                    </tr>
+                    <tr>
+                        <td>1/4カップ</td>
+                        <td>31g</td>
+                        <td>大さじ2杯</td>
+                    </tr>
+                </table>
+                
+                <div class="household-comparison">
+                    <h4>🏠 身近なもので比較</h4>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥄</div>
+                        <div class="comparison-text">大さじ1杯 = 約8g</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥄</div>
+                        <div class="comparison-text">小さじ1杯 = 約3g</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">📱</div>
+                        <div class="comparison-text">125g = スマートフォン約1台分</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">🧈</div>
+                    <div class="ingredient-title">
+                        <h3>Butter</h3>
+                        <p>バター</p>
+                    </div>
+                </div>
+                
+                <table class="conversion-table">
+                    <tr>
+                        <th>単位</th>
+                        <th>グラム数</th>
+                        <th>日本の単位</th>
+                    </tr>
+                    <tr>
+                        <td>1スティック</td>
+                        <td><strong>113g</strong></td>
+                        <td>100g＋大さじ1杯強</td>
+                    </tr>
+                    <tr>
+                        <td>1カップ</td>
+                        <td>227g</td>
+                        <td>200g＋大さじ3杯</td>
+                    </tr>
+                    <tr>
+                        <td>1/2カップ</td>
+                        <td>113g</td>
+                        <td>100g＋大さじ1杯強</td>
+                    </tr>
+                </table>
+                
+                <div class="household-comparison">
+                    <h4>🏠 身近なもので比較</h4>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥄</div>
+                        <div class="comparison-text">大さじ1杯 = 約12g</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">📱</div>
+                        <div class="comparison-text">113g = スマートフォン約1台分</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥚</div>
+                        <div class="comparison-text">113g = 卵Lサイズ約2個分</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">⚖️</div>
+                    <div class="ingredient-title">
+                        <h3>Weight Units</h3>
+                        <p>重量単位（ポンド・オンス）</p>
+                    </div>
+                </div>
+                
+                <table class="conversion-table">
+                    <tr>
+                        <th>単位</th>
+                        <th>グラム数</th>
+                        <th>身近なもので比較</th>
+                    </tr>
+                    <tr>
+                        <td>1ポンド (lb)</td>
+                        <td><strong>453.6g</strong></td>
+                        <td>卵Lサイズ約9個</td>
+                    </tr>
+                    <tr>
+                        <td>1オンス (oz)</td>
+                        <td>28.35g</td>
+                        <td>卵Mサイズ約半個</td>
+                    </tr>
+                    <tr>
+                        <td>1/2ポンド</td>
+                        <td>226.8g</td>
+                        <td>卵Lサイズ約4.5個</td>
+                    </tr>
+                </table>
+                
+                <div class="household-comparison">
+                    <h4>🏠 身近なもので比較</h4>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥚</div>
+                        <div class="comparison-text">1lb = 卵Lサイズ9個分（約50g×9）</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">📱</div>
+                        <div class="comparison-text">1lb = スマートフォン約2.5台分</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🍞</div>
+                        <div class="comparison-text">1lb = 食パン6枚切り約1枚分</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="ingredient-card">
+                <div class="ingredient-header">
+                    <div class="ingredient-icon">🥚</div>
+                    <div class="ingredient-title">
+                        <h3>Eggs</h3>
+                        <p>卵（サイズ別重量）</p>
+                    </div>
+                </div>
+                
+                <table class="conversion-table">
+                    <tr>
+                        <th>サイズ</th>
+                        <th>グラム数</th>
+                        <th>特徴</th>
+                    </tr>
+                    <tr>
+                        <td>LLサイズ</td>
+                        <td><strong>70g以上</strong></td>
+                        <td>日本の特玉に相当</td>
+                    </tr>
+                    <tr>
+                        <td>Lサイズ</td>
+                        <td>65-70g</td>
+                        <td>日本のL玉に相当</td>
+                    </tr>
+                    <tr>
+                        <td>Mサイズ</td>
+                        <td>55-60g</td>
+                        <td>日本のM玉に相当</td>
+                    </tr>
+                </table>
+                
+                <div class="household-comparison">
+                    <h4>🏠 身近なもので比較</h4>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🥄</div>
+                        <div class="comparison-text">卵1個 = 大さじ約4杯分</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">🍞</div>
+                        <div class="comparison-text">卵1個 = 食パン6枚切り約半枚分</div>
+                    </div>
+                    <div class="comparison-item">
+                        <div class="comparison-icon">☕</div>
+                        <div class="comparison-text">卵1個 = コーヒーカップ約1.3杯分の水</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="faq-section">
+            <h2>❓ よくある質問</h2>
+            <div class="faq-item">
+                <h3>Q: All-purpose flour 1cupは何グラムですか？</h3>
+                <p>A: All-purpose flour 1cupは125gです。日本の計量カップで量る場合、1カップ（200ml）＋大さじ1杯（約8g）に相当します。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: バター1スティックは何グラムですか？</h3>
+                <p>A: バター1スティックは113gです。日本のバター100g＋大さじ1杯強（約13g）に相当します。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 1ポンドは何グラムですか？</h3>
+                <p>A: 1ポンドは453.6gです。日本の卵Lサイズ約9個分、スマートフォン約2.5台分の重さに相当します。</p>
+            </div>
+            <div class="faq-item">
+                <h3>Q: 海外の卵と日本の卵のサイズは違いますか？</h3>
+                <p>A: アメリカのLサイズは65-70gで、日本のL玉にほぼ相当します。ただし、レシピによってはMサイズ（55-60g）を基準にしている場合もあります。</p>
+            </div>
+        </section>
+
+        <section class="related-links">
+            <h2>🔗 こんなツールも人気です！</h2>
+            <ul>
+                <li><a href="global-matrix.html" class="gentle-chip">📊 グローバル食材換算マトリックス</a></li>
+                <li><a href="substitute-overseas-cup.html" class="gentle-chip">🌍 海外カップの代用ガイド</a></li>
+                <li><a href="overseas-oven-calc.html" class="gentle-chip">🌡️ オーブン・レンジの海外単位変換</a></li>
+                <li><a href="index.html" class="gentle-chip">🏠 トップページ - クイック変換ボード</a></li>
+            </ul>
+        </section>
+    </main>
+
+    <footer>
+        <p>&copy; 2024 お料理単位くん - 海外レシピの単位変換をサポート</p>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const inputValue = document.getElementById('input-value');
+            const inputUnit = document.getElementById('input-unit');
+            const resultGrams = document.getElementById('result-grams');
+            const resultHousehold = document.getElementById('result-household');
+            
+            const conversionData = {
+                'cup-flour': { grams: 125, household: '大さじ15杯＋小さじ1杯', unit: 'カップ' },
+                'stick-butter': { grams: 113, household: 'スマートフォン1台分', unit: 'スティック' },
+                'lb': { grams: 453.6, household: '卵Lサイズ9個分', unit: 'ポンド' },
+                'oz': { grams: 28.35, household: '卵Mサイズ半個分', unit: 'オンス' },
+                'egg-large': { grams: 68, household: '大さじ4杯分', unit: '卵Lサイズ1個' }
+            };
+            
+            function calculateConversion() {
+                const value = parseFloat(inputValue.value) || 0;
+                const unit = inputUnit.value;
+                const data = conversionData[unit];
+                
+                if (!data || value === 0) {
+                    resultGrams.textContent = '-';
+                    resultHousehold.textContent = '-';
+                    return;
+                }
+                
+                const totalGrams = (data.grams * value).toFixed(1);
+                const householdComparison = value === 1 ? data.household : `${data.household} × ${value}`;
+                
+                resultGrams.textContent = `${totalGrams}g`;
+                resultHousehold.textContent = householdComparison;
+            }
+            
+            inputValue.addEventListener('input', calculateConversion);
+            inputUnit.addEventListener('change', calculateConversion);
+            
+            // 初期計算
+            calculateConversion();
+        });
+    </script>
+
+    <!-- 構造化データ -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": ["WebPage", "HowTo"],
+        "name": "海外レシピの粉物・個体系代用目安",
+        "description": "海外の粉物・個体系を日本の単位で簡単換算",
+        "url": "https://uwf-inter.github.io/unit-converter-cooking/overseas-ingredient-sos.html",
+        "mainEntity": {
+            "@type": "HowTo",
+            "name": "海外の食材単位を日本の単位で量る方法",
+            "description": "All-purpose flour、バター、ポンドなどを身近なもので量る手順",
+            "step": [
+                {
+                    "@type": "HowToStep",
+                    "name": "小麦粉を量る",
+                    "text": "All-purpose flour 1カップは125g。日本の計量カップ1杯＋大さじ1杯に相当する"
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "バターを量る",
+                    "text": "バター1スティックは113g。日本のバター100g＋大さじ1杯強に相当する"
+                },
+                {
+                    "@type": "HowToStep",
+                    "name": "ポンドを量る",
+                    "text": "1ポンドは453.6g。卵Lサイズ9個分、スマートフォン2.5台分の重さに相当する"
+                }
+            ]
+        },
+        "dataset": {
+            "@type": "Dataset",
+            "name": "海外食材単位換算データ",
+            "description": "粉物、バター、ポンド、卵などの重量換算データ",
+            "keywords": ["All-purpose flour", "バター", "ポンド", "オンス", "卵", "重量換算"]
+        }
+    }
+    </script>
+
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "All-purpose flour 1cupは何グラムですか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "All-purpose flour 1cupは125gです。日本の計量カップで量る場合、1カップ（200ml）＋大さじ1杯（約8g）に相当します。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "バター1スティックは何グラムですか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "バター1スティックは113gです。日本のバター100g＋大さじ1杯強（約13g）に相当します。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "1ポンドは何グラムですか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "1ポンドは453.6gです。日本の卵Lサイズ約9個分、スマートフォン約2.5台分の重さに相当します。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "海外の卵と日本の卵のサイズは違いますか？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "アメリカのLサイズは65-70gで、日本のL玉にほぼ相当します。ただし、レシピによってはMサイズ（55-60g）を基準にしている場合もあります。"
+                }
+            }
+        ]
+    }
+    </script>
+</body>
+</html>
