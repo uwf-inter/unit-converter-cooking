@@ -1053,7 +1053,246 @@ header h1 a:hover {
     color: #666;
 }
 
-/* Mobile Responsive */
+/* 海外レシピSOS - やわらかいUI要素 */
+.overseas-sos-header {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    color: #6c5ce7;
+    padding: 2rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    text-align: center;
+    border: 3px solid #fff;
+    box-shadow: 0 8px 25px rgba(253, 203, 110, 0.3);
+}
+
+.overseas-sos-header h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.overseas-sos-header p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+.soft-card {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-radius: 18px;
+    padding: 2rem;
+    border: 2px solid #f1f3f5;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+    transition: all 0.3s ease;
+    margin-bottom: 2rem;
+}
+
+.soft-card:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+.soft-card h3 {
+    color: #6c5ce7;
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.soft-card p {
+    color: #636e72;
+    font-size: 1rem;
+    line-height: 1.8;
+    margin-bottom: 1rem;
+}
+
+.gentle-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.8rem 1.5rem;
+    background: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+    color: white;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: 600;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(116, 185, 255, 0.3);
+    border: none;
+    cursor: pointer;
+    line-height: 1.4;
+}
+
+.gentle-chip:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(116, 185, 255, 0.4);
+    background: linear-gradient(135deg, #0984e3 0%, #74b9ff 100%);
+}
+
+.friendly-table {
+    background: white;
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+    margin: 2rem 0;
+}
+
+.friendly-table thead {
+    background: linear-gradient(135deg, #a29bfe 0%, #6c5ce7 100%);
+    color: white;
+}
+
+.friendly-table th {
+    padding: 1.2rem;
+    text-align: left;
+    font-weight: 600;
+    font-size: 1rem;
+    line-height: 1.4;
+}
+
+.friendly-table td {
+    padding: 1rem 1.2rem;
+    border-bottom: 1px solid #f1f3f5;
+    font-size: 0.95rem;
+    line-height: 1.6;
+}
+
+.friendly-table tr:hover {
+    background: #f8f9fa;
+}
+
+.friendly-table tr:last-child td {
+    border-bottom: none;
+}
+
+.cute-icon {
+    display: inline-block;
+    width: 24px;
+    height: 24px;
+    margin-right: 0.5rem;
+    vertical-align: middle;
+    font-size: 1.2rem;
+}
+
+.warm-highlight {
+    background: linear-gradient(135deg, #ffeaa7 0%, #fdcb6e 100%);
+    border-radius: 15px;
+    padding: 1.5rem;
+    margin: 2rem 0;
+    border: 2px solid #fff;
+    box-shadow: 0 4px 15px rgba(253, 203, 110, 0.2);
+}
+
+.warm-highlight h3 {
+    color: #d63031;
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    line-height: 1.4;
+}
+
+.warm-highlight p {
+    color: #636e72;
+    line-height: 1.7;
+    margin-bottom: 0;
+}
+
+.visual-guide-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin: 2rem 0;
+}
+
+.cup-visual-card {
+    background: linear-gradient(135deg, #fff 0%, #f8f9fa 100%);
+    border-radius: 20px;
+    padding: 1.5rem;
+    border: 2px solid #e9ecef;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    text-align: center;
+}
+
+.cup-visual {
+    width: 100%;
+    height: 180px;
+    background: white;
+    border-radius: 10px;
+    border: 3px solid #e9ecef;
+    position: relative;
+    margin: 1.5rem 0;
+    overflow: hidden;
+}
+
+.cup-fill {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    background: linear-gradient(180deg, #74b9ff 0%, #0984e3 100%);
+    border-radius: 0 0 7px 7px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.3;
+}
+
+.cup-label {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    background: #6c5ce7;
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+.comparison-visual {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+}
+
+.comparison-item {
+    text-align: center;
+    flex: 1;
+}
+
+.comparison-icon {
+    font-size: 2.5rem;
+    margin-bottom: 0.5rem;
+    display: block;
+}
+
+.comparison-text {
+    font-size: 0.9rem;
+    color: #636e72;
+    line-height: 1.5;
+}
+
+@media (max-width: 768px) {
+    .visual-guide-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .comparison-visual {
+        flex-direction: column;
+        gap: 1.5rem;
+    }
+    
+    .gentle-chip {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+    }
+}
 @media (max-width: 768px) {
     .quick-conversion-board {
         padding: 1.5rem;
@@ -1790,24 +2029,29 @@ footer {
     box-shadow: 0 2px 4px rgba(245, 124, 0, 0.3);
 }
 
-.ingredients-area textarea,
-.scaler-result-area textarea {
-    width: 100%;
-    height: 120px;
-    padding: 1rem;
-    border: 2px solid #eee;
-    border-radius: 12px;
-    font-size: 0.95rem;
-    line-height: 1.6;
-    resize: none;
+input[type="number"],
+input[type="text"],
+select,
+textarea {
+    border: 2px solid var(--border-color);
+    border-radius: 8px;
+    padding: 0.8rem;
+    font-size: 1rem;
     font-family: inherit;
-    background-color: #fafafa;
-    transition: all 0.2s;
+    transition: border-color 0.3s ease;
+    appearance: none; /* Remove default appearance for better styling */
 }
 
-.ingredients-area textarea:focus {
+input[type="number"]:focus,
+input[type="text"]:focus,
+select:focus,
+textarea:focus {
     outline: none;
     border-color: var(--primary-color);
+}
+
+.ingredients-area textarea,
+.scaler-result-area textarea {
     background-color: #fff;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
 }
