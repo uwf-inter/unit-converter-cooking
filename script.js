@@ -1,4 +1,4 @@
-document.addEventListener('DOMContentLoaded', () => {
+window.initApp = function() {
     // Specific Gravity Data (g/ml) - Move to global scope
     window.INGREDIENT_DATA = {
         'none': { density: 1.0, name: '', icon: '💧' },
@@ -1357,4 +1357,169 @@ document.addEventListener('DOMContentLoaded', () => {
             return table;
         }
     };
+
+    // Update SPA navigation active states
+    const filename = window.location.pathname.split('/').pop() || 'index.html';
+    const chips = document.querySelectorAll('.chip-link');
+    chips.forEach(chip => {
+        chip.classList.remove('active');
+        if (chip.getAttribute('href') === filename) {
+            chip.classList.add('active');
+            chip.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        }
+    });
+};
+
+document.addEventListener('DOMContentLoaded', window.initApp);
+
+// ==========================================
+// SPA Routing & Sticky Header Logic
+// ==========================================
+
+// SPA Router
+document.addEventListener('click', async (e) => {
+    const link = e.target.closest('.spa-link');
+    if (link && link.href && link.href.startsWith(window.location.origin)) {
+        e.preventDefault();
+        const url = link.href;
+        
+        history.pushState(null, '', url);
+        
+        try {
+            const resp = await fetch(url);
+            const html = await resp.text();
+            
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            
+            const newMain = doc.querySelector('main');
+            const newTitle = doc.querySelector('title');
+            
+            if (newMain) {
+                const currentMain = document.querySelector('main');
+                if (currentMain) {
+                    currentMain.replaceWith(newMain);
+                }
+                if (newTitle) {
+                    document.title = newTitle.textContent;
+                }
+                
+                // Update mobile category select if it exists
+                const select = document.getElementById('mobile-category-select');
+                if (select) {
+                    const filename = url.split('/').pop() || 'index.html';
+                    const option = Array.from(select.options).find(opt => opt.value === filename);
+                    if(option) select.value = option.value;
+                }
+                
+                // Re-initialize app logic
+                window.initApp();
+                window.scrollTo(0, 0);
+            }
+        } catch(err) {
+            console.error('SPA Navigation failed', err);
+            window.location.href = url;
+        }
+    }
 });
+
+// Category Select Change
+document.addEventListener('change', (e) => {
+    if (e.target.id === 'mobile-category-select') {
+        const url = e.target.value;
+        const link = document.createElement('a');
+        link.href = url;
+        link.className = 'spa-link';
+        document.body.appendChild(link);
+        link.click();
+        link.remove();
+    }
+});
+
+window.addEventListener('popstate', () => {
+    location.reload(); // Simple reload on back button to ensure state is correct
+});
+
+// Sticky Header Hide on Scroll
+let lastScrollY = window.scrollY;
+document.addEventListener('scroll', () => {
+    const header = document.getElementById('app-header');
+    if (!header) return;
+    
+    if (window.scrollY > lastScrollY && window.scrollY > 100) {
+        // Scrolling down
+        header.style.transform = 'translateY(-100%)';
+    } else {
+        // Scrolling up
+        header.style.transform = 'translateY(0)';
+    }
+    lastScrollY = window.scrollY;
+}, { passive: true });
+
+// ==========================================
+// PWA Install Logic
+// ==========================================
+let deferredPrompt;
+const pwaBanner = document.getElementById('pwa-install-banner');
+const pwaInstallBtn = document.getElementById('pwa-install-btn');
+const pwaCloseBtn = document.getElementById('pwa-close-btn');
+
+// Service Worker Registration
+if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+        navigator.serviceWorker.register('./sw.js')
+            .then((registration) => {
+                console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+                console.log('SW registration failed: ', registrationError);
+            });
+    });
+}
+
+// Intercept standard install prompt
+window.addEventListener('beforeinstallprompt', (e) => {
+    // Prevent the mini-infobar from appearing on mobile
+    e.preventDefault();
+    // Stash the event so it can be triggered later.
+    deferredPrompt = e;
+    
+    // Check if user dismissed it this session
+    if (sessionStorage.getItem('pwaPromptDismissed')) {
+        return;
+    }
+
+    // Delay showing the banner until user interacts (e.g., after 1 conversion)
+    const triggerBanner = () => {
+        if (pwaBanner && !pwaBanner.classList.contains('show')) {
+            // Show snackbar after a short delay
+            setTimeout(() => {
+                pwaBanner.classList.add('show');
+            }, 3000);
+        }
+        document.removeEventListener('change', triggerBanner);
+    };
+    
+    document.addEventListener('change', triggerBanner, { once: true });
+});
+
+// Install Button Click Handler
+if (pwaInstallBtn) {
+    pwaInstallBtn.addEventListener('click', async () => {
+        if (pwaBanner) pwaBanner.classList.remove('show');
+        if (deferredPrompt) {
+            deferredPrompt.prompt();
+            const { outcome } = await deferredPrompt.userChoice;
+            console.log(`User response to the install prompt: ${outcome}`);
+            deferredPrompt = null;
+        }
+    });
+}
+
+// Close Button Click Handler
+if (pwaCloseBtn) {
+    pwaCloseBtn.addEventListener('click', () => {
+        if (pwaBanner) pwaBanner.classList.remove('show');
+        sessionStorage.setItem('pwaPromptDismissed', 'true');
+    });
+}

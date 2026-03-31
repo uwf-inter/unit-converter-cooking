@@ -1,0 +1,22 @@
+{
+  "name": "お料理単位くん",
+  "short_name": "単位くん",
+  "description": "はかりがない時の救世主！大さじ、カップ、電子レンジの加熱時間、海外レシピの単位まで1発変換できる料理用計算機アプリ。",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#fff8e1",
+  "theme_color": "#ffca28",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
