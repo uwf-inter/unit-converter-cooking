@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>【究極】はかりなしで量る！身近なもので100g・50gを正確に｜お料理単位くん</title>
-    <meta name="description" content="はかりがない時も大丈夫！卵・スマホ・マグカップなど身近なもので小麦粉100g・砂糖50gを正確に量る方法。指の関節・手のひらでの目安、パスタ・バターの図解ガイドも完備。">
+    <title>【はかりがない！】小麦粉や砂糖を『道具なし』で正確に量る方法（卵・コイン代用）</title>
+    <meta name="description" content="はかりがなくても大丈夫！卵やスマホ、マグカップなど、今すぐキッチンで使える身近な代用ツールで小麦粉100g・砂糖50gを正確に量る方法をズバリ解説します。">
     <link rel="canonical" href="https://uwf-inter.github.io/unit-converter-cooking/no-scale-measuring.html">
 
     <!-- JSON-LD Structured Data -->
@@ -32,23 +32,23 @@
                     "name": "はかりがない時、小麦粉100gはどう量る？",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "卵2個分（約100g）またはマグカップ小さめ1杯（約110g）が目安です。指の関節を使うと手のひら一杯で約15-20gです。"
+                        "text": "卵2個分の重さ（約100g）と釣り合わせるか、計量カップ代わりに『小さめのマグカップの半分強』を目安にして量ることができます。"
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "マグカップ1杯は何ml？",
+                    "name": "砂糖50g はかりなしで量るには？",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "一般的なマグカップは300ml、小さめサイズは200ml（ほぼ1カップ）です。料理では200mlマグカップが計量カップの代わりになります。"
+                        "text": "卵1個分（約50g）の重さを目安にするのが確実です。カサで量る場合は、大さじ約5杯半になります。"
                     }
                 },
                 {
                     "@type": "Question",
-                    "name": "砂糖50gは何個分？",
+                    "name": "スマホは何グラムの代用になりますか？",
                     "acceptedAnswer": {
                         "@type": "Answer",
-                        "text": "砂糖50gは卵1個分（約50g）またはスマホの約1/3の重さです。マグカップなら1/4杯弱が目安です。"
+                        "text": "一般的なスマートフォンは約180g前後です。小麦粉1円玉の重さ（1g）や100円玉（4.8g）と組み合わせて微調整の分銅代わりに使えます。"
                     }
                 }
             ]
@@ -403,20 +403,42 @@
 </head>
 
 <body>
-    <header>
-        <h1><a href="index.html" title="お料理単位くん トップページ">👨‍🍳 お料理単位くん</a></h1>
-        <p style="text-align:center; font-size:0.8rem; margin-top:-10px;">〜 はかりなしで量る究極ガイド 〜</p>
+    <!-- ========== New Slim Navigation ========== -->
+    <header class="app-header" id="app-header">
+        <div class="header-top">
+            <h1 class="logo"><a href="index.html" class="spa-link" style="text-decoration:none; color:inherit;">👨‍🍳 お料理単位くん</a></h1>
+            
+            <div class="category-select-wrapper">
+                <select id="mobile-category-select" class="category-select" aria-label="ツールカテゴリ選択">
+                    <option value="index.html">🍲 単位・g換算</option>
+                    <option value="baking-calc.html">🍰 ケーキ型換算</option>
+                    <option value="microwave-calc.html">⚡ レンジ換算</option>
+                    <option value="fitness-calc.html">🏃 フィットネス計量</option>
+                    <option value="standard-weights.html">🥦 野菜の重量</option>
+                    <option value="substitute-measuring.html">⚖️ 代用・目分量</option>
+                    <option value="global-matrix.html">🌍 海外換算</option>
+                </select>
+            </div>
+        </div>
+        
+        <nav class="chip-nav-container">
+            <ul class="chip-nav" id="chip-nav">
+                <li><a href="index.html" class="chip-link spa-link">基本換算</a></li>
+                <li><a href="butter.html" class="chip-link spa-link">バター</a></li>
+                <li><a href="sugar.html" class="chip-link spa-link">砂糖</a></li>
+                <li><a href="flour.html" class="chip-link spa-link">小麦粉</a></li>
+                <li><a href="salt.html" class="chip-link spa-link">塩</a></li>
+                <li><a href="otama.html" class="chip-link spa-link">おたま</a></li>
+                <li><a href="tube-spices.html" class="chip-link spa-link">チューブ調味料</a></li>
+                <li><a href="pasta-calc.html" class="chip-link spa-link">パスタ計算</a></li>
+                <li><a href="rice-calc.html" class="chip-link spa-link">お米換算</a></li>
+                <li><a href="visual-guide.html" class="chip-link spa-link">目分量ガイド</a></li>
+                <li><a href="no-scale-measuring.html" class="chip-link spa-link">はかりなし</a></li>
+                <li><a href="1-stick-butter.html" class="chip-link spa-link">バター1 stick</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <div class="category-tabs">
-        <a href="index.html" class="category-tab">🍲 単位・g換算</a>
-        <a href="substitute-measuring.html" class="category-tab active">⚖️ 代用・パスタ計量</a>
-        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
-        <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
-        <a href="global-matrix.html" class="category-tab">🌍 グローバルマトリックス</a>
-    </div>
-
-    <!-- Breadcrumb -->
+    <!-- ========================================== -->
     <nav class="breadcrumb">
         <a href="index.html">トップ</a>
         <span>&gt;</span>
@@ -428,8 +450,15 @@
     <main class="container">
         <!-- Emergency Header -->
         <div class="sos-header">
-            <h1 class="sos-title">🚨 はかりなしで量る究極ガイド</h1>
-            <p class="sos-subtitle">卵・スマホ・マグカップなど身近なもので100g・50gを正確に量る方法</p>
+            <h1 class="sos-title" style="font-size: 1.8rem; margin-bottom: 1rem;">【はかりがない！】小麦粉や砂糖を『道具なし』で正確に量る方法（卵・コイン代用）</h1>
+            <p class="sos-subtitle" style="font-size: 1.1rem; line-height: 1.6;">海外レシピを作ろうとして、単位の違いにパニックになっていませんか？<br>さらに「はかりまでない！」という緊急事態も、卵やスマホなどの代用ツールで即解決！今すぐキッチンで実行できる正確な目安をお教えします。</p>
+        </div>
+
+        <!-- Quick Answer Card -->
+        <div class="answer-card" style="background: white; border: 4px solid #ef5350; border-radius: 20px; padding: 2rem; text-align: center; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(239, 83, 80, 0.1);">
+            <div style="font-size: 1.2rem; color: #c62828; font-weight: bold; margin-bottom: 1rem;">＼ ズバリ代用ツールはこれ！ ／</div>
+            <div style="font-size: 2rem; font-weight: 900; color: #d32f2f; line-height: 1.4; margin-bottom: 1rem;">卵1個 ＝ 約50g<br>小さめマグカップ1杯 ＝ 約200g（水）</div>
+            <div style="font-size: 1.2rem; color: #c62828; font-weight: bold;">小麦粉100gなら<span style="color: #ff5722; font-size: 1.4rem;">「卵2個分と同じ重さ」</span>です！</div>
         </div>
 
         <!-- Quick Search -->

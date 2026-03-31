@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>アメリカやイギリスのレシピで困ったら。カップの大きさをチェック！</title>
-    <meta name="description" content="海外のレシピでカップの単位に困ったら解決！日本の200mlカップやマグカップで、アメリカやイギリスのカップを簡単に量る方法を、かわいいイラストと一緒に分かりやすく解説します。">
-    <meta name="keywords" content="アメリカ レンジ 1カップ 何ml,US cup 代用 マグカップ,海外レシピ カップ,イギリス カップ 量り方,日本の道具 海外カップ">
+    <title>アメリカの1カップは240ml！日本の200mlカップで正しく量るための目安</title>
+    <meta name="description" content="海外レシピの単位で困ったら！アメリカの1カップ（約240ml）を、日本の200mlカップやマグカップで正確に量る方法を分かりやすく解説します。">
+    <meta name="keywords" content="アメリカ レンジ 1カップ 何ml,US cup 代用 マグカップ,海外レシピ カップ,日本の道具 海外カップ">
     
     <!-- Open Graph -->
     <meta property="og:title" content="アメリカやイギリスのレシピで困ったら。カップの大きさをチェック！">
@@ -19,15 +19,53 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>🌍 アメリカやイギリスのレシピで困ったら</h1>
-        <p>日本の道具で、海外のカップを簡単に量る方法をチェック！</p>
+    <!-- ========== New Slim Navigation ========== -->
+    <header class="app-header" id="app-header">
+        <div class="header-top">
+            <h1 class="logo"><a href="index.html" class="spa-link" style="text-decoration:none; color:inherit;">👨‍🍳 お料理単位くん</a></h1>
+            
+            <div class="category-select-wrapper">
+                <select id="mobile-category-select" class="category-select" aria-label="ツールカテゴリ選択">
+                    <option value="index.html">🍲 単位・g換算</option>
+                    <option value="baking-calc.html">🍰 ケーキ型換算</option>
+                    <option value="microwave-calc.html">⚡ レンジ換算</option>
+                    <option value="fitness-calc.html">🏃 フィットネス計量</option>
+                    <option value="standard-weights.html">🥦 野菜の重量</option>
+                    <option value="substitute-measuring.html">⚖️ 代用・目分量</option>
+                    <option value="global-matrix.html">🌍 海外換算</option>
+                </select>
+            </div>
+        </div>
+        
+        <nav class="chip-nav-container">
+            <ul class="chip-nav" id="chip-nav">
+                <li><a href="index.html" class="chip-link spa-link">基本換算</a></li>
+                <li><a href="butter.html" class="chip-link spa-link">バター</a></li>
+                <li><a href="sugar.html" class="chip-link spa-link">砂糖</a></li>
+                <li><a href="flour.html" class="chip-link spa-link">小麦粉</a></li>
+                <li><a href="salt.html" class="chip-link spa-link">塩</a></li>
+                <li><a href="otama.html" class="chip-link spa-link">おたま</a></li>
+                <li><a href="tube-spices.html" class="chip-link spa-link">チューブ調味料</a></li>
+                <li><a href="pasta-calc.html" class="chip-link spa-link">パスタ計算</a></li>
+                <li><a href="rice-calc.html" class="chip-link spa-link">お米換算</a></li>
+                <li><a href="visual-guide.html" class="chip-link spa-link">目分量ガイド</a></li>
+                <li><a href="no-scale-measuring.html" class="chip-link spa-link">はかりなし</a></li>
+                <li><a href="1-stick-butter.html" class="chip-link spa-link">バター1 stick</a></li>
+            </ul>
+        </nav>
     </header>
-
+    <!-- ========================================== -->
     <main>
-        <div class="overseas-sos-header">
-            <h2>🤔 実は海外と日本では、カップの大きさがこんなに違うんです！</h2>
-            <p>日本の200mlカップに対し、アメリカは236.59ml、イギリスは284.13mlも！この差を知らないと、お菓子作りが甘くなったり、パンが固くなったりしちゃいます。でも大丈夫！身近な道具で正確に量る方法をお教えします。</p>
+        <div class="overseas-sos-header" style="background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%); padding: 2rem; border-radius: 15px; margin-bottom: 2rem; border: 2px solid #90caf9;">
+            <h1 class="sos-title" style="color: #1565c0; font-size: 1.6rem; font-weight: 900; margin-bottom: 1rem; line-height: 1.4;">アメリカの1カップは240ml！日本の200mlカップで正しく量るための目安</h1>
+            <p class="article-lead" style="font-size: 1.1rem; color: #0d47a1; line-height: 1.6;">海外レシピを作ろうとして、単位の違いにパニックになっていませんか？<br>「USカップなんて持ってない！」という方も大丈夫。日本の200mlカップやマグカップを使って、アメリカのカップを正確に量るための視覚的なアドバイスでズバリ解決します！</p>
+        </div>
+
+        <!-- Quick Answer Card -->
+        <div class="answer-card" style="background: white; border: 4px solid #4fc3f7; border-radius: 20px; padding: 2rem; text-align: center; margin-bottom: 2rem; box-shadow: 0 10px 20px rgba(79, 195, 247, 0.1);">
+            <div style="font-size: 1.2rem; color: #0277bd; font-weight: bold; margin-bottom: 1rem;">＼ ズバリ結論！ ／</div>
+            <div style="font-size: 2.2rem; font-weight: 900; color: #0288d1; line-height: 1.4; margin-bottom: 1rem;">アメリカ 1カップ ＝ 約240ml</div>
+            <div style="font-size: 1.2rem; color: #0277bd; font-weight: bold;">日本の計量カップ（200ml）なら<br><span style="color: #ff5722; font-size: 1.4rem;">「なみなみ1杯 ＋ 大さじ約3杯弱（40ml）」</span></div>
         </div>
 
         <div class="soft-card">
@@ -272,7 +310,7 @@
                 "name": "アメリカの1カップは日本のカップで何mlですか？",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "アメリカの1カップは236.59mlです。日本の200mlカップでは1杯＋大さじ2杯強（約36.59ml）を足した量に相当します。"
+                    "text": "アメリカの1カップは約240ml（正確には約236.6ml）です。日本の200mlカップでは、なみなみ1杯と大さじ約3杯弱（約40ml）を足した量に相当します。"
                 }
             },
             {

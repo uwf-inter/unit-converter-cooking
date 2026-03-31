@@ -17,6 +17,10 @@
     <meta property="og:image" content="https://your-website-url.com/og-image.jpg">
     <meta name="twitter:card" content="summary_large_image">
 
+    <!-- Web App Manifest for PWA -->
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#ffca28">
+
     <!-- ========================================== -->
     <!-- Google Search Console Verification Tag -->
     <!-- 下記の content 属性をあなたの認証コードに書き換えてください -->
@@ -179,30 +183,42 @@
             style="display:none;visibility:hidden"></iframe></noscript>
     <!-- End Google Tag Manager (noscript) -->
 
-    <header>
-        <h1><a href="index.html">👨‍🍳 サクッと解決！お料理単位くん</a></h1>
+    <!-- ========== New Slim Navigation ========== -->
+    <header class="app-header" id="app-header">
+        <div class="header-top">
+            <h1 class="logo"><a href="index.html" class="spa-link" style="text-decoration:none; color:inherit;">👨‍🍳 お料理単位くん</a></h1>
+            
+            <div class="category-select-wrapper">
+                <select id="mobile-category-select" class="category-select" aria-label="ツールカテゴリ選択">
+                    <option value="index.html">🍲 単位・g換算</option>
+                    <option value="baking-calc.html">🍰 ケーキ型換算</option>
+                    <option value="microwave-calc.html">⚡ レンジ換算</option>
+                    <option value="fitness-calc.html">🏃 フィットネス計量</option>
+                    <option value="standard-weights.html">🥦 野菜の重量</option>
+                    <option value="substitute-measuring.html">⚖️ 代用・目分量</option>
+                    <option value="global-matrix.html">🌍 海外換算</option>
+                </select>
+            </div>
+        </div>
+        
+        <nav class="chip-nav-container">
+            <ul class="chip-nav" id="chip-nav">
+                <li><a href="index.html" class="chip-link spa-link">基本換算</a></li>
+                <li><a href="butter.html" class="chip-link spa-link">バター</a></li>
+                <li><a href="sugar.html" class="chip-link spa-link">砂糖</a></li>
+                <li><a href="flour.html" class="chip-link spa-link">小麦粉</a></li>
+                <li><a href="salt.html" class="chip-link spa-link">塩</a></li>
+                <li><a href="otama.html" class="chip-link spa-link">おたま</a></li>
+                <li><a href="tube-spices.html" class="chip-link spa-link">チューブ調味料</a></li>
+                <li><a href="pasta-calc.html" class="chip-link spa-link">パスタ計算</a></li>
+                <li><a href="rice-calc.html" class="chip-link spa-link">お米換算</a></li>
+                <li><a href="visual-guide.html" class="chip-link spa-link">目分量ガイド</a></li>
+                <li><a href="no-scale-measuring.html" class="chip-link spa-link">はかりなし</a></li>
+                <li><a href="1-stick-butter.html" class="chip-link spa-link">バター1 stick</a></li>
+            </ul>
+        </nav>
     </header>
-
-    <div class="category-tabs">
-        <a href="index.html" class="category-tab active">🍲 単位・g換算</a>
-        <a href="fitness-calc.html" class="category-tab">🏃 フィットネス計量</a>
-        <a href="visual-guide.html" class="category-tab">📏 目分量・代用</a>
-        <a href="conversion-tables.html" class="category-tab">📘 食材大辞典</a>
-        <a href="global-matrix.html" class="category-tab">🌍 グローバルマトリックス</a>
-    </div>
-
-    <nav class="main-nav">
-        <a href="index.html" class="active">トップ</a>
-        <a href="otama.html">おたま容量</a>
-        <a href="tube-spices.html">チューブ調味料</a>
-        <a href="pasta-calc.html">パスタ計算</a>
-        <a href="rice-calc.html">お米換算</a>
-        <a href="microwave-calc.html">レンジ換算</a>
-        <a href="fitness-calc.html">フィットネス</a>
-        <a href="standard-weights.html">標準重量</a>
-        <a href="substitute-measuring.html">代用計量</a>
-    </nav>
-
+    <!-- ========================================== -->
     <main class="container">
         <!-- Quick Conversion Board -->
         <section class="quick-conversion-board">
@@ -842,7 +858,18 @@
         }
     }
     </script>
-    <script src="script.js?v=5.0"></script>
+    
+    <!-- PWA Install Banner -->
+    <div id="pwa-install-banner" class="pwa-banner">
+        <div class="pwa-banner-header">
+            <span class="pwa-banner-title">🍳 ホーム画面に追加</span>
+            <button id="pwa-close-btn" class="pwa-close-btn" aria-label="閉じる">&times;</button>
+        </div>
+        <p class="pwa-banner-text">検索いらずで1秒起動！<br>はかりがない時の救世主をポケットに。</p>
+        <button id="pwa-install-btn" class="pwa-install-btn">アプリを追加する</button>
+    </div>
+
+    <script src="script.js?v=6.0"></script>
 </body>
 
 </html>
