@@ -1358,6 +1358,18 @@ window.initApp = function() {
         }
     };
 
+    // Butter Length Calculator (butter.html)
+    const butterLengthInput = document.getElementById('butter-length-input');
+    const butterWeightResult = document.getElementById('butter-weight-result');
+    if (butterLengthInput && butterWeightResult) {
+        butterLengthInput.addEventListener('input', (e) => {
+            const val = parseFloat(e.target.value) || 0;
+            // 1.2cm = 10g rule
+            const weight = (val * (10 / 1.2)).toFixed(1);
+            butterWeightResult.textContent = weight.replace(/\.0$/, '');
+        });
+    }
+
     // Update SPA navigation active states
     const filename = window.location.pathname.split('/').pop() || 'index.html';
     const chips = document.querySelectorAll('.chip-link');
@@ -1380,10 +1392,22 @@ document.addEventListener('DOMContentLoaded', window.initApp);
 document.addEventListener('click', async (e) => {
     const link = e.target.closest('.spa-link');
     if (link && link.href && link.href.startsWith(window.location.origin)) {
-        e.preventDefault();
         const url = link.href;
+
+        // ローカル環境（fileプロトコル）の場合はSPA遷移を諦めて通常遷移する
+        if (window.location.protocol === 'file:') {
+            return; // e.preventDefault()を呼ばないことで通常のリンク遷移に任せる
+        }
+
+        e.preventDefault();
         
-        history.pushState(null, '', url);
+        try {
+            history.pushState(null, '', url);
+        } catch (err) {
+            // セキュリティエラー（Origin null等）のフォールバック
+            window.location.href = url;
+            return;
+        }
         
         try {
             const resp = await fetch(url);
