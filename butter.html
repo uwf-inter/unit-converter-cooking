@@ -28,6 +28,30 @@
                     "@type": "Answer",
                     "text": "バター大さじ1杯は約12gです。"
                 }
+            },
+            {
+                "@type": "Question",
+                "name": "バター10gは何センチ？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "標準的な200gのバターブロックの場合、約1.2cmの厚みで切り出すと約10gになります。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "はかりがない時、バター10gをどう量る？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "定規やスマホ画面を目安にして、200gバターなら厚さ約1.2cm、もしくは大さじ1杯弱（約12gが大さじ1）を目安に量るのが一番簡単です。"
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "バター150gパックの一目盛りは何グラム？",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "一般的にバターの包み紙（銀紙）に印刷されている目盛りは、150gパック・200gパックともに「1目盛り＝約10g」ずつになっている製品が大半です。カットする時の頼もしい味方です！"
+                }
             }
         ]
     }
@@ -174,6 +198,91 @@
                             </tr>
                         </tbody>
                     </table>
+                </div>
+
+                <!-- Physical Measurement Guide -->
+                <h3 class="section-title" style="margin-top: 3rem; color: #795548;">📏 バターの「長さ(cm)」から重さを計算</h3>
+                <p>はかりがない時でも大丈夫！定規で測れば大体の重さが分かります。（※標準的な200gブロックの場合）</p>
+                <div class="calc-box" style="background: #fff8e1; border: 2px solid #ffca28; border-radius: 12px; padding: 1.5rem; text-align: center; margin-bottom: 2rem;">
+                    <div style="font-size: 1.2rem; margin-bottom: 1rem; color: #5d4037; font-weight: bold;">
+                        長さ <input type="number" id="butter-length-input" value="1.2" min="0" step="0.1" style="width: 80px; text-align: right; font-size: 1.2rem; padding: 4px 8px; border: 2px solid #ccc; border-radius: 8px;"> cm
+                    </div>
+                    <div style="font-size: 1.5rem; color: #5d4037; font-weight: bold;">
+                        ＝ 約 <span id="butter-weight-result" style="color: #ff5722; font-size: 2.5rem; font-weight: 900;">10</span> <span style="font-size: 1.2rem;">g</span>
+                    </div>
+                    <p style="font-size: 0.9rem; color: #795548; margin-top: 10px;">計算式：1.2cm ＝ 約10g</p>
+                </div>
+
+                <!-- Visual Analog Scale -->
+                <h3 class="section-title" style="margin-top: 2rem;">📱 スマホを定規がわりに！視覚的ガイド</h3>
+                <p>スマホの画面上に実物大に近いメモリを表示します！バターの塊を画面の横に置いて確かめてみましょう。</p>
+                
+                <div class="analog-scale" style="background: #e0f7fa; border-radius: 12px; padding: 1.5rem 1rem; margin-bottom: 2rem; position: relative;">
+                    <div style="font-weight: bold; color: #00838f; margin-bottom: 1rem; text-align: center;">👇 ここから合わせて長さを確認 👇</div>
+                    <!-- CSS trick to roughly show cm. 1cm ≈ 38px on typical screens -->
+                    <div style="display: flex; align-items: flex-end; height: 40px; border-left: 2px solid #006064; padding-left: 2px; margin-bottom: 10px; width: fit-content; margin: 0 auto;">
+                        <div style="width: 38px; border-right: 1px solid #009688; height: 100%; position: relative;">
+                            <span style="position: absolute; bottom: 0; right: 2px; font-size: 0.7rem; color: #006064;">1cm</span>
+                        </div>
+                        <div style="width: 38px; border-right: 2px solid #006064; height: 100%; position: relative; background: rgba(0, 150, 136, 0.1);">
+                            <span style="position: absolute; bottom: 0; right: 2px; font-size: 0.75rem; font-weight:bold; color: #004d40;">2cm<br>(約17g)</span>
+                        </div>
+                        <div style="width: 38px; border-right: 1px solid #009688; height: 100%; position: relative;">
+                            <span style="position: absolute; bottom: 0; right: 2px; font-size: 0.7rem; color: #006064;">3cm</span>
+                        </div>
+                        <div style="width: 38px; border-right: 2px solid #006064; height: 100%; position: relative; background: rgba(0, 150, 136, 0.1);">
+                            <span style="position: absolute; bottom: 0; right: 2px; font-size: 0.75rem; font-weight:bold; color: #004d40;">4cm<br>(約33g)</span>
+                        </div>
+                        <div style="width: 38px; border-right: 1px solid #009688; height: 100%; position: relative;">&nbsp;</div>
+                        <div style="width: 38px; border-right: 2px solid #006064; height: 100%; position: relative; background: rgba(0, 150, 136, 0.1);">
+                            <span style="position: absolute; bottom: 0; right: 2px; font-size: 0.75rem; font-weight:bold; color: #004d40;">6cm<br>(約50g)</span>
+                        </div>
+                    </div>
+                    <p style="font-size: 0.8rem; color: #006064; text-align: center; margin-top: 2rem;">※ご利用の機種により実際の長さと数ミリの誤差が出ることがあります。</p>
+                </div>
+
+                <!-- Sizes -->
+                <h3 class="section-title">📦 バター1本サイズ別の総グラム数</h3>
+                <p>スーパーに売っている主なバターパッケージの総重量です。箱の表示を確認してみましょう。</p>
+                <div class="butter-size-cards" style="display: flex; gap: 10px; margin-bottom: 2rem; flex-wrap: wrap;">
+                    <div style="flex: 1; min-width: 100px; background: #fbe9e7; border: 2px solid #ffab91; border-radius: 12px; padding: 1rem; text-align: center;">
+                        <div style="font-size: 0.9rem; color: #bf360c; font-weight: bold;">小さめパック</div>
+                        <div style="font-size: 2rem; color: #d84315; font-weight: 900;">150<span style="font-size:1rem;">g</span></div>
+                    </div>
+                    <div style="flex: 1; min-width: 100px; background: #fff3e0; border: 2px solid #ffb74d; border-radius: 12px; padding: 1rem; text-align: center;">
+                        <div style="font-size: 0.9rem; color: #e65100; font-weight: bold;">標準サイズ</div>
+                        <div style="font-size: 2rem; color: #ef6c00; font-weight: 900;">200<span style="font-size:1rem;">g</span></div>
+                    </div>
+                    <div style="flex: 1; min-width: 100px; background: #f3e5f5; border: 2px solid #ce93d8; border-radius: 12px; padding: 1rem; text-align: center;">
+                        <div style="font-size: 0.9rem; color: #6a1b9a; font-weight: bold;">業務用（ポンド）</div>
+                        <div style="font-size: 2rem; color: #8e24aa; font-weight: 900;">450<span style="font-size:1rem;">g</span></div>
+                    </div>
+                </div>
+
+                <!-- Tips -->
+                <h3 class="section-title">💡 バターを汚れず・きれいに切るライフハック</h3>
+                <div class="tips-box" style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 15px rgba(0,0,0,0.05); margin-bottom: 3rem; border-left: 5px solid #ff9800;">
+                    <ul style="list-style-type: none; padding: 0; margin: 0; color: #5d4037; font-size: 1.05rem;">
+                        <li style="margin-bottom: 1.5rem;"><strong>🔥 包丁を温めてから切る</strong><br>カチカチに冷えたバターを切る時は、<span>お湯で包丁の刃を温めてから水気を拭き取り、スッと刃を入れてみてください。</span>断面がなめらかになり、崩れません！</li>
+                        <li><strong>🧻 クッキングシートを刃に巻く</strong><br>包丁を洗う手間を省きたいなら、刃の周りにクッキングシートやキッチンペーパーを巻いて上からグッと押し切るのがコツです。包丁がヌルヌルにならず快適です。</li>
+                    </ul>
+                </div>
+
+                <!-- FAQ Section -->
+                <h3 class="section-title">❓ バターの量り方 よくある質問 (FAQ)</h3>
+                <div class="faq-container" style="display: flex; flex-direction: column; gap: 1rem; margin-bottom: 2rem;">
+                    <details style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #ddd; cursor: pointer;">
+                        <summary style="font-weight: bold; color: #ff8f00; font-size: 1.1rem; outline: none;">バター10gは何センチ？</summary>
+                        <p style="margin-top: 10px; color: #5d4037; line-height: 1.5;">標準的な200gのバターブロックの場合、約1.2cmの厚みで切り出すと約10gになります。</p>
+                    </details>
+                    <details style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #ddd; cursor: pointer;">
+                        <summary style="font-weight: bold; color: #ff8f00; font-size: 1.1rem; outline: none;">はかりがない時、バター10gをどう量る？</summary>
+                        <p style="margin-top: 10px; color: #5d4037; line-height: 1.5;">定規やスマホ画面を目安にして、200gバターなら厚さ約1.2cm、もしくは「大さじ1杯弱（約12gが大さじ1）」を目安に量るのが一番簡単です。「指一本分の幅」でも約10g前後になります！</p>
+                    </details>
+                    <details style="background: white; padding: 1rem; border-radius: 8px; border: 1px solid #ddd; cursor: pointer;">
+                        <summary style="font-weight: bold; color: #ff8f00; font-size: 1.1rem; outline: none;">バター150gパックの一目盛りは何グラム？</summary>
+                        <p style="margin-top: 10px; color: #5d4037; line-height: 1.5;">一般的にバターの包み紙（銀紙）に印刷されている目盛りは、150gパック・200gパックともに「1目盛り＝約10gずつ」になっている製品が大半です。カットする時の頼もしい味方です！</p>
+                    </details>
                 </div>
             </div>
         </section>
