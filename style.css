@@ -2828,6 +2828,103 @@ textarea:focus {
 }
 
 /* ==========================================
+   iOS PWA Install Guide Modal
+   ========================================== */
+.ios-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 10000;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.ios-modal-overlay[hidden] {
+    display: none;
+}
+
+.ios-modal-content {
+    background: #fff;
+    border-radius: 16px;
+    padding: 24px;
+    max-width: 90%;
+    width: 320px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    position: relative;
+    animation: popIn 0.3s ease-out;
+}
+
+@keyframes popIn {
+    0% { transform: scale(0.9); opacity: 0; }
+    100% { transform: scale(1); opacity: 1; }
+}
+
+.ios-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: #999;
+    cursor: pointer;
+}
+
+.ios-modal-title {
+    font-size: 1.1rem;
+    margin-top: 0;
+    margin-bottom: 10px;
+    color: #333;
+    text-align: center;
+}
+
+.ios-modal-desc {
+    font-size: 0.9rem;
+    color: #666;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.ios-steps {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.ios-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background: #f9f9f9;
+    padding: 10px;
+    border-radius: 8px;
+}
+
+.step-num {
+    background: #FFCA28;
+    color: #fff;
+    font-weight: bold;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-shrink: 0;
+    font-size: 0.9rem;
+}
+
+.step-text {
+    font-size: 0.85rem;
+    color: #444;
+    line-height: 1.4;
+}
+
+/* ==========================================
    Slim Navigation UI & SPA Chip Scroll
    ========================================== */
 .app-header {
