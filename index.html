@@ -860,13 +860,37 @@
     </script>
     
     <!-- PWA Install Banner -->
-    <div id="pwa-install-banner" class="pwa-banner">
+    <div id="pwa-install-banner" class="pwa-banner" hidden>
         <div class="pwa-banner-header">
-            <span class="pwa-banner-title">🍳 ホーム画面に追加</span>
+            <span class="pwa-banner-title">🍳 お料理単位くん</span>
             <button id="pwa-close-btn" class="pwa-close-btn" aria-label="閉じる">&times;</button>
         </div>
-        <p class="pwa-banner-text">検索いらずで1秒起動！<br>はかりがない時の救世主をポケットに。</p>
-        <button id="pwa-install-btn" class="pwa-install-btn">アプリを追加する</button>
+        <p class="pwa-banner-text">料理中に便利！<br>ホーム画面に追加して1秒で起動📱</p>
+        <button id="pwa-install-btn" class="pwa-install-btn">ホーム画面に追加する</button>
+    </div>
+
+    <!-- iOS PWA Install Guide Modal -->
+    <div id="ios-pwa-modal" class="ios-modal-overlay" hidden>
+        <div class="ios-modal-content">
+            <button id="ios-modal-close" class="ios-modal-close" aria-label="閉じる">&times;</button>
+            <h3 class="ios-modal-title">📱 ホーム画面に追加する方法</h3>
+            <p class="ios-modal-desc">Safariから簡単に追加できます！以下の手順で設定してください。</p>
+            <div class="ios-steps">
+                <div class="ios-step">
+                    <div class="step-num">1</div>
+                    <div class="step-text">画面下部の<br><strong>「共有」アイコン</strong><br>（四角から矢印が上に出ているマーク）をタップします。</div>
+                </div>
+                <div class="ios-step">
+                    <div class="step-num">2</div>
+                    <div class="step-text">メニューを下に少しスクロールし、<br><strong>「ホーム画面に追加」</strong><br>を選択します。</div>
+                </div>
+                <div class="ios-step">
+                    <div class="step-num">3</div>
+                    <div class="step-text">右上の<strong>「追加」</strong>をタップすれば完了です！</div>
+                </div>
+            </div>
+            <button id="ios-modal-gotit" class="pwa-install-btn" style="margin-top: 15px; width: 100%;">OK</button>
+        </div>
     </div>
 
     <script src="script.js?v=6.0"></script>

@@ -1481,60 +1481,82 @@ document.addEventListener('scroll', () => {
 }, { passive: true });
 
 // ==========================================
-// PWA Install Logic
+// PWA Install & iOS Modal Logic
 // ==========================================
 let deferredPrompt;
 const pwaBanner = document.getElementById('pwa-install-banner');
 const pwaInstallBtn = document.getElementById('pwa-install-btn');
 const pwaCloseBtn = document.getElementById('pwa-close-btn');
 
+const iosModal = document.getElementById('ios-pwa-modal');
+const iosModalClose = document.getElementById('ios-modal-close');
+const iosModalGotit = document.getElementById('ios-modal-gotit');
+
+// Device & Environment Checks
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isStandalone = window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone;
+
+// Dismissal Logic (24 hours)
+function canShowPrompt() {
+    const dismissedAt = localStorage.getItem('pwaDismissedAt');
+    if (!dismissedAt) return true;
+    const now = new Date().getTime();
+    const hours24 = 24 * 60 * 60 * 1000;
+    return (now - parseInt(dismissedAt, 10)) > hours24;
+}
+
+function recordDismissal() {
+    localStorage.setItem('pwaDismissedAt', new Date().getTime().toString());
+}
+
 // Service Worker Registration
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
         navigator.serviceWorker.register('./sw.js')
-            .then((registration) => {
-                console.log('SW registered: ', registration);
-            })
-            .catch((registrationError) => {
-                console.log('SW registration failed: ', registrationError);
-            });
+            .catch(err => console.log('SW registration failed: ', err));
     });
 }
 
-// Intercept standard install prompt
-window.addEventListener('beforeinstallprompt', (e) => {
-    // Prevent the mini-infobar from appearing on mobile
-    e.preventDefault();
-    // Stash the event so it can be triggered later.
-    deferredPrompt = e;
+// Banner Trigger (Called when calculation happens)
+window.triggerPwaPrompt = function() {
+    if (isStandalone || !canShowPrompt() || !pwaBanner) return;
     
-    // Check if user dismissed it this session
-    if (sessionStorage.getItem('pwaPromptDismissed')) {
-        return;
+    // Wait slightly to show banner after user has seen result
+    if (deferredPrompt || isIOS) {
+        setTimeout(() => {
+            pwaBanner.removeAttribute('hidden');
+            pwaBanner.classList.add('show');
+        }, 1500);
     }
+};
 
-    // Delay showing the banner until user interacts (e.g., after 1 conversion)
-    const triggerBanner = () => {
-        if (pwaBanner && !pwaBanner.classList.contains('show')) {
-            // Show snackbar after a short delay
-            setTimeout(() => {
-                pwaBanner.classList.add('show');
-            }, 3000);
-        }
-        document.removeEventListener('change', triggerBanner);
-    };
-    
-    document.addEventListener('change', triggerBanner, { once: true });
+document.addEventListener('input', () => {
+    if (window.triggerPwaPrompt) window.triggerPwaPrompt();
+}, { once: true });
+
+// Intercept standard install prompt for Android/Chrome
+window.addEventListener('beforeinstallprompt', (e) => {
+    e.preventDefault();
+    deferredPrompt = e;
 });
 
 // Install Button Click Handler
 if (pwaInstallBtn) {
     pwaInstallBtn.addEventListener('click', async () => {
-        if (pwaBanner) pwaBanner.classList.remove('show');
-        if (deferredPrompt) {
+        if (pwaBanner) {
+            pwaBanner.classList.remove('show');
+            setTimeout(() => pwaBanner.setAttribute('hidden', 'true'), 300);
+        }
+        
+        if (isIOS) {
+            // Show iOS Custom Modal
+            if (iosModal) {
+                iosModal.removeAttribute('hidden');
+            }
+        } else if (deferredPrompt) {
             deferredPrompt.prompt();
             const { outcome } = await deferredPrompt.userChoice;
-            console.log(`User response to the install prompt: ${outcome}`);
+            console.log(`User response to install prompt: ${outcome}`);
             deferredPrompt = null;
         }
     });
@@ -1543,7 +1565,20 @@ if (pwaInstallBtn) {
 // Close Button Click Handler
 if (pwaCloseBtn) {
     pwaCloseBtn.addEventListener('click', () => {
-        if (pwaBanner) pwaBanner.classList.remove('show');
-        sessionStorage.setItem('pwaPromptDismissed', 'true');
+        if (pwaBanner) {
+            pwaBanner.classList.remove('show');
+            setTimeout(() => pwaBanner.setAttribute('hidden', 'true'), 300);
+        }
+        recordDismissal();
     });
 }
+
+// iOS Modal Close Logic
+function closeIosModal() {
+    if (iosModal) {
+        iosModal.setAttribute('hidden', 'true');
+        recordDismissal();
+    }
+}
+if (iosModalClose) iosModalClose.addEventListener('click', closeIosModal);
+if (iosModalGotit) iosModalGotit.addEventListener('click', closeIosModal);
